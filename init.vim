@@ -617,3 +617,5 @@ let g:codi#interpreters = {
 noremap <leader><leader>s :<c-u>Codi<cr>
 
 noremap <silent> <leader><leader>h :<c-u>ColorHighlight<cr>
+
+let g:gutentags_cache_dir = '~/tags'

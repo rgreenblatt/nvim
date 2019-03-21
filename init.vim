@@ -1,4 +1,4 @@
-"serious changes or remaps:
+"general changes or remaps:
 map Y y$
 
 "clever-f
@@ -7,15 +7,20 @@ map Y y$
 " inoremap jk <esc>
 
 noremap ,m "_
-vnoremap ,m "_
 
 noremap ,j "+
-vnoremap ,j "+
 
 map , "
 
 map <space> <leader>
 map <space><space> <leader><leader>
+
+noremap <Tab> <C-o>
+noremap <S-Tab> <C-i>
+
+noremap <BS> -
+
+inoremap <C-b> <esc>:<C-u>le<cr>A
 
 "plugins
 set nocompatible
@@ -81,6 +86,14 @@ Plug 'lervag/vimtex'
 Plug 'neomutt/neomutt.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'sakhnik/nvim-gdb'
+Plug 'lambdalisue/suda.vim'
+Plug 'LucHermitte/VimFold4C'
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'tmhedberg/SimpylFold'
+Plug 'justinmk/vim-dirvish'
+Plug 'honza/vim-snippets'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 filetype plugin indent on
  
@@ -394,6 +407,14 @@ endfunction
 "java doc commenting (requires eclim/eclipse workspace)
 "noremap <silent> <leader><leader>j <esc>:<c-u>JavaDocComment<CR>
 
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
 "lightline options
 let g:lightline = {
       \ 'colorscheme': 'srcery_drk',
@@ -403,7 +424,9 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'gitstatus': 'FugitiveStatusline'
+      \   'gitstatus': 'FugitiveStatusline',
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'MyFileformat'
       \ }
       \ }
 
@@ -453,7 +476,7 @@ let g:startify_custom_header =
 
 "windowswap
 let g:windowswap_map_keys = 0
-  nnoremap <silent> <leader>v :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <leader>v :call WindowSwap#EasyWindowSwap()<CR>
 
 "scratch
 let g:scratch_no_mappings = 1
@@ -527,8 +550,6 @@ map ;N <Plug>(miniyank-cycleback)
 
 noremap <silent> <leader><leader>f :<c-u>VimadeToggle<cr>
 
-set shell=/bin/zsh
-
 "rainbow parens
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -559,6 +580,7 @@ augroup END
 let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_progname = 'nvr'
 map <leader>xi  <plug>(vimtex-info)
 map <leader>xI  <plug>(vimtex-info-full)
 map <leader>xt  <plug>(vimtex-toc-open)
@@ -619,3 +641,15 @@ noremap <leader><leader>s :<c-u>Codi<cr>
 noremap <silent> <leader><leader>h :<c-u>ColorHighlight<cr>
 
 let g:gutentags_cache_dir = '~/tags'
+
+"c/c++ folding 
+let g:fold_options = {
+   \ 'fallback_method' : { 'line_threshold' : 2000, 'method' : 'syntax' },
+   \ 'fold_blank': 1,
+   \ 'fold_includes': 1,
+   \ 'max_foldline_length': 'win',
+   \ 'merge_comments' : 1,
+   \ 'show_if_and_else': 1,
+   \ 'strip_namespaces': 1,
+   \ 'strip_template_arguments': 1
+   \ }

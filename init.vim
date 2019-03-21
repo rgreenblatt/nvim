@@ -251,7 +251,7 @@ noremap <leader>gac <esc>:<c-u>Commits<cr>
 noremap <leader>go <esc>:<c-u>Commands<cr>
 noremap <leader>gn <esc>:<c-u>Maps<cr>
 noremap <leader>gk <esc>:<c-u>Helptags<cr>
-noremap <leader>gF <esc>:<c-u>FileTypes<cr>
+noremap <leader>gF <esc>:<c-u>Filetypes<cr>
 
 noremap <leader>Gf <esc>:<c-u>Files<cr>
 noremap <leader>Gg <esc>:<c-u>GFiles<cr>
@@ -640,7 +640,7 @@ noremap <leader><leader>s :<c-u>Codi<cr>
 
 noremap <silent> <leader><leader>h :<c-u>ColorHighlight<cr>
 
-let g:gutentags_cache_dir = '~/tags'
+let g:gutentags_cache_dir = '~/.tags'
 
 "c/c++ folding 
 let g:fold_options = {

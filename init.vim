@@ -21,6 +21,7 @@ noremap <S-Tab> <C-i>
 noremap <BS> -
 
 inoremap <C-b> <esc>:<C-u>le<cr>A
+xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
 "plugins
 set nocompatible
@@ -282,7 +283,7 @@ nmap <leader>u <Plug>(coc-references)
 
 " format
 nmap <leader>f <Plug>(coc-format-selected)
-vmap <leader>f <Plug>(coc-format-selected)
+xmap <leader>f <Plug>(coc-format-selected)
 
 nmap <leader>F <Plug>(coc-format)
 

@@ -19,9 +19,16 @@ noremap <Tab> <C-o>
 noremap <S-Tab> <C-i>
 
 noremap <BS> -
+noremap z<BS> z-
 
 inoremap <C-b> <esc>:<C-u>le<cr>A
 xnoremap <expr> p v:register=='"'?'pgvy':'p'
+
+nnoremap <Leader>s *``cgn
+nnoremap <Leader>S #``cgN
+
+noremap ' `
+noremap ` '
 
 "plugins
 set nocompatible
@@ -71,7 +78,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-fold'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-entire'
-Plug 'flazz/vim-colorschemes'
 Plug 'Carpetsmoker/xdg_open.vim'
 Plug 'bfredl/nvim-miniyank'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -95,6 +101,8 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'justinmk/vim-dirvish'
 Plug 'honza/vim-snippets'
 Plug 'ryanoasis/vim-devicons'
+Plug 'romainl/vim-cool'
+Plug 'morhetz/gruvbox'
 call plug#end()
 filetype plugin indent on
  
@@ -418,7 +426,7 @@ endfunction
 
 "lightline options
 let g:lightline = {
-      \ 'colorscheme': 'srcery_drk',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'gitstatus', 'readonly', 'filename', 'modified' ] ]
@@ -489,8 +497,10 @@ xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
 
 colorscheme gruvbox
+set termguicolors
+let g:gruvbox_contrast_dark = "hard"
 
-"limelight/goyo
+" limelight/goyo
 let g:limelight_conceal_ctermfg = 'DarkGray'
 
 " Color name (:help gui-colors) or RGB color
@@ -654,3 +664,4 @@ let g:fold_options = {
    \ 'strip_namespaces': 1,
    \ 'strip_template_arguments': 1
    \ }
+

@@ -1,4 +1,4 @@
-"general changes or remaps:
+"general changes or remaps which override defaults:
 map Y y$
 
 "clever-f
@@ -7,16 +7,11 @@ map Y y$
 " inoremap jk <esc>
 
 noremap ,m "_
-
 noremap ,j "+
-
 map , "
 
 map <space> <leader>
 map <space><space> <leader><leader>
-
-noremap <Tab> <C-o>
-noremap <S-Tab> <C-i>
 
 noremap <BS> -
 noremap z<BS> z-
@@ -24,11 +19,14 @@ noremap z<BS> z-
 inoremap <C-b> <esc>:<C-u>le<cr>A
 xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
-nnoremap <Leader>s *``cgn
-nnoremap <Leader>S #``cgN
-
 noremap ' `
 noremap ` '
+
+xnoremap <expr> I mode()=~'\cv' ? ':normal ^i' : 'I'
+xnoremap <expr> A mode()=~'\cv' ? ':normal $a' : 'A'
+
+noremap <C-r> R
+noremap R <C-r> 
 
 "plugins
 set nocompatible
@@ -37,9 +35,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'dansomething/vim-eclim'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'wikitopian/hardmode'
-Plug 'inkarkat/vim-CountJump'
 Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-CountJump'
 Plug 'inkarkat/vim-mark'
+Plug 'inkarkat/vim-EnhancedJumps'
 Plug 'wellle/targets.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'rgreenblatt/i3-vim-focus'
@@ -47,6 +46,7 @@ Plug 'rgreenblatt/i3-vim-focus'
 Plug 'rgreenblatt/scratch.vim'
 Plug 'rgreenblatt/vim-ninja-feet'
 Plug 'rgreenblatt/c-conceal'
+Plug 'rgreenblatt/vim-unimpaired'
 Plug 'markonm/traces.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tommcdo/vim-exchange'
@@ -55,10 +55,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-abolish'
 Plug 'makerj/vim-pdf'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'unblevable/quick-scope'
@@ -83,7 +83,7 @@ Plug 'bfredl/nvim-miniyank'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'ehamberg/vim-cute-python'
 Plug 'metakirby5/codi.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'chrisbra/NrrwRgn'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'simnalamburt/vim-mundo'
@@ -103,6 +103,10 @@ Plug 'honza/vim-snippets'
 Plug 'ryanoasis/vim-devicons'
 Plug 'romainl/vim-cool'
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/vim-peekaboo'
+Plug 'machakann/vim-highlightedyank'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'szw/vim-g'
 call plug#end()
 filetype plugin indent on
  
@@ -116,6 +120,19 @@ endfunction
 
 noremap Q @@
 set lazyredraw
+
+"better jumping
+nmap <Tab> <Plug>EnhancedJumpsOlder
+nmap <S-Tab> <Plug>EnhancedJumpsNewer
+
+nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
+nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
+
+nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
+nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
+
+let g:EnhancedJumps_CaptureJumpMessages = 0
+let g:EnhancedJumps_UseTab = 0
 
 "number settings
 set relativenumber
@@ -133,6 +150,10 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+"termopen
+au TermOpen * setlocal listchars= nonumber norelativenumber
+" au TermOpen * startinsert
 
 "red terminal cursor
 highlight TermCursor ctermfg=red guifg=red
@@ -179,17 +200,11 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 "command mode navigation
 cnoremap <C-A> <Home>
 
-"terminal wrapper so numbers aren't shown
-function! TerminalProgram(prog)
-  execute ":te ".a:prog
-  execute ":setlocal nonumber | setlocal norelativenumber"
-endfunction
-
 "general leader maps
-noremap <silent> <leader>kt :<c-u>sp <bar> call TerminalProgram('zsh')<CR>
-noremap <silent> <leader>lt :<c-u>vs <bar> call TerminalProgram('zsh')<CR>
-noremap <silent> <leader>,t :<c-u>tabe <bar> call TerminalProgram('zsh')<CR>
-noremap <silent> <leader>.t :<c-u>call TerminalProgram('zsh')<CR>
+noremap <silent> <leader>kt :<c-u>sp <bar> te<CR>
+noremap <silent> <leader>lt :<c-u>vs <bar> te<CR>
+noremap <silent> <leader>,t :<c-u>tabe <bar> te<CR>
+noremap <silent> <leader>.t :<c-u>te<CR>
 
 noremap <silent> <leader>ks :<c-u>sp<CR>:Startify<CR>
 noremap <silent> <leader>ls :<c-u>vs<CR>:Startify<CR>
@@ -216,7 +231,16 @@ noremap <leader>we <C-w>=
 noremap <leader>wm <C-w><bar><C-w>_
 map <leader>w <C-w>
 
-noremap <leader>T <C-]>
+noremap <leader>t <C-]>
+noremap <leader>T g<C-]>
+
+nnoremap <Leader>s *``cgn
+nnoremap <Leader>S #``cgN
+
+noremap <leader>Q :bp\|bd #<CR>
+
+noremap <leader><leader>o :Google
+noremap <leader><leader>O :Googlef
 
 "alt window navigation
 map <silent> gzl :<c-u>call Focus('right', 'l')<CR>
@@ -245,18 +269,18 @@ noremap <leader>gg <esc>:<c-u>GFiles<space>
 noremap <leader>gs <esc>:<c-u>GFiles?<space>
 noremap <leader>gb <esc>:<c-u>Buffers<cr>
 noremap <leader>gr <esc>:<c-u>Rg<cr>
-noremap <leader>gl <esc>:<c-u>BLines<cr> 
-noremap <leader>gal <esc>:<c-u>Lines<cr> 
-noremap <leader>gt <esc>:<c-u>BTags<cr> 
-noremap <leader>gat <esc>:<c-u>Tags<cr> 
+noremap <leader>gL <esc>:<c-u>BLines<cr> 
+noremap <leader>gl <esc>:<c-u>Lines<cr> 
+noremap <leader>gT <esc>:<c-u>BTags<cr> 
+noremap <leader>gt <esc>:<c-u>Tags<cr> 
 noremap <leader>gm <esc>:<c-u>Marks<cr> 
 noremap <leader>gw <esc>:<c-u>Windows<cr> 
 noremap <leader>gh <esc>:<c-u>History<cr>
 noremap <leader>g: <esc>:<c-u>History:<cr>
 noremap <leader>g/ <esc>:<c-u>History/<cr>
 noremap <leader>gp <esc>:<c-u>Snippets<cr>
-noremap <leader>gc <esc>:<c-u>BCommits<cr>
-noremap <leader>gac <esc>:<c-u>Commits<cr>
+noremap <leader>gC <esc>:<c-u>BCommits<cr>
+noremap <leader>gc <esc>:<c-u>Commits<cr>
 noremap <leader>go <esc>:<c-u>Commands<cr>
 noremap <leader>gn <esc>:<c-u>Maps<cr>
 noremap <leader>gk <esc>:<c-u>Helptags<cr>
@@ -416,6 +440,7 @@ endfunction
 "java doc commenting (requires eclim/eclipse workspace)
 "noremap <silent> <leader><leader>j <esc>:<c-u>JavaDocComment<CR>
 
+"lightline options
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
@@ -424,7 +449,6 @@ function! MyFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-"lightline options
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
@@ -461,7 +485,7 @@ let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/init.vim'},
       \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
       \ {'K': '~/Documents/keyboard/src/layers.py'}] 
 
-let g:startify_commands = [{'m': 'call TerminalProgram("neomutt")'}, {'t': 'call TerminalProgram("zsh")'}, 
+let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
       \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
 
 let g:startify_lists = [
@@ -665,3 +689,30 @@ let g:fold_options = {
    \ 'strip_template_arguments': 1
    \ }
 
+let g:highlightedyank_highlight_duration = 100
+
+function! s:indent_len(str)
+  return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
+endfunction
+
+function! s:go_indent(times, dir)
+  for _ in range(a:times)
+    let l = line('.')
+    let x = line('$')
+    let i = s:indent_len(getline(l))
+    let e = empty(getline(l))
+
+    while l >= 1 && l <= x
+      let line = getline(l + a:dir)
+      let l += a:dir
+      if s:indent_len(line) != i || empty(line) != e
+        break
+      endif
+    endwhile
+    let l = min([max([1, l]), x])
+    execute 'normal! '. l .'G^'
+  endfor
+endfunction
+
+nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
+nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>

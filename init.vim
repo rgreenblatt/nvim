@@ -14,10 +14,9 @@ map <space> <leader>
 map <space><space> <leader><leader>
 
 noremap <BS> -
-noremap z<BS> z-
+nnoremap z<BS> z-
 
 inoremap <C-b> <esc>:<C-u>le<cr>A
-xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
 noremap ' `
 noremap ` '
@@ -27,6 +26,18 @@ xnoremap <expr> A mode()=~'\cv' ? ':normal $a' : 'A'
 
 noremap <C-r> R
 noremap R <C-r> 
+noremap gR g<C-r> 
+
+nnoremap "q 1gt
+nnoremap "w 2gt
+nnoremap "e 3gt
+nnoremap "r 4gt
+nnoremap "t 5gt
+nnoremap "y 6gt
+nnoremap "u 7gt
+nnoremap "i 8gt
+nnoremap "o 9gt
+nnoremap "p 10gt
 
 "plugins
 set nocompatible
@@ -91,7 +102,6 @@ Plug 'itchyny/calendar.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'lervag/vimtex'
 Plug 'neomutt/neomutt.vim'
-Plug 'chrisbra/Colorizer'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'sakhnik/nvim-gdb'
 Plug 'lambdalisue/suda.vim'
@@ -106,24 +116,38 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/vim-peekaboo'
 Plug 'machakann/vim-highlightedyank'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/sideways.vim'
 Plug 'szw/vim-g'
+Plug 'justinmk/vim-sneak'
+Plug 'RRethy/vim-hexokinase'
+Plug 'ron89/thesaurus_query.vim'
+Plug 'Shougo/neco-vim'
+Plug 'neoclide/coc-neco'
+Plug 'Konfekt/FastFold'
+Plug 'thinca/vim-visualstar' 
+Plug 'dhruvasagar/vim-zoom'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 filetype plugin indent on
- 
+
 "macros
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
 noremap Q @@
 set lazyredraw
 
-"better jumping
-nmap <Tab> <Plug>EnhancedJumpsOlder
-nmap <S-Tab> <Plug>EnhancedJumpsNewer
+"better jumping (uses vim-EnhancedJumps)
+nmap <silent><expr> <TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) : 
+            \ "\<Plug>EnhancedJumpsOlder"
+nmap <silent><expr> <S-TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : 
+            \ "\<Plug>EnhancedJumpsNewer"
 
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
 nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
@@ -165,7 +189,7 @@ set wildmenu
 "conceal
 set conceallevel=2
 let g:tex_conceal="abdgm"
-noremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=1'<CR><CR>
+nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 
 "highlight column 110 to avoid going to long
 set colorcolumn=110
@@ -193,9 +217,9 @@ autocmd Filetype scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 c
 "auto indent for tex is garbage
 " autocmd Filetype tex setlocal indentexpr=
 
-autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
 
-au BufRead,BufNewFile *.sbt set filetype=scala
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "command mode navigation
 cnoremap <C-A> <Home>
@@ -242,6 +266,10 @@ noremap <leader>Q :bp\|bd #<CR>
 noremap <leader><leader>o :Google
 noremap <leader><leader>O :Googlef
 
+nnoremap ;f 1z=
+nnoremap ;t :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap ;t y:ThesaurusQueryReplace <C-r>"<CR>
+
 "alt window navigation
 map <silent> gzl :<c-u>call Focus('right', 'l')<CR>
 map <silent> gzh :<c-u>call Focus('left', 'h')<CR>
@@ -255,13 +283,13 @@ tnoremap <C-Space> <C-\><C-n>
 let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 autocmd FileType gitcommit set bufhidden=delete
 
-" Go to last active tab
-if !exists('g:lasttab')
-  let g:lasttab = 1
+" Go to last active window
+if !exists('g:lastwin')
+    let g:lastwin = 1000
 endif
 
-nmap <silent> gb :<c-u>exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+nmap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
+au WinLeave * let g:lastwin = win_getid()
 
 "fzf maps
 noremap <leader>gf <esc>:<c-u>Files<space>
@@ -291,17 +319,49 @@ noremap <leader>Gg <esc>:<c-u>GFiles<cr>
 noremap <leader>Gs <esc>:<c-u>GFiles?<cr>
 
 "coc options
+"these are the :CocInstall I use:
+":CocInstall coc-word
+":CocInstall coc-tag
+":CocInstall coc-lists
+":CocInstall coc-syntax
+":CocInstall coc-emoji
+":CocInstall coc-dictionary
+":CocInstall coc-pyls
+":CocInstall coc-json
+":CocInstall coc-java
+":CocInstall coc-vimtex
+":CocInstall coc-ccls
+":CocInstall coc-yaml
+":CocInstall coc-rls
+":CocInstall coc-snippets
+":CocInstall coc-gocode
+
 " use <tab> for trigger completion and navigate to next complete item
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+            \ pumvisible() ? "\<C-n>" :
+            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr> <S-Tab> 
+            \ pumvisible() ? "\<C-p>" :
+            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : "\<S-Tab>"
+
+snoremap <silent><expr> <TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) : 
+            \ "\<TAB>"
+snoremap <silent><expr> <S-TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : 
+            \ "\<S-TAB>"
+
+"pum close/break undo
+inoremap <c-space> <c-g>u
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` for navigate diagnostics
 nmap [g <Plug>(coc-diagnostic-prev)
@@ -327,114 +387,114 @@ nmap <leader>c <Plug>(coc-fix-current)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 "use fzf for diagnostics
 function! s:format_coc_diagnostic(item) abort
-  return (has_key(a:item,'file')  ? bufname(a:item.file) : '')
-        \ . '|' . (a:item.lnum  ? a:item.lnum : '')
-        \ . (a:item.col ? ' col ' . a:item.col : '')
-        \ . '| ' . a:item.severity
-        \ . ': ' . a:item.message 
+    return (has_key(a:item,'file')  ? bufname(a:item.file) : '')
+                \ . '|' . (a:item.lnum  ? a:item.lnum : '')
+                \ . (a:item.col ? ' col ' . a:item.col : '')
+                \ . '| ' . a:item.severity
+                \ . ': ' . a:item.message 
 endfunction
 
 function! s:get_current_diagnostics() abort
-  " Remove entries not belonging to the current file.
-  let l:diags = filter(copy(CocAction('diagnosticList')), {key, val -> val.file ==# expand('%:p')})
-  return map(l:diags, 's:format_coc_diagnostic(v:val)')
+    " Remove entries not belonging to the current file.
+    let l:diags = filter(copy(CocAction('diagnosticList')), {key, val -> val.file ==# expand('%:p')})
+    return map(l:diags, 's:format_coc_diagnostic(v:val)')
 endfunction
 
 function! s:format_qf_diags(item) abort
-  let l:parsed = s:parse_error(a:item)
-  return {'bufnr' : bufnr(l:parsed['bufnr']), 'lnum' : l:parsed['linenr'], 'col': l:parsed['colnr'], 'text' : l:parsed['text']}
+    let l:parsed = s:parse_error(a:item)
+    return {'bufnr' : bufnr(l:parsed['bufnr']), 'lnum' : l:parsed['linenr'], 'col': l:parsed['colnr'], 'text' : l:parsed['text']}
 endfunction
 
 function! s:build_quickfix_list(lines)
-  call setqflist(map(a:lines, 's:format_qf_diags(v:val)'),'r', "Diagnostics")
+    call setqflist(map(a:lines, 's:format_qf_diags(v:val)'),'r', "Diagnostics")
 endfunc
 
 let s:TYPE = {'dict': type({}), 'funcref': type(function('call')), 'string': type(''), 'list': type([])}
 
 let s:default_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
 
 function! s:action_for(key, ...)
-  let default = a:0 ? a:1 : ''
-  if a:key == 'ctrl-q'
-    let l:Cmd = function('s:build_quickfix_list')
-  else
-    let l:Cmd = get(get(g:, 'fzf_action', s:default_action), a:key, default)
-  endif
-  return l:Cmd
+    let default = a:0 ? a:1 : ''
+    if a:key == 'ctrl-q'
+        let l:Cmd = function('s:build_quickfix_list')
+    else
+        let l:Cmd = get(get(g:, 'fzf_action', s:default_action), a:key, default)
+    endif
+    return l:Cmd
 endfunction
 
 function! GetFzfDiags() abort
-  let l:diags = CocAction('diagnosticList')
-  if !empty(l:diags)
-    let expect_keys = join(keys(get(g:, 'fzf_action', s:default_action)), ',')
-    let l:opts = {
-          \ 'source': s:get_current_diagnostics(),
-          \ 'sink*': function('s:error_handler'),
-          \ 'options': ['--multi','--expect=ctrl-q,'.expect_keys,'--ansi', '--prompt=Coc Diagnostics> '],
-          \ }
-    call fzf#run(fzf#wrap(l:opts))
-    call s:syntax()
-  endif
+    let l:diags = CocAction('diagnosticList')
+    if !empty(l:diags)
+        let expect_keys = join(keys(get(g:, 'fzf_action', s:default_action)), ',')
+        let l:opts = {
+                    \ 'source': s:get_current_diagnostics(),
+                    \ 'sink*': function('s:error_handler'),
+                    \ 'options': ['--multi','--expect=ctrl-q,'.expect_keys,'--ansi', '--prompt=Coc Diagnostics> '],
+                    \ }
+        call fzf#run(fzf#wrap(l:opts))
+        call s:syntax()
+    endif
 endfunction
 
 function! s:syntax() abort
-  if has('syntax') && exists('g:syntax_on')
-    syntax match FzfQuickFixFileName '^[^|]*' nextgroup=FzfQuickFixSeparator
-    syntax match FzfQuickFixSeparator '|' nextgroup=FzfQuickFixLineNumber contained
-    syntax match FzfQuickFixLineNumber '[^|]*' contained contains=FzfQuickFixError
-    syntax match FzfQuickFixError 'error' contained
+    if has('syntax') && exists('g:syntax_on')
+        syntax match FzfQuickFixFileName '^[^|]*' nextgroup=FzfQuickFixSeparator
+        syntax match FzfQuickFixSeparator '|' nextgroup=FzfQuickFixLineNumber contained
+        syntax match FzfQuickFixLineNumber '[^|]*' contained contains=FzfQuickFixError
+        syntax match FzfQuickFixError 'error' contained
 
-    highlight default link FzfQuickFixFileName Directory
-    highlight default link FzfQuickFixLineNumber LineNr
-    highlight default link FzfQuickFixError Error
-  endif
+        highlight default link FzfQuickFixFileName Directory
+        highlight default link FzfQuickFixLineNumber LineNr
+        highlight default link FzfQuickFixError Error
+    endif
 endfunction
 
 function! s:error_handler(err) abort
-   
-  let l:Cmd = s:action_for(a:err[0])
 
-  if !empty(l:Cmd) && type(l:Cmd) == s:TYPE.string && stridx('edit', l:Cmd) < 0
-    execute 'silent' l:Cmd
-  elseif !empty(l:Cmd) && type(l:Cmd) == s:TYPE.funcref
-    call l:Cmd(a:err[1:])
-    return
-  endif
-  let l:parsed = s:parse_error(a:err[1:])
-  execute 'buffer' bufnr(l:parsed["bufnr"])
-  mark '
-  call cursor(l:parsed["linenr"], l:parsed["colnr"])
-  normal! zvzz
+    let l:Cmd = s:action_for(a:err[0])
+
+    if !empty(l:Cmd) && type(l:Cmd) == s:TYPE.string && stridx('edit', l:Cmd) < 0
+        execute 'silent' l:Cmd
+    elseif !empty(l:Cmd) && type(l:Cmd) == s:TYPE.funcref
+        call l:Cmd(a:err[1:])
+        return
+    endif
+    let l:parsed = s:parse_error(a:err[1:])
+    execute 'buffer' bufnr(l:parsed["bufnr"])
+    mark '
+    call cursor(l:parsed["linenr"], l:parsed["colnr"])
+    normal! zvzz
 
 endfunction
 
 function! s:parse_error(err) abort
-  let l:match = matchlist(a:err, '\v^([^|]*)\|(\d+)?%(\scol\s(\d+))?.*\|(.*)')[1:4]
-  if empty(l:match) || empty(l:match[0])
-    return
-  endif
+    let l:match = matchlist(a:err, '\v^([^|]*)\|(\d+)?%(\scol\s(\d+))?.*\|(.*)')[1:4]
+    if empty(l:match) || empty(l:match[0])
+        return
+    endif
 
-  if empty(l:match[1]) && (bufnr(l:match[0]) == bufnr('%'))
-    return
-  endif
+    if empty(l:match[1]) && (bufnr(l:match[0]) == bufnr('%'))
+        return
+    endif
 
-  let l:line_number = empty(l:match[1]) ? 1 : str2nr(l:match[1])
-  let l:col_number = empty(l:match[2]) ? 1 : str2nr(l:match[2])
-  let l:error_msg = l:match[3]
+    let l:line_number = empty(l:match[1]) ? 1 : str2nr(l:match[1])
+    let l:col_number = empty(l:match[2]) ? 1 : str2nr(l:match[2])
+    let l:error_msg = l:match[3]
 
-  return ({'bufnr' : l:match[0],'linenr' : l:line_number, 'colnr':l:col_number, 'text': l:error_msg})
+    return ({'bufnr' : l:match[0],'linenr' : l:line_number, 'colnr':l:col_number, 'text': l:error_msg})
 endfunction
 
 "java doc commenting (requires eclim/eclipse workspace)
@@ -442,26 +502,26 @@ endfunction
 
 "lightline options
 function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
 function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'gitstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'gitstatus': 'FugitiveStatusline',
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat'
-      \ }
-      \ }
+            \ 'colorscheme': 'gruvbox',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'cocstatus', 'gitstatus', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'cocstatus': 'coc#status',
+            \   'gitstatus': 'FugitiveStatusline',
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat'
+            \ }
+            \ }
 
 let b:lion_squeeze_spaces = 1
 
@@ -481,31 +541,31 @@ set iskeyword+=-
 
 "startify
 let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/init.vim'},
-      \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
-      \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
-      \ {'K': '~/Documents/keyboard/src/layers.py'}] 
+            \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
+            \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
+            \ {'K': '~/Documents/keyboard/src/layers.py'}] 
 
 let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
-      \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
+            \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
 
 let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ { 'type': 'files',     'header': ['   Recent']            },
-      \ ]
+            \ { 'type': 'sessions',  'header': ['   Sessions']       },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ { 'type': 'commands',  'header': ['   Commands']       },
+            \ { 'type': 'files',     'header': ['   Recent']            },
+            \ ]
 
 "possible additonal entry
 "      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
 
 let g:startify_skiplist = [
-       \ 'init.vim',
-       \ 'config',
-       \ 'config.py'
-       \ ]
+            \ 'init.vim',
+            \ 'config',
+            \ 'config.py'
+            \ ]
 
 let g:startify_custom_header =
-      \ map(split(system('cat /home/ryan/Documents/efficiency/TODO/TODO_LIST.txt'), '\n'), '"   ". v:val')
+            \ map(split(system('cat /home/ryan/Documents/efficiency/TODO/TODO_LIST.txt'), '\n'), '"   ". v:val')
 
 "windowswap
 let g:windowswap_map_keys = 0
@@ -536,13 +596,13 @@ let g:limelight_priority = -1
 noremap <silent> <leader><leader>g :Goyo<cr>
 
 function SetupGoyo() 
-  Limelight
-  noremap <silent> <leader><leader>g :Goyo!<cr>
+    Limelight
+    noremap <silent> <leader><leader>g :Goyo!<cr>
 endfunction
 
 function SetupNoGoyo() 
-  Limelight!
-  noremap <silent> <leader><leader>g :Goyo<cr>
+    Limelight!
+    noremap <silent> <leader><leader>g :Goyo<cr>
 endfunction
 
 autocmd! User GoyoEnter call SetupGoyo()
@@ -553,6 +613,7 @@ let g:mwAutoLoadMarks = 1
 "yankring
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
+xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
 map ;o p;n
 map ;O P;n
@@ -607,8 +668,8 @@ let g:calendar_view = 'week'
 let g:calendar_cyclic_view = 1
 
 augroup calendar-mappings
-  autocmd!
-  autocmd FileType calendar nunmap <buffer> <space>
+    autocmd!
+    autocmd FileType calendar nunmap <buffer> <space>
 augroup END
 
 "vimtex
@@ -643,76 +704,93 @@ map <leader>xs  <plug>(vimtex-toggle-main)
 map _  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
 function Op_select_region(window_heightmotion_wiseness)
-  normal! `[v`]
+    normal! `[v`]
 endfunction
 
 map ;_  <Plug>(operator-select-block)
 call operator#user#define('select-block', 'Op_select_block')
 function Op_select_block(window_heightmotion_wiseness)
-  exe "normal `[\<c-v>`]"
+    exe "normal `[\<c-v>`]"
 endfunction
 
 map <leader>_  <Plug>(operator-select-line)
 call operator#user#define('select-line', 'Op_select_line')
 function Op_select_line(window_heightmotion_wiseness)
-  normal! `[V`]
+    normal! `[V`]
 endfunction
 
 map <leader>wa  <Plug>(operator-adjust)
 call operator#user#define('adjust', 'Op_adjust_window_height')
 function! Op_adjust_window_height(motion_wiseness)
-  execute (line("']") - line("'[") + 1) 'wincmd' '_'
-  normal! `[zt
+    execute (line("']") - line("'[") + 1) 'wincmd' '_'
+    normal! `[zt
 endfunction
 
 "change codi to use python3
 let g:codi#interpreters = {
-      \ 'python': {
-      \ 'bin': 'python3',
-      \ },
-      \ }
+            \ 'python': {
+            \ 'bin': 'python3',
+            \ },
+            \ }
 noremap <leader><leader>s :<c-u>Codi<cr>
 
-noremap <silent> <leader><leader>h :<c-u>ColorHighlight<cr>
+noremap <silent> <leader><leader>h :<c-u>HexokinaseToggle<cr>
 
 let g:gutentags_cache_dir = '~/.tags'
 
 "c/c++ folding 
 let g:fold_options = {
-   \ 'fallback_method' : { 'line_threshold' : 2000, 'method' : 'syntax' },
-   \ 'fold_blank': 1,
-   \ 'fold_includes': 1,
-   \ 'max_foldline_length': 'win',
-   \ 'merge_comments' : 1,
-   \ 'show_if_and_else': 1,
-   \ 'strip_namespaces': 1,
-   \ 'strip_template_arguments': 1
-   \ }
+            \ 'fallback_method' : { 'line_threshold' : 2000, 'method' : 'syntax' },
+            \ 'fold_blank': 1,
+            \ 'fold_includes': 1,
+            \ 'max_foldline_length': 'win',
+            \ 'merge_comments' : 1,
+            \ 'show_if_and_else': 1,
+            \ 'strip_namespaces': 1,
+            \ 'strip_template_arguments': 1
+            \ }
 
 let g:highlightedyank_highlight_duration = 100
 
 function! s:indent_len(str)
-  return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
+    return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
 endfunction
 
 function! s:go_indent(times, dir)
-  for _ in range(a:times)
-    let l = line('.')
-    let x = line('$')
-    let i = s:indent_len(getline(l))
-    let e = empty(getline(l))
+    for _ in range(a:times)
+        let l = line('.')
+        let x = line('$')
+        let i = s:indent_len(getline(l))
+        let e = empty(getline(l))
 
-    while l >= 1 && l <= x
-      let line = getline(l + a:dir)
-      let l += a:dir
-      if s:indent_len(line) != i || empty(line) != e
-        break
-      endif
-    endwhile
-    let l = min([max([1, l]), x])
-    execute 'normal! '. l .'G^'
-  endfor
+        while l >= 1 && l <= x
+            let line = getline(l + a:dir)
+            let l += a:dir
+            if s:indent_len(line) != i || empty(line) != e
+                break
+            endif
+        endwhile
+        let l = min([max([1, l]), x])
+        execute 'normal! '. l .'G^'
+    endfor
 endfunction
 
 nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>
+
+let g:sneak#s_next = 1
+
+function! Output(cmd)
+    redir => message
+    silent execute a:cmd
+    redir END
+    if empty(message)
+        echoerr "no output"
+    else
+        " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+        new
+        setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+        silent put=message
+    endif
+endfunction
+command! -nargs=+ -complete=command Output call Output(<q-args>)

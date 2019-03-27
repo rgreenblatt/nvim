@@ -269,8 +269,11 @@ autocmd! User GoyoLeave call SetupNoGoyo()
 "git
 nnoremap ;gs :<c-u>Gstatus<space>
 nnoremap ;gd :<c-u>Gvdiff<space>
-nnoremap ;gp :<c-u>Gpull<space>
-nnoremap ;gh :<c-u>Gpush<space>
+
+"when bug gets fixed, switch back to builtin commands
+nnoremap ;gp :<c-u>Git pull<space>
+nnoremap ;gh :<c-u>Git push<space>
+
 nnoremap ;gcc :<c-u>Gcommit -v<space>
 nnoremap ;gca :<c-u>Gcommit -v -a<space>
 nnoremap ;gcA :<c-u>Gcommit --amend -v -a<space>

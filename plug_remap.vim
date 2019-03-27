@@ -267,7 +267,7 @@ autocmd! User GoyoEnter call SetupGoyo()
 autocmd! User GoyoLeave call SetupNoGoyo()
 
 "git
-nnoremap ;gs :<c-u>Gstatus<space>
+nnoremap <silent> ;gs :<c-u>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands

@@ -31,7 +31,7 @@ let g:clever_f_timeout_ms = 3000
 let g:wordmotion_prefix = ';'
 
 "startify
-let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/init.vim'},
+let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
             \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
             \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
             \ {'K': '~/Documents/keyboard/src/layers.py'}] 

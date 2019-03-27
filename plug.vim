@@ -83,7 +83,6 @@ Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
-Plug 'dhruvasagar/vim-zoom'
 Plug 'Yggdroot/indentLine'
 Plug 'liuchengxu/vista.vim'
 call plug#end()

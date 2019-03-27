@@ -11,7 +11,7 @@ set expandtab
 set wildmode=longest,list,full
 set wildmenu
 set conceallevel=2
-set colorcolumn=110
+set colorcolumn=111
 highlight ColorColumn ctermbg=darkgray
 highlight TermCursor ctermfg=red guifg=red
 let $GIT_EDITOR = 'nvr -cc split --remote-wait'

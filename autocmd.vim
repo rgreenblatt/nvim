@@ -1,6 +1,6 @@
 au TermOpen * setlocal listchars= nonumber norelativenumber
-au Filetype java setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
-au Filetype scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
+au Filetype java setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
+au Filetype scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
 autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
 autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd FileType gitcommit set bufhidden=delete

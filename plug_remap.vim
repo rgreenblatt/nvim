@@ -280,3 +280,7 @@ nnoremap ;gcA :<c-u>Gcommit --amend -v -a<space>
 nnoremap ;go :<c-u>Gcheckout<space>
 nnoremap ;gr :<c-u>Gremove<space>
 nnoremap ;gm :<c-u>Gmove<space>
+
+"ninja-feet overides mappings
+nnoremap ;i [i
+nnoremap ;I [I

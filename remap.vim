@@ -116,5 +116,5 @@ endfunction
 nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 
-"swap comma and quote (should be done after all maps, but before plugins)
+"swap comma/quote and apostrophe/backtick
 set langmap=\\,\",\"\\,,`','`

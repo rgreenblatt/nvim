@@ -1,7 +1,3 @@
-Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
-Abolish thsi this
-Abolish slient silent
-Abolish accross across
 iabbrev cosnt const
 
 function! SetupCommandAbbrs(from, to)

@@ -1,22 +1,14 @@
 "remaps which override defaults:
 map Y y$
 
-noremap ,m "_
-noremap ,j "+
-map , "
-
-cnoremap <c-space> <c-f>
+noremap "m "_
+noremap "j "+
 
 map <space> <leader>
 map <space><space> <leader><leader>
 
 noremap <BS> -
 nnoremap z<BS> z-
-
-inoremap <C-b> <esc>:<C-u>le<cr>A
-
-noremap ' `
-noremap ` '
 
 xnoremap <expr> I mode()=~'\cv' ? ':normal ^i' : 'I'
 xnoremap <expr> A mode()=~'\cv' ? ':normal $a' : 'A'
@@ -25,16 +17,16 @@ noremap <C-r> R
 noremap R <C-r> 
 noremap gR g<C-r> 
 
-nnoremap "q 1gt
-nnoremap "w 2gt
-nnoremap "e 3gt
-nnoremap "r 4gt
-nnoremap "t 5gt
-nnoremap "y 6gt
-nnoremap "u 7gt
-nnoremap "i 8gt
-nnoremap "o 9gt
-nnoremap "p 10gt
+nnoremap ,q 1gt
+nnoremap ,w 2gt
+nnoremap ,e 3gt
+nnoremap ,r 4gt
+nnoremap ,t 5gt
+nnoremap ,y 6gt
+nnoremap ,u 7gt
+nnoremap ,i 8gt
+nnoremap ,o 9gt
+nnoremap ,p 10gt
 
 "macros
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
@@ -87,7 +79,6 @@ nnoremap <Leader>S #``cgN
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
-nnoremap ;p :<c-u>let @@=expand('%:p:h')<cr>
 
 "term esc
 tnoremap <C-Space> <C-\><C-n>
@@ -124,3 +115,6 @@ endfunction
 
 nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>
+
+"swap comma and quote (should be done after all maps, but before plugins)
+set langmap=\\,\",\"\\,,`','`

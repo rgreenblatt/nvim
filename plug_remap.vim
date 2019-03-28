@@ -216,7 +216,15 @@ map ;P9 P;n;n;n;n;n;n;n;n;n
 map ;n <Plug>(miniyank-cycle)
 map ;N <Plug>(miniyank-cycleback)
 
+"vimade
 nnoremap <silent> <leader><leader>f :<c-u>VimadeToggle<cr>
+
+augroup VimadeCmdLine
+    au! 
+    au CmdLineEnter * VimadeBufDisable
+    au CmdlineLeave * VimadeBufEnable
+augroup END
+
 
 "NarrowRegion
 let g:nrrw_rgn_nomap_nr = 1

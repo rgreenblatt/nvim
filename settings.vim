@@ -16,8 +16,3 @@ highlight ColorColumn ctermbg=darkgray
 highlight TermCursor ctermfg=red guifg=red
 let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 set iskeyword+=-
-
-"colorscheme
-colorscheme gruvbox
-set termguicolors
-let g:gruvbox_contrast_dark = "hard"

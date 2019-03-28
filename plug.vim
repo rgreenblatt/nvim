@@ -24,7 +24,6 @@ endfunction
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
-" Plug 'dansomething/vim-eclim'
 if exists("g:headless")
 else
     Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
@@ -34,6 +33,7 @@ else
     Plug 'makerj/vim-pdf'
     Plug 'lervag/vimtex'
     Plug 'rgreenblatt/i3-vim-focus'
+    " Plug 'dansomething/vim-eclim'
 endif
 Plug 'wikitopian/hardmode'
 Plug 'inkarkat/vim-ingo-library'

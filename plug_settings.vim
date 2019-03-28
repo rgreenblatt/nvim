@@ -1,3 +1,8 @@
+"colorscheme
+colorscheme gruvbox
+set termguicolors
+let g:gruvbox_contrast_dark = "hard"
+
 "enhanced jumps
 let g:EnhancedJumps_CaptureJumpMessages = 0
 let g:EnhancedJumps_UseTab = 0
@@ -13,33 +18,54 @@ let g:clever_f_timeout_ms = 3000
 
 let g:wordmotion_prefix = ';'
 
-"startify
-let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
-            \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
-            \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
-            \ {'K': '~/Documents/keyboard/src/layers.py'}] 
+if exists("g:headless")
+else
+    "startify
+    let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
+                \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
+                \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
+                \ {'K': '~/Documents/keyboard/src/layers.py'}] 
+    
+    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
+                \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
+    
+    let g:startify_lists = [
+                \ { 'type': 'sessions',  'header': ['   Sessions']       },
+                \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+                \ { 'type': 'commands',  'header': ['   Commands']       },
+                \ { 'type': 'files',     'header': ['   Recent']            },
+                \ ]
+    
+    "possible additonal entry
+    "      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
+    
+    let g:startify_skiplist = [
+                \ 'init.vim',
+                \ 'config',
+                \ 'config.py'
+                \ ]
+    
+    let g:startify_custom_header =
+                \ map(split(system('cat /home/ryan/Documents/efficiency/TODO/TODO_LIST.txt'), '\n'), 
+                \'"   ". v:val')
 
-let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
-            \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
-
-let g:startify_lists = [
-            \ { 'type': 'sessions',  'header': ['   Sessions']       },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-            \ { 'type': 'commands',  'header': ['   Commands']       },
-            \ { 'type': 'files',     'header': ['   Recent']            },
-            \ ]
-
-"possible additonal entry
-"      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
-
-let g:startify_skiplist = [
-            \ 'init.vim',
-            \ 'config',
-            \ 'config.py'
-            \ ]
-
-let g:startify_custom_header =
-            \ map(split(system('cat /home/ryan/Documents/efficiency/TODO/TODO_LIST.txt'), '\n'), '"   ". v:val')
+    "calender.vim
+    let g:calendar_google_task = 1
+    let g:calendar_google_calendar = 1
+    let g:calendar_view = 'week'
+    let g:calendar_cyclic_view = 1
+    
+    augroup calendar-mappings
+        autocmd!
+        autocmd FileType calendar nunmap <buffer> <space>
+    augroup END
+    
+    "vimtex
+    let g:vimtex_compiler_method = 'latexmk'
+    let g:vimtex_fold_enabled = 1
+    let g:vimtex_view_method = 'zathura'
+    let g:vimtex_compiler_progname = 'nvr'
+endif
 
 let g:windowswap_map_keys = 0
 
@@ -54,23 +80,6 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_priority = -1
 
 let g:mwAutoLoadMarks = 1
-
-"calender.vim
-let g:calendar_google_task = 1
-let g:calendar_google_calendar = 1
-let g:calendar_view = 'week'
-let g:calendar_cyclic_view = 1
-
-augroup calendar-mappings
-    autocmd!
-    autocmd FileType calendar nunmap <buffer> <space>
-augroup END
-
-"vimtex
-let g:vimtex_compiler_method = 'latexmk'
-let g:vimtex_fold_enabled = 1
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_compiler_progname = 'nvr'
 
 let g:codi#interpreters = {
             \ 'python': {

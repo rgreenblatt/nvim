@@ -48,7 +48,6 @@ nnoremap <silent> <leader>kd :<c-u>sp<CR>:Dirvish<CR>
 nnoremap <silent> <leader>ld :<c-u>vs<CR>:Dirvish<CR>
 nnoremap <silent> <leader>,d :<c-u>tabe<CR>:Dirvish<CR>
 
-
 if exists("g:headless")
 else
     "startify in new window

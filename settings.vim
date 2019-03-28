@@ -17,7 +17,7 @@ highlight TermCursor ctermfg=red guifg=red
 let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 set iskeyword+=-
 set termguicolors
-set pumblend=30
+set pumblend=20
 set ignorecase
 set smartcase
 

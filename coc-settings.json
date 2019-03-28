@@ -1,6 +1,5 @@
 {
   "coc.preferences.echodocSupport": true,
-  "coc.preferences.minTriggerInputLength": 2,
   "languageserver": {
     "dockerfile": {
       "command": "docker-langserver",

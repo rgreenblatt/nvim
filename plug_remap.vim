@@ -43,6 +43,9 @@ nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
 nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
+nmap z;  <Plug>EnhancedJumpsFarFallbackChangeNewer
+nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
+
 "dirvish in new window
 nnoremap <silent> <leader>kd :<c-u>sp<CR>:Dirvish<CR>
 nnoremap <silent> <leader>ld :<c-u>vs<CR>:Dirvish<CR>
@@ -98,6 +101,9 @@ else
 
     "pum close/break undo
     inoremap <c-space> <c-g>u
+
+    "snippet trigger
+    imap <C-s> <Plug>(coc-snippets-expand)
 
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 

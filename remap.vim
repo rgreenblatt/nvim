@@ -116,5 +116,18 @@ endfunction
 nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 
+"use command line window
+cnoremap <esc> <c-f>z1<cr>
+
+augroup CmdWin
+    au! 
+    au CmdLineEnter * VimadeBufDisable
+    au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
+    au CmdwinEnter * nnoremap <esc> <C-c><C-c>
+    au CmdwinEnter * nnoremap <expr><silent> k 'z7<cr>:nnoremap k k<cr>'
+    au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
+    au CmdlineLeave * VimadeBufEnable
+augroup END
+
 "swap comma/quote and apostrophe/backtick
 set langmap=\\,\",\"\\,,`','`

@@ -1,9 +1,9 @@
 au TermOpen * setlocal listchars= nonumber norelativenumber
 au Filetype java setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
 au Filetype scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
-autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
-autocmd FileType json syntax match Comment +\/\/.\+$+
-autocmd FileType gitcommit set bufhidden=delete
+au Filetype tex,text,textile,mkd,markdown setlocal spell
+au FileType json syntax match Comment +\/\/.\+$+
+au FileType gitcommit set bufhidden=delete
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -21,6 +21,6 @@ function s:MkNonExDir(file, buf)
 endfunction
 
 augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+    au!
+    au BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END

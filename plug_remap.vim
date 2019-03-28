@@ -48,92 +48,120 @@ nnoremap <silent> <leader>kd :<c-u>sp<CR>:Dirvish<CR>
 nnoremap <silent> <leader>ld :<c-u>vs<CR>:Dirvish<CR>
 nnoremap <silent> <leader>,d :<c-u>tabe<CR>:Dirvish<CR>
 
-"startify in new window
-nnoremap <silent> <leader>ks :<c-u>sp<CR>:Startify<CR>
-nnoremap <silent> <leader>ls :<c-u>vs<CR>:Startify<CR>
-nnoremap <silent> <leader>,s :<c-u>tabe<CR>:Startify<CR>
-nnoremap <silent> <leader>.s :<c-u>Startify<CR>
 
-"google
-nnoremap <leader><leader>o :Google
-nnoremap <leader><leader>O :Googlef
+if exists("g:headless")
+else
+    "startify in new window
+    nnoremap <silent> <leader>ks :<c-u>sp<CR>:Startify<CR>
+    nnoremap <silent> <leader>ls :<c-u>vs<CR>:Startify<CR>
+    nnoremap <silent> <leader>,s :<c-u>tabe<CR>:Startify<CR>
+    nnoremap <silent> <leader>.s :<c-u>Startify<CR>
 
-xnoremap <leader><leader>o :Google
-xnoremap <leader><leader>O :Googlef
+    "google
+    nnoremap <leader><leader>o :Google
+    nnoremap <leader><leader>O :Googlef
 
-"thesaurus
-nnoremap ;t :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
-vnoremap ;t y:ThesaurusQueryReplace <C-r>"<CR>
+    xnoremap <leader><leader>o :Google
+    xnoremap <leader><leader>O :Googlef
 
-"window navigation (requires keyboard remaping and i3-vim-focus
-nnoremap <silent> gzl :<c-u>call Focus('right', 'l')<CR>
-nnoremap <silent> gzh :<c-u>call Focus('left', 'h')<CR>
-nnoremap <silent> gzk :<c-u>call Focus('up', 'k')<CR>
-nnoremap <silent> gzj :<c-u>call Focus('down', 'j')<CR>
+    "thesaurus
+    nnoremap ;t :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
+    vnoremap ;t y:ThesaurusQueryReplace <C-r>"<CR>
 
-"coc remaps
-" use <tab> for trigger completion and navigate to next complete item
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+    "window navigation (requires keyboard remaping and i3-vim-focus
+    nnoremap <silent> gzl :<c-u>call Focus('right', 'l')<CR>
+    nnoremap <silent> gzh :<c-u>call Focus('left', 'h')<CR>
+    nnoremap <silent> gzk :<c-u>call Focus('up', 'k')<CR>
+    nnoremap <silent> gzj :<c-u>call Focus('down', 'j')<CR>
 
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr> <S-Tab> 
-            \ pumvisible() ? "\<C-p>" :
-            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : "\<S-Tab>"
+    "coc remaps
+    " use <tab> for trigger completion and navigate to next complete item
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
 
-snoremap <silent><expr> <TAB>
-            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) : 
-            \ "\<TAB>"
-snoremap <silent><expr> <S-TAB>
-            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : 
-            \ "\<S-TAB>"
+    inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+    inoremap <expr> <S-Tab> 
+                \ pumvisible() ? "\<C-p>" :
+                \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : "\<S-Tab>"
 
-"pum close/break undo
-inoremap <c-space> <c-g>u
+    snoremap <silent><expr> <TAB>
+                \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) : 
+                \ "\<TAB>"
+    snoremap <silent><expr> <S-TAB>
+                \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) : 
+                \ "\<S-TAB>"
 
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    "pum close/break undo
+    inoremap <c-space> <c-g>u
 
-nmap <leader>L :<c-u>CocList<space>
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[g` and `]g` for navigate diagnostics
-nmap [g <Plug>(coc-diagnostic-prev)
-nmap ]g <Plug>(coc-diagnostic-next)
+    nmap <leader>L :<c-u>CocList<space>
 
-" Remap keys for gotos
-nmap <leader>d <Plug>(coc-definition)
-nmap <leader>o <Plug>(coc-type-definition)
-nmap <leader>i <Plug>(coc-implementation)
-nmap <leader>u <Plug>(coc-references)
+    " Use `[g` and `]g` for navigate diagnostics
+    nmap [g <Plug>(coc-diagnostic-prev)
+    nmap ]g <Plug>(coc-diagnostic-next)
 
-" format
-nmap <leader>f <Plug>(coc-format-selected)
-xmap <leader>f <Plug>(coc-format-selected)
+    " Remap keys for gotos
+    nmap <leader>d <Plug>(coc-definition)
+    nmap <leader>o <Plug>(coc-type-definition)
+    nmap <leader>i <Plug>(coc-implementation)
+    nmap <leader>u <Plug>(coc-references)
 
-nmap <leader>F <Plug>(coc-format)
+    " format
+    nmap <leader>f <Plug>(coc-format-selected)
+    xmap <leader>f <Plug>(coc-format-selected)
 
-nmap <leader>e <Plug>(coc-rename)
+    nmap <leader>F <Plug>(coc-format)
 
-nmap <leader>c <Plug>(coc-fix-current)
+    nmap <leader>e <Plug>(coc-rename)
 
-"show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+    nmap <leader>c <Plug>(coc-fix-current)
 
-function! s:show_documentation()
-    if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
+    "show documentation in preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-"java doc commenting (requires eclim/eclipse workspace)
-"nnoremap <silent> <leader><leader>j <esc>:<c-u>JavaDocComment<CR>
+    function! s:show_documentation()
+        if &filetype == 'vim'
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    "java doc commenting (requires eclim/eclipse workspace)
+    "nnoremap <silent> <leader><leader>j <esc>:<c-u>JavaDocComment<CR>
+
+    "vimtex
+    map <leader>xi  <plug>(vimtex-info)
+    map <leader>xI  <plug>(vimtex-info-full)
+    map <leader>xt  <plug>(vimtex-toc-open)
+    map <leader>xT  <plug>(vimtex-toc-toggle)
+    map <leader>xq  <plug>(vimtex-log)
+    map <leader>xv  <plug>(vimtex-view)
+    map <leader>xr  <plug>(vimtex-reverse-search)
+    map <leader>xl  <plug>(vimtex-compile)
+    map <leader>xL  <plug>(vimtex-compile-selected)
+    xmap <leader>xL  <plug>(vimtex-compile-selected)
+    map <leader>xk  <plug>(vimtex-stop)
+    map <leader>xK  <plug>(vimtex-stop-all)
+    map <leader>xe  <plug>(vimtex-errors)
+    map <leader>xo  <plug>(vimtex-compile-output)
+    map <leader>xg  <plug>(vimtex-status)
+    map <leader>xG  <plug>(vimtex-status-all)
+    map <leader>xc  <plug>(vimtex-clean)
+    map <leader>xC  <plug>(vimtex-clean-full)
+    map <leader>xm  <plug>(vimtex-imaps-list)
+    map <leader>xx  <plug>(vimtex-reload)
+    map <leader>xX  <plug>(vimtex-reload-state)
+    map <leader>xs  <plug>(vimtex-toggle-main)
+endif
 
 ""insertchar options
 "let g:insert_char_no_default_mapping = 1
@@ -194,29 +222,6 @@ xmap ;R <Plug>NrrwrgnBangDo
 
 nnoremap <silent> <leader><leader>u :<c-u>MundoToggle<cr>
 
-"vimtex
-map <leader>xi  <plug>(vimtex-info)
-map <leader>xI  <plug>(vimtex-info-full)
-map <leader>xt  <plug>(vimtex-toc-open)
-map <leader>xT  <plug>(vimtex-toc-toggle)
-map <leader>xq  <plug>(vimtex-log)
-map <leader>xv  <plug>(vimtex-view)
-map <leader>xr  <plug>(vimtex-reverse-search)
-map <leader>xl  <plug>(vimtex-compile)
-map <leader>xL  <plug>(vimtex-compile-selected)
-xmap <leader>xL  <plug>(vimtex-compile-selected)
-map <leader>xk  <plug>(vimtex-stop)
-map <leader>xK  <plug>(vimtex-stop-all)
-map <leader>xe  <plug>(vimtex-errors)
-map <leader>xo  <plug>(vimtex-compile-output)
-map <leader>xg  <plug>(vimtex-status)
-map <leader>xG  <plug>(vimtex-status-all)
-map <leader>xc  <plug>(vimtex-clean)
-map <leader>xC  <plug>(vimtex-clean-full)
-map <leader>xm  <plug>(vimtex-imaps-list)
-map <leader>xx  <plug>(vimtex-reload)
-map <leader>xX  <plug>(vimtex-reload-state)
-map <leader>xs  <plug>(vimtex-toggle-main)
 
 "custom operators
 map _  <Plug>(operator-select)

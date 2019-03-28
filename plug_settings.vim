@@ -4,23 +4,6 @@ let g:EnhancedJumps_UseTab = 0
 
 let g:tex_conceal="abdgm"
 
-"these are the :CocInstall I use:
-":CocInstall coc-word
-":CocInstall coc-tag
-":CocInstall coc-lists
-":CocInstall coc-syntax
-":CocInstall coc-emoji
-":CocInstall coc-dictionary
-":CocInstall coc-pyls
-":CocInstall coc-json
-":CocInstall coc-java
-":CocInstall coc-vimtex
-":CocInstall coc-ccls
-":CocInstall coc-yaml
-":CocInstall coc-rls
-":CocInstall coc-snippets
-":CocInstall coc-gocode
-
 let b:lion_squeeze_spaces = 1
 
 "cleverf options

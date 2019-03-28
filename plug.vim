@@ -1,8 +1,31 @@
+function! InstallDeps(info)
+    if a:info.status == 'installed' || a:info.force
+        let extensions = ['coc-word'       \
+                          'coc-tag'        \
+                          'coc-lists'      \
+                          'coc-syntax'     \
+                          'coc-emoji'      \
+                          'coc-dictionary' \
+                          'coc-pyls'       \
+                          'coc-json'       \
+                          'coc-java'       \
+                          'coc-vimtex'     \
+                          'coc-ccls'       \
+                          'coc-yaml'       \
+                          'coc-rls'        \
+                          'coc-snippets'   \
+                          'coc-gocode'     \ 
+                          ]
+        call coc#util#install()
+        call coc#util#install_extension(extensions)
+    endif
+endfunction
+
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'dansomething/vim-eclim'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
 Plug 'wikitopian/hardmode'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-CountJump'

@@ -44,14 +44,34 @@ nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'c
 "command mode navigation
 cnoremap <C-A> <Home>
 
+function! FloatingBuffer()
+  let buf = nvim_create_buf(v:false, v:true)
+
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': 1,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+
 "general leader maps
 nnoremap <silent> <leader>kt :<c-u>sp <bar> te<CR>
 nnoremap <silent> <leader>lt :<c-u>vs <bar> te<CR>
+nnoremap <silent> <leader>;t :<c-u>call FloatingBuffer()<CR>:te<CR>
 nnoremap <silent> <leader>,t :<c-u>tabe <bar> te<CR>
 nnoremap <silent> <leader>.t :<c-u>te<CR>
 
 nnoremap <silent> <leader>kf :<c-u>sp<CR>
 nnoremap <silent> <leader>lf :<c-u>vs<CR>
+nnoremap <silent><expr> <leader>;f ':<c-u>call FloatingBuffer()<cr>:<c-u>e<space>'.expand('%').'<CR>'
 nnoremap <silent> <leader>,f :<c-u>tabe %<CR>
 
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
@@ -79,6 +99,7 @@ nnoremap <Leader>S #``cgN
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
+nnoremap ;;s :<c-u>source %<cr>
 
 "term esc
 tnoremap <C-Space> <C-\><C-n>
@@ -113,8 +134,8 @@ function! s:go_indent(times, dir)
     endfor
 endfunction
 
-nnoremap <silent> <leader>; :<c-u>call <SID>go_indent(v:count1, 1)<cr>
-nnoremap <silent> <leader>: :<c-u>call <SID>go_indent(v:count1, -1)<cr>
+nnoremap <silent> <leader>' :<c-u>call <SID>go_indent(v:count1, 1)<cr>
+nnoremap <silent> <leader>" :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 
 "use command line window
 cnoremap <esc> <c-f>z1<cr>
@@ -123,7 +144,7 @@ augroup CmdWin
     au! 
     au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
     au CmdwinEnter * nnoremap <esc> <C-c><C-c>
-    au CmdwinEnter * nnoremap <expr><silent> k 'z7<cr>:nnoremap k k<cr>'
+    au CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
     au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
 augroup END
 

@@ -1,6 +1,6 @@
 "fzf maps
-nnoremap ;l :<c-u>Files %:p:h<cr>
-nnoremap ;L :<c-u>GFiles %:p:h<cr>
+nnoremap ;j :<c-u>Files %:p:h<cr>
+nnoremap ;k :<c-u>GFiles %:p:h<cr>
 nnoremap ;s :<c-u>GFiles? %:p:h<cr>
 
 nnoremap <leader>gf :<c-u>Files<space>
@@ -43,7 +43,7 @@ nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
 nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
-nmap z;  <Plug>EnhancedJumpsFarFallbackChangeNewer
+nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
 nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 
 "dirvish in new window
@@ -183,38 +183,64 @@ xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
 
 "yankring
-map p <Plug>(miniyank-autoput)
-map P <Plug>(miniyank-autoPut)
+nmap p <Plug>(miniyank-autoput)
+nmap P <Plug>(miniyank-autoPut)
+xmap p <Plug>(miniyank-autoput)
+xmap P <Plug>(miniyank-autoPut)
 xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
-map ;o p;n
-map ;O P;n
-
+nmap ;;p p;n
+nmap ;;p P;n
+xmap ;;p p;n
+xmap ;;p P;n
+ 
 "total hack:
-map ;p0 p
-map ;p1 p;n
-map ;p2 p;n;n
-map ;p3 p;n;n;n
-map ;p4 p;n;n;n;n
-map ;p5 p;n;n;n;n;n
-map ;p6 p;n;n;n;n;n;n
-map ;p7 p;n;n;n;n;n;n;n
-map ;p8 p;n;n;n;n;n;n;n;n
-map ;p9 p;n;n;n;n;n;n;n;n;n
+nmap ;p0 p
+nmap ;p1 p;n
+nmap ;p2 p;n;n
+nmap ;p3 p;n;n;n
+nmap ;p4 p;n;n;n;n
+nmap ;p5 p;n;n;n;n;n
+nmap ;p6 p;n;n;n;n;n;n
+nmap ;p7 p;n;n;n;n;n;n;n
+nmap ;p8 p;n;n;n;n;n;n;n;n
+nmap ;p9 p;n;n;n;n;n;n;n;n;n
 
-map ;P0 P
-map ;P1 P;n
-map ;P2 P;n;n
-map ;P3 P;n;n;n
-map ;P4 P;n;n;n;n
-map ;P5 P;n;n;n;n;n
-map ;P6 P;n;n;n;n;n;n
-map ;P7 P;n;n;n;n;n;n;n
-map ;P8 P;n;n;n;n;n;n;n;n
-map ;P9 P;n;n;n;n;n;n;n;n;n
+xmap ;p0 p
+xmap ;p1 p;n
+xmap ;p2 p;n;n
+xmap ;p3 p;n;n;n
+xmap ;p4 p;n;n;n;n
+xmap ;p5 p;n;n;n;n;n
+xmap ;p6 p;n;n;n;n;n;n
+xmap ;p7 p;n;n;n;n;n;n;n
+xmap ;p8 p;n;n;n;n;n;n;n;n
+xmap ;p9 p;n;n;n;n;n;n;n;n;n
 
-map ;n <Plug>(miniyank-cycle)
-map ;N <Plug>(miniyank-cycleback)
+nmap ;P0 P
+nmap ;P1 P;n
+nmap ;P2 P;n;n
+nmap ;P3 P;n;n;n
+nmap ;P4 P;n;n;n;n
+nmap ;P5 P;n;n;n;n;n
+nmap ;P6 P;n;n;n;n;n;n
+nmap ;P7 P;n;n;n;n;n;n;n
+nmap ;P8 P;n;n;n;n;n;n;n;n
+nmap ;P9 P;n;n;n;n;n;n;n;n;n
+
+xmap ;P0 P
+xmap ;P1 P;n
+xmap ;P2 P;n;n
+xmap ;P3 P;n;n;n
+xmap ;P4 P;n;n;n;n
+xmap ;P5 P;n;n;n;n;n
+xmap ;P6 P;n;n;n;n;n;n
+xmap ;P7 P;n;n;n;n;n;n;n
+xmap ;P8 P;n;n;n;n;n;n;n;n
+xmap ;P9 P;n;n;n;n;n;n;n;n;n
+
+nmap ;n <Plug>(miniyank-cycle)
+nmap ;N <Plug>(miniyank-cycleback)
 
 "vimade
 nnoremap <silent> <leader><leader>f :<c-u>VimadeToggle<cr>
@@ -302,3 +328,12 @@ nnoremap ;gm :<c-u>Gmove<space>
 "ninja-feet overides mappings
 nnoremap ;i [i
 nnoremap ;I [I
+
+"sideways maps
+nnoremap <silent> ;h :<c-u>SidewaysJumpLeft<cr>
+nnoremap <silent> ;l :<c-u>SidewaysJumpRight<cr>
+nnoremap <silent> ;y :<c-u>SidewaysLeft<cr>
+nnoremap <silent> ;o :<c-u>SidewaysRight<cr>
+
+"fzf terminal remap
+tnoremap <c-a> <a-c>

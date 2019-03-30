@@ -139,7 +139,7 @@ let g:fold_options = {
             \ }
 "}}}
 
-let g:highlightedyank_highlight_duration = 100
+let g:highlightedyank_highlight_duration = 200
 
 let g:sneak#s_next = 1
 
@@ -172,5 +172,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 "}}}
+
+let g:local_vimrc = ['.config', 'local_init.vim']
 
 " vim: set fdm=marker:

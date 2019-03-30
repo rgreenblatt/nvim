@@ -1,5 +1,6 @@
 iabbrev cosnt const
 
+"command abbreviation {{{
 function! SetupCommandAbbrs(from, to)
     exec 'cnoreabbrev <expr> '.a:from
                 \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
@@ -7,3 +8,6 @@ function! SetupCommandAbbrs(from, to)
 endfunction
 
 call SetupCommandAbbrs('T', 'tabe')
+"}}}
+
+" vim: set fdm=marker:

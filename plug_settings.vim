@@ -1,26 +1,56 @@
-"colorscheme
+"colorscheme{{{
 let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_italic = 1
 colorscheme gruvbox
+"}}}
 
-"enhanced jumps
+"enhanced jumps{{{
 let g:EnhancedJumps_CaptureJumpMessages = 0
 let g:EnhancedJumps_UseTab = 0
+"}}}
 
 let g:tex_conceal="abdgm"
 
 let b:lion_squeeze_spaces = 1
 
-"cleverf options
+"cleverf options{{{
 let g:clever_f_across_no_line = 1
 let g:clever_f_fix_key_direction = 1
 let g:clever_f_timeout_ms = 3000
+"}}}
 
 let g:wordmotion_prefix = ';'
 
+"settings for heavier installs {{{
 if exists("g:headless")
 else
-    "startify
+    "coc {{{
+    let g:coc_global_extensions = [
+                \ 'coc-word',
+                \ 'coc-tag',
+                \ 'coc-lists',
+                \ 'coc-syntax',
+                \ 'coc-emoji',
+                \ 'coc-dictionary',
+                \ 'coc-pyls',
+                \ 'coc-json',
+                \ 'coc-java',
+                \ 'coc-vimtex',
+                \ 'coc-ccls',
+                \ 'coc-yaml',
+                \ 'coc-rls',
+                \ 'coc-snippets',
+                \ 'coc-gocode']
+    augroup CocGenericAutocmds
+        autocmd!
+        " Setup formatexpr specified filetype(s).
+        autocmd FileType c,cpp,json,java,rust,tex,go,yaml setl formatexpr=CocAction('formatSelected')
+        " Update signature help on jump placeholder
+        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+    "}}}
+
+    "startify {{{
     let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
                 \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
                 \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
@@ -48,8 +78,9 @@ else
     let g:startify_custom_header =
                 \ map(split(system('cat /home/ryan/Documents/efficiency/TODO/TODO_LIST.txt'), '\n'), 
                 \'"   ". v:val')
+    "}}}
 
-    "calender.vim
+    "calender {{{
     let g:calendar_google_task = 1
     let g:calendar_google_calendar = 1
     let g:calendar_view = 'week'
@@ -59,17 +90,20 @@ else
         autocmd!
         autocmd FileType calendar nunmap <buffer> <space>
     augroup END
+    "}}}
     
-    "vimtex
+    "vimtex {{{
     let g:vimtex_compiler_method = 'latexmk'
     let g:vimtex_fold_enabled = 1
     let g:vimtex_view_method = 'zathura'
     let g:vimtex_compiler_progname = 'nvr'
+    "}}}
 endif
+"}}}
 
 let g:windowswap_map_keys = 0
 
-" limelight/goyo
+" limelight/goyo {{{
 let g:limelight_conceal_ctermfg = 'DarkGray'
 
 " Color name (:help gui-colors) or RGB color
@@ -78,17 +112,21 @@ let g:limelight_conceal_guifg = 'DarkGray'
 " Highlighting priority (default: 10)
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
+"}}}
 
 let g:mwAutoLoadMarks = 1
 
+"codi {{{
 let g:codi#interpreters = {
             \ 'python': {
             \ 'bin': 'python3',
             \ },
             \ }
+"}}}
 
 let g:gutentags_cache_dir = '~/.tags'
 
+"c/cpp folding {{{
 let g:fold_options = {
             \ 'fallback_method' : { 'line_threshold' : 2000, 'method' : 'syntax' },
             \ 'fold_blank': 0,
@@ -99,11 +137,13 @@ let g:fold_options = {
             \ 'strip_namespaces': 1,
             \ 'strip_template_arguments': 1
             \ }
+"}}}
 
 let g:highlightedyank_highlight_duration = 100
 
 let g:sneak#s_next = 1
 
+"floating fzf window {{{
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
 function! FloatingFZF()
@@ -124,3 +164,13 @@ function! FloatingFZF()
 
   call nvim_open_win(buf, v:true, opts)
 endfunction
+"}}}
+
+"rainbow parens {{{
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"}}}
+
+" vim: set fdm=marker:

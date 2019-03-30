@@ -1,32 +1,11 @@
-function! InstallDeps(info)
-    if a:info.status == 'installed' || a:info.force
-        let extensions = ['coc-word'       \
-                          'coc-tag'        \
-                          'coc-lists'      \
-                          'coc-syntax'     \
-                          'coc-emoji'      \
-                          'coc-dictionary' \
-                          'coc-pyls'       \
-                          'coc-json'       \
-                          'coc-java'       \
-                          'coc-vimtex'     \
-                          'coc-ccls'       \
-                          'coc-yaml'       \
-                          'coc-rls'        \
-                          'coc-snippets'   \
-                          'coc-gocode'     \ 
-                          ]
-        call coc#util#install()
-        call coc#util#install_extension(extensions)
-    endif
-endfunction
-
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
+"plugins {{{
+"plugins for a heavier install {{{
 if exists("g:headless")
 else
-    Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
     Plug 'mhinz/vim-startify'
     Plug 'itchyny/calendar.vim'
     Plug 'Carpetsmoker/xdg_open.vim'
@@ -35,6 +14,7 @@ else
     Plug 'rgreenblatt/i3-vim-focus'
     " Plug 'dansomething/vim-eclim'
 endif
+"}}}
 Plug 'wikitopian/hardmode'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-CountJump'
@@ -47,6 +27,7 @@ Plug 'rgreenblatt/scratch.vim'
 Plug 'rgreenblatt/vim-ninja-feet'
 Plug 'rgreenblatt/c-conceal'
 Plug 'rgreenblatt/vim-unimpaired'
+Plug 'rgreenblatt/gruvbox'
 Plug 'markonm/traces.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tommcdo/vim-exchange'
@@ -89,16 +70,15 @@ Plug 'simnalamburt/vim-mundo'
 Plug 'derekwyatt/vim-scala'
 Plug 'neomutt/neomutt.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'sakhnik/nvim-gdb'
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'lambdalisue/suda.vim'
-Plug 'LucHermitte/VimFold4C'
+" Plug 'LucHermitte/VimFold4C'
 Plug 'LucHermitte/lh-vim-lib'
-Plug 'tmhedberg/SimpylFold'
+" Plug 'tmhedberg/SimpylFold'
 Plug 'justinmk/vim-dirvish'
 Plug 'honza/vim-snippets'
 Plug 'ryanoasis/vim-devicons'
 Plug 'romainl/vim-cool'
-Plug 'morhetz/gruvbox'
 Plug 'junegunn/vim-peekaboo'
 Plug 'machakann/vim-highlightedyank'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -112,5 +92,7 @@ Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
 " Plug 'liuchengxu/vista.vim'
+"}}}
 call plug#end()
 filetype plugin indent on
+" vim: set fdm=marker:

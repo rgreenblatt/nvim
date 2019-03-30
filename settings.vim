@@ -20,4 +20,10 @@ set termguicolors
 set pumblend=20
 set ignorecase
 set smartcase
+set hidden
+set cmdheight=3
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
+" vim: set fdm=marker:

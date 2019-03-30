@@ -1,4 +1,4 @@
-"remaps which override defaults:
+"remaps which override defaults {{{
 map Y y$
 
 noremap "m "_
@@ -14,8 +14,8 @@ xnoremap <expr> I mode()=~'\cv' ? ':normal ^i' : 'I'
 xnoremap <expr> A mode()=~'\cv' ? ':normal $a' : 'A'
 
 noremap <C-r> R
-noremap R <C-r> 
-noremap gR g<C-r> 
+noremap R <C-r>
+noremap gR g<C-r>
 
 nnoremap ,q 1gt
 nnoremap ,w 2gt
@@ -27,8 +27,9 @@ nnoremap ,u 7gt
 nnoremap ,i 8gt
 nnoremap ,o 9gt
 nnoremap ,p 10gt
+"}}}
 
-"macros
+"macros {{{
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
@@ -37,13 +38,17 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 noremap Q @@
+"}}}
 
-"conceal toggle
+"conceal toggle {{{
 nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+"}}}
 
-"command mode navigation
-cnoremap <C-A> <Home>
+"command mode navigation{{{
+cnoremap <C-A> <Home> 
+"}}}
 
+"general leader maps {{{
 function! FloatingBuffer()
   let buf = nvim_create_buf(v:false, v:true)
 
@@ -62,7 +67,6 @@ function! FloatingBuffer()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
-"general leader maps
 nnoremap <silent> <leader>kt :<c-u>sp <bar> te<CR>
 nnoremap <silent> <leader>lt :<c-u>vs <bar> te<CR>
 nnoremap <silent> <leader>;t :<c-u>call FloatingBuffer()<CR>:te<CR>
@@ -71,7 +75,7 @@ nnoremap <silent> <leader>.t :<c-u>te<CR>
 
 nnoremap <silent> <leader>kf :<c-u>sp<CR>
 nnoremap <silent> <leader>lf :<c-u>vs<CR>
-nnoremap <silent><expr> <leader>;f ':<c-u>call FloatingBuffer()<cr>:<c-u>e<space>'.expand('%').'<CR>'
+nnoremap <silent><expr> <leader>;f ':<c-u>call FloatingBuffer()<cr>:e<space>'.expand('%').'<CR>'
 nnoremap <silent> <leader>,f :<c-u>tabe %<CR>
 
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
@@ -80,7 +84,7 @@ nnoremap <silent> <leader><leader>w :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
 nnoremap <silent> <leader>z :<c-u>noh<CR>
 
 nnoremap <silent> <leader>q :<c-u>q<CR>
-nnoremap <silent> <leader>a :<c-u>qa<CR>
+nnoremap <silent> <leader>A :<c-u>qa<CR>
 nnoremap <silent> <leader>W :<c-u>w<CR>
 nnoremap <silent> <leader><leader>d :<c-u>w<CR> :<c-u>bd<CR>
 
@@ -90,8 +94,13 @@ nnoremap <leader>we <C-w>=
 nnoremap <leader>wm <C-w><bar><C-w>_
 nmap <leader>w <C-w>
 
+xnoremap <leader>t <C-]>
+xnoremap <leader>T <C-T>
+xnoremap ;T g<C-]>
+
 nnoremap <leader>t <C-]>
-nnoremap <leader>T g<C-]>
+nnoremap <leader>T <C-T>
+nnoremap ;T g<C-]>
 
 nnoremap <Leader>s *``cgn
 nnoremap <Leader>S #``cgN
@@ -100,18 +109,22 @@ nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
 nnoremap ;;s :<c-u>source %<cr>
+"}}}
 
-"term esc
+"term esc {{{
 tnoremap <C-Space> <C-\><C-n>
+"}}}
 
-" Go to last active window
+"Go to last active window {{{
 if !exists('g:lastwin')
     let g:lastwin = 1000
 endif
 
 nmap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
 au WinLeave * let g:lastwin = win_getid()
+"}}}
 
+"navigate indents {{{
 function! s:indent_len(str)
     return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
 endfunction
@@ -136,17 +149,24 @@ endfunction
 
 nnoremap <silent> <leader>' :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>" :<c-u>call <SID>go_indent(v:count1, -1)<cr>
+"}}}
 
-"use command line window
+"use command line window {{{
 cnoremap <esc> <c-f>z1<cr>
 
 augroup CmdWin
-    au! 
+    au!
     au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
     au CmdwinEnter * nnoremap <esc> <C-c><C-c>
     au CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
     au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
+    au CmdwinEnter * set cmdheight=1
+    au CmdwinLeave * set cmdheight=3
 augroup END
+"}}}
 
-"swap comma/quote and apostrophe/backtick
+"swap comma/quote and apostrophe/backtick {{{
 set langmap=\\,\",\"\\,,`','`
+"}}}
+
+" vim: set fdm=marker:

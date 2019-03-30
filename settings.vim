@@ -30,5 +30,6 @@ set background=dark
 set backupdir=~/.backup/
 set directory=~/.swp/
 set undodir=~/.undo/
+set laststatus=2
 
 " vim: set fdm=marker:

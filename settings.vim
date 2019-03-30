@@ -13,18 +13,22 @@ set wildmenu
 set conceallevel=2
 set colorcolumn=111
 highlight ColorColumn ctermbg=darkgray
-highlight TermCursor ctermfg=red guifg=red
-let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+"highlight TermCursor ctermfg=red guifg=red
+"let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 set iskeyword+=-
-set termguicolors
-set pumblend=20
+"set termguicolors
+"set pumblend=20
 set ignorecase
 set smartcase
 set hidden
 set cmdheight=3
 set updatetime=300
-set shortmess+=c
-set signcolumn=yes
+"set shortmess+=c
+"set signcolumn=yes
 set autowrite
+set background=dark
+set backupdir=~/.backup/
+set directory=~/.swp/
+set undodir=~/.undo/
 
 " vim: set fdm=marker:

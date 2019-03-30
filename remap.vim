@@ -112,17 +112,17 @@ nnoremap ;;s :<c-u>source %<cr>
 "}}}
 
 "term esc {{{
-tnoremap <C-Space> <C-\><C-n>
+"tnoremap <C-Space> <C-\><C-n>
 "}}}
 
-"Go to last active window {{{
-if !exists('g:lastwin')
-    let g:lastwin = 1000
-endif
+""Go to last active window {{{
+"if !exists('g:lastwin')
+"    let g:lastwin = 1000
+"endif
 
-nmap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
-au WinLeave * let g:lastwin = win_getid()
-"}}}
+"nmap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
+"au WinLeave * let g:lastwin = win_getid()
+""}}}
 
 "navigate indents {{{
 function! s:indent_len(str)

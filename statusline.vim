@@ -1,15 +1,15 @@
-"file type devicons helper {{{
-function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 
-                \'no ft') : ''
-endfunction
-"}}}
+""file type devicons helper {{{
+"function! MyFiletype()
+"    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 
+"                \'no ft') : ''
+"endfunction
+""}}}
 
-"file format devicons helper {{{
-function! MyFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-"}}}
+""file format devicons helper {{{
+"function! MyFileformat()
+"    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+"endfunction
+""}}}
 
 "status line {{{
 let g:lightline = {
@@ -21,10 +21,10 @@ let g:lightline = {
             \ 'component_function': {
             \   'cocstatus': 'coc#status',
             \   'gitstatus': 'FugitiveStatusline',
-            \   'filetype': 'MyFiletype',
-            \   'fileformat': 'MyFileformat'
             \ }
             \ }
+            " \   'filetype': 'MyFiletype',
+            " \   'fileformat': 'MyFileformat'
 "}}}
 
 " vim: set fdm=marker:

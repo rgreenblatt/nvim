@@ -211,76 +211,76 @@ xmap zS <plug>(scratch-selection-clear)
 "}}}
 
 "yankring {{{
-nmap p <Plug>(miniyank-autoput)
-nmap P <Plug>(miniyank-autoPut)
-xmap p <Plug>(miniyank-autoput)
-xmap P <Plug>(miniyank-autoPut)
-xnoremap <expr> p v:register=='"'?'pgvy':'p'
+"nmap p <Plug>(miniyank-autoput)
+"nmap P <Plug>(miniyank-autoPut)
+"xmap p <Plug>(miniyank-autoput)
+"xmap P <Plug>(miniyank-autoPut)
+"xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
-nmap ;;p p;n
-nmap ;;P P;n
-xmap <expr> ;;p v:register=='"'?'p;ngvy':'p;n'
-xmap ;;P P;n
+"nmap ;;p p;n
+"nmap ;;P P;n
+"xmap <expr> ;;p v:register=='"'?'p;ngvy':'p;n'
+"xmap ;;P P;n
 
-"total hack:
-nmap ;p0 p
-nmap ;p1 p;n
-nmap ;p2 p;n;n
-nmap ;p3 p;n;n;n
-nmap ;p4 p;n;n;n;n
-nmap ;p5 p;n;n;n;n;n
-nmap ;p6 p;n;n;n;n;n;n
-nmap ;p7 p;n;n;n;n;n;n;n
-nmap ;p8 p;n;n;n;n;n;n;n;n
-nmap ;p9 p;n;n;n;n;n;n;n;n;n
+""total hack:
+"nmap ;p0 p
+"nmap ;p1 p;n
+"nmap ;p2 p;n;n
+"nmap ;p3 p;n;n;n
+"nmap ;p4 p;n;n;n;n
+"nmap ;p5 p;n;n;n;n;n
+"nmap ;p6 p;n;n;n;n;n;n
+"nmap ;p7 p;n;n;n;n;n;n;n
+"nmap ;p8 p;n;n;n;n;n;n;n;n
+"nmap ;p9 p;n;n;n;n;n;n;n;n;n
 
-xmap ;p0 p
-xmap ;p1 p;n
-xmap ;p2 p;n;n
-xmap ;p3 p;n;n;n
-xmap ;p4 p;n;n;n;n
-xmap ;p5 p;n;n;n;n;n
-xmap ;p6 p;n;n;n;n;n;n
-xmap ;p7 p;n;n;n;n;n;n;n
-xmap ;p8 p;n;n;n;n;n;n;n;n
-xmap ;p9 p;n;n;n;n;n;n;n;n;n
+"xmap ;p0 p
+"xmap ;p1 p;n
+"xmap ;p2 p;n;n
+"xmap ;p3 p;n;n;n
+"xmap ;p4 p;n;n;n;n
+"xmap ;p5 p;n;n;n;n;n
+"xmap ;p6 p;n;n;n;n;n;n
+"xmap ;p7 p;n;n;n;n;n;n;n
+"xmap ;p8 p;n;n;n;n;n;n;n;n
+"xmap ;p9 p;n;n;n;n;n;n;n;n;n
 
-nmap ;P0 P
-nmap ;P1 P;n
-nmap ;P2 P;n;n
-nmap ;P3 P;n;n;n
-nmap ;P4 P;n;n;n;n
-nmap ;P5 P;n;n;n;n;n
-nmap ;P6 P;n;n;n;n;n;n
-nmap ;P7 P;n;n;n;n;n;n;n
-nmap ;P8 P;n;n;n;n;n;n;n;n
-nmap ;P9 P;n;n;n;n;n;n;n;n;n
+"nmap ;P0 P
+"nmap ;P1 P;n
+"nmap ;P2 P;n;n
+"nmap ;P3 P;n;n;n
+"nmap ;P4 P;n;n;n;n
+"nmap ;P5 P;n;n;n;n;n
+"nmap ;P6 P;n;n;n;n;n;n
+"nmap ;P7 P;n;n;n;n;n;n;n
+"nmap ;P8 P;n;n;n;n;n;n;n;n
+"nmap ;P9 P;n;n;n;n;n;n;n;n;n
 
-xmap ;P0 P
-xmap ;P1 P;n
-xmap ;P2 P;n;n
-xmap ;P3 P;n;n;n
-xmap ;P4 P;n;n;n;n
-xmap ;P5 P;n;n;n;n;n
-xmap ;P6 P;n;n;n;n;n;n
-xmap ;P7 P;n;n;n;n;n;n;n
-xmap ;P8 P;n;n;n;n;n;n;n;n
-xmap ;P9 P;n;n;n;n;n;n;n;n;n
+"xmap ;P0 P
+"xmap ;P1 P;n
+"xmap ;P2 P;n;n
+"xmap ;P3 P;n;n;n
+"xmap ;P4 P;n;n;n;n
+"xmap ;P5 P;n;n;n;n;n
+"xmap ;P6 P;n;n;n;n;n;n
+"xmap ;P7 P;n;n;n;n;n;n;n
+"xmap ;P8 P;n;n;n;n;n;n;n;n
+"xmap ;P9 P;n;n;n;n;n;n;n;n;n
 
-nmap ;n <Plug>(miniyank-cycle)
-nmap ;N <Plug>(miniyank-cycleback)
+"nmap ;n <Plug>(miniyank-cycle)
+"nmap ;N <Plug>(miniyank-cycleback)
 "}}}
 
 "vimade {{{
-nnoremap <silent> ;vt :<c-u>VimadeToggle<cr>
-nnoremap <silent> ;vb :<c-u>VimadeBufDisable<cr>
-nnoremap <silent> ;vw :<c-u>VimadeWinDisable<cr>
+" nnoremap <silent> ;vt :<c-u>VimadeToggle<cr>
+" nnoremap <silent> ;vb :<c-u>VimadeBufDisable<cr>
+" nnoremap <silent> ;vw :<c-u>VimadeWinDisable<cr>
 
-augroup VimadeCmdLine
-    au!
-    au CmdLineEnter * VimadeBufDisable
-    au CmdlineLeave * VimadeBufEnable
-augroup END
+" augroup VimadeCmdLine
+"     au!
+"     au CmdLineEnter * VimadeBufDisable
+"     au CmdlineLeave * VimadeBufEnable
+" augroup END
 "}}}
 
 "NarrowRegion {{{
@@ -372,7 +372,7 @@ nnoremap <silent> ;o :<c-u>SidewaysRight<cr>
 "}}}
 
 "fzf terminal remap {{{
-tnoremap <c-a> <a-c>
+"tnoremap <c-a> <a-c>
 "}}}
 
 "nvimgdb {{{

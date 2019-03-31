@@ -120,8 +120,11 @@ if !exists('g:lastwin')
     let g:lastwin = 1000
 endif
 
-nmap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
-au WinLeave * let g:lastwin = win_getid()
+nnoremap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
+augroup LastActiveWindow
+    autocmd!
+    autocmd WinLeave * let g:lastwin = win_getid()
+augroup end
 "}}}
 
 "navigate indents {{{

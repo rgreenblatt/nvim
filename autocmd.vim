@@ -1,9 +1,12 @@
 "general autocmds {{{
-au TermOpen * setlocal listchars= nonumber norelativenumber
-au Filetype java,scala,cpp,c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
-au Filetype tex,text,textile,mkd,markdown setlocal spell
-au FileType json syntax match Comment +\/\/.\+$+
-au FileType gitcommit set bufhidden=delete
+augroup GenericFileAutocmds
+    autocmd!
+    autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+    autocmd Filetype java,scala,cpp,c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
+    autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+    autocmd FileType gitcommit set bufhidden=delete
+augroup end
 "}}}
 
 "mkdir as needed {{{
@@ -18,9 +21,9 @@ function! s:MkNonExDir(file, buf)
 endfunction
 
 augroup BWCCreateDir
-    au!
-    au BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup end
 "}}}
 
 " vim: set fdm=marker:

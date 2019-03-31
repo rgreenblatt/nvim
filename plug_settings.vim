@@ -89,7 +89,7 @@ else
     augroup calendar-mappings
         autocmd!
         autocmd FileType calendar nunmap <buffer> <space>
-    augroup END
+    augroup end
     "}}}
     
     "vimtex {{{
@@ -167,10 +167,13 @@ endfunction
 "}}}
 
 "rainbow parens {{{
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+augroup RainbowParens
+    autocmd!
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax   * RainbowParenthesesLoadRound
+    autocmd Syntax   * RainbowParenthesesLoadSquare
+    autocmd Syntax   * RainbowParenthesesLoadBraces
+augroup end
 "}}}
 
 let g:local_vimrc = ['.config', 'local_init.vim']

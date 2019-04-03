@@ -125,9 +125,6 @@ nnoremap ;T g<C-]>
 nnoremap <Leader>s *``cgn
 nnoremap <Leader>S #``cgN
 
-xnoremap <Leader>s *``cgn
-xnoremap <Leader>S #``cgN
-
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=

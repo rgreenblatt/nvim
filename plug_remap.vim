@@ -1,3 +1,21 @@
+"better jumping (uses vim-EnhancedJumps) {{{
+nmap <silent><expr> <TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+            \ "\<Plug>EnhancedJumpsOlder"
+nmap <silent><expr> <S-TAB>
+            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) :
+            \ "\<Plug>EnhancedJumpsNewer"
+
+nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
+nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
+
+nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
+nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
+
+nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
+nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
+"}}}
+
 "nuake {{{
 call MapWinCmd("t", "NuakeLocal")
 "}}}
@@ -28,25 +46,6 @@ nnoremap <leader>g: :<c-u>History:<cr>
 nnoremap <leader>g/ :<c-u>History/<cr>
 nnoremap <leader>gn :<c-u>Maps<cr>
 nnoremap <leader>gk :<c-u>Helptags<cr>
-nnoremap <leader>gF :<c-u>Filetypes<cr>
-"}}}
-
-"better jumping (uses vim-EnhancedJumps) {{{
-nmap <silent><expr> <TAB>
-            \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-            \ "\<Plug>EnhancedJumpsOlder"
-nmap <silent><expr> <S-TAB>
-            \ coc#expandableOrJumpable() ? coc#rpc#request('snippetPrev', []) :
-            \ "\<Plug>EnhancedJumpsNewer"
-
-nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
-nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
-
-nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
-nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
-
-nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
-nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 "}}}
 
 "dirvish in new window {{{
@@ -111,7 +110,8 @@ else
 
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-    nmap <leader>L :<c-u>CocList<space>
+    nnoremap <leader>L :<c-u>CocList<space>
+    nnoremap ;S :<c-u>CocList -I symbols<cr>
 
     " Use `[g` and `]g` for navigate diagnostics
     nmap [g <Plug>(coc-diagnostic-prev)
@@ -386,5 +386,11 @@ let g:nvimgdb_config_override = {
             \ 'key_eval':          ';de'
             \ }
 "}}}
+
+"visual star search and replace {{{
+xmap <Leader>s <Plug>(visualstar-*)``cgn
+xmap <Leader>S <Plug>(visualstar-#)``cgN
+"}}}
+
 
 " vim: set fdm=marker:

@@ -355,10 +355,6 @@ nnoremap <silent> ;y :<c-u>SidewaysLeft<cr>
 nnoremap <silent> ;o :<c-u>SidewaysRight<cr>
 "}}}
 
-"fzf terminal remap {{{
-tnoremap <c-a> <a-c>
-"}}}
-
 "nvimgdb {{{
 let g:nvimgdb_disable_start_keymaps = 1
 nnoremap ;dp :<c-u>SetDebugPath<space>

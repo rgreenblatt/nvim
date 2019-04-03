@@ -6,7 +6,6 @@ function! Output(cmd)
     if empty(message)
         echoerr "no output"
     else
-        " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
         new
         setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
         silent put=message

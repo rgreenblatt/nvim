@@ -1,11 +1,12 @@
-"general autocmds {{{
-augroup GenericFileAutocmds
+"general filetype autocmds {{{
+augroup FiletypeAutocmds
     autocmd!
     autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    autocmd Filetype java,scala,cpp,c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=81
+    autocmd Filetype java,scala,cpp,c setlocal colorcolumn=81
     autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
     autocmd FileType json syntax match Comment +\/\/.\+$+
     autocmd FileType gitcommit set bufhidden=delete
+    autocmd BufRead,BufNewFile *.sbt set filetype=scala
 augroup end
 "}}}
 

@@ -1,33 +1,34 @@
-"fzf maps {{{
-nnoremap ;j :<c-u>Files %:p:h<cr>
-nnoremap ;k :<c-u>GFiles %:p:h<cr>
-nnoremap ;s :<c-u>GFiles? %:p:h<cr>
+"nuake {{{
+call MapWinCmd("t", "NuakeLocal")
+"}}}
 
-nnoremap <leader>gf :<c-u>Files<space>
-nnoremap <leader>gg :<c-u>GFiles<space>
-nnoremap <leader>gs :<c-u>GFiles?<space>
-nnoremap <leader>gb :<c-u>Buffers<cr>
-nnoremap <leader>gr :<c-u>Rg<cr>
-nnoremap <leader>gL :<c-u>BLines<cr>
-nnoremap <leader>gl :<c-u>Lines<cr>
-nnoremap <leader>gT :<c-u>BTags<cr>
-nnoremap <leader>gt :<c-u>Tags<cr>
-nnoremap <leader>gm :<c-u>Marks<cr>
-nnoremap <leader>gw :<c-u>Windows<cr>
-nnoremap <leader>gh :<c-u>History<cr>
+"fzf maps {{{
+call MapWinCmd("f", "Files")
+call MapWinCmd("F", "Files ", 1)
+call MapWinCmd("g", "GFiles")
+call MapWinCmd("G", "GFiles", 1)
+call MapWinCmd("r", "Rg")
+call MapWinCmd("R", "Rg ", 1)
+call MapWinCmd("l", "BLines")
+call MapWinCmd("L", "Lines")
+call MapWinCmd(";t", "Tags")
+call MapWinCmd(";T", "BTags")
+call MapWinCmd("m", "call fzf#vim#marks()")
+call MapWinCmd("h", "History")
+call MapWinCmd("q", "Commits")
+call MapWinCmd("Q", "BCommits")
+call MapWinCmd("o", "commands")
+
+nnoremap ;j :<c-u>Buffers<cr>
+nnoremap ;k :<c-u>Files %:p:h<cr>
+nnoremap ;a :<c-u>GFiles<cr>
+nnoremap ;s :<c-u>GFiles?<cr>
+
 nnoremap <leader>g: :<c-u>History:<cr>
 nnoremap <leader>g/ :<c-u>History/<cr>
-nnoremap <leader>gp :<c-u>Snippets<cr>
-nnoremap <leader>gC :<c-u>BCommits<cr>
-nnoremap <leader>gc :<c-u>Commits<cr>
-nnoremap <leader>go :<c-u>Commands<cr>
 nnoremap <leader>gn :<c-u>Maps<cr>
 nnoremap <leader>gk :<c-u>Helptags<cr>
 nnoremap <leader>gF :<c-u>Filetypes<cr>
-
-nnoremap <leader>Gf :<c-u>Files<cr>
-nnoremap <leader>Gg :<c-u>GFiles<cr>
-nnoremap <leader>Gs :<c-u>GFiles?<cr>
 "}}}
 
 "better jumping (uses vim-EnhancedJumps) {{{
@@ -49,21 +50,14 @@ nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 "}}}
 
 "dirvish in new window {{{
-nnoremap <silent> <leader>kd :<c-u>sp<CR>:Dirvish %<CR>
-nnoremap <silent> <leader>ld :<c-u>vs<CR>:Dirvish %<CR>
-nnoremap <silent> <leader>,d :<c-u>tabe<CR>:Dirvish %<CR>
-nnoremap <silent><expr> <leader>;d ':<c-u>call FloatingBuffer()<cr>:Dirvish<space>'.expand('%').'<CR>'
+call MapWinCmd("d", "Dirvish")
 "}}}
 
 "plugin remaps for a heavier install {{{
 if exists("g:headless")
 else
     "startify in new window {{{
-    nnoremap <silent> <leader>ks :<c-u>sp<CR>:Startify<CR>
-    nnoremap <silent> <leader>ls :<c-u>vs<CR>:Startify<CR>
-    nnoremap <silent> <leader>,s :<c-u>tabe<CR>:Startify<CR>
-    nnoremap <silent> <leader>.s :<c-u>Startify<CR>
-    nnoremap <silent> <leader>;s :<c-u>call FloatingBuffer()<cr>:Startify<cr>
+    call MapWinCmd("s", "Startify")
     "}}}
 
     "google {{{
@@ -148,7 +142,7 @@ else
     nmap <leader>a <Plug>(coc-codeaction-selected)
     xmap <leader>a <Plug>(coc-codeaction-selected)
 
-    nmap <leader>j <Plug>(coc-float-jump)
+    nmap <leader>Z <Plug>(coc-float-jump)
 
     "show documentation in preview window
     nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -162,34 +156,29 @@ else
     endfunction
     "}}}
 
-
-    "java doc commenting (requires eclim/eclipse workspace) {{{
-    "nnoremap <silent> <leader><leader>j <esc>:<c-u>JavaDocComment<CR>
-    "}}}
-
     "vimtex {{{
-    map  <leader>xi   <plug>(vimtex-info)
-    map  <leader>xI   <plug>(vimtex-info-full)
-    map  <leader>xt   <plug>(vimtex-toc-open)
-    map  <leader>xT   <plug>(vimtex-toc-toggle)
-    map  <leader>xq   <plug>(vimtex-log)
-    map  <leader>xv   <plug>(vimtex-view)
-    map  <leader>xr   <plug>(vimtex-reverse-search)
-    map  <leader>xl   <plug>(vimtex-compile)
-    map  <leader>xL   <plug>(vimtex-compile-selected)
-    xmap <leader>xL   <plug>(vimtex-compile-selected)
-    map  <leader>xk   <plug>(vimtex-stop)
-    map  <leader>xK   <plug>(vimtex-stop-all)
-    map  <leader>xe   <plug>(vimtex-errors)
-    map  <leader>xo   <plug>(vimtex-compile-output)
-    map  <leader>xg   <plug>(vimtex-status)
-    map  <leader>xG   <plug>(vimtex-status-all)
-    map  <leader>xc   <plug>(vimtex-clean)
-    map  <leader>xC   <plug>(vimtex-clean-full)
-    map  <leader>xm   <plug>(vimtex-imaps-list)
-    map  <leader>xx   <plug>(vimtex-reload)
-    map  <leader>xX   <plug>(vimtex-reload-state)
-    map  <leader>xs   <plug>(vimtex-toggle-main)
+    nmap  <leader>xi   <plug>(vimtex-info)
+    nmap  <leader>xI   <plug>(vimtex-info-full)
+    nmap  <leader>xt   <plug>(vimtex-toc-open)
+    nmap  <leader>xT   <plug>(vimtex-toc-toggle)
+    nmap  <leader>xq   <plug>(vimtex-log)
+    nmap  <leader>xv   <plug>(vimtex-view)
+    nmap  <leader>xr   <plug>(vimtex-reverse-search)
+    nmap  <leader>xl   <plug>(vimtex-compile)
+    nmap  <leader>xL   <plug>(vimtex-compile-selected)
+    nmap  <leader>xL   <plug>(vimtex-compile-selected)
+    nmap  <leader>xk   <plug>(vimtex-stop)
+    nmap  <leader>xK   <plug>(vimtex-stop-all)
+    nmap  <leader>xe   <plug>(vimtex-errors)
+    nmap  <leader>xo   <plug>(vimtex-compile-output)
+    nmap  <leader>xg   <plug>(vimtex-status)
+    nmap  <leader>xG   <plug>(vimtex-status-all)
+    nmap  <leader>xc   <plug>(vimtex-clean)
+    nmap  <leader>xC   <plug>(vimtex-clean-full)
+    nmap  <leader>xm   <plug>(vimtex-imaps-list)
+    nmap  <leader>xx   <plug>(vimtex-reload)
+    nmap  <leader>xX   <plug>(vimtex-reload-state)
+    nmap  <leader>xs   <plug>(vimtex-toggle-main)
     "}}}
 endif
 "}}}
@@ -273,14 +262,9 @@ nmap ;N <Plug>(miniyank-cycleback)
 
 "vimade {{{
 nnoremap <silent> ;vt :<c-u>VimadeToggle<cr>
-nnoremap <silent> ;vb :<c-u>VimadeBufDisable<cr>
-nnoremap <silent> ;vw :<c-u>VimadeWinDisable<cr>
-
-augroup VimadeCmdLine
-    au!
-    au CmdLineEnter * VimadeBufDisable
-    au CmdlineLeave * VimadeBufEnable
-augroup END
+nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ? ":<c-u>VimadeBufEnable<cr>" : 
+            \":<c-u>VimadeBufDisable<cr>" 
+nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ? ":<c-u>VimadeWinEnable<cr>" : ":<c-u>VimadeWinDisable<cr>" 
 "}}}
 
 "NarrowRegion {{{
@@ -389,7 +373,8 @@ nnoremap ;dq :<c-u>GdbDebugStop<cr>
 nnoremap ;dr :<c-u>GdbBreakpointClearAll<cr>
 nnoremap ;di :<c-u>GdbInterrupt<cr>
 nnoremap ;dE :<c-u>GdbEvalWord<home>
-let g:nvimgdb_config = {
+
+let g:nvimgdb_config_override = {
             \ 'key_until':         ';du',
             \ 'key_continue':      ';dc',
             \ 'key_next':          ';dn',
@@ -398,13 +383,7 @@ let g:nvimgdb_config = {
             \ 'key_breakpoint':    ';db',
             \ 'key_frameup':       ';dk',
             \ 'key_framedown':     ';dj',
-            \ 'key_eval':          ';de',
-            \ 'set_tkeymaps':      'function("GdbCallAsync", "keymaps.setT")',
-            \ 'set_keymaps':       'function("GdbCallAsync", "keymaps.set")',
-            \ 'unset_keymaps':     'function("GdbCallAsync", "keymaps.unset")',
-            \ 'sign_current_line': '▶',
-            \ 'sign_breakpoint':   [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
-            \ 'split_command':     'split'
+            \ 'key_eval':          ';de'
             \ }
 "}}}
 

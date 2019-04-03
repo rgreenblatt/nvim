@@ -4,9 +4,9 @@ set viewoptions=cursor,folds,slash,unix
 set relativenumber
 set number
 set lazyredraw
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set wildmode=longest,list,full
 set wildmenu
@@ -26,5 +26,6 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 set autowrite
+set gdefault
 
 " vim: set fdm=marker:

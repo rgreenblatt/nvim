@@ -43,7 +43,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-apathy'
 Plug 'tpope/vim-git'
 Plug 'vim-scripts/restore_view.vim'
-Plug 'unblevable/quick-scope'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -52,6 +51,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'TaDaa/vimade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'rhysd/clever-f.vim'
+Plug 'unblevable/quick-scope'
+" Plug 'deris/vim-shot-f'
 Plug 'chaoren/vim-wordmotion'
 Plug 'wesQ3/vim-windowswap'
 Plug 'jeetsukumaran/vim-pythonsense'
@@ -59,6 +60,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-fold'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-function'
 Plug 'bfredl/nvim-miniyank'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'ehamberg/vim-cute-python'
@@ -93,7 +95,9 @@ Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
 " Plug 'liuchengxu/vista.vim'
+Plug 'Lenovsky/nuake'
 "}}}
 call plug#end()
 filetype plugin indent on
+
 " vim: set fdm=marker:

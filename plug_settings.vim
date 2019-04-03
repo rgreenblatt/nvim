@@ -11,7 +11,7 @@ let g:EnhancedJumps_UseTab = 0
 
 let g:tex_conceal="abdgm"
 
-let b:lion_squeeze_spaces = 1
+let g:lion_squeeze_spaces = 1
 
 "cleverf options{{{
 let g:clever_f_across_no_line = 1
@@ -44,7 +44,7 @@ else
     augroup CocGenericAutocmds
         autocmd!
         " Setup formatexpr specified filetype(s).
-        autocmd FileType c,cpp,json,java,rust,tex,go,yaml setl formatexpr=CocAction('formatSelected')
+        autocmd FileType c,cpp,json,java,rust,tex,go,yaml setlocal formatexpr=CocAction('formatSelected')
         " Update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
@@ -99,6 +99,28 @@ else
     let g:vimtex_compiler_progname = 'nvr'
     "}}}
 endif
+"}}}
+
+"nuake {{{
+let g:nuake_per_tab = 1
+let g:nuake_close_if_last_standing = 0
+let g:nuake_start_insert = 0
+
+" augroup NuakeSetName
+"     autocmd!
+"     autocmd BufWinEnter * 
+" 				\ if &filetype == 'nuake'|
+"                 \ exe "file nuake_term_".tabpagenr() |
+" 				\ endif
+" augroup END
+"}}}
+
+"vimade {{{
+augroup VimadeSpecial
+    autocmd!
+    autocmd CmdLineEnter * VimadeBufDisable
+    autocmd CmdlineLeave * VimadeBufEnable
+augroup END
 "}}}
 
 let g:windowswap_map_keys = 0

@@ -8,6 +8,9 @@ function! SetupCommandAbbrs(from, to)
 endfunction
 
 call SetupCommandAbbrs('T', 'tabedit')
+call SetupCommandAbbrs('R', 'CocRestart')
+call SetupCommandAbbrs('PI', 'PlugInstall')
+call SetupCommandAbbrs('PU', 'PlugUpdate')
 "}}}
 
 " vim: set fdm=marker:

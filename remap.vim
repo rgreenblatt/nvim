@@ -10,8 +10,8 @@ map <space><space> <leader><leader>
 noremap <BS> -
 nnoremap z<BS> z-
 
-xnoremap <expr> I mode()=~'\cv' ? ':normal ^i' : 'I'
-xnoremap <expr> A mode()=~'\cv' ? ':normal $a' : 'A'
+xnoremap <leader>i :<c-u>'<,'>normal ^i
+xnoremap <leader>a :<c-u>'<,'>normal $a
 
 noremap <C-r> R
 noremap R <C-r>
@@ -33,8 +33,8 @@ nnoremap ,p 10gt
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
 noremap Q @@
@@ -48,7 +48,12 @@ nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'c
 cnoremap <C-A> <Home> 
 "}}}
 
-"general leader maps {{{
+"fix spelling mistake {{{
+inoremap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
+nnoremap <c-f> [s1z=<c-o>
+"}}}
+
+"window maps {{{
 function! FloatingBuffer()
   let buf = nvim_create_buf(v:false, v:true)
 
@@ -67,17 +72,32 @@ function! FloatingBuffer()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
-nnoremap <silent> <leader>kt :<c-u>sp <bar> te<CR>
-nnoremap <silent> <leader>lt :<c-u>vs <bar> te<CR>
-nnoremap <silent> <leader>;t :<c-u>call FloatingBuffer()<CR>:te<CR>
-nnoremap <silent> <leader>,t :<c-u>tabe <bar> te<CR>
-nnoremap <silent> <leader>.t :<c-u>te<CR>
+function! MapWinCmd(key, command, ...)
+  if a:0 && a:1
+    let suffix = ""
+  else
+    let suffix = "<CR>"
+  endif
 
-nnoremap <silent> <leader>kf :<c-u>sp<CR>
-nnoremap <silent> <leader>lf :<c-u>vs<CR>
-nnoremap <silent><expr> <leader>;f ':<c-u>call FloatingBuffer()<cr>:e<space>'.expand('%').'<CR>'
-nnoremap <silent> <leader>,f :<c-u>tabe %<CR>
+  "silent?
+  execute "nnoremap <leader>h".a:key." :<c-u>aboveleft vnew <bar>"       .a:command.suffix
+  execute "nnoremap <leader>j".a:key." :<c-u>belowright new bar>"        .a:command.suffix
+  execute "nnoremap <leader>k".a:key." :<c-u>aboveleft new <bar>"        .a:command.suffix
+  execute "nnoremap <leader>l".a:key." :<c-u>belowright vnew <bar>"      .a:command.suffix
+  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingBuffer()<CR>:" .a:command.suffix
+  execute "nnoremap <leader>,".a:key." :<c-u>tabnew <bar>"               .a:command.suffix
+  execute "nnoremap <leader>.".a:key." :<c-u>"                           .a:command.suffix
+  execute "nnoremap <leader>H".a:key." :<c-u>topleft vnew <bar>"         .a:command.suffix
+  execute "nnoremap <leader>J".a:key." :<c-u>botright new bar>"          .a:command.suffix
+  execute "nnoremap <leader>K".a:key." :<c-u>topleft new <bar>"          .a:command.suffix
+  execute "nnoremap <leader>L".a:key." :<c-u>botright vnew <bar>"        .a:command.suffix
+endfunction
 
+call MapWinCmd("T", "te")
+call MapWinCmd("c", "feedkeys(\"\<space>\<tab>\")")
+"}}}
+
+"general leader maps {{{
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
 nnoremap <silent> <leader><leader>n :<c-u>set invrelativenumber<CR>
 nnoremap <silent> <leader><leader>w :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
@@ -105,6 +125,9 @@ nnoremap ;T g<C-]>
 nnoremap <Leader>s *``cgn
 nnoremap <Leader>S #``cgN
 
+xnoremap <Leader>s *``cgn
+xnoremap <Leader>S #``cgN
+
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
@@ -115,39 +138,27 @@ nnoremap ;;s :<c-u>source %<cr>
 tnoremap <C-Space> <C-\><C-n>
 "}}}
 
-"Go to last active window {{{
-if !exists('g:lastwin')
-    let g:lastwin = 1000
-endif
-
-nnoremap <silent> gb :<c-u>exe "call win_gotoid( ".g:lastwin ")"<CR>
-augroup LastActiveWindow
-    autocmd!
-    autocmd WinLeave * let g:lastwin = win_getid()
-augroup end
-"}}}
-
 "navigate indents {{{
 function! s:indent_len(str)
-    return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
+  return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
 endfunction
 
 function! s:go_indent(times, dir)
-    for _ in range(a:times)
-        let l = line('.')
-        let x = line('$')
-        let i = s:indent_len(getline(l))
-        let e = empty(getline(l))
-        while l >= 1 && l <= x
-            let line = getline(l + a:dir)
-            let l += a:dir
-            if s:indent_len(line) != i || empty(line) != e
-                break
-            endif
-        endwhile
-        let l = min([max([1, l]), x])
-        execute 'normal! '. l .'G^'
-    endfor
+  for _ in range(a:times)
+    let l = line('.')
+    let x = line('$')
+    let i = s:indent_len(getline(l))
+    let e = empty(getline(l))
+    while l >= 1 && l <= x
+      let line = getline(l + a:dir)
+      let l += a:dir
+      if s:indent_len(line) != i || empty(line) != e
+        break
+      endif
+    endwhile
+    let l = min([max([1, l]), x])
+    execute 'normal! '. l .'G^'
+  endfor
 endfunction
 
 nnoremap <silent> <leader>' :<c-u>call <SID>go_indent(v:count1, 1)<cr>
@@ -158,18 +169,14 @@ nnoremap <silent> <leader>" :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 cnoremap <esc> <c-f>z1<cr>
 
 augroup CmdWin
-    au!
-    au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
-    au CmdwinEnter * nnoremap <esc> <C-c><C-c>
-    au CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
-    au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
-    au CmdwinEnter * set cmdheight=1
-    au CmdwinLeave * set cmdheight=3
+  au!
+  au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
+  au CmdwinEnter * nnoremap <esc> <C-c><C-c>
+  au CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
+  au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
+  au CmdwinEnter * set cmdheight=1
+  au CmdwinLeave * set cmdheight=3
 augroup END
-"}}}
-
-"swap comma/quote and apostrophe/backtick {{{
-set langmap=\\,\",\"\\,,`','`
 "}}}
 
 " vim: set fdm=marker:

@@ -34,6 +34,10 @@
             "filetypes": ["dockerfile"],
             "args": ["--stdio"]
         },
+        "scala": {
+            "command": "metals",
+            "filetypes": ["scala"]
+        },
         "bash": {
             "command": "bash-language-server",
             "args": ["start"],

@@ -56,7 +56,7 @@ else
                 \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
                 \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
     
-    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
+    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'NuakeLocal'}, 
                 \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
     
     let g:startify_lists = [

@@ -36,11 +36,7 @@ call MapWinCmd("h", "History")
 call MapWinCmd("q", "Commits")
 call MapWinCmd("Q", "BCommits")
 call MapWinCmd("o", "commands")
-
-nnoremap ;j :<c-u>Buffers<cr>
-nnoremap ;k :<c-u>Files %:p:h<cr>
-nnoremap ;a :<c-u>GFiles<cr>
-nnoremap ;s :<c-u>GFiles?<cr>
+call MapWinCmd("b", "Buffers")
 
 nnoremap <leader>g: :<c-u>History:<cr>
 nnoremap <leader>g/ :<c-u>History/<cr>

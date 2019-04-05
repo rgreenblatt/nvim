@@ -1,6 +1,7 @@
 {
     "suggest.echodocSupport": true,
     "suggest.maxCompleteItemCount": 20,
+    "python.jediEnabled": false,
     "suggest.completionItemKindLabels": {
         "function": "\uf794",
         "method": "\uf6a6",

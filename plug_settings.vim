@@ -32,7 +32,7 @@ else
                 \ 'coc-syntax',
                 \ 'coc-emoji',
                 \ 'coc-dictionary',
-                \ 'coc-pyls',
+                \ 'coc-python',
                 \ 'coc-json',
                 \ 'coc-java',
                 \ 'coc-vimtex',
@@ -54,7 +54,7 @@ else
     let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
                 \ {'w': '~/.config/i3/config'}, {'b': '~/.config/qutebrowser/config.py'},
                 \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, {'s': '~/.config/i3status/config'},
-                \ {'K': '~/Documents/keyboard/src/layers.py'}] 
+                \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
     
     let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'te'}, 
                 \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]

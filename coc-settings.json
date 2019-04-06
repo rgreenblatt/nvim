@@ -37,7 +37,8 @@
         },
         "scala": {
             "command": "metals",
-            "filetypes": ["scala"]
+            "filetypes": ["scala"],
+            "trace.server": "verbose"
         },
         "bash": {
             "command": "bash-language-server",

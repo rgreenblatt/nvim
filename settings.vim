@@ -11,7 +11,7 @@ set expandtab
 set wildmode=longest,list,full
 set wildmenu
 set conceallevel=2
-set colorcolumn=111
+set colorcolumn=81
 highlight ColorColumn ctermbg=darkgray
 highlight TermCursor ctermfg=red guifg=red
 let $GIT_EDITOR = 'nvr -cc split --remote-wait'
@@ -27,5 +27,7 @@ set shortmess+=c
 set signcolumn=yes
 set autowrite
 set gdefault
+set cursorline
+set cursorcolumn
 
 " vim: set fdm=marker:

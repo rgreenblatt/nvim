@@ -41,11 +41,12 @@ noremap Q @@
 "}}}
 
 "conceal toggle {{{
-nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ?
+      \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 "}}}
 
 "command mode navigation{{{
-cnoremap <C-A> <Home> 
+cnoremap <C-A> <Home>
 "}}}
 
 "fix spelling mistake {{{
@@ -80,21 +81,31 @@ function! MapWinCmd(key, command, ...)
   endif
 
   "silent?
-  execute "nnoremap <leader>h".a:key." :<c-u>aboveleft vnew <bar>"       .a:command.suffix
-  execute "nnoremap <leader>j".a:key." :<c-u>belowright new <bar>"        .a:command.suffix
-  execute "nnoremap <leader>k".a:key." :<c-u>aboveleft new <bar>"        .a:command.suffix
-  execute "nnoremap <leader>l".a:key." :<c-u>belowright vnew <bar>"      .a:command.suffix
-  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingBuffer()<CR>:" .a:command.suffix
-  execute "nnoremap <leader>,".a:key." :<c-u>tabnew <bar>"               .a:command.suffix
-  execute "nnoremap <leader>.".a:key." :<c-u>"                           .a:command.suffix
-  execute "nnoremap <leader>H".a:key." :<c-u>topleft vnew <bar>"         .a:command.suffix
-  execute "nnoremap <leader>J".a:key." :<c-u>botright new <bar>"          .a:command.suffix
-  execute "nnoremap <leader>K".a:key." :<c-u>topleft new <bar>"          .a:command.suffix
-  execute "nnoremap <leader>L".a:key." :<c-u>botright vnew <bar>"        .a:command.suffix
+  execute "nnoremap <leader>h".a:key." :<c-u>aboveleft vnew <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>j".a:key." :<c-u>belowright new <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>k".a:key." :<c-u>aboveleft new <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>l".a:key." :<c-u>belowright vnew <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingBuffer()<CR>:".
+        \ a:command.suffix
+  execute "nnoremap <leader>,".a:key." :<c-u>tabnew <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>.".a:key." :<c-u>".
+        \ a:command.suffix
+  execute "nnoremap <leader>H".a:key." :<c-u>topleft vnew <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>J".a:key." :<c-u>botright new <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>K".a:key." :<c-u>topleft new <bar>".
+        \ a:command.suffix
+  execute "nnoremap <leader>L".a:key." :<c-u>botright vnew <bar>".
+        \ a:command.suffix
 endfunction
 
 call MapWinCmd("T", "te")
-call MapWinCmd("c", "feedkeys(\"\<space>\<tab>\")")
 "}}}
 
 "general leader maps {{{
@@ -128,7 +139,12 @@ nnoremap <Leader>S #``cgN
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
-nnoremap ;;s :<c-u>source %<cr>
+nnoremap <leader><leader>S :<c-u>source %<cr>
+
+nnoremap <leader>f gq
+xnoremap <leader>f gq
+
+nnoremap <leader>F gggqG
 "}}}
 
 "term esc {{{

@@ -10,19 +10,28 @@ function! MyFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 "}}}
+ 
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{()}
+"
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 "status line {{{
 let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'cocstatus', 'gitstatus', 'readonly', 'filename', 'modified' ] ]
+            \             [ 'cocstatus', 'gitstatus', 'nearestmethod', 'readonly', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
             \   'cocstatus': 'coc#status',
             \   'gitstatus': 'FugitiveStatusline',
             \   'filetype': 'MyFiletype',
-            \   'fileformat': 'MyFileformat'
+            \   'fileformat': 'MyFileformat',
+            \   'nearestmethod': 'NearestMethodOrFunction'
             \ }
             \ }
 "}}}

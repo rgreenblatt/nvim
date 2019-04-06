@@ -5,7 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 "plugins for a heavier install {{{
 if exists("g:headless")
 else
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     Plug 'mhinz/vim-startify'
     Plug 'itchyny/calendar.vim'
     Plug 'Carpetsmoker/xdg_open.vim'
@@ -13,6 +13,7 @@ else
     Plug 'lervag/vimtex'
     Plug 'rgreenblatt/i3-vim-focus'
     " Plug 'dansomething/vim-eclim'
+    Plug 'liuchengxu/vista.vim'
 endif
 "}}}
 Plug 'wikitopian/hardmode'
@@ -48,7 +49,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'TaDaa/vimade'
+" Plug 'TaDaa/vimade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'rhysd/clever-f.vim'
 Plug 'unblevable/quick-scope'
@@ -94,8 +95,7 @@ Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
-" Plug 'liuchengxu/vista.vim'
-Plug 'Lenovsky/nuake'
+Plug 'rgreenblatt/nuake'
 "}}}
 call plug#end()
 filetype plugin indent on

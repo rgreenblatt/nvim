@@ -11,6 +11,7 @@ call SetupCommandAbbrs('T', 'tabedit')
 call SetupCommandAbbrs('R', 'CocRestart')
 call SetupCommandAbbrs('PI', 'PlugInstall')
 call SetupCommandAbbrs('PU', 'PlugUpdate')
+call SetupCommandAbbrs('PC', 'PlugClean')
 "}}}
 
 " vim: set fdm=marker:

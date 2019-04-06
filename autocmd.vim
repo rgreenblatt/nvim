@@ -2,7 +2,7 @@
 augroup FiletypeAutocmds
     autocmd!
     autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    autocmd Filetype java,scala,cpp,c setlocal colorcolumn=81
+    autocmd TermOpen * setlocal signcolumn=no
     autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
     autocmd FileType json syntax match Comment +\/\/.\+$+
     autocmd FileType gitcommit set bufhidden=delete
@@ -11,8 +11,7 @@ augroup end
 "}}}
 
 "mkdir as needed {{{
-"https://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
-function! s:MkNonExDir(file, buf)
+function! s:MkDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -23,8 +22,16 @@ endfunction
 
 augroup BWCCreateDir
     autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+    autocmd BufWritePre * :call s:MkDir(expand('<afile>'), +expand('<abuf>'))
 augroup end
+"}}}
+
+"cursorline/column only in current window {{{
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cursorline cursorcolumn
+    autocmd WinLeave * set nocursorline nocursorcolumn
+augroup END
 "}}}
 
 " vim: set fdm=marker:

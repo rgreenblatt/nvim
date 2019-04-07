@@ -1,37 +1,55 @@
 "general filetype autocmds {{{
 augroup FiletypeAutocmds
-    autocmd!
-    autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    autocmd TermOpen * setlocal signcolumn=no
-    autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
-    autocmd FileType json syntax match Comment +\/\/.\+$+
-    autocmd FileType gitcommit set bufhidden=delete
-    autocmd BufRead,BufNewFile *.sbt set filetype=scala
+  autocmd!
+  autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+  autocmd TermOpen * setlocal signcolumn=no
+  autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+  autocmd FileType gitcommit set bufhidden=delete
+  autocmd BufRead,BufNewFile *.sbt set filetype=scala
 augroup end
 "}}}
 
 "mkdir as needed {{{
 function! s:MkDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
     endif
+  endif
 endfunction
 
 augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkDir(expand('<afile>'), +expand('<abuf>'))
+  autocmd!
+  autocmd BufWritePre * :call s:MkDir(expand('<afile>'), +expand('<abuf>'))
 augroup end
 "}}}
 
 "cursorline/column only in current window {{{
 augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set cursorline cursorcolumn
-    autocmd WinLeave * set nocursorline nocursorcolumn
+  autocmd!
+  autocmd WinEnter * set cursorline cursorcolumn
+  autocmd WinLeave * set nocursorline nocursorcolumn
 augroup END
 "}}}
 
-" vim: set fdm=marker:
+
+"clean up no names {{{
+function! CleanNoNameEmptyBuffers()
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+  if !empty(buffers)
+    exe 'bd '.join(buffers, ' ')
+  else
+    echo 'No buffer deleted'
+  endif
+endfunction
+
+augroup CleanBuffers
+  autocmd!
+  autocmd BufLeave * call CleanNoNameEmptyBuffers()
+augroup END
+
+"}}}
+
+  " vim: set fdm=marker:

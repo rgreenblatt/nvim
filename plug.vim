@@ -5,7 +5,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 "plugins for a heavier install {{{
 if exists("g:headless")
 else
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+    " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'mhinz/vim-startify'
     Plug 'itchyny/calendar.vim'
     Plug 'Carpetsmoker/xdg_open.vim'
@@ -95,7 +96,7 @@ Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
-Plug 'rgreenblatt/nuake'
+" Plug 'rgreenblatt/nuake'
 "}}}
 call plug#end()
 filetype plugin indent on

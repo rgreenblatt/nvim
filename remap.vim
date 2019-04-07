@@ -41,7 +41,7 @@ noremap Q @@
 "}}}
 
 "conceal toggle {{{
-nnoremap <leader><leader>c :<c-u>set <C-R>=&conceallevel ?
+nnoremap <a-c> :<c-u>set <C-R>=&conceallevel ?
       \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 "}}}
 
@@ -104,20 +104,24 @@ function! MapWinCmd(key, command, ...)
   execute "nnoremap <leader>L".a:key." :<c-u>botright vnew <bar>".
         \ a:command.suffix
 endfunction
-
-call MapWinCmd("T", "te")
 "}}}
 
 "general leader maps {{{
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
-nnoremap <silent> <leader><leader>n :<c-u>set invrelativenumber<CR>
-nnoremap <silent> <leader><leader>w :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <silent> <leader>P :<c-u>cd<space>
+nnoremap <silent> <leader>,p :<c-u>tcd %:p:h<CR>
+nnoremap <silent> <leader>,P :<c-u>tcd<space>
+nnoremap <silent> <leader>.p :<c-u>lcd %:p:h<CR>
+nnoremap <silent> <leader>.P :<c-u>lcd<space>
+
+nnoremap <silent> <a-n> :<c-u>set invrelativenumber<CR>
+nnoremap <silent> <a-w> :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
 nnoremap <silent> <leader>z :<c-u>noh<CR>
 
 nnoremap <silent> <leader>q :<c-u>q<CR>
 nnoremap <silent> <leader>A :<c-u>qa<CR>
 nnoremap <silent> <leader>W :<c-u>w<CR>
-nnoremap <silent> <leader><leader>d :<c-u>w<CR> :<c-u>bd<CR>
+nnoremap <silent> <a-d> :<c-u>w<CR> :<c-u>bd<CR>
 
 nnoremap <leader>ww <C-w><bar>
 nnoremap <leader>wt <C-w>_
@@ -139,7 +143,6 @@ nnoremap <Leader>S #``cgN
 nnoremap <leader>Q :bp\|bd #<CR>
 
 nnoremap ;f 1z=
-nnoremap <leader><leader>S :<c-u>source %<cr>
 
 nnoremap <leader>f gq
 xnoremap <leader>f gq
@@ -147,8 +150,12 @@ xnoremap <leader>f gq
 nnoremap <leader>F gggqG
 "}}}
 
-"term esc {{{
-tnoremap <C-Space> <C-\><C-n>
+"general alt maps {{{
+nnoremap <a-p> :<c-u>pwd<cr>
+nnoremap <a-r> :<c-u>registers<cr>
+nnoremap <a-h> :<c-u>help<space>
+
+nnoremap <a-s> :<c-u>source %<cr>
 "}}}
 
 "navigate indents {{{
@@ -190,6 +197,13 @@ augroup CmdWin
   au CmdwinEnter * set cmdheight=1
   au CmdwinLeave * set cmdheight=3
 augroup END
+"}}}
+
+"terminal {{{
+tnoremap <C-Space> <C-\><C-n>
+
+call MapWinCmd("t", "GlobalSharedTerm")
+call MapWinCmd("T", "terminal")
 "}}}
 
 " vim: set fdm=marker:

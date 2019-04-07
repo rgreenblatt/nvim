@@ -60,7 +60,7 @@ else
                 \ {'p': '~/.profile'}, 
                 \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
     
-    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'NuakeLocal'}, 
+    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'GlobalSharedTerm'}, 
                 \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
     
     let g:startify_lists = [
@@ -108,13 +108,6 @@ else
     let g:vista_fzf_preview = ['right:50%']
     "}}}
 endif
-"}}}
-
-"nuake {{{
-let g:nuake_per_tab = 1
-let g:nuake_close_if_last_standing = 0
-let g:nuake_start_insert = 0
-let g:nuake_fixed_size = 0
 "}}}
 
 ""vimade {{{

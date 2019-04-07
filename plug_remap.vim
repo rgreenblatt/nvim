@@ -14,6 +14,9 @@ nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
 nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
+"langmap related
+nnoremap g"  g,
+
 nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
 nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 
@@ -21,17 +24,13 @@ call MapWinCmd("c", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
       \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif")
 "}}}
 
-"nuake {{{
-call MapWinCmd("t", "NuakeLocal")
-"}}}
-
 "fzf maps {{{
 call MapWinCmd("f", "Files")
 call MapWinCmd("F", "Files ", 1)
 call MapWinCmd("g", "GFiles")
 call MapWinCmd("G", "GFiles", 1)
-call MapWinCmd("r", "Rg")
-call MapWinCmd("R", "Rg ", 1)
+call MapWinCmd("r", "Rg", 1)
+call MapWinCmd("R", "Rg ")
 call MapWinCmd("l", "BLines")
 call MapWinCmd("L", "Lines")
 call MapWinCmd(";t", "Tags")
@@ -43,12 +42,14 @@ call MapWinCmd("Q", "BCommits")
 call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
 
-nnoremap "" :<c-u>GFiles<cr>
-nnoremap ;; :<c-u>Buffers<cr>
-nnoremap <leader>g: :<c-u>History:<cr>
-nnoremap <leader>g/ :<c-u>History/<cr>
-nnoremap <leader>gn :<c-u>Maps<cr>
-nnoremap <leader>gk :<c-u>Helptags<cr>
+nnoremap <M-C-B> :<c-u>Buffers<cr>
+nnoremap <M-C-N> :<c-u>GFiles<cr>
+nnoremap <M-C-A> :<c-u>Maps<cr>
+nnoremap <M-C-F> :<c-u>Files<cr>
+nnoremap <M-C-G> :<c-u>Rg<space>
+nnoremap <M-C-H> :<c-u>History/<cr>
+nnoremap <M-C-P> :<c-u>:Helptags<cr>
+nnoremap <leader>: :<c-u>History:<cr>
 "}}}
 
 "dirvish in new window {{{
@@ -63,16 +64,16 @@ else
   "}}}
 
   "google {{{
-  nnoremap <leader><leader>o :Google
-  nnoremap <leader><leader>O :Googlef
+  nnoremap <a-g> :<c-u>Google<space>
+  nnoremap <a-f> :<c-u>Googlef<space>
 
-  xnoremap <leader><leader>o :Google
-  xnoremap <leader><leader>O :Googlef
+  xnoremap <a-g> :<c-u>Google<space>
+  xnoremap <a-f> :<c-u>Googlef<space>
   "}}}
 
   "thesaurus {{{
-  nnoremap ;t :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
-  xnoremap ;t y:ThesaurusQueryReplace <C-r>"<CR>
+  nnoremap <a-t> :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
+  xnoremap <a-t> y:ThesaurusQueryReplace <C-r>"<CR>
   "}}}
 
   "window navigation (requires keyboard remaping and i3-vim-focus {{{
@@ -136,12 +137,6 @@ else
   nmap <leader>D <Plug>(coc-declaration)
   nmap <leader>d <Plug>(coc-definition)
   nmap <leader>o <Plug>(coc-type-definition)
-
-  " format
-  nnoremap <leader>f gq
-  xnoremap <leader>f gq
-
-  nnoremap <leader>F gggqG
 
   nmap <leader>i <Plug>(coc-implementation)
   nmap <leader>u <Plug>(coc-references)
@@ -287,7 +282,7 @@ map ;r <Plug>NrrwrgnDo
 xmap ;R <Plug>NrrwrgnBangDo
 "}}}
 
-nnoremap <silent> <leader><leader>u :<c-u>MundoToggle<cr>
+nnoremap <silent> <a-u> :<c-u>MundoToggle<cr>
 
 "custom operators {{{
 map _  <Plug>(operator-select)
@@ -316,7 +311,7 @@ function! Op_adjust_window_height(motion_wiseness)
 endfunction
 "}}}
 
-nnoremap <leader><leader>s :<c-u>Codi<cr>
+nnoremap <a-i> :<c-u>Codi<cr>
 
 nnoremap <silent> ;vc :<c-u>HexokinaseToggle<cr>
 

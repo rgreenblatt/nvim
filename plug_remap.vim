@@ -388,4 +388,32 @@ xmap <Leader>s <Plug>(visualstar-*)``cgn
 xmap <Leader>S <Plug>(visualstar-#)``cgN
 "}}}
 
+"Neomake {{{
+nnoremap <a-m> :<c-u>Neomake<cr>
+nnoremap <a-,> :<c-u>Neomake!<cr>
+"}}}
+
+"sandwich {{{
+nmap <silent> ;sd <Plug>(operator-sandwich-delete)
+      \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> ;sr <Plug>(operator-sandwich-replace)
+      \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> ;ss <Plug>(operator-sandwich-delete)
+      \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+nmap <silent> ;se <Plug>(operator-sandwich-replace)
+      \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+"}}}
+
+"wintabs {{{
+nmap <c-h> <Plug>(wintabs_previous)
+nmap <c-l> <Plug>(wintabs_next)
+nmap <c-t>c <Plug>(wintabs_close)
+nmap <c-t>u <Plug>(wintabs_undo)
+nmap <c-t>o <Plug>(wintabs_only)
+nmap <c-w>c <Plug>(wintabs_close_window)
+nmap <c-w>o <Plug>(wintabs_only_window)
+command! Tabc WintabsCloseVimtab
+command! Tabo WintabsOnlyVimtab
+"}}}
+
 " vim: set fdm=marker:

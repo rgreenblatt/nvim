@@ -196,4 +196,10 @@ augroup end
 
 let g:local_vimrc = ['.config', 'local_init.vim']
 
+let g:neomake_open_list = 2
+
+let g:sandwich_no_default_key_mappings = 1
+
+let g:wintabs_display = 'statusline'
+
 " vim: set fdm=marker:

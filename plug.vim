@@ -5,8 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 "plugins for a heavier install {{{
 if exists("g:headless")
 else
-    " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     Plug 'mhinz/vim-startify'
     Plug 'itchyny/calendar.vim'
     Plug 'Carpetsmoker/xdg_open.vim'
@@ -33,7 +32,7 @@ Plug 'rgreenblatt/gruvbox'
 Plug 'markonm/traces.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -43,14 +42,13 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-apathy'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-dispatch'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/gv.vim'
 " Plug 'TaDaa/vimade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'rhysd/clever-f.vim'
@@ -97,6 +95,13 @@ Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar' 
 " Plug 'rgreenblatt/nuake'
+Plug 'matze/vim-move'
+Plug 'neomake/neomake'
+Plug 'wsdjeg/vim-fetch'
+Plug 'machakann/vim-sandwich'
+Plug 'terryma/vim-expand-region'
+Plug 'zefei/vim-wintabs'
+Plug 'zefei/vim-wintabs-powerline'
 "}}}
 call plug#end()
 filetype plugin indent on

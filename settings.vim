@@ -1,6 +1,7 @@
 set viminfo='19,<1000,s1000
 set undofile
 set viewoptions=cursor,folds,slash,unix
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,globals
 set relativenumber
 set number
 set lazyredraw

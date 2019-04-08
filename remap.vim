@@ -154,6 +154,7 @@ nnoremap <leader>F gggqG
 nnoremap <a-p> :<c-u>pwd<cr>
 nnoremap <a-r> :<c-u>registers<cr>
 nnoremap <a-h> :<c-u>help<space>
+nnoremap <a-m> :<c-u>make<cr>
 
 nnoremap <a-s> :<c-u>source %<cr>
 "}}}

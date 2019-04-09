@@ -44,7 +44,7 @@ else
     augroup CocGenericAutocmds
         autocmd!
         " Setup formatexpr specified filetype(s).
-        autocmd FileType c,cpp,json,java,rust,tex,go,yaml,python setlocal 
+        autocmd FileType c,cpp,cuda,json,java,rust,tex,go,yaml,python setlocal 
               \ formatexpr=CocAction('formatSelected')
         " Update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
@@ -60,7 +60,7 @@ else
                 \ {'p': '~/.profile'}, 
                 \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
     
-    let g:startify_commands = [{'m': 'te neomutt'}, {'t': 'GlobalSharedTerm'}, 
+    let g:startify_commands = [{'m': 'te neomutt '}, {'t': 'GlobalSharedTerm'}, 
                 \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
     
     let g:startify_lists = [
@@ -106,6 +106,23 @@ else
     
     "vista {{{
     let g:vista_fzf_preview = ['right:50%']
+    "}}}
+    
+    "semshi {{{
+    let g:semshi#error_sign = v:false
+    let g:semshi#simplify_markup = v:false
+    "}}}
+
+    "chromatica {{{
+    let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
+    " augroup ChromaticaStartup
+    "     autocmd!
+    "     autocmd FileType c,cpp,cuda ChromaticaStart
+    " augroup end
+    let g:chromatica#global_args = [
+          \ '-isystem /usr/lib/llvm-7/lib/clang/7.0.0/include'
+          \ ]
+    let g:chromatica#responsive_mode = 1
     "}}}
 endif
 "}}}
@@ -200,6 +217,10 @@ let g:neomake_open_list = 2
 
 let g:sandwich_no_default_key_mappings = 1
 
-let g:wintabs_display = 'statusline'
+"wintabs {{{
+let g:wintabs_display = 'none'
+let g:wintabs_delete_buffers = 0 
+let g:wintabs_autoclose_vimtab = 1
+"}}}
 
 " vim: set fdm=marker:

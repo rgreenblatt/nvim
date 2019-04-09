@@ -12,6 +12,8 @@ call SetupCommandAbbrs('R', 'CocRestart')
 call SetupCommandAbbrs('PI', 'PlugInstall')
 call SetupCommandAbbrs('PU', 'PlugUpdate')
 call SetupCommandAbbrs('PC', 'PlugClean')
+call SetupCommandAbbrs('TC', 'WintabsCloseVimtab')
+call SetupCommandAbbrs('WD', 'WintabsDo')
 "}}}
 
 " vim: set fdm=marker:

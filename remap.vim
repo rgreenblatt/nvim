@@ -108,11 +108,11 @@ endfunction
 
 "general leader maps {{{
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
-nnoremap <silent> <leader>P :<c-u>cd<space>
+nnoremap <leader>P :<c-u>cd<space>
 nnoremap <silent> <leader>,p :<c-u>tcd %:p:h<CR>
-nnoremap <silent> <leader>,P :<c-u>tcd<space>
+nnoremap <leader>,P :<c-u>tcd<space>
 nnoremap <silent> <leader>.p :<c-u>lcd %:p:h<CR>
-nnoremap <silent> <leader>.P :<c-u>lcd<space>
+nnoremap <leader>.P :<c-u>lcd<space>
 
 nnoremap <silent> <a-n> :<c-u>set invrelativenumber<CR>
 nnoremap <silent> <a-w> :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
@@ -120,7 +120,7 @@ nnoremap <silent> <leader>z :<c-u>noh<CR>
 
 nnoremap <silent> <leader>q :<c-u>q<CR>
 nnoremap <silent> <leader>A :<c-u>qa<CR>
-nnoremap <silent> <leader>W :<c-u>w<CR>
+nnoremap <silent> <leader>b :<c-u>w<CR>
 nnoremap <silent> <a-d> :<c-u>w<CR> :<c-u>bd<CR>
 
 nnoremap <leader>ww <C-w><bar>
@@ -153,8 +153,7 @@ nnoremap <leader>F gggqG
 "general alt maps {{{
 nnoremap <a-p> :<c-u>pwd<cr>
 nnoremap <a-r> :<c-u>registers<cr>
-nnoremap <a-h> :<c-u>help<space>
-
+nnoremap <a-z> :<c-u>help<space>
 nnoremap <a-s> :<c-u>source %<cr>
 "}}}
 
@@ -189,13 +188,13 @@ nnoremap <silent> <leader>" :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 cnoremap <esc> <c-f>z1<cr>
 
 augroup CmdWin
-  au!
-  au CmdwinEnter * cnoremap <buffer> <esc> <C-c>
-  au CmdwinEnter * nnoremap <esc> <C-c><C-c>
-  au CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
-  au CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
-  au CmdwinEnter * set cmdheight=1
-  au CmdwinLeave * set cmdheight=3
+  autocmd!
+  autocmd CmdwinEnter * cnoremap <buffer> <esc> <C-c>
+  autocmd CmdwinEnter * nnoremap <esc> <C-c><C-c>
+  autocmd CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
+  autocmd CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
+  autocmd CmdwinEnter * set cmdheight=1
+  autocmd CmdwinLeave * set cmdheight=3
 augroup END
 "}}}
 

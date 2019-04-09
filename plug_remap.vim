@@ -116,7 +116,8 @@ else
   "snippet trigger
   imap <C-s> <Plug>(coc-snippets-expand)
 
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   nnoremap <leader>I :<c-u>CocCommand python.sortImports<cr>
   nnoremap <leader>R :<c-u>CocCommand python.sortImports<cr>
@@ -278,7 +279,7 @@ nmap ;N <Plug>(miniyank-cycleback)
 let g:nrrw_rgn_nomap_nr = 1
 let g:nrrw_rgn_nomap_Nr = 1
 
-map ;r <Plug>NrrwrgnDo
+xmap ;r <Plug>NrrwrgnDo
 xmap ;R <Plug>NrrwrgnBangDo
 "}}}
 
@@ -323,11 +324,13 @@ nnoremap <silent> ;vg :Goyo<cr>
 function! SetupGoyo()
   Limelight
   nnoremap <silent> ;vg :Goyo!<cr>
+  setlocal nocursorline nocursorcolumn
 endfunction
 
 function! SetupNoGoyo()
   Limelight!
   nnoremap <silent> ;vg :Goyo<cr>
+  setlocal cursorline cursorcolumn
 endfunction
 
 autocmd! User GoyoEnter call SetupGoyo()
@@ -407,13 +410,40 @@ nmap <silent> ;se <Plug>(operator-sandwich-replace)
 "wintabs {{{
 nmap <c-h> <Plug>(wintabs_previous)
 nmap <c-l> <Plug>(wintabs_next)
-nmap <c-t>c <Plug>(wintabs_close)
-nmap <c-t>u <Plug>(wintabs_undo)
-nmap <c-t>o <Plug>(wintabs_only)
-nmap <c-w>c <Plug>(wintabs_close_window)
-nmap <c-w>o <Plug>(wintabs_only_window)
-command! Tabc WintabsCloseVimtab
-command! Tabo WintabsOnlyVimtab
+nmap <leader>q <Plug>(wintabs_close)
+nmap ;u <Plug>(wintabs_undo)
+nmap <c-w>o <Plug>(wintabs_only)
+nmap ;q <Plug>(wintabs_close_window)
+nmap <c-w>O <Plug>(wintabs_only_window)
+nmap ;Q <Plug>(wintabs_close_vimtab)
+nmap ;a <Plug>(wintabs_all)
+
+nmap <leader><leader>a <Plug>(wintabs_first)
+nmap <leader><leader>s <Plug>(wintabs_last)
+
+nmap <leader><leader>h <Plug>(wintabs_move_to_window_left)
+nmap <leader><leader>j <Plug>(wintabs_move_to_window_right)
+nmap <leader><leader>k <Plug>(wintabs_move_to_window_above)
+nmap <leader><leader>l <Plug>(wintabs_move_to_window_below)
+nmap <leader><leader>p <Plug>(wintabs_move_to_window_next)
+nmap <leader><leader>m <Plug>(wintabs_maximize)
+
+nmap <leader><leader>q <Plug>(wintabs_tab_1)
+nmap <leader><leader>w <Plug>(wintabs_tab_2)
+nmap <leader><leader>e <Plug>(wintabs_tab_3)
+nmap <leader><leader>t <Plug>(wintabs_tab_4)
+nmap <leader><leader>r <Plug>(wintabs_tab_5)
+nmap <leader><leader>y <Plug>(wintabs_tab_6)
+nmap <leader><leader>u <Plug>(wintabs_tab_7)
+nmap <leader><leader>i <Plug>(wintabs_tab_8)
+nmap <leader><leader>o <Plug>(wintabs_tab_9)
+
+nmap <leader>Q :<c-u>Startify<cr><Plug>(wintabs_only)
+
+augroup CmdWinQ
+  autocmd!
+  autocmd CmdwinEnter * nnoremap <buffer> <leader>q :<c-u>q<CR>
+augroup END
 "}}}
 
 " vim: set fdm=marker:

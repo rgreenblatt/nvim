@@ -14,6 +14,8 @@ else
     Plug 'rgreenblatt/i3-vim-focus'
     " Plug 'dansomething/vim-eclim'
     Plug 'liuchengxu/vista.vim'
+    Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 endif
 "}}}
 Plug 'wikitopian/hardmode'
@@ -22,13 +24,14 @@ Plug 'inkarkat/vim-CountJump'
 Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-EnhancedJumps'
 Plug 'wellle/targets.vim'
-Plug 'itchyny/lightline.vim'
-" Plug 'rgreenblatt/vim-insert-char'
+Plug 'rgreenblatt/vim-wintabs'
+"Plug 'rgreenblatt/vim-insert-char'
 Plug 'rgreenblatt/scratch.vim'
 Plug 'rgreenblatt/vim-ninja-feet'
 Plug 'rgreenblatt/c-conceal'
 Plug 'rgreenblatt/vim-unimpaired'
 Plug 'rgreenblatt/gruvbox'
+Plug 'itchyny/lightline.vim'
 Plug 'markonm/traces.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'tommcdo/vim-exchange'
@@ -42,7 +45,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-apathy'
-Plug 'vim-scripts/restore_view.vim'
+"Plug 'vim-scripts/restore_view.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -100,8 +103,6 @@ Plug 'neomake/neomake'
 Plug 'wsdjeg/vim-fetch'
 Plug 'machakann/vim-sandwich'
 Plug 'terryma/vim-expand-region'
-Plug 'zefei/vim-wintabs'
-Plug 'zefei/vim-wintabs-powerline'
 "}}}
 call plug#end()
 filetype plugin indent on

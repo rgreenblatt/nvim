@@ -176,7 +176,14 @@ let g:fold_options = {
 
 let g:highlightedyank_highlight_duration = 200
 
+" sneak {{{
 let g:sneak#s_next = 1
+let g:sneak#absolute_dir = 1
+" let g:sneak#label = 1
+" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
+"}}}
 
 "floating fzf window {{{
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
@@ -214,8 +221,6 @@ augroup end
 let g:local_vimrc = ['.config', 'local_init.vim']
 
 let g:neomake_open_list = 2
-
-let g:sandwich_no_default_key_mappings = 1
 
 "wintabs {{{
 let g:wintabs_display = 'none'

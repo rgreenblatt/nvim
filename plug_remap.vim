@@ -155,6 +155,7 @@ else
 
   "show documentation in preview window
   nnoremap <silent> K :<c-u>call <SID>show_documentation()<CR>
+  xnoremap <silent> K :<c-u>call <SID>show_documentation()<CR>
 
   function! s:show_documentation()
     if &filetype == 'vim'
@@ -367,6 +368,7 @@ nnoremap <silent> ;o :<c-u>SidewaysRight<cr>
 
 "nvimgdb {{{
 let g:nvimgdb_disable_start_keymaps = 1
+
 nnoremap ;dp :<c-u>SetDebugPath<space>
 nnoremap <expr> ;dsg exists('g:debug_path') ? 
       \':<c-u>GdbStart gdb -q<space>'.expand(g:debug_path).'<cr>' : 
@@ -397,6 +399,10 @@ nnoremap <a-,> :<c-u>Neomake!<cr>
 "}}}
 
 "sandwich {{{
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
+let g:textobj_sandwich_no_default_key_mappings = 1
+
 nmap <silent> ;sd <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 nmap <silent> ;sr <Plug>(operator-sandwich-replace)
@@ -405,6 +411,22 @@ nmap <silent> ;ss <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 nmap <silent> ;se <Plug>(operator-sandwich-replace)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+nmap ;sa <Plug>(operator-sandwich-add)
+xmap ;sa <Plug>(operator-sandwich-add)
+omap ;sa <Plug>(operator-sandwich-g@)
+xmap ;sd <Plug>(operator-sandwich-delete)
+xmap ;sr <Plug>(operator-sandwich-replace)
+
+" omap ib <Plug>(textobj-sandwich-auto-i)
+" xmap ib <Plug>(textobj-sandwich-auto-i)
+" omap ab <Plug>(textobj-sandwich-auto-a)
+" xmap ab <Plug>(textobj-sandwich-auto-a)
+
+" omap is <Plug>(textobj-sandwich-query-i)
+" xmap is <Plug>(textobj-sandwich-query-i)
+" omap as <Plug>(textobj-sandwich-query-a)
+" xmap as <Plug>(textobj-sandwich-query-a)
 "}}}
 
 "wintabs {{{
@@ -444,6 +466,10 @@ augroup CmdWinQ
   autocmd!
   autocmd CmdwinEnter * nnoremap <buffer> <leader>q :<c-u>q<CR>
 augroup END
+"}}}
+
+"ToggleMacroMode {{{
+noremap <silent> ;m :<C-u>ToggleMacroMode<CR>:<c-u>call lightline#update()<cr>
 "}}}
 
 " vim: set fdm=marker:

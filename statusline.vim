@@ -101,7 +101,17 @@ endfunction
 let g:buftabs_show_number = 0
 "}}}
 
+" macro mode info {{{ 
+function! MacroModeInfo()
+  if g:macro_mode == 1
+    return "M"
+  else
+    return ""
+  endif
+endfunction
+
 set statusline+=%{()}
+"}}}
 
 "status line {{{
 let g:lightline = {
@@ -110,7 +120,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'percent' ],
       \             [ 'nearestmethod', 'cocstatus', 'gitstatus',
-      \               'readonly' ] ],
+      \               'readonly', 'macromode' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
       \              [ 'wintab_after', 'wintab_current', 
@@ -132,10 +142,12 @@ let g:lightline = {
       \ 'component_expand': {
       \   'wintab_before': 'WinTabBefore',
       \   'wintab_current': 'WinTabCurrent',
-      \   'wintab_after': 'WinTabAfter'
+      \   'wintab_after': 'WinTabAfter',
+      \   'macromode': 'MacroModeInfo'
       \ },
       \ 'component_type': {
-      \   'wintab_current': 'error'
+      \   'wintab_current': 'error',
+      \   'macromode': 'error'
       \ }
       \ }
 "}}}

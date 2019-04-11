@@ -114,6 +114,16 @@ nnoremap <leader>,P :<c-u>tcd<space>
 nnoremap <silent> <leader>.p :<c-u>lcd %:p:h<CR>
 nnoremap <leader>.P :<c-u>lcd<space>
 
+"not sure if I really need these mappings...
+nnoremap <leader>,D :<c-u>tabdo<space>
+nnoremap <leader>;D :<c-u>windo<space>
+nnoremap <leader>kD :<c-u>cdo<space>
+nnoremap <leader>jD :<c-u>ldo<space>
+nnoremap <leader>KD :<c-u>cfdo<space>
+nnoremap <leader>JD :<c-u>lfdo<space>
+nnoremap <leader>lD :<c-u>bufdo<space>
+nnoremap <leader>hD :<c-u>argdo<space>
+
 nnoremap <silent> <a-n> :<c-u>set invrelativenumber<CR>
 nnoremap <silent> <a-w> :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
 nnoremap <silent> <leader>z :<c-u>noh<CR>
@@ -148,6 +158,11 @@ nnoremap <leader>f gq
 xnoremap <leader>f gq
 
 nnoremap <leader>F gggqG
+
+nnoremap <leader>! :%s/\<<C-r>=expand('<cword>')<CR>\>/
+nnoremap <leader>&: '{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
+xnoremap <leader>! y:%s/<C-r>"/
+xnoremap <leader>& y:'{,'}s/<C-r>"/
 "}}}
 
 "general alt maps {{{
@@ -203,6 +218,38 @@ tnoremap <C-Space> <C-\><C-n>
 
 call MapWinCmd("t", "GlobalSharedTerm")
 call MapWinCmd("T", "terminal")
+"}}}
+
+"arbitrary command in new window {{{
+call MapWinCmd("_", " ", 1)
+"}}}
+
+"arrow key window resize {{{
+noremap <up>    <C-W>+
+noremap <down>  <C-W>-
+noremap <left>  3<C-W><
+noremap <right> 3<C-W>>
+"}}}
+
+"insert word of the line above/below {{{
+inoremap <C-Y> <C-C>:let @z = @"<CR>mz
+			\:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
+			\:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yiw')<CR>
+			\`zp:let @" = @z<CR>a
+inoremap <C-E> <C-C>:let @z = @"<CR>mz
+			\:exec 'normal!' (col('.')==1 && col('$')==1 ? 'j' : 'jl')<CR>
+			\:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yiw')<CR>
+			\`zp:let @" = @z<CR>a
+
+"}}}
+
+"select last inserted text {{{
+nnoremap gV `[v`]h
+"}}}
+
+"line text object {{{
+xnoremap il ^og_
+onoremap il :<C-u>normal vil<CR>
 "}}}
 
 " vim: set fdm=marker:

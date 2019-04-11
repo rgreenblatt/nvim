@@ -287,25 +287,26 @@ xmap ;R <Plug>NrrwrgnBangDo
 nnoremap <silent> <a-u> :<c-u>MundoToggle<cr>
 
 "custom operators {{{
-map _  <Plug>(operator-select)
+nmap _  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
 function! Op_select_region(window_heightmotion_wiseness)
   normal! `[v`]
 endfunction
 
-map ;_  <Plug>(operator-select-block)
+nmap ;_  <Plug>(operator-select-block)
 call operator#user#define('select-block', 'Op_select_block')
 function! Op_select_block(window_heightmotion_wiseness)
   exe "normal `[\<c-v>`]"
 endfunction
 
-map <leader>_  <Plug>(operator-select-line)
+nmap <leader>_  <Plug>(operator-select-line)
 call operator#user#define('select-line', 'Op_select_line')
 function! Op_select_line(window_heightmotion_wiseness)
   normal! `[V`]
 endfunction
 
-map <leader>wa  <Plug>(operator-adjust)
+nmap <leader>wa  <Plug>(operator-adjust)
+xmap <leader>wa  <Plug>(operator-adjust)
 call operator#user#define('adjust', 'Op_adjust_window_height')
 function! Op_adjust_window_height(motion_wiseness)
   execute (line("']") - line("'[") + 1) 'wincmd' '_'
@@ -439,6 +440,7 @@ nmap ;q <Plug>(wintabs_close_window)
 nmap <c-w>O <Plug>(wintabs_only_window)
 nmap ;Q <Plug>(wintabs_close_vimtab)
 nmap ;a <Plug>(wintabs_all)
+nmap <leader>.D :<c-u>WintabsDo<space>
 
 nmap <leader><leader>a <Plug>(wintabs_first)
 nmap <leader><leader>s <Plug>(wintabs_last)

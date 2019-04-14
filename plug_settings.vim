@@ -228,4 +228,12 @@ let g:wintabs_delete_buffers = 0
 let g:wintabs_autoclose_vimtab = 1
 "}}}
 
+""autoformat {{{
+"noremap <F5> :AutoFormat<CR>
+"let g:formatdef_scalafmt = "'scalafmt --stdin'"
+"let g:formatters_scala = ['scalafmt'] 
+""}}}
+
+let g:polyglot_disabled = ['latex']
+
 " vim: set fdm=marker:

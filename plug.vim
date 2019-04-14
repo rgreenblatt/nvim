@@ -16,6 +16,7 @@ else
     Plug 'liuchengxu/vista.vim'
     Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'Chiel92/vim-autoformat'
 endif
 "}}}
 Plug 'wikitopian/hardmode'
@@ -45,7 +46,10 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-apathy'
-"Plug 'vim-scripts/restore_view.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+" Plug 'neomake/neomake'
+Plug 'vim-scripts/restore_view.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -66,7 +70,6 @@ Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-function'
 Plug 'bfredl/nvim-miniyank'
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'ehamberg/vim-cute-python'
 Plug 'metakirby5/codi.vim'
 Plug 'mhinz/vim-signify'
@@ -75,7 +78,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'simnalamburt/vim-mundo'
 Plug 'derekwyatt/vim-scala'
 Plug 'neomutt/neomutt.vim'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'lambdalisue/suda.vim'
 Plug 'LucHermitte/VimFold4C'
@@ -96,13 +98,14 @@ Plug 'ron89/thesaurus_query.vim'
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 Plug 'Konfekt/FastFold'
-Plug 'thinca/vim-visualstar' 
+Plug 'thinca/vim-visualstar'
 " Plug 'rgreenblatt/nuake'
 Plug 'matze/vim-move'
-Plug 'neomake/neomake'
 Plug 'wsdjeg/vim-fetch'
 Plug 'machakann/vim-sandwich'
 Plug 'terryma/vim-expand-region'
+Plug 'sheerun/vim-polyglot'
+Plug 'buztard/vim-rel-jump'
 "}}}
 call plug#end()
 filetype plugin indent on

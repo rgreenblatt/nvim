@@ -29,5 +29,6 @@ set gdefault
 set cursorline
 set cursorcolumn
 set noshowmode
+set foldmethod=syntax
 
 " vim: set fdm=marker:

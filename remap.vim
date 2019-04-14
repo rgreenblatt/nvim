@@ -252,4 +252,8 @@ xnoremap il ^og_
 onoremap il :<C-u>normal vil<CR>
 "}}}
 
+"no ctrl z, I don't typically use vim in a shell, I run it standalone {{{
+nnoremap <c-z> <nop>
+"}}}
+
 " vim: set fdm=marker:

@@ -383,6 +383,14 @@ nnoremap <expr> ;dsp exists('g:debug_path') ?
 nnoremap ;dq :<c-u>GdbDebugStop<cr>
 nnoremap ;dr :<c-u>GdbBreakpointClearAll<cr>
 nnoremap ;di :<c-u>GdbInterrupt<cr>
+
+let g:nvimgdb_config_override = {
+      \ 'key_until':         ';du',
+      \ 'key_continue':      ';dc',
+      \ 'key_next':          ';dn',
+      \ 'key_step':          ';ds',
+      \ 'key_finish':        ';df',
+      \ 'key_breakpoint':    ';db',
       \ 'key_frameup':       ';dk',
       \ 'key_framedown':     ';dj',
       \ 'key_eval':          ';de'
@@ -395,8 +403,8 @@ xmap <Leader>S <Plug>(visualstar-#)``cgN
 "}}}
 
 "Neomake {{{
-nnoremap <a-m> :<c-u>Neomake<cr>
-nnoremap <a-,> :<c-u>Neomake!<cr>
+nnoremap <a-m> :<c-u>Make<cr>
+nnoremap <a-,> :<c-u>Make!<cr>
 "}}}
 
 "sandwich {{{

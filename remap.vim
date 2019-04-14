@@ -26,7 +26,7 @@ nnoremap ,y 6gt
 nnoremap ,u 7gt
 nnoremap ,i 8gt
 nnoremap ,o 9gt
-nnoremap ,p :<c-u>tablast<cr>
+nnoremap ,p <Cmd>tablast<cr>
 "}}}
 
 "macros {{{
@@ -192,11 +192,11 @@ function! s:go_indent(times, dir)
   endfor
 endfunction
 
-nnoremap <silent> <leader>' :<c-u>call <SID>go_indent(v:count1, 1)<cr>
-nnoremap <silent> <leader>" :<c-u>call <SID>go_indent(v:count1, -1)<cr>
+nnoremap <silent> <leader>' <Cmd>call <SID>go_indent(v:count1, 1)<cr>
+nnoremap <silent> <leader>" <Cmd>call <SID>go_indent(v:count1, -1)<cr>
 "}}}
 
-"use command line window {{{
+"better cmd line {{{
 cnoremap <esc> <c-f>z1<cr>
 
 augroup CmdWin
@@ -246,7 +246,7 @@ nnoremap gV `[v`]h
 
 "line text object {{{
 xnoremap il ^og_
-onoremap il :<C-u>normal vil<CR>
+onoremap il <Cmd>normal vil<CR>
 "}}}
 
 "no ctrl z, I don't typically use vim in a shell, I run it standalone {{{

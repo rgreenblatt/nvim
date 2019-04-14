@@ -34,7 +34,6 @@ augroup BgHighlight
 augroup END
 "}}}
 
-
 "clean up no names {{{
 function! CleanNoNameEmptyBuffers()
   let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
@@ -47,7 +46,6 @@ augroup CleanBuffers
   autocmd!
   autocmd BufLeave * call CleanNoNameEmptyBuffers()
 augroup END
-
 "}}}
 
-  " vim: set fdm=marker:
+" vim: set fdm=marker:

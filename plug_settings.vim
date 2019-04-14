@@ -52,6 +52,9 @@ else
     "}}}
 
     "startify {{{
+    let g:startify_files_number = 5
+    let g:startify_session_sort = 1
+
     let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
                 \ {'w': '~/.config/i3/config'}, 
                 \ {'b': '~/.config/qutebrowser/config.py'},
@@ -69,7 +72,6 @@ else
                 \ {'type': 'commands',  'header': [' Commands']},
                 \ {'type': 'files',     'header': [' Recent']},
                 \ ]
-    
     "possible additonal entry
     "      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
     
@@ -79,7 +81,8 @@ else
                 \ 'config.py'
                 \ ]
     
-    let g:startify_custom_header =
+    let g:startify_custom_header = ""
+    let g:startify_custom_footer =
                 \ map(split(system('cat /home/ryan/Documents/efficiency'.
                 \ '/TODO/TODO_LIST.txt'), '\n'), 
                 \'"   ". v:val')

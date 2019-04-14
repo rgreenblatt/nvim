@@ -42,14 +42,14 @@ call MapWinCmd("Q", "BCommits")
 call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
 
-nnoremap <M-C-B> :<c-u>Buffers<cr>
-nnoremap <M-C-N> :<c-u>GFiles<cr>
-nnoremap <M-C-A> :<c-u>Maps<cr>
-nnoremap <M-C-F> :<c-u>Files<cr>
+nnoremap <M-C-B> <Cmd>Buffers<cr>
+nnoremap <M-C-N> <Cmd>GFiles<cr>
+nnoremap <M-C-A> <Cmd>Maps<cr>
+nnoremap <M-C-F> <Cmd>Files<cr>
 nnoremap <M-C-G> :<c-u>Rg<space>
-nnoremap <M-C-H> :<c-u>History/<cr>
-nnoremap <M-C-P> :<c-u>:Helptags<cr>
-nnoremap <leader>: :<c-u>History:<cr>
+nnoremap <M-C-H> <Cmd>History/<cr>
+nnoremap <M-C-P> <Cmd>:Helptags<cr>
+nnoremap <leader>: <Cmd>History:<cr>
 "}}}
 
 "dirvish in new window {{{
@@ -72,15 +72,15 @@ else
   "}}}
 
   "thesaurus {{{
-  nnoremap <a-t> :<c-u>ThesaurusQueryReplaceCurrentWord<CR>
-  xnoremap <a-t> y:ThesaurusQueryReplace <C-r>"<CR>
+  nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
+  xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
   "}}}
 
   "window navigation (requires keyboard remaping and i3-vim-focus {{{
-  nnoremap <silent> gzl :<c-u>call Focus('right', 'l')<CR>
-  nnoremap <silent> gzh :<c-u>call Focus('left', 'h')<CR>
-  nnoremap <silent> gzk :<c-u>call Focus('up', 'k')<CR>
-  nnoremap <silent> gzj :<c-u>call Focus('down', 'j')<CR>
+  nnoremap <silent> gzl <Cmd>call Focus('right', 'l')<CR>
+  nnoremap <silent> gzh <Cmd>call Focus('left', 'h')<CR>
+  nnoremap <silent> gzk <Cmd>call Focus('up', 'k')<CR>
+  nnoremap <silent> gzj <Cmd>call Focus('down', 'j')<CR>
   "}}}
 
   "coc remaps {{{
@@ -119,13 +119,13 @@ else
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-  nnoremap <leader>I :<c-u>CocCommand python.sortImports<cr>
-  nnoremap <leader>R :<c-u>CocCommand python.sortImports<cr>
+  nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
+  nnoremap <leader>R <Cmd>CocCommand python.sortImports<cr>
   nnoremap ;L :<c-u>CocList<space>
-  nnoremap ;S :<c-u>CocList -I symbols<cr>
-  nnoremap ;S :<c-u>CocList -I symbols<cr>
+  nnoremap ;S <Cmd>CocList -I symbols<cr>
+  nnoremap ;S <Cmd>CocList -I symbols<cr>
 
-  nnoremap ;S :<c-u>CocList -I symbols<cr>
+  nnoremap ;S <Cmd>CocList -I symbols<cr>
 
   " Use `[g` and `]g` for navigate diagnostics
   nmap [g <Plug>(coc-diagnostic-prev)
@@ -154,8 +154,8 @@ else
   nmap <leader>Z <Plug>(coc-float-jump)
 
   "show documentation in preview window
-  nnoremap <silent> K :<c-u>call <SID>show_documentation()<CR>
-  xnoremap <silent> K :<c-u>call <SID>show_documentation()<CR>
+  nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
+  xnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
 
   function! s:show_documentation()
     if &filetype == 'vim'
@@ -169,7 +169,7 @@ else
   "vista {{{
   call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
         \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
-  nnoremap <silent> <leader>V :<c-u>Vista!!<cr>
+  nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
   "}}}
 
   "vimtex {{{
@@ -227,12 +227,12 @@ nmap ;N <Plug>(miniyank-cycleback)
 "}}}
 
 " vimade {{{
-"  nnoremap <silent> ;vt :<c-u>VimadeToggle<cr>
+"  nnoremap <silent> ;vt <Cmd>VimadeToggle<cr>
 "  nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ? 
-"        \ ":<c-u>VimadeBufEnable<cr>" : 
-"        \":<c-u>VimadeBufDisable<cr>" 
+"        \ "<Cmd>VimadeBufEnable<cr>" : 
+"        \"<Cmd>VimadeBufDisable<cr>" 
 "  nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ? 
-"        \ ":<c-u>VimadeWinEnable<cr>" : ":<c-u>VimadeWinDisable<cr>" 
+"        \ "<Cmd>VimadeWinEnable<cr>" : "<Cmd>VimadeWinDisable<cr>" 
 " }}}
 
 "NarrowRegion {{{
@@ -243,7 +243,7 @@ xmap ;r <Plug>NrrwrgnDo
 xmap ;R <Plug>NrrwrgnBangDo
 "}}}
 
-nnoremap <silent> <a-u> :<c-u>MundoToggle<cr>
+nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
 "custom operators {{{
 nmap _  <Plug>(operator-select)
@@ -273,24 +273,24 @@ function! Op_adjust_window_height(motion_wiseness)
 endfunction
 "}}}
 
-nnoremap <a-i> :<c-u>Codi<cr>
+nnoremap <a-i> <Cmd>Codi<cr>
 
-nnoremap <silent> ;vh :<c-u>HexokinaseToggle<cr>
+nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
 
-nnoremap <silent> <leader>v :<c-u>call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <leader>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
 
 "goyo {{{
-nnoremap <silent> ;vg :Goyo<cr>
+nnoremap <silent> ;vg <Cmd>Goyo<cr>
 
 function! SetupGoyo()
   Limelight
-  nnoremap <silent> ;vg :Goyo!<cr>
+  nnoremap <silent> ;vg <Cmd>Goyo!<cr>
   setlocal nocursorline nocursorcolumn
 endfunction
 
 function! SetupNoGoyo()
   Limelight!
-  nnoremap <silent> ;vg :Goyo<cr>
+  nnoremap <silent> ;vg <Cmd>Goyo<cr>
   setlocal cursorline cursorcolumn
 endfunction
 
@@ -299,16 +299,16 @@ autocmd! User GoyoLeave call SetupNoGoyo()
 "}}}
 
 "git {{{
-nnoremap <silent> ;gs :<c-u>Gstatus<cr>
+nnoremap <silent> ;gs <Cmd>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands
-nnoremap ;gp :<c-u>Git pull<cr>
-nnoremap ;gh :<c-u>Git push<cr>
+nnoremap ;gp <Cmd>Git pull<cr>
+nnoremap ;gh <Cmd>Git push<cr>
 
-nnoremap ;gcc :<c-u>Gcommit -v<cr>
-nnoremap ;gca :<c-u>Gcommit -v -a<cr>
-nnoremap ;gcA :<c-u>Gcommit --amend -v -a<cr>
+nnoremap ;gcc <Cmd>Gcommit -v<cr>
+nnoremap ;gca <Cmd>Gcommit -v -a<cr>
+nnoremap ;gcA <Cmd>Gcommit --amend -v -a<cr>
 nnoremap ;go :<c-u>Gcheckout<space>
 nnoremap ;gr :<c-u>Gremove<space>
 nnoremap ;gm :<c-u>Gmove<space>
@@ -320,10 +320,10 @@ nnoremap ;I [I
 "}}}
 
 "sideways maps {{{
-nnoremap <silent> ;h :<c-u>SidewaysJumpLeft<cr>
-nnoremap <silent> ;l :<c-u>SidewaysJumpRight<cr>
-nnoremap <silent> ;y :<c-u>SidewaysLeft<cr>
-nnoremap <silent> ;o :<c-u>SidewaysRight<cr>
+nnoremap <silent> ;h <Cmd>SidewaysJumpLeft<cr>
+nnoremap <silent> ;l <Cmd>SidewaysJumpRight<cr>
+nnoremap <silent> ;y <Cmd>SidewaysLeft<cr>
+nnoremap <silent> ;o <Cmd>SidewaysRight<cr>
 "}}}
 
 "nvimgdb {{{
@@ -331,17 +331,17 @@ let g:nvimgdb_disable_start_keymaps = 1
 
 nnoremap ;dp :<c-u>SetDebugPath<space>
 nnoremap <expr> ;dsg exists('g:debug_path') ? 
-      \':<c-u>GdbStart gdb -q<space>'.expand(g:debug_path).'<cr>' : 
+      \'<Cmd>GdbStart gdb -q<space>'.expand(g:debug_path).'<cr>' : 
       \':<c-u>GdbStart gdb -q<space>'
 nnoremap <expr> ;dsl exists('g:debug_path') ? 
-      \':<c-u>GdbStartLLDB lldb <space>'.expand(g:debug_path).'<cr>' : 
+      \'<Cmd>GdbStartLLDB lldb <space>'.expand(g:debug_path).'<cr>' : 
       \':<c-u>GdbStartLLDB lldb<space>'
 nnoremap <expr> ;dsp exists('g:debug_path') ? 
-      \':<c-u>GdbStartPDB python -m pdb <space>'.expand(g:debug_path).'<cr>' : 
+      \'<Cmd>GdbStartPDB python -m pdb <space>'.expand(g:debug_path).'<cr>' : 
       \':<c-u>GdbStartPDB python -m pdb<space>'
-nnoremap ;dq :<c-u>GdbDebugStop<cr>
-nnoremap ;dr :<c-u>GdbBreakpointClearAll<cr>
-nnoremap ;di :<c-u>GdbInterrupt<cr>
+nnoremap ;dq <Cmd>GdbDebugStop<cr>
+nnoremap ;dr <Cmd>GdbBreakpointClearAll<cr>
+nnoremap ;di <Cmd>GdbInterrupt<cr>
 
 let g:nvimgdb_config_override = {
       \ 'key_until':         ';du',
@@ -362,8 +362,8 @@ xmap <Leader>S <Plug>(visualstar-#)``cgN
 "}}}
 
 "dispatch {{{
-nnoremap <a-m> :<c-u>Make<cr>
-nnoremap <a-,> :<c-u>Make!<cr>
+nnoremap <a-m> <Cmd>Make<cr>
+nnoremap <a-,> <Cmd>Make!<cr>
 "}}}
 
 "sandwich {{{
@@ -407,7 +407,7 @@ nmap ;q <Plug>(wintabs_close_window)
 nmap <c-w>O <Plug>(wintabs_only_window)
 nmap ;Q <Plug>(wintabs_close_vimtab)
 nmap ;a <Plug>(wintabs_all)
-nmap <leader>.D :<c-u>WintabsDo<space>
+nmap <leader>.D <Cmd>WintabsDo<space>
 
 nmap <leader><leader>h <Plug>(wintabs_move_to_window_left)
 nmap <leader><leader>j <Plug>(wintabs_move_to_window_right)
@@ -419,24 +419,24 @@ nmap <leader><leader>m <Plug>(wintabs_maximize)
 nmap <leader><leader>q <Plug>(wintabs_tab_1)
 nmap <leader><leader>w <Plug>(wintabs_tab_2)
 nmap <leader><leader>e <Plug>(wintabs_tab_3)
-nmap <leader><leader>t <Plug>(wintabs_tab_4)
-nmap <leader><leader>r <Plug>(wintabs_tab_5)
+nmap <leader><leader>r <Plug>(wintabs_tab_4)
+nmap <leader><leader>t <Plug>(wintabs_tab_5)
 nmap <leader><leader>y <Plug>(wintabs_tab_6)
 nmap <leader><leader>u <Plug>(wintabs_tab_7)
 nmap <leader><leader>i <Plug>(wintabs_tab_8)
 nmap <leader><leader>o <Plug>(wintabs_tab_9)
 nmap <leader><leader>p <Plug>(wintabs_last)
 
-nmap <leader>Q :<c-u>Startify<cr><Plug>(wintabs_only)
+nmap <leader>Q <Cmd>Startify<cr><Plug>(wintabs_only)
 
 augroup CmdWinQ
   autocmd!
-  autocmd CmdwinEnter * nnoremap <buffer> <leader>q :<c-u>q<CR>
+  autocmd CmdwinEnter * nnoremap <buffer> <leader>q <Cmd>q<CR>
 augroup END
 "}}}
 
 "ToggleMacroMode {{{
-noremap <silent> ;m :<C-u>ToggleMacroMode<CR>:<c-u>call lightline#update()<cr>
+noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
 "}}}
 
 " vim: set fdm=marker:

@@ -26,7 +26,7 @@ nnoremap ,y 6gt
 nnoremap ,u 7gt
 nnoremap ,i 8gt
 nnoremap ,o 9gt
-nnoremap ,p 10gt
+nnoremap ,p :<c-u>tablast<cr>
 "}}}
 
 "macros {{{
@@ -41,7 +41,7 @@ noremap Q @@
 "}}}
 
 "conceal toggle {{{
-nnoremap <a-c> :<c-u>set <C-R>=&conceallevel ?
+nnoremap ;vc :<c-u>set <C-R>=&conceallevel ?
       \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 "}}}
 
@@ -51,7 +51,7 @@ cnoremap <C-A> <Home>
 
 "fix spelling mistake {{{
 inoremap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
-nnoremap <c-f> [s1z=<c-o>
+nnoremap <c-f> ms[s1z=`s
 "}}}
 
 "window maps {{{
@@ -106,7 +106,7 @@ function! MapWinCmd(key, command, ...)
 endfunction
 "}}}
 
-"general leader maps {{{
+"general leader/semicolon/alt maps {{{
 nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
 nnoremap <leader>P :<c-u>cd<space>
 nnoremap <silent> <leader>,p :<c-u>tcd %:p:h<CR>
@@ -152,8 +152,6 @@ nnoremap <Leader>S #``cgN
 
 nnoremap <leader>Q :bp\|bd #<CR>
 
-nnoremap ;f 1z=
-
 nnoremap <leader>f gq
 xnoremap <leader>f gq
 
@@ -163,11 +161,10 @@ nnoremap <leader>! :%s/\<<C-r>=expand('<cword>')<CR>\>/
 nnoremap <leader>&: '{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
 xnoremap <leader>! y:%s/<C-r>"/
 xnoremap <leader>& y:'{,'}s/<C-r>"/
-"}}}
 
-"general alt maps {{{
 nnoremap <a-p> :<c-u>pwd<cr>
 nnoremap <a-r> :<c-u>registers<cr>
+nnoremap <a-c> :<c-u>changes<cr>
 nnoremap <a-z> :<c-u>help<space>
 nnoremap <a-s> :<c-u>source %<cr>
 "}}}
@@ -221,7 +218,7 @@ call MapWinCmd("T", "terminal")
 "}}}
 
 "arbitrary command in new window {{{
-call MapWinCmd("_", " ", 1)
+call MapWinCmd("e", " ", 1)
 "}}}
 
 "arrow key window resize {{{

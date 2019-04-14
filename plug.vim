@@ -49,7 +49,7 @@ Plug 'tpope/vim-apathy'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 " Plug 'neomake/neomake'
-Plug 'vim-scripts/restore_view.vim'
+" Plug 'vim-scripts/restore_view.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'

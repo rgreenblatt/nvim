@@ -222,47 +222,6 @@ xmap p <Plug>(miniyank-autoput)
 xmap P <Plug>(miniyank-autoPut)
 xnoremap <expr> p v:register=='"'?'pgvy':'p'
 
-"total hack:
-nmap ;p1 p;n
-nmap ;p2 p;n;n
-nmap ;p3 p;n;n;n
-nmap ;p4 p;n;n;n;n
-nmap ;p5 p;n;n;n;n;n
-nmap ;p6 p;n;n;n;n;n;n
-nmap ;p7 p;n;n;n;n;n;n;n
-nmap ;p8 p;n;n;n;n;n;n;n;n
-nmap ;p9 p;n;n;n;n;n;n;n;n;n
-
-xmap ;p1 p;n
-xmap ;p2 p;n;n
-xmap ;p3 p;n;n;n
-xmap ;p4 p;n;n;n;n
-xmap ;p5 p;n;n;n;n;n
-xmap ;p6 p;n;n;n;n;n;n
-xmap ;p7 p;n;n;n;n;n;n;n
-xmap ;p8 p;n;n;n;n;n;n;n;n
-xmap ;p9 p;n;n;n;n;n;n;n;n;n
-
-nmap ;P1 P;n
-nmap ;P2 P;n;n
-nmap ;P3 P;n;n;n
-nmap ;P4 P;n;n;n;n
-nmap ;P5 P;n;n;n;n;n
-nmap ;P6 P;n;n;n;n;n;n
-nmap ;P7 P;n;n;n;n;n;n;n
-nmap ;P8 P;n;n;n;n;n;n;n;n
-nmap ;P9 P;n;n;n;n;n;n;n;n;n
-
-xmap ;P1 P;n
-xmap ;P2 P;n;n
-xmap ;P3 P;n;n;n
-xmap ;P4 P;n;n;n;n
-xmap ;P5 P;n;n;n;n;n
-xmap ;P6 P;n;n;n;n;n;n
-xmap ;P7 P;n;n;n;n;n;n;n
-xmap ;P8 P;n;n;n;n;n;n;n;n
-xmap ;P9 P;n;n;n;n;n;n;n;n;n
-
 nmap ;n <Plug>(miniyank-cycle)
 nmap ;N <Plug>(miniyank-cycleback)
 "}}}
@@ -316,7 +275,7 @@ endfunction
 
 nnoremap <a-i> :<c-u>Codi<cr>
 
-nnoremap <silent> ;vc :<c-u>HexokinaseToggle<cr>
+nnoremap <silent> ;vh :<c-u>HexokinaseToggle<cr>
 
 nnoremap <silent> <leader>v :<c-u>call WindowSwap#EasyWindowSwap()<CR>
 
@@ -402,7 +361,7 @@ xmap <Leader>s <Plug>(visualstar-*)``cgn
 xmap <Leader>S <Plug>(visualstar-#)``cgN
 "}}}
 
-"Neomake {{{
+"dispatch {{{
 nnoremap <a-m> :<c-u>Make<cr>
 nnoremap <a-,> :<c-u>Make!<cr>
 "}}}
@@ -450,9 +409,6 @@ nmap ;Q <Plug>(wintabs_close_vimtab)
 nmap ;a <Plug>(wintabs_all)
 nmap <leader>.D :<c-u>WintabsDo<space>
 
-nmap <leader><leader>a <Plug>(wintabs_first)
-nmap <leader><leader>s <Plug>(wintabs_last)
-
 nmap <leader><leader>h <Plug>(wintabs_move_to_window_left)
 nmap <leader><leader>j <Plug>(wintabs_move_to_window_right)
 nmap <leader><leader>k <Plug>(wintabs_move_to_window_above)
@@ -469,6 +425,7 @@ nmap <leader><leader>y <Plug>(wintabs_tab_6)
 nmap <leader><leader>u <Plug>(wintabs_tab_7)
 nmap <leader><leader>i <Plug>(wintabs_tab_8)
 nmap <leader><leader>o <Plug>(wintabs_tab_9)
+nmap <leader><leader>p <Plug>(wintabs_last)
 
 nmap <leader>Q :<c-u>Startify<cr><Plug>(wintabs_only)
 

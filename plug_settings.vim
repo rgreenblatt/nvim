@@ -22,22 +22,6 @@ let g:clever_f_timeout_ms = 3000
 let g:wordmotion_prefix = ';'
 
 "coc {{{
-let g:coc_global_extensions = [
-      \ 'coc-word',
-      \ 'coc-tag',
-      \ 'coc-lists',
-      \ 'coc-syntax',
-      \ 'coc-emoji',
-      \ 'coc-dictionary',
-      \ 'coc-python',
-      \ 'coc-json',
-      \ 'coc-java',
-      \ 'coc-vimtex',
-      \ 'coc-ccls',
-      \ 'coc-yaml',
-      \ 'coc-rls',
-      \ 'coc-snippets',
-      \ 'coc-gocode']
 augroup CocGenericAutocmds
   autocmd!
   " Setup formatexpr specified filetype(s).

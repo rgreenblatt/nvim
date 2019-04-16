@@ -251,20 +251,20 @@ xmap ;R <Plug>NrrwrgnBangDo
 
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
-"custom operators TODO {{{
-nmap _  <Plug>(operator-select)
+"custom operators {{{
+nmap ;;v  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
 function! Op_select_region(window_heightmotion_wiseness)
   normal! `[v`]
 endfunction
 
-nmap ;_  <Plug>(operator-select-block)
+nmap ;;<c-v>  <Plug>(operator-select-block)
 call operator#user#define('select-block', 'Op_select_block')
 function! Op_select_block(window_heightmotion_wiseness)
   exe "normal `[\<c-v>`]"
 endfunction
 
-nmap <leader>_  <Plug>(operator-select-line)
+nmap ;;V  <Plug>(operator-select-line)
 call operator#user#define('select-line', 'Op_select_line')
 function! Op_select_line(window_heightmotion_wiseness)
   normal! `[V`]

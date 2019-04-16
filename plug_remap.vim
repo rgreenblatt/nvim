@@ -1,12 +1,17 @@
 "better jumping (uses vim-EnhancedJumps) {{{
-nmap <silent><expr> <TAB>
-      \ coc#expandableOrJumpable() ? 
-      \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-      \ "\<Plug>EnhancedJumpsOlder"
-nmap <silent><expr> <S-TAB>
-      \ coc#expandableOrJumpable() ? 
-      \ coc#rpc#request('snippetPrev', []) :
-      \ "\<Plug>EnhancedJumpsNewer"
+if exists("g:disable_coc")
+  nmap <TAB> <Plug>EnhancedJumpsOlder
+  nmap <S-TAB> <Plug>EnhancedJumpsNewer
+else
+  nmap <silent><expr> <TAB>
+        \ coc#expandableOrJumpable() ? 
+        \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+        \ "\<Plug>EnhancedJumpsOlder"
+  nmap <silent><expr> <S-TAB>
+        \ coc#expandableOrJumpable() ? 
+        \ coc#rpc#request('snippetPrev', []) :
+        \ "\<Plug>EnhancedJumpsNewer"
+endif
 
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
 nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
@@ -56,16 +61,17 @@ nnoremap <leader>: <Cmd>History:<cr>
 call MapWinCmd("d", "Dirvish")
 "}}}
 
-  "startify in new window {{{
-  call MapWinCmd("s", "Startify")
-  "}}}
+"startify in new window {{{
+call MapWinCmd("s", "Startify")
+"}}}
 
-  "thesaurus {{{
-  nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
-  xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
-  "}}}
+"thesaurus {{{
+nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
+xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
+"}}}
 
-  "coc remaps {{{
+"coc remaps {{{
+if !exists("g:disable_coc")
   " use <tab> for trigger completion and navigate to next complete item
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -99,7 +105,7 @@ call MapWinCmd("d", "Dirvish")
   imap <C-s> <Plug>(coc-snippets-expand)
 
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
   nnoremap <leader>R <Cmd>CocCommand python.sortImports<cr>
@@ -146,38 +152,39 @@ call MapWinCmd("d", "Dirvish")
       call CocAction('doHover')
     endif
   endfunction
-  "}}}
+endif
+"}}}
 
-  "vista {{{
-  call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
-        \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
-  nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
-  "}}}
+"vista {{{
+call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
+      \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
+nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
+"}}}
 
-  "vimtex {{{
-  nmap  <leader>xi   <plug>(vimtex-info)
-  nmap  <leader>xI   <plug>(vimtex-info-full)
-  nmap  <leader>xt   <plug>(vimtex-toc-open)
-  nmap  <leader>xT   <plug>(vimtex-toc-toggle)
-  nmap  <leader>xq   <plug>(vimtex-log)
-  nmap  <leader>xv   <plug>(vimtex-view)
-  nmap  <leader>xr   <plug>(vimtex-reverse-search)
-  nmap  <leader>xl   <plug>(vimtex-compile)
-  nmap  <leader>xL   <plug>(vimtex-compile-selected)
-  nmap  <leader>xL   <plug>(vimtex-compile-selected)
-  nmap  <leader>xk   <plug>(vimtex-stop)
-  nmap  <leader>xK   <plug>(vimtex-stop-all)
-  nmap  <leader>xe   <plug>(vimtex-errors)
-  nmap  <leader>xo   <plug>(vimtex-compile-output)
-  nmap  <leader>xg   <plug>(vimtex-status)
-  nmap  <leader>xG   <plug>(vimtex-status-all)
-  nmap  <leader>xc   <plug>(vimtex-clean)
-  nmap  <leader>xC   <plug>(vimtex-clean-full)
-  nmap  <leader>xm   <plug>(vimtex-imaps-list)
-  nmap  <leader>xx   <plug>(vimtex-reload)
-  nmap  <leader>xX   <plug>(vimtex-reload-state)
-  nmap  <leader>xs   <plug>(vimtex-toggle-main)
-  "}}}
+"vimtex {{{
+nmap  <leader>xi   <plug>(vimtex-info)
+nmap  <leader>xI   <plug>(vimtex-info-full)
+nmap  <leader>xt   <plug>(vimtex-toc-open)
+nmap  <leader>xT   <plug>(vimtex-toc-toggle)
+nmap  <leader>xq   <plug>(vimtex-log)
+nmap  <leader>xv   <plug>(vimtex-view)
+nmap  <leader>xr   <plug>(vimtex-reverse-search)
+nmap  <leader>xl   <plug>(vimtex-compile)
+nmap  <leader>xL   <plug>(vimtex-compile-selected)
+nmap  <leader>xL   <plug>(vimtex-compile-selected)
+nmap  <leader>xk   <plug>(vimtex-stop)
+nmap  <leader>xK   <plug>(vimtex-stop-all)
+nmap  <leader>xe   <plug>(vimtex-errors)
+nmap  <leader>xo   <plug>(vimtex-compile-output)
+nmap  <leader>xg   <plug>(vimtex-status)
+nmap  <leader>xG   <plug>(vimtex-status-all)
+nmap  <leader>xc   <plug>(vimtex-clean)
+nmap  <leader>xC   <plug>(vimtex-clean-full)
+nmap  <leader>xm   <plug>(vimtex-imaps-list)
+nmap  <leader>xx   <plug>(vimtex-reload)
+nmap  <leader>xX   <plug>(vimtex-reload-state)
+nmap  <leader>xs   <plug>(vimtex-toggle-main)
+"}}}
 
 "plugin remaps for a headed install {{{
 if !exists("g:headless")

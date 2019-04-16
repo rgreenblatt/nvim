@@ -22,14 +22,16 @@ let g:clever_f_timeout_ms = 3000
 let g:wordmotion_prefix = ';'
 
 "coc {{{
-augroup CocGenericAutocmds
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType c,cpp,cuda,json,java,rust,tex,go,yaml,python setlocal 
-        \ formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+if exists("g:disable_coc")
+  augroup CocGenericAutocmds
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType c,cpp,cuda,json,java,rust,tex,go,yaml,python setlocal 
+          \ formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+endif
 "}}}
 
 "startify {{{

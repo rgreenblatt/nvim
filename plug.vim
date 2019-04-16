@@ -10,7 +10,9 @@ if !exists("g:headless")
 endif
 "}}}
 " Plug 'dansomething/vim-eclim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+if !exists("g:disable_coc")
+  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+endif
 Plug 'makerj/vim-pdf'
 Plug 'liuchengxu/vista.vim'
 Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}

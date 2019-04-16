@@ -2,23 +2,23 @@ set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 "plugins {{{
-"plugins for a heavier install {{{
-if exists("g:headless")
-else
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'mhinz/vim-startify'
-    Plug 'itchyny/calendar.vim'
-    Plug 'Carpetsmoker/xdg_open.vim'
-    Plug 'makerj/vim-pdf'
-    Plug 'lervag/vimtex'
-    Plug 'rgreenblatt/i3-vim-focus'
-    " Plug 'dansomething/vim-eclim'
-    Plug 'liuchengxu/vista.vim'
-    Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
-    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    Plug 'Chiel92/vim-autoformat'
+"plugins for a headed install {{{
+if !exists("g:headless")
+  Plug 'Carpetsmoker/xdg_open.vim'
+  Plug 'rgreenblatt/i3-vim-focus'
+  Plug 'szw/vim-g'
 endif
 "}}}
+" Plug 'dansomething/vim-eclim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'makerj/vim-pdf'
+Plug 'liuchengxu/vista.vim'
+Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'Chiel92/vim-autoformat'
+Plug 'lervag/vimtex'
+Plug 'mhinz/vim-startify'
+Plug 'itchyny/calendar.vim'
 Plug 'wikitopian/hardmode'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-CountJump'
@@ -49,7 +49,7 @@ Plug 'tpope/vim-apathy'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 " Plug 'neomake/neomake'
-Plug 'vim-scripts/restore_view.vim'
+" Plug 'vim-scripts/restore_view.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -60,6 +60,7 @@ Plug 'junegunn/gv.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'rhysd/clever-f.vim'
 Plug 'unblevable/quick-scope'
+" Plug 'rgreenblatt/sneak-quick-scope'
 " Plug 'deris/vim-shot-f'
 Plug 'chaoren/vim-wordmotion'
 Plug 'wesQ3/vim-windowswap'
@@ -91,7 +92,6 @@ Plug 'romainl/vim-cool'
 Plug 'machakann/vim-highlightedyank'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/sideways.vim'
-Plug 'szw/vim-g'
 Plug 'justinmk/vim-sneak'
 Plug 'RRethy/vim-hexokinase'
 Plug 'ron89/thesaurus_query.vim'

@@ -21,113 +21,108 @@ let g:clever_f_timeout_ms = 3000
 
 let g:wordmotion_prefix = ';'
 
-"settings for heavier installs {{{
-if exists("g:headless")
-else
-    "coc {{{
-    let g:coc_global_extensions = [
-                \ 'coc-word',
-                \ 'coc-tag',
-                \ 'coc-lists',
-                \ 'coc-syntax',
-                \ 'coc-emoji',
-                \ 'coc-dictionary',
-                \ 'coc-python',
-                \ 'coc-json',
-                \ 'coc-java',
-                \ 'coc-vimtex',
-                \ 'coc-ccls',
-                \ 'coc-yaml',
-                \ 'coc-rls',
-                \ 'coc-snippets',
-                \ 'coc-gocode']
-    augroup CocGenericAutocmds
-        autocmd!
-        " Setup formatexpr specified filetype(s).
-        autocmd FileType c,cpp,cuda,json,java,rust,tex,go,yaml,python setlocal 
-              \ formatexpr=CocAction('formatSelected')
-        " Update signature help on jump placeholder
-        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
-    "}}}
+"coc {{{
+let g:coc_global_extensions = [
+      \ 'coc-word',
+      \ 'coc-tag',
+      \ 'coc-lists',
+      \ 'coc-syntax',
+      \ 'coc-emoji',
+      \ 'coc-dictionary',
+      \ 'coc-python',
+      \ 'coc-json',
+      \ 'coc-java',
+      \ 'coc-vimtex',
+      \ 'coc-ccls',
+      \ 'coc-yaml',
+      \ 'coc-rls',
+      \ 'coc-snippets',
+      \ 'coc-gocode']
+augroup CocGenericAutocmds
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType c,cpp,cuda,json,java,rust,tex,go,yaml,python setlocal 
+        \ formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+"}}}
 
-    "startify {{{
-    let g:startify_files_number = 5
-    let g:startify_session_sort = 1
+"startify {{{
+let g:startify_files_number = 5
+let g:startify_session_sort = 1
 
-    let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
-                \ {'w': '~/.config/i3/config'}, 
-                \ {'b': '~/.config/qutebrowser/config.py'},
-                \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, 
-                \ {'s': '~/.config/i3status/config'},
-                \ {'p': '~/.profile'}, 
-                \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
-    
-    let g:startify_commands = [{'m': 'te neomutt '}, {'t': 'GlobalSharedTerm'}, 
-                \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
-    
-    let g:startify_lists = [
-                \ {'type': 'sessions',  'header': [' Sessions']},
-                \ {'type': 'bookmarks', 'header': [' Bookmarks']},
-                \ {'type': 'commands',  'header': [' Commands']},
-                \ {'type': 'files',     'header': [' Recent']},
-                \ ]
-    "possible additonal entry
-    "      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
-    
-    let g:startify_skiplist = [
-                \ 'init.vim',
-                \ 'config',
-                \ 'config.py'
-                \ ]
-    
-    let g:startify_custom_header = ""
-    let g:startify_custom_footer =
-                \ map(split(system('cat /home/ryan/Documents/efficiency'.
-                \ '/TODO/TODO_LIST.txt'), '\n'), 
-                \'"   ". v:val')
-    "}}}
+let g:startify_bookmarks = [{'z': '~/.zshrc'}, {'v': '~/.config/nvim/'},
+      \ {'w': '~/.config/i3/config'}, 
+      \ {'b': '~/.config/qutebrowser/config.py'},
+      \ {'T': '~/Documents/efficiency/TODO/TODO_LIST.txt'}, 
+      \ {'s': '~/.config/i3status/config'},
+      \ {'p': '~/.profile'}, 
+      \ {'K': '~/Documents/keyboard/src/keyboard/layers.py'}] 
 
-    "calender {{{
-    let g:calendar_google_task = 1
-    let g:calendar_google_calendar = 1
-    let g:calendar_view = 'week'
-    let g:calendar_cyclic_view = 1
-    
-    augroup calendar-mappings
-        autocmd!
-        autocmd FileType calendar nunmap <buffer> <space>
-    augroup end
-    "}}}
-    
-    "vimtex {{{
-    let g:vimtex_compiler_method = 'latexmk'
-    let g:vimtex_fold_enabled = 1
-    let g:vimtex_view_method = 'zathura'
-    let g:vimtex_compiler_progname = 'nvr'
-    "}}}
-    
-    "vista {{{
-    let g:vista_fzf_preview = ['right:50%']
-    "}}}
-    
-    "semshi {{{
-    let g:semshi#error_sign = v:false
-    let g:semshi#simplify_markup = v:false
-    "}}}
+let g:startify_commands = [{'m': 'te neomutt '}, {'t': 'GlobalSharedTerm'}, 
+      \ {'c': 'Calendar -position=here'}, {'f': 'Files'}]
 
-    "chromatica {{{
-    let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
-    " augroup ChromaticaStartup
-    "     autocmd!
-    "     autocmd FileType c,cpp,cuda ChromaticaStart
-    " augroup end
-    let g:chromatica#global_args = [
-          \ '-isystem /usr/lib/llvm-7/lib/clang/7.0.0/include'
-          \ ]
-    let g:chromatica#responsive_mode = 1
-    "}}}
-endif
+let g:startify_lists = [
+      \ {'type': 'sessions',  'header': [' Sessions']},
+      \ {'type': 'bookmarks', 'header': [' Bookmarks']},
+      \ {'type': 'commands',  'header': [' Commands']},
+      \ {'type': 'files',     'header': [' Recent']},
+      \ ]
+"possible additonal entry
+"      \ { 'type': 'dir',       'header': ['   Recent: '. getcwd()] },
+
+let g:startify_skiplist = [
+      \ 'init.vim',
+      \ 'config',
+      \ 'config.py'
+      \ ]
+
+let g:startify_custom_header = ""
+let g:startify_custom_footer =
+      \ map(split(system('cat /home/ryan/Documents/efficiency'.
+      \ '/TODO/TODO_LIST.txt'), '\n'), 
+      \'"   ". v:val')
+"}}}
+
+"calender {{{
+let g:calendar_google_task = 1
+let g:calendar_google_calendar = 1
+let g:calendar_view = 'week'
+let g:calendar_cyclic_view = 1
+
+augroup calendar-mappings
+  autocmd!
+  autocmd FileType calendar nunmap <buffer> <space>
+augroup end
+"}}}
+
+"vimtex {{{
+let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_fold_enabled = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_progname = 'nvr'
+"}}}
+
+"vista {{{
+let g:vista_fzf_preview = ['right:50%']
+"}}}
+
+"semshi {{{
+let g:semshi#error_sign = v:false
+let g:semshi#simplify_markup = v:false
+"}}}
+
+"chromatica {{{
+let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
+" augroup ChromaticaStartup
+"     autocmd!
+"     autocmd FileType c,cpp,cuda ChromaticaStart
+" augroup end
+let g:chromatica#global_args = [
+      \ '-isystem /usr/lib/llvm-7/lib/clang/7.0.0/include'
+      \ ]
+let g:chromatica#responsive_mode = 1
 "}}}
 
 ""vimade {{{
@@ -155,26 +150,26 @@ let g:mwAutoLoadMarks = 1
 
 "codi {{{
 let g:codi#interpreters = {
-            \ 'python': {
-            \ 'bin': 'python3',
-            \ },
-            \ }
+      \ 'python': {
+      \ 'bin': 'python3',
+      \ },
+      \ }
 "}}}
 
 let g:gutentags_cache_dir = '~/.tags'
 
 "c/cpp folding {{{
 let g:fold_options = {
-            \ 'fallback_method' : { 'line_threshold' : 2000, 
-                                  \ 'method' : 'syntax' },
-            \ 'fold_blank': 0,
-            \ 'fold_includes': 1,
-            \ 'max_foldline_length': 'win',
-            \ 'merge_comments' : 1,
-            \ 'show_if_and_else': 1,
-            \ 'strip_namespaces': 1,
-            \ 'strip_template_arguments': 1
-            \ }
+      \ 'fallback_method' : { 'line_threshold' : 2000, 
+      \ 'method' : 'syntax' },
+      \ 'fold_blank': 0,
+      \ 'fold_includes': 1,
+      \ 'max_foldline_length': 'win',
+      \ 'merge_comments' : 1,
+      \ 'show_if_and_else': 1,
+      \ 'strip_namespaces': 1,
+      \ 'strip_template_arguments': 1
+      \ }
 "}}}
 
 let g:highlightedyank_highlight_duration = 200
@@ -186,6 +181,8 @@ let g:sneak#absolute_dir = 1
 " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
 omap s <Plug>Sneak_s
 omap S <Plug>Sneak_S
+
+" let g:sqs_within_lines = 5
 "}}}
 
 "floating fzf window {{{
@@ -213,11 +210,11 @@ endfunction
 
 "rainbow parens {{{
 augroup RainbowParens
-    autocmd!
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax   * RainbowParenthesesLoadRound
-    autocmd Syntax   * RainbowParenthesesLoadSquare
-    autocmd Syntax   * RainbowParenthesesLoadBraces
+  autocmd!
+  autocmd VimEnter * RainbowParenthesesToggle
+  autocmd Syntax   * RainbowParenthesesLoadRound
+  autocmd Syntax   * RainbowParenthesesLoadSquare
+  autocmd Syntax   * RainbowParenthesesLoadBraces
 augroup end
 "}}}
 

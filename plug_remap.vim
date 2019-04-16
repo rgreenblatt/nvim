@@ -56,31 +56,13 @@ nnoremap <leader>: <Cmd>History:<cr>
 call MapWinCmd("d", "Dirvish")
 "}}}
 
-"plugin remaps for a heavier install {{{
-if exists("g:headless")
-else
   "startify in new window {{{
   call MapWinCmd("s", "Startify")
-  "}}}
-
-  "google {{{
-  nnoremap <a-g> :<c-u>Google<space>
-  nnoremap <a-f> :<c-u>Googlef<space>
-
-  xnoremap <a-g> :<c-u>Google<space>
-  xnoremap <a-f> :<c-u>Googlef<space>
   "}}}
 
   "thesaurus {{{
   nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
   xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
-  "}}}
-
-  "window navigation (requires keyboard remaping and i3-vim-focus {{{
-  nnoremap <silent> gzl <Cmd>call Focus('right', 'l')<CR>
-  nnoremap <silent> gzh <Cmd>call Focus('left', 'h')<CR>
-  nnoremap <silent> gzk <Cmd>call Focus('up', 'k')<CR>
-  nnoremap <silent> gzj <Cmd>call Focus('down', 'j')<CR>
   "}}}
 
   "coc remaps {{{
@@ -195,6 +177,23 @@ else
   nmap  <leader>xx   <plug>(vimtex-reload)
   nmap  <leader>xX   <plug>(vimtex-reload-state)
   nmap  <leader>xs   <plug>(vimtex-toggle-main)
+  "}}}
+
+"plugin remaps for a headed install {{{
+if !exists("g:headless")
+  "google {{{
+  nnoremap <a-g> :<c-u>Google<space>
+  nnoremap <a-f> :<c-u>Googlef<space>
+
+  xnoremap <a-g> :<c-u>Google<space>
+  xnoremap <a-f> :<c-u>Googlef<space>
+  "}}}
+
+  "window navigation (requires keyboard remaping and i3-vim-focus {{{
+  nnoremap <silent> gzl <Cmd>call Focus('right', 'l')<CR>
+  nnoremap <silent> gzh <Cmd>call Focus('left', 'h')<CR>
+  nnoremap <silent> gzk <Cmd>call Focus('up', 'k')<CR>
+  nnoremap <silent> gzj <Cmd>call Focus('down', 'j')<CR>
   "}}}
 endif
 "}}}

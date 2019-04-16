@@ -15,7 +15,7 @@ let g:lion_squeeze_spaces = 1
 
 "cleverf options{{{
 let g:clever_f_across_no_line = 1
-let g:clever_f_fix_key_direction = 1
+let g:clever_f_fix_key_direction = 0
 let g:clever_f_timeout_ms = 3000
 "}}}
 
@@ -163,7 +163,7 @@ let g:highlightedyank_highlight_duration = 200
 
 " sneak {{{
 let g:sneak#s_next = 1
-let g:sneak#absolute_dir = 1
+let g:sneak#absolute_dir = 0
 " let g:sneak#label = 1
 " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
 omap s <Plug>Sneak_s

@@ -221,6 +221,10 @@ let g:wintabs_autoclose_vimtab = 1
 "let g:formatters_scala = ['scalafmt'] 
 ""}}}
 
+"polyglot and associated plugins: {{{
 let g:polyglot_disabled = ['latex']
+"if I ever start working with csvs some, look into plugin
+let g:no_csv_maps = 1
+"}}}
 
 " vim: set fdm=marker:

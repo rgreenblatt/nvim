@@ -251,7 +251,7 @@ xmap ;R <Plug>NrrwrgnBangDo
 
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
-"custom operators {{{
+"custom operators TODO {{{
 nmap _  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
 function! Op_select_region(window_heightmotion_wiseness)

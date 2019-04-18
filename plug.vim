@@ -1,3 +1,10 @@
+" autoinstall vim-plug {{{
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+" }}}
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
@@ -108,6 +115,10 @@ Plug 'machakann/vim-sandwich'
 Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot'
 Plug 'buztard/vim-rel-jump'
+"TODO
+Plug 'zenbro/mirror.vim'
+Plug 'esneider/YUNOcommit.vim'
+Plug 'kshenoy/vim-signature'
 "}}}
 call plug#end()
 filetype plugin indent on

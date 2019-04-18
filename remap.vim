@@ -141,11 +141,11 @@ nmap <leader>w <C-w>
 
 xnoremap <leader>t <C-]>
 xnoremap <leader>T <C-T>
-xnoremap ;T g<C-]>
+xnoremap ;t g<C-]>
 
 nnoremap <leader>t <C-]>
 nnoremap <leader>T <C-T>
-nnoremap ;T g<C-]>
+nnoremap ;t g<C-]>
 
 nnoremap <Leader>s *``cgn
 nnoremap <Leader>S #``cgN
@@ -158,7 +158,7 @@ xnoremap <leader>f gq
 nnoremap <leader>F gggqG<c-o>
 
 nnoremap <leader>! :%s/\<<C-r>=expand('<cword>')<CR>\>/
-nnoremap <leader>&: '{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
+nnoremap <leader>& :'{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
 xnoremap <leader>! y:%s/<C-r>"/
 xnoremap <leader>& y:'{,'}s/<C-r>"/
 
@@ -213,6 +213,7 @@ augroup END
 "terminal {{{
 tnoremap <C-Space> <C-\><C-n>
 
+
 call MapWinCmd("t", "GlobalSharedTerm")
 call MapWinCmd("T", "terminal")
 "}}}
@@ -247,6 +248,11 @@ nnoremap gV `[v`]h
 "line text object {{{
 xnoremap il ^og_
 onoremap il <Cmd>normal vil<CR>
+"}}}
+
+"view text object {{{
+xnoremap iv HoL
+onoremap iv <Cmd>exec "normal! HVL"<cr>
 "}}}
 
 "no ctrl z, I don't typically use vim in a shell, I run it standalone {{{

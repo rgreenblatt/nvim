@@ -115,10 +115,16 @@ Plug 'machakann/vim-sandwich'
 Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot'
 Plug 'buztard/vim-rel-jump'
+
 "TODO
 Plug 'zenbro/mirror.vim'
+
 Plug 'esneider/YUNOcommit.vim'
+
+"TODO
 Plug 'kshenoy/vim-signature'
+
+Plug 'svermeulen/vim-subversive'
 "}}}
 call plug#end()
 filetype plugin indent on

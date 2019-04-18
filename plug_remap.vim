@@ -108,12 +108,14 @@ if !exists("g:disable_coc")
         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
-  nnoremap <leader>R <Cmd>CocCommand python.sortImports<cr>
+  nnoremap <leader>R <Cmd>CocCommand python.execInTerminal<cr>
   nnoremap ;L :<c-u>CocList<space>
   nnoremap ;S <Cmd>CocList -I symbols<cr>
-  nnoremap ;S <Cmd>CocList -I symbols<cr>
+  nnoremap ;D <Cmd>CocList --auto-preview diagnostics<cr>
+  nnoremap ;O <Cmd>CocList --auto-preview outline<cr>
+  nnoremap <leader>G <Cmd>CocList links<cr>
+  nnoremap ;f <Cmd>CocList --auto-preview files<cr>
 
-  nnoremap ;S <Cmd>CocList -I symbols<cr>
 
   " Use `[g` and `]g` for navigate diagnostics
   nmap [g <Plug>(coc-diagnostic-prev)
@@ -252,6 +254,29 @@ xmap ;R <Plug>NrrwrgnBangDo
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
 "custom operators {{{
+nmap ;s  <Plug>(operator-substitute)
+call operator#user#define('substitute', 'Op_substitute_region')
+function! Op_substitute_region(window_heightmotion_wiseness)
+  let reg = operator#user#register()
+  let to_sub=eval("@".reg)
+  let orig_reg=@@
+  let start=getpos("'[")
+  let end=getpos("']")
+  execute "normal! msi\<c-r>. \<esc>d`s"
+  let to_rep=@@
+  echom to_rep
+  normal! x
+  let @@=to_rep
+  echom to_rep
+  echom orig_reg
+  call setpos("'[", start)
+  call setpos("']", end)
+  let to_exec = "normal! '[,']s/".to_sub."/\<c-r>\"\<cr>"
+  echom to_exec
+  execute to_exec
+  let @@=orig_reg
+endfunction
+
 nmap ;;v  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
 function! Op_select_region(window_heightmotion_wiseness)
@@ -377,20 +402,20 @@ let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
 
-nmap <silent> ;sd <Plug>(operator-sandwich-delete)
+nmap <silent> <leader>ad <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> ;sr <Plug>(operator-sandwich-replace)
+nmap <silent> <leader>ar <Plug>(operator-sandwich-replace)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> ;ss <Plug>(operator-sandwich-delete)
+nmap <silent> <leader>as <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-nmap <silent> ;se <Plug>(operator-sandwich-replace)
+nmap <silent> <leader>ae <Plug>(operator-sandwich-replace)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
-nmap ;sa <Plug>(operator-sandwich-add)
-xmap ;sa <Plug>(operator-sandwich-add)
-omap ;sa <Plug>(operator-sandwich-g@)
-xmap ;sd <Plug>(operator-sandwich-delete)
-xmap ;sr <Plug>(operator-sandwich-replace)
+nmap <leader>aa <Plug>(operator-sandwich-add)
+xmap <leader>aa <Plug>(operator-sandwich-add)
+omap <leader>aa <Plug>(operator-sandwich-g@)
+xmap <leader>ad <Plug>(operator-sandwich-delete)
+xmap <leader>ar <Plug>(operator-sandwich-replace)
 
 " omap ib <Plug>(textobj-sandwich-auto-i)
 " xmap ib <Plug>(textobj-sandwich-auto-i)
@@ -443,6 +468,16 @@ augroup END
 
 "ToggleMacroMode {{{
 noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
+"}}}
+
+"subversive {{{
+" nmap ;s <plug>(SubversiveSubstitute)
+" nmap ;ss <plug>(SubversiveSubstituteLine)
+" nmap ;S <plug>(SubversiveSubstituteToEndOfLine)
+
+" nmap ;s <plug>(SubversiveSubstituteRange)
+" xmap ;s <plug>(SubversiveSubstituteRange)
+" nmap ;ss <plug>(SubversiveSubstituteWordRange)
 "}}}
 
 " vim: set fdm=marker:

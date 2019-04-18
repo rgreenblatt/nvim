@@ -30,5 +30,6 @@ set cursorline
 set cursorcolumn
 set noshowmode
 set foldmethod=syntax
+set foldopen+=jump
 
 " vim: set fdm=marker:

@@ -38,7 +38,8 @@
         },
         "scala": {
             "command": "metals",
-            "filetypes": ["scala"]
+            "filetypes": ["scala"],
+            "rootPatterns": ["build.sbt"]
         },
         "bash": {
             "command": "bash-language-server",

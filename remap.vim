@@ -155,7 +155,7 @@ nnoremap <leader>Q :bp\|bd #<CR>
 nnoremap <leader>f gq
 xnoremap <leader>f gq
 
-nnoremap <leader>F gggqG
+nnoremap <leader>F gggqG<c-o>
 
 nnoremap <leader>! :%s/\<<C-r>=expand('<cword>')<CR>\>/
 nnoremap <leader>&: '{,'}s/\<<C-r>=expand('<cword>')<CR>\>/

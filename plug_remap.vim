@@ -459,8 +459,19 @@ nnoremap <silent> ;gs <Cmd>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands
-nnoremap ;gp <Cmd>Git pull<cr>
-nnoremap ;gh <Cmd>Git push<cr>
+function! GitCheckSSH(command)
+  if system("cd ". expand("%:p:h") . 
+        \ "&& git config --get remote.origin.url")[:3] == "git@"
+    echom "ssh"
+    execute "G" . a:command
+  else
+    echom "https"
+    execute "Git " . a:command
+  endif
+endfunction
+
+nnoremap ;gp <Cmd>call GitCheckSSH("pull")<cr>
+nnoremap ;gh <Cmd>call GitCheckSSH("push")<cr>
 
 nnoremap ;gcc <Cmd>Gcommit -v<cr>
 nnoremap ;gca <Cmd>Gcommit -v -a<cr>

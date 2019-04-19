@@ -10,9 +10,6 @@ map <space><space> <leader><leader>
 noremap <BS> -
 nnoremap z<BS> z-
 
-xnoremap ;i :<c-u>'<,'>normal ^i
-xnoremap ;a :<c-u>'<,'>normal $a
-
 noremap <C-r> R
 noremap R <C-r>
 noremap gR g<C-r>
@@ -132,6 +129,9 @@ nnoremap <silent> <leader>q :<c-u>q<CR>
 nnoremap <silent> <leader>A :<c-u>qa<CR>
 nnoremap <silent> <leader>b :<c-u>w<CR>
 nnoremap <silent> <a-d> :<c-u>w<CR> :<c-u>bd<CR>
+
+xnoremap ;i :<c-u>'<,'>normal ^i
+xnoremap ;a :<c-u>'<,'>normal $a
 
 nnoremap <leader>ww <C-w><bar>
 nnoremap <leader>wt <C-w>_

@@ -7,11 +7,17 @@ endfunction
 "}}}
 
 "vista nearestmethod {{{
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+if exists("g:disable_coc")
+  function! NearestMethodOrFunction() abort
+    return ""
+  endfunction
+else
+  function! NearestMethodOrFunction() abort
+    return get(b:, 'vista_nearest_method_or_function', '')
+  endfunction
+  
+  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+endif
 "}}}
 
 "wintabs {{{

@@ -138,8 +138,8 @@ if !exists("g:disable_coc")
 
   nmap <leader>C <Plug>(coc-codeaction)
 
-  nmap <leader>a <Plug>(coc-codeaction-selected)
-  xmap <leader>a <Plug>(coc-codeaction-selected)
+  " nmap <leader>a <Plug>(coc-codeaction-selected)
+  " xmap <leader>a <Plug>(coc-codeaction-selected)
 
   nmap <leader>Z <Plug>(coc-float-jump)
 
@@ -254,9 +254,6 @@ xmap ;R <Plug>NrrwrgnBangDo
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
 "custom operators {{{
-function! SetStartInsert()
-endfunction
-
 xmap ;s <Plug>(substitute-region)
 xmap ;S <Plug>(subvert-region)
 nmap ;s <Plug>(substitute-region)
@@ -272,20 +269,14 @@ xmap ;C <Plug>(subvert-region-c)
 nmap ;c <Plug>(substitute-region-c)
 nmap ;C <Plug>(subvert-region-c)
 
-xmap ;;s <Plug>(substitute-region-exact-exact
-xmap ;;S <Plug>(subvert-region-exact)
+xmap ;;s <Plug>(substitute-region-exact)
 nmap ;;s <Plug>(substitute-region-exact)
-nmap ;;S <Plug>(subvert-region-exact)
 
 xmap ;;r <Plug>(substitute-region-g-exact)
-xmap ;;R <Plug>(subvert-region-g-exact)
 nmap ;;r <Plug>(substitute-region-g-exact)
-nmap ;;R <Plug>(subvert-region-g-exact)
 
 xmap ;;c <Plug>(substitute-region-c-exact)
-xmap ;;C <Plug>(subvert-region-c-exact)
 nmap ;;c <Plug>(substitute-region-c-exact)
-nmap ;;C <Plug>(subvert-region-c-exact)
 
 function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
       \ replace_alter)
@@ -320,6 +311,11 @@ function! SubvertReplaceEscape(str)
   return a:str
 endfunction
 
+function! SubstitutePatternEscapeExact(str)
+  return '\V\C' . '\<' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge') .
+        \ '\>'
+endfunction
+
 call SubstituteRegionMakeMap("substitute-region", "s", "",
       \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
 call SubstituteRegionMakeMap("substitute-region-g", "s", "g",
@@ -332,6 +328,13 @@ call SubstituteRegionMakeMap("subvert-region-g", "S", "g",
       \ "SubvertPatternEscape", "SubvertReplaceEscape")
 call SubstituteRegionMakeMap("subvert-region-c", "S", "c",
       \ "SubvertPatternEscape", "SubvertReplaceEscape")
+
+call SubstituteRegionMakeMap("substitute-region-exact", "s", "",
+      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("substitute-region-g-exact", "s", "g",
+      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("substitute-region-c-exact", "s", "c",
+      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
 
 function! GetVisCommand(line_dif)
   if a:line_dif
@@ -346,7 +349,6 @@ xmap <silent> <Plug>(substitute-region-visual-finish)
       \ GetVisCommand(line("'>") - line("'<"))<cr>
 
 function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter)
-  let cursor = getcurpos()
   let g:to_sub = eval("@" . v:register)
   let g:substitute_region_start_insert = getpos("'[")
   let g:substitute_region_end_insert = getpos("']")
@@ -364,8 +366,6 @@ function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter)
   let g:substitute_region_command = a:command
   let g:substitute_region_flags = a:flags
   silent! call repeat#set("\<Plug>(operator-substitute-region)", v:count)
-
-  call setpos('.', cursor)
 endfunction
 
 call operator#user#define('substitute-region', 'SubstituteRegion')

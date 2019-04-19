@@ -227,6 +227,6 @@ let g:polyglot_disabled = ['latex']
 let g:no_csv_maps = 1
 "}}}
 
-let g:YUNOcommit_after = 20
+let g:YUNOcommit_after = 2000
 
 " vim: set fdm=marker:

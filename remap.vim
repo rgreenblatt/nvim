@@ -10,8 +10,8 @@ map <space><space> <leader><leader>
 noremap <BS> -
 nnoremap z<BS> z-
 
-xnoremap <leader>i :<c-u>'<,'>normal ^i
-xnoremap <leader>a :<c-u>'<,'>normal $a
+xnoremap ;i :<c-u>'<,'>normal ^i
+xnoremap ;a :<c-u>'<,'>normal $a
 
 noremap <C-r> R
 noremap R <C-r>

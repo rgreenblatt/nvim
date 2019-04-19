@@ -70,8 +70,8 @@ nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
 xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
 "}}}
 
-"coc remaps {{{
 if !exists("g:disable_coc")
+  "coc remaps {{{
   " use <tab> for trigger completion and navigate to next complete item
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -154,14 +154,14 @@ if !exists("g:disable_coc")
       call CocAction('doHover')
     endif
   endfunction
-endif
-"}}}
+  "}}}
 
-"vista {{{
-call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
-      \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
-nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
-"}}}
+  "vista {{{
+  call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
+        \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
+  nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
+  "}}}
+endif
 
 "vimtex {{{
 nmap  <leader>xi   <plug>(vimtex-info)

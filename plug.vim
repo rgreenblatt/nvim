@@ -19,9 +19,9 @@ endif
 " Plug 'dansomething/vim-eclim'
 if !exists("g:disable_coc")
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'liuchengxu/vista.vim'
 endif
 Plug 'makerj/vim-pdf'
-Plug 'liuchengxu/vista.vim'
 Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'Chiel92/vim-autoformat'

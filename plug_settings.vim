@@ -21,8 +21,8 @@ let g:clever_f_timeout_ms = 3000
 
 let g:wordmotion_prefix = ';'
 
-"coc {{{
 if !exists("g:disable_coc")
+  "coc {{{
   let g:coc_global_extensions = [
         \ 'coc-word',
         \ 'coc-tag',
@@ -47,8 +47,13 @@ if !exists("g:disable_coc")
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
+  "}}}
+
+
+  "vista {{{
+  let g:vista_fzf_preview = ['right:50%']
+  "}}}
 endif
-"}}}
 
 "startify {{{
 let g:startify_files_number = 5
@@ -89,10 +94,6 @@ let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
-"}}}
-
-"vista {{{
-let g:vista_fzf_preview = ['right:50%']
 "}}}
 
 "semshi {{{

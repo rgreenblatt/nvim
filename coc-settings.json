@@ -1,61 +1,61 @@
 {
-    "suggest.echodocSupport": true,
-    "suggest.maxCompleteItemCount": 20,
-    "coc.preferences.formatOnType": true,
-    "python.jediEnabled": false,
-    "suggest.completionItemKindLabels": {
-        "function": "\uf794",
-        "method": "\uf6a6",
-        "variable": "\uf71b",
-        "constant": "\uf8ff",
-        "struct": "\ufb44",
-        "class": "\uf0e8",
-        "interface": "\ufa52",
-        "text": "\ue612",
-        "enum": "\uf435",
-        "enumMember": "\uf02b",
-        "module": "\uf668",
-        "color": "\ue22b",
-        "property": "\ufab6",
-        "field": "\uf93d",
-        "unit": "\uf475",
-        "file": "\uf471",
-        "value": "\uf8a3",
-        "event": "\ufacd",
-        "folder": "\uf115",
-        "keyword": "\uf893",
-        "snippet": "\uf64d",
-        "operator": "\uf915",
-        "reference": "\uf87a",
-        "typeParameter": "\uf278",
-        "default": "\uf29c"
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "coc.preferences.formatOnType": true,
+  "python.jediEnabled": false,
+  "suggest.completionItemKindLabels": {
+    "function": "\uf794",
+    "method": "\uf6a6",
+    "variable": "\uf71b",
+    "constant": "\uf8ff",
+    "struct": "\ufb44",
+    "class": "\uf0e8",
+    "interface": "\ufa52",
+    "text": "\ue612",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "module": "\uf668",
+    "color": "\ue22b",
+    "property": "\ufab6",
+    "field": "\uf93d",
+    "unit": "\uf475",
+    "file": "\uf471",
+    "value": "\uf8a3",
+    "event": "\ufacd",
+    "folder": "\uf115",
+    "keyword": "\uf893",
+    "snippet": "\uf64d",
+    "operator": "\uf915",
+    "reference": "\uf87a",
+    "typeParameter": "\uf278",
+    "default": "\uf29c"
+  },
+  "languageserver": {
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
     },
-    "languageserver": {
-        "dockerfile": {
-            "command": "docker-langserver",
-            "filetypes": ["dockerfile"],
-            "args": ["--stdio"]
-        },
-        "scala": {
-            "command": "metals",
-            "filetypes": ["scala"],
-            "rootPatterns": ["build.sbt"]
-        },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
-        },
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                }
-            }
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala", "sbt"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
         }
+      }
     }
+  }
 }

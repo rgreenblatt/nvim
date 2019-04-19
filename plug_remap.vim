@@ -4,11 +4,11 @@ if exists("g:disable_coc")
   nmap <S-TAB> <Plug>EnhancedJumpsNewer
 else
   nmap <silent><expr> <TAB>
-        \ coc#expandableOrJumpable() ? 
+        \ coc#expandableOrJumpable() ?
         \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
         \ "\<Plug>EnhancedJumpsOlder"
   nmap <silent><expr> <S-TAB>
-        \ coc#expandableOrJumpable() ? 
+        \ coc#expandableOrJumpable() ?
         \ coc#rpc#request('snippetPrev', []) :
         \ "\<Plug>EnhancedJumpsNewer"
 endif
@@ -80,7 +80,7 @@ if !exists("g:disable_coc")
 
   inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
-        \ coc#expandableOrJumpable() ? 
+        \ coc#expandableOrJumpable() ?
         \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
         \ <SID>check_back_space() ? "\<TAB>" :
         \ coc#refresh()
@@ -105,7 +105,7 @@ if !exists("g:disable_coc")
   imap <C-s> <Plug>(coc-snippets-expand)
 
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+        \: "\<CR>"
 
   nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
   nnoremap <leader>R <Cmd>CocCommand python.execInTerminal<cr>
@@ -236,11 +236,11 @@ nmap ;N <Plug>(miniyank-cycleback)
 
 " vimade {{{
 "  nnoremap <silent> ;vt <Cmd>VimadeToggle<cr>
-"  nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ? 
-"        \ "<Cmd>VimadeBufEnable<cr>" : 
-"        \"<Cmd>VimadeBufDisable<cr>" 
-"  nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ? 
-"        \ "<Cmd>VimadeWinEnable<cr>" : "<Cmd>VimadeWinDisable<cr>" 
+"  nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ?
+"        \ "<Cmd>VimadeBufEnable<cr>" :
+"        \"<Cmd>VimadeBufDisable<cr>"
+"  nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ?
+"        \ "<Cmd>VimadeWinEnable<cr>" : "<Cmd>VimadeWinDisable<cr>"
 " }}}
 
 "NarrowRegion {{{
@@ -254,28 +254,153 @@ xmap ;R <Plug>NrrwrgnBangDo
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
 "custom operators {{{
-nmap ;s  <Plug>(operator-substitute)
-call operator#user#define('substitute', 'Op_substitute_region')
-function! Op_substitute_region(window_heightmotion_wiseness)
-  let reg = operator#user#register()
-  let to_sub=eval("@".reg)
-  let orig_reg=@@
-  let start=getpos("'[")
-  let end=getpos("']")
-  execute "normal! msi\<c-r>. \<esc>d`s"
-  let to_rep=@@
-  echom to_rep
-  normal! x
-  let @@=to_rep
-  echom to_rep
-  echom orig_reg
-  call setpos("'[", start)
-  call setpos("']", end)
-  let to_exec = "normal! '[,']s/".to_sub."/\<c-r>\"\<cr>"
-  echom to_exec
-  execute to_exec
-  let @@=orig_reg
+function! SetStartInsert()
 endfunction
+
+xmap ;s <Plug>(substitute-region)
+xmap ;S <Plug>(subvert-region)
+nmap ;s <Plug>(substitute-region)
+nmap ;S <Plug>(subvert-region)
+
+xmap ;r <Plug>(substitute-region-g)
+xmap ;R <Plug>(subvert-region-g)
+nmap ;r <Plug>(substitute-region-g)
+nmap ;R <Plug>(subvert-region-g)
+
+xmap ;c <Plug>(substitute-region-c)
+xmap ;C <Plug>(subvert-region-c)
+nmap ;c <Plug>(substitute-region-c)
+nmap ;C <Plug>(subvert-region-c)
+
+xmap ;;s <Plug>(substitute-region-exact-exact
+xmap ;;S <Plug>(subvert-region-exact)
+nmap ;;s <Plug>(substitute-region-exact)
+nmap ;;S <Plug>(subvert-region-exact)
+
+xmap ;;r <Plug>(substitute-region-g-exact)
+xmap ;;R <Plug>(subvert-region-g-exact)
+nmap ;;r <Plug>(substitute-region-g-exact)
+nmap ;;R <Plug>(subvert-region-g-exact)
+
+xmap ;;c <Plug>(substitute-region-c-exact)
+xmap ;;C <Plug>(subvert-region-c-exact)
+nmap ;;c <Plug>(substitute-region-c-exact)
+nmap ;;C <Plug>(subvert-region-c-exact)
+
+function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
+      \ replace_alter)
+  let start_map = "map <silent> <Plug>(" . a:plug_name .
+        \ ") <Cmd>call SubstituteRegionSetup('" . a:command .
+        \ "', '".  a:flags . "', '" . a:pattern_alter . "', '" .
+        \ a:replace_alter .  "')<cr>"
+  let start_xmap = "x" . start_map
+  let start_nmap = "n" . start_map
+  let end_xmap = "<Plug>(substitute-region-visual-finish)"
+  let end_nmap = "."
+  execute start_xmap . end_xmap
+  execute start_nmap . end_nmap
+endfunction
+
+"source:
+"https://stackoverflow.com/questions/53498121/all-the-special-characters-that-need-escaping-in-vim-pattern-searching-replacmen
+function! SubstitutePatternEscape(str)
+  return '\V\C' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
+endfunction
+
+function! SubstituteReplaceEscape(str)
+  return escape(a:str, '/\' . (&magic ? '&~' : ''))
+endfunction
+
+"note, { and } can't be effectively escaped for subvert...
+function! SubvertPatternEscape(str)
+  return substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
+endfunction
+
+function! SubvertReplaceEscape(str)
+  return a:str
+endfunction
+
+call SubstituteRegionMakeMap("substitute-region", "s", "",
+      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("substitute-region-g", "s", "g",
+      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("substitute-region-c", "s", "c",
+      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region", "S", "",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region-g", "S", "g",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region-c", "S", "c",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+
+function! GetVisCommand(line_dif)
+  if a:line_dif
+    return string(a:line_dif) . "j"
+  else
+    return "l"
+  endif
+endfunction
+
+xmap <silent> <Plug>(substitute-region-visual-finish)
+      \ <esc>'<<Cmd>execute "normal .".
+      \ GetVisCommand(line("'>") - line("'<"))<cr>
+
+function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter)
+  let cursor = getcurpos()
+  let g:to_sub = eval("@" . v:register)
+  let g:substitute_region_start_insert = getpos("'[")
+  let g:substitute_region_end_insert = getpos("']")
+  let g:replace_alter = a:replace_alter
+  let g:pattern_alter = a:pattern_alter
+  "do nothing change required for some reason
+  let cur_mode = mode()
+  let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == ""
+
+  if !is_visual
+    silent execute "normal! ia\<bs>\<esc>"
+  endif
+
+  let g:substitute_region_is_first = 1
+  let g:substitute_region_command = a:command
+  let g:substitute_region_flags = a:flags
+  silent! call repeat#set("\<Plug>(operator-substitute-region)", v:count)
+
+  call setpos('.', cursor)
+endfunction
+
+call operator#user#define('substitute-region', 'SubstituteRegion')
+
+function! SubstituteRegion(_)
+  let cursor = getcurpos()
+  let orig_reg_s = @s
+  let orig_reg_n = @n
+  let start = getpos("'[")
+  let end = getpos("']")
+  if g:substitute_region_is_first
+    if @. != ""
+      call setpos("'[", g:substitute_region_start_insert)
+      call setpos("']", g:substitute_region_end_insert)
+      silent execute "normal! `[\"sy`]"
+      let g:saved_s_reg = function(g:replace_alter)(@s)
+      call setpos("'[", start)
+      call setpos("']", end)
+    else
+      let g:saved_s_reg = ""
+    endif
+    call feedkeys("2u", 'ni')
+  endif
+  let to_feed = "\<Cmd>call setpos(\"'[\", ". string(start) . ")\<cr>" .
+        \ "\<Cmd>call setpos(\"']\", ". string(end) . ")\<cr>" .
+        \ ":'[,']" .
+        \ g:substitute_region_command . "/" .
+        \ function(g:pattern_alter)(g:to_sub) .
+        \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags. "\<cr>"
+        \ "\<Cmd>normal! '[\<cr>" .
+        \ "\<Cmd>let @n = '" . orig_reg_n . "\<cr>'" .
+        \ "\<Cmd>let @s = '" . orig_reg_s . "'\<cr>"
+  call feedkeys(to_feed, 'n')
+  let g:substitute_region_is_first = 0
+endfunctio
 
 nmap ;;v  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
@@ -361,15 +486,15 @@ nnoremap <silent> ;o <Cmd>SidewaysRight<cr>
 let g:nvimgdb_disable_start_keymaps = 1
 
 nnoremap ;dp :<c-u>SetDebugPath<space>
-nnoremap <expr> ;dsg exists('g:debug_path') ? 
-      \'<Cmd>GdbStart gdb -q<space>'.expand(g:debug_path).'<cr>' : 
+nnoremap <expr> ;dsg exists('g:debug_path') ?
+      \'<Cmd>GdbStart gdb -q<space>' . expand(g:debug_path) . '<cr>' :
       \':<c-u>GdbStart gdb -q<space>'
-nnoremap <expr> ;dsl exists('g:debug_path') ? 
-      \'<Cmd>GdbStartLLDB lldb <space>'.expand(g:debug_path).'<cr>' : 
+nnoremap <expr> ;dsl exists('g:debug_path') ?
+      \'<Cmd>GdbStartLLDB lldb <space>' . expand(g:debug_path) . '<cr>' :
       \':<c-u>GdbStartLLDB lldb<space>'
-nnoremap <expr> ;dsp exists('g:debug_path') ? 
-      \'<Cmd>GdbStartPDB python -m pdb <space>'.expand(g:debug_path).'<cr>' : 
-      \':<c-u>GdbStartPDB python -m pdb<space>'
+nnoremap <expr> ;dsp exists('g:debug_path') ?
+      \'<Cmd>GdbStartPDB python -m pdb <space>' . expand(g:debug_path) .
+      \ '<cr>' : ':<c-u>GdbStartPDB python -m pdb<space>'
 nnoremap ;dq <Cmd>GdbDebugStop<cr>
 nnoremap ;dr <Cmd>GdbBreakpointClearAll<cr>
 nnoremap ;di <Cmd>GdbInterrupt<cr>

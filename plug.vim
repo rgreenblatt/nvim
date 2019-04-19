@@ -125,6 +125,7 @@ Plug 'esneider/YUNOcommit.vim'
 Plug 'kshenoy/vim-signature'
 
 Plug 'svermeulen/vim-subversive'
+Plug 'vim-scripts/vis'
 "}}}
 call plug#end()
 filetype plugin indent on

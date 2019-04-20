@@ -270,13 +270,19 @@ nmap ;c <Plug>(substitute-region-c)
 nmap ;C <Plug>(subvert-region-c)
 
 xmap ;;s <Plug>(substitute-region-exact)
+xmap ;;S <Plug>(subvert-region-exact)
 nmap ;;s <Plug>(substitute-region-exact)
+nmap ;;S <Plug>(subvert-region-exact)
 
 xmap ;;r <Plug>(substitute-region-g-exact)
+xmap ;;R <Plug>(subvert-region-g-exact)
 nmap ;;r <Plug>(substitute-region-g-exact)
+nmap ;;R <Plug>(subvert-region-g-exact)
 
 xmap ;;c <Plug>(substitute-region-c-exact)
+xmap ;;C <Plug>(subvert-region-c-exact)
 nmap ;;c <Plug>(substitute-region-c-exact)
+nmap ;;C <Plug>(subvert-region-c-exact)
 
 function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
       \ replace_alter)
@@ -335,6 +341,13 @@ call SubstituteRegionMakeMap("substitute-region-g-exact", "s", "g",
       \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
 call SubstituteRegionMakeMap("substitute-region-c-exact", "s", "c",
       \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region-exact", "S", "w",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region-g-exact", "S", "gw",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+call SubstituteRegionMakeMap("subvert-region-c-exact", "S", "cw",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+
 
 function! GetVisCommand(line_dif)
   if a:line_dif
@@ -459,7 +472,7 @@ nnoremap <silent> ;gs <Cmd>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands
-function! GitCheckSSH(command)
+function! BitCheckSSH(command)
   if system("cd ". expand("%:p:h") . 
         \ "&& git config --get remote.origin.url")[:3] == "git@"
     echom "ssh"
@@ -603,17 +616,40 @@ augroup END
 "}}}
 
 "ToggleMacroMode {{{
+
+function! EnterMacroMode()
+  let g:clever_f_mark_cursor = 0
+  let g:clever_f_mark_char = 0
+  let g:qs_enable = 0
+  let g:macro_mode= 1
+  HighlightedyankOff
+endfunction
+
+command! -nargs=0 EnterMacroMode call EnterMacroMode()
+
+function! ExitMacroMode()
+  let g:clever_f_mark_cursor = 1
+  let g:clever_f_mark_char = 1
+  let g:qs_enable = 1
+  let g:macro_mode= 0
+  HighlightedyankOn
+endfunction
+
+command! -nargs=0 ExitMacroMode call ExitMacroMode()
+
+let g:macro_mode= 0
+
+function! ToggleMacroMode()
+  if g:macro_mode == 1
+    ExitMacroMode
+  else
+    EnterMacroMode
+  endif
+endfunction
+
+command! -nargs=0 ToggleMacroMode call ToggleMacroMode()
+
 noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
-"}}}
-
-"subversive {{{
-" nmap ;s <plug>(SubversiveSubstitute)
-" nmap ;ss <plug>(SubversiveSubstituteLine)
-" nmap ;S <plug>(SubversiveSubstituteToEndOfLine)
-
-" nmap ;s <plug>(SubversiveSubstituteRange)
-" xmap ;s <plug>(SubversiveSubstituteRange)
-" nmap ;ss <plug>(SubversiveSubstituteWordRange)
 "}}}
 
 " vim: set fdm=marker:

@@ -37,39 +37,6 @@ endfunction
 command! -nargs=0 GlobalSharedTerm call s:GlobalSharedTerm()
 "}}}
 
-"macro mode toggle {{{
-function! EnterMacroMode()
-  let g:clever_f_mark_cursor = 0
-  let g:clever_f_mark_char = 0
-  let g:qs_enable = 0
-  let g:macro_mode= 1
-endfunction
-
-command! -nargs=0 EnterMacroMode call EnterMacroMode()
-
-function! ExitMacroMode()
-  let g:clever_f_mark_cursor = 1
-  let g:clever_f_mark_char = 1
-  let g:qs_enable = 1
-  let g:macro_mode= 0
-endfunction
-
-command! -nargs=0 ExitMacroMode call ExitMacroMode()
-
-let g:macro_mode= 0
-
-function! ToggleMacroMode()
-  if g:macro_mode == 1
-    ExitMacroMode
-  else
-    EnterMacroMode
-  endif
-endfunction
-
-command! -nargs=0 ToggleMacroMode call ToggleMacroMode()
-
-"}}}
-
 "timing commands {{{
 " Times the number of times a particular command takes to execute the
 " specified number of times (in seconds).

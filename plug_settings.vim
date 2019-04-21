@@ -174,26 +174,7 @@ omap S <Plug>Sneak_S
 "}}}
 
 "floating fzf window {{{
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
-
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  let col = float2nr((&columns - width) / 2)
-
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': 1,
-        \ 'col': col,
-        \ 'width': width,
-        \ 'height': height
-        \ }
-
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+let g:fzf_layout = { 'window': 'call FloatingBuffer()' }
 "}}}
 
 "rainbow parens {{{
@@ -238,5 +219,28 @@ let g:scratch_autohide = 0
 let g:YUNOcommit_after = 2000
 
 let g:dispatch_no_maps = 1
+
+"dirvish {{{
+function! DirvishSetup()
+  "This assumes it is sorted with hidden at bottom which should be true
+  let hidden_pattern = '\(\/\.\)\@<=\(.*\/.\)\@!'
+  let line_first_hidden = search(hidden_pattern)
+  if line_first_hidden
+    let sort_dirs = 'sort ,^.*[\/],'
+    execute string(line_first_hidden) . ',$' . sort_dirs
+    if line_first_hidden > 1
+      execute '1,' . string(line_first_hidden - 1) . sort_dirs
+    endif
+  else
+    sort ,^.*[\/],
+  endif
+  execute 'setlocal foldexpr=' . escape("match(getline(v:lnum), '" . 
+        \ hidden_pattern . "') != -1", ' \')
+  setlocal foldmethod=expr
+  setlocal foldtext=\"hidden\ files\"
+endfunction
+
+let g:dirvish_mode = 'call DirvishSetup()'
+"}}}
 
 " vim: set fdm=marker:

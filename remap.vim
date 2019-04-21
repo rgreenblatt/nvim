@@ -55,13 +55,14 @@ nnoremap <c-f> ms[s1z=`s
 function! FloatingBuffer()
   let buf = nvim_create_buf(v:false, v:true)
 
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
+  "full size
+  let height = &lines - 1 - &cmdheight
+  let width = &columns
   let col = float2nr((&columns - width) / 2)
 
   let opts = {
         \ 'relative': 'editor',
-        \ 'row': 1,
+        \ 'row': 0,
         \ 'col': col,
         \ 'width': width,
         \ 'height': height

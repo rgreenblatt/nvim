@@ -233,6 +233,10 @@ let g:sqs_enable = 1
 nnoremap ;vs <plug>(SneakQuickScopeToggle) 
 "}}}
 
+let g:scratch_autohide = 0
+
 let g:YUNOcommit_after = 2000
+
+let g:dispatch_no_maps = 1
 
 " vim: set fdm=marker:

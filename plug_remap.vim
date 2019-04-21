@@ -33,9 +33,11 @@ call MapWinCmd("c", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
 call MapWinCmd("f", "Files")
 call MapWinCmd("F", "Files ", 1)
 call MapWinCmd("g", "GFiles")
-call MapWinCmd("G", "GFiles", 1)
-call MapWinCmd("r", "Rg", 1)
-call MapWinCmd("R", "Rg ")
+call MapWinCmd("G", "GFiles ", 1)
+call MapWinCmd("R", "Rg")
+call MapWinCmd("r", "Rg ", 1)
+call MapWinCmd("I", "RgHidden")
+call MapWinCmd("i", "RgHidden ", 1)
 call MapWinCmd("l", "BLines")
 call MapWinCmd("L", "Lines")
 call MapWinCmd(";t", "Tags")
@@ -46,6 +48,12 @@ call MapWinCmd("q", "Commits")
 call MapWinCmd("Q", "BCommits")
 call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
+call MapWinCmd("B", "Wipeouts")
+
+command! -bang -nargs=* RgHidden 
+      \ call fzf#vim#grep("rg --column --line-number --no-heading " .
+      \ "--color=always --smart-case --hidden --no-ignore-vcs " . 
+      \ shellescape(<q-args>), 1, <bang>0)
 
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>

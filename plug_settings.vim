@@ -228,6 +228,11 @@ let g:polyglot_disabled = ['latex']
 let g:no_csv_maps = 1
 "}}}
 
+"sneak quick scope {{{
+let g:sqs_enable = 1
+nnoremap ;vs <plug>(SneakQuickScopeToggle) 
+"}}}
+
 let g:YUNOcommit_after = 2000
 
 " vim: set fdm=marker:

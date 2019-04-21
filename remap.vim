@@ -157,16 +157,13 @@ xnoremap <leader>f gq
 
 nnoremap <leader>F gggqG<c-o>
 
-nnoremap <leader>! :%s/\<<C-r>=expand('<cword>')<CR>\>/
-nnoremap <leader>& :'{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
-xnoremap <leader>! y:%s/<C-r>"/
-xnoremap <leader>& y:'{,'}s/<C-r>"/
-
-nnoremap <a-p> :<c-u>pwd<cr>
-nnoremap <a-r> :<c-u>registers<cr>
-nnoremap <a-c> :<c-u>changes<cr>
+nnoremap <a-p> <Cmd>pwd<cr>
+nnoremap <a-r> <Cmd>registers<cr>
+nnoremap <a-c> <Cmd>changes<cr>
 nnoremap <a-z> :<c-u>help<space>
-nnoremap <a-s> :<c-u>source %<cr>
+nnoremap <a-s> <Cmd>source %<cr>
+
+nnoremap <a-o> <Cmd>:s/\C<cr>
 "}}}
 
 "navigate indents {{{
@@ -225,8 +222,8 @@ call MapWinCmd("e", " ", 1)
 "arrow key window resize {{{
 noremap <up>    <C-W>+
 noremap <down>  <C-W>-
-noremap <left>  3<C-W><
-noremap <right> 3<C-W>>
+noremap <left>  3<C-W>>
+noremap <right> 3<C-W><
 "}}}
 
 "insert word of the line above/below {{{
@@ -241,7 +238,7 @@ inoremap <C-E> <C-C>:let @z = @"<CR>mz
 
 "}}}
 
-"select last inserted text {{{
+"select last inserted/yank/etc text {{{
 nnoremap gV `[v`]h
 "}}}
 

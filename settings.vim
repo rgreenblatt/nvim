@@ -21,7 +21,7 @@ set ignorecase
 set smartcase
 set hidden
 set cmdheight=3
-set updatetime=300
+set updatetime=100
 set shortmess+=c
 set signcolumn=yes
 set autowrite

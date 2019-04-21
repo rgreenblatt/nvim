@@ -148,7 +148,7 @@ if !exists("g:disable_coc")
   xnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
 
   function! s:show_documentation()
-    if &filetype == 'vim'
+    if &filetype == 'vim' || &filetype == 'help'
       execute 'h '.expand('<cword>')
     else
       call CocAction('doHover')
@@ -284,12 +284,20 @@ xmap ;;C <Plug>(subvert-region-c-exact)
 nmap ;;c <Plug>(substitute-region-c-exact)
 nmap ;;C <Plug>(subvert-region-c-exact)
 
+xmap ;z <Plug>(substitute-region-edit)
+xmap ;Z <Plug>(subvert-region-edit)
+nmap ;z <Plug>(substitute-region-edit)
+nmap ;Z <Plug>(subvert-region-edit)
+
 function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
-      \ replace_alter)
+      \ replace_alter, ...)
+
+  let edit_flags = a:0 && a:1
+
   let start_map = "map <silent> <Plug>(" . a:plug_name .
         \ ") <Cmd>call SubstituteRegionSetup('" . a:command .
         \ "', '".  a:flags . "', '" . a:pattern_alter . "', '" .
-        \ a:replace_alter .  "')<cr>"
+        \ a:replace_alter .  "', '" . edit_flags . "')<cr>"
   let start_xmap = "x" . start_map
   let start_nmap = "n" . start_map
   let end_xmap = "<Plug>(substitute-region-visual-finish)"
@@ -349,6 +357,11 @@ call SubstituteRegionMakeMap("subvert-region-c-exact", "S", "cw",
       \ "SubvertPatternEscape", "SubvertReplaceEscape")
 
 
+call SubstituteRegionMakeMap("substitute-region-edit", "s", "",
+      \ "SubstitutePatternEscape", "SubstituteReplaceEscape", 1)
+call SubstituteRegionMakeMap("subvert-region-edit", "S", "",
+      \ "SubvertPatternEscape", "SubvertReplaceEscape", 1)
+
 function! GetVisCommand(line_dif)
   if a:line_dif
     return string(a:line_dif) . "j"
@@ -361,7 +374,8 @@ xmap <silent> <Plug>(substitute-region-visual-finish)
       \ <esc>'<<Cmd>execute "normal .".
       \ GetVisCommand(line("'>") - line("'<"))<cr>
 
-function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter)
+function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter, 
+      \ edit_flags)
   let g:to_sub = eval("@" . v:register)
   let g:substitute_region_start_insert = getpos("'[")
   let g:substitute_region_end_insert = getpos("']")
@@ -370,6 +384,7 @@ function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter)
   "do nothing change required for some reason
   let cur_mode = mode()
   let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == ""
+  let g:substitute_region_edit_flags = a:edit_flags
 
   if !is_visual
     silent execute "normal! ia\<bs>\<esc>"
@@ -385,8 +400,7 @@ call operator#user#define('substitute-region', 'SubstituteRegion')
 
 function! SubstituteRegion(_)
   let cursor = getcurpos()
-  let orig_reg_s = @s
-  let orig_reg_n = @n
+  let g:substitute_region_orig_s = @s
   let start = getpos("'[")
   let end = getpos("']")
   if g:substitute_region_is_first
@@ -407,13 +421,19 @@ function! SubstituteRegion(_)
         \ ":'[,']" .
         \ g:substitute_region_command . "/" .
         \ function(g:pattern_alter)(g:to_sub) .
-        \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags. "\<cr>"
-        \ "\<Cmd>normal! '[\<cr>" .
-        \ "\<Cmd>let @n = '" . orig_reg_n . "\<cr>'" .
-        \ "\<Cmd>let @s = '" . orig_reg_s . "'\<cr>"
+        \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags
+
+  let to_feed_suffix = " | normal! '[ | let @s = g:substitute_region_orig_s"
+  let to_feed .= to_feed_suffix
+
+  if g:substitute_region_edit_flags
+    let to_feed .= repeat("\<left>", len(to_feed_suffix))
+  else
+    let to_feed .= "\<cr>"
+  endif
   call feedkeys(to_feed, 'n')
   let g:substitute_region_is_first = 0
-endfunctio
+endfunction
 
 nmap ;;v  <Plug>(operator-select)
 call operator#user#define('select', 'Op_select_region')
@@ -472,7 +492,7 @@ nnoremap <silent> ;gs <Cmd>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands
-function! BitCheckSSH(command)
+function! GitCheckSSH(command)
   if system("cd ". expand("%:p:h") . 
         \ "&& git config --get remote.origin.url")[:3] == "git@"
     echom "ssh"
@@ -616,11 +636,11 @@ augroup END
 "}}}
 
 "ToggleMacroMode {{{
-
 function! EnterMacroMode()
   let g:clever_f_mark_cursor = 0
   let g:clever_f_mark_char = 0
   let g:qs_enable = 0
+  let g:sqs_enable = 0
   let g:macro_mode= 1
   HighlightedyankOff
 endfunction
@@ -631,6 +651,7 @@ function! ExitMacroMode()
   let g:clever_f_mark_cursor = 1
   let g:clever_f_mark_char = 1
   let g:qs_enable = 1
+  let g:sqs_enable = 1
   let g:macro_mode= 0
   HighlightedyankOn
 endfunction

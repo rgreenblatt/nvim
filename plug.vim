@@ -92,7 +92,7 @@ Plug 'mhinz/vim-startify'
 Plug 'rgreenblatt/vim-wintabs'
 " Plug 'vim-scripts/restore_view.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+Plug 'rgreenblatt/fzf.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'justinmk/vim-dirvish'
 "}}}

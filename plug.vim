@@ -95,6 +95,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'rgreenblatt/fzf.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
 "}}}
 
 "integrations {{{

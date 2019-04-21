@@ -9,7 +9,7 @@ if !exists("g:headless")
 endif
 "}}}
 
-"language integration {{{
+"languages {{{
 " Plug 'dansomething/vim-eclim'
 if !exists("g:disable_coc")
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
@@ -113,6 +113,7 @@ Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'neomutt/neomutt.vim'
 Plug 'mhinz/vim-signify'
 Plug 'lambdalisue/suda.vim'
+Plug 'vhdirk/vim-cmake'
 "}}}
 
 "misc {{{

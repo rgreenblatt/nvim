@@ -6,20 +6,6 @@ function! MyFiletype()
 endfunction
 "}}}
 
-"vista nearestmethod {{{
-if exists("g:disable_coc")
-  function! NearestMethodOrFunction() abort
-    return ""
-  endfunction
-else
-  function! NearestMethodOrFunction() abort
-    return get(b:, 'vista_nearest_method_or_function', '')
-  endfunction
-  
-  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-endif
-"}}}
-
 "wintabs {{{
 function! WinTabBefore() abort
   return "%{wintabs#get_tablist(0)}"
@@ -59,7 +45,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'percent' ],
-      \             [ 'nearestmethod', 'cocstatus', 'gitstatus',
+      \             [ 'cocstatus', 'gitstatus',
       \               'readonly', 'macromode' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
@@ -67,14 +53,13 @@ let g:lightline = {
       \               'wintab_before' ] ],
       \ },
       \ 'inactive': {
-      \   'left': [ [ 'percent' , 'nearestmethod', 'gitstatus'] ],
+      \   'left': [ [ 'percent', 'gitstatus'] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
       \              [ 'wintab_after', 'wintab_current', 
       \               'wintab_before' ] ],
       \ },
       \ 'component_function': {
-      \   'nearestmethod': 'NearestMethodOrFunction',
       \   'cocstatus': 'coc#status',
       \   'gitstatus': 'FugitiveStatusline',
       \   'filetype': 'MyFiletype'

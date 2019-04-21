@@ -374,7 +374,7 @@ xmap <silent> <Plug>(substitute-region-visual-finish)
       \ <esc>'<<Cmd>execute "normal .".
       \ GetVisCommand(line("'>") - line("'<"))<cr>
 
-function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter, 
+function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter,
       \ edit_flags)
   let g:to_sub = eval("@" . v:register)
   let g:substitute_region_start_insert = getpos("'[")
@@ -493,7 +493,7 @@ nnoremap ;gd :<c-u>Gvdiff<space>
 
 "when bug gets fixed, switch back to builtin commands
 function! GitCheckSSH(command)
-  if system("cd ". expand("%:p:h") . 
+  if system("cd ". expand("%:p:h") .
         \ "&& git config --get remote.origin.url")[:3] == "git@"
     echom "ssh"
     execute "G" . a:command

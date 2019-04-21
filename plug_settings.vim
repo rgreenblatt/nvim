@@ -230,7 +230,7 @@ let g:no_csv_maps = 1
 
 "sneak quick scope {{{
 let g:sqs_enable = 1
-nnoremap ;vs <plug>(SneakQuickScopeToggle) 
+nmap ;vs <plug>(SneakQuickScopeToggle)
 "}}}
 
 let g:scratch_autohide = 0

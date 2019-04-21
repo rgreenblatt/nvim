@@ -221,6 +221,16 @@ let g:YUNOcommit_after = 2000
 let g:dispatch_no_maps = 1
 
 "dirvish {{{
+function! DirvishFoldHiddenText()
+  let names = []
+  let i = v:foldstart
+  while i <= v:foldend
+    call add(names, matchlist(getline(i), '\/\(\(.*\/.\)\@!.*$\)')[1])
+    let i += 1
+  endwhile
+  return join(names, " ")
+endfunction
+
 function! DirvishSetup()
   "This assumes it is sorted with hidden at bottom which should be true
   let hidden_pattern = '\(\/\.\)\@<=\(.*\/.\)\@!'
@@ -237,7 +247,7 @@ function! DirvishSetup()
   execute 'setlocal foldexpr=' . escape("match(getline(v:lnum), '" . 
         \ hidden_pattern . "') != -1", ' \')
   setlocal foldmethod=expr
-  setlocal foldtext=\"hidden\ files\"
+  setlocal foldtext=DirvishFoldHiddenText()
 endfunction
 
 let g:dirvish_mode = 'call DirvishSetup()'

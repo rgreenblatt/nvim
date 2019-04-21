@@ -7,15 +7,15 @@ endfunction
 "}}}
 
 "wintabs {{{
-function! WinTabBefore() abort
+function! WinTabBefore()
   return "%{wintabs#get_tablist(0)}"
 endfunction
 
-function! WinTabCurrent() abort
+function! WinTabCurrent()
   return "%{wintabs#get_tablist(1)}"
 endfunction
 
-function! WinTabAfter() abort
+function! WinTabAfter()
   return "%{wintabs#get_tablist(2)}"
 endfunction
 
@@ -35,8 +35,22 @@ function! MacroModeInfo()
     return ""
   endif
 endfunction
+"}}}
 
-set statusline+=%{()}
+"short pwd {{{
+"requires shell script
+function! ShortPwd()
+  let out = substitute(system("cd ". getcwd() . " && short_pwd"), "\n", "", "")
+  if v:shell_error
+    return "error"
+  else
+    return out
+  endif
+endfunction
+
+function! ShortPwdWrapper()
+  return "%{ShortPwd()}"
+endfunction
 "}}}
 
 "status line {{{
@@ -45,7 +59,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'percent' ],
-      \             [ 'cocstatus', 'gitstatus',
+      \             [ 'cocstatus', 'gitstatus', 'short_pwd',
       \               'readonly', 'macromode' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
@@ -53,7 +67,7 @@ let g:lightline = {
       \               'wintab_before' ] ],
       \ },
       \ 'inactive': {
-      \   'left': [ [ 'percent', 'gitstatus'] ],
+      \   'left': [ [ 'percent', 'gitstatus', 'short_pwd'] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
       \              [ 'wintab_after', 'wintab_current', 
@@ -62,13 +76,14 @@ let g:lightline = {
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
       \   'gitstatus': 'FugitiveStatusline',
-      \   'filetype': 'MyFiletype'
+      \   'filetype': 'MyFiletype',
       \ },
       \ 'component_expand': {
       \   'wintab_before': 'WinTabBefore',
       \   'wintab_current': 'WinTabCurrent',
       \   'wintab_after': 'WinTabAfter',
-      \   'macromode': 'MacroModeInfo'
+      \   'macromode': 'MacroModeInfo',
+      \   'short_pwd': 'ShortPwdWrapper'
       \ },
       \ 'component_type': {
       \   'wintab_current': 'error',

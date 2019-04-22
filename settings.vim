@@ -17,6 +17,10 @@ let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 set iskeyword+=-
 set termguicolors
 set pumblend=20
+try
+  set floatblend=20
+catch /E518/
+endtry
 set ignorecase
 set smartcase
 set hidden

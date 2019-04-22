@@ -99,6 +99,10 @@ Plug 'rgreenblatt/scratch.vim'
 Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/local_vimrc'
 Plug 'airblade/vim-rooter'
+Plug 'romainl/vim-qf'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'skywind3000/asyncrun.vim'
 "}}}
 
 "integrations {{{
@@ -109,9 +113,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'esneider/YUNOcommit.vim'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'ron89/thesaurus_query.vim'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'neomutt/neomutt.vim'

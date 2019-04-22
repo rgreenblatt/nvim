@@ -25,7 +25,7 @@ let g:wintabs_separator = " "
 let g:wintabs_number_separator = " "
 let g:wintabs_only_basename = 1
 let g:wintabs_show_number = 1
-let g:wintabs_not_current_character_limit = 3
+let g:wintabs_not_current_character_limit = 7
 "}}}
 
 " macro mode info {{{ 

@@ -189,12 +189,10 @@ augroup end
 
 let g:local_vimrc = ['.config', 'local_init.vim']
 
-let g:neomake_open_list = 2
-
 "wintabs {{{
-let g:wintabs_display = 'none'
 let g:wintabs_delete_buffers = 0 
 let g:wintabs_autoclose_vimtab = 1
+let g:wintabs_buffer_limit = 5
 "}}}
 
 ""autoformat {{{

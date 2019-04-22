@@ -25,6 +25,7 @@ let g:wintabs_separator = " "
 let g:wintabs_number_separator = " "
 let g:wintabs_only_basename = 1
 let g:wintabs_show_number = 1
+let g:wintabs_not_current_character_limit = 3
 "}}}
 
 " macro mode info {{{ 
@@ -53,6 +54,17 @@ function! ShortPwdWrapper()
 endfunction
 "}}}
 
+"FugitiveStatusline wrapper to reduce noise {{{
+function! FugitiveStatuslineWrapper()
+  let out = FugitiveStatusline()
+  if out == '[Git(master)]'
+    return ''
+  else
+    return out
+  endif
+endfunction
+"}}}
+
 "status line {{{
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -75,7 +87,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'gitstatus': 'FugitiveStatusline',
+      \   'gitstatus': 'FugitiveStatuslineWrapper',
       \   'filetype': 'MyFiletype',
       \ },
       \ 'component_expand': {

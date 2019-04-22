@@ -155,9 +155,26 @@ if !exists("g:disable_coc")
   nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
   xnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
 
+  function! s:get_visual_selection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+      return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+  endfunction
+
   function! s:show_documentation()
     if &filetype == 'vim' || &filetype == 'help'
-      execute 'h '.expand('<cword>')
+      if mode() == "v" || mode() == "V" || mode() == ""
+        execute 'h '. s:get_visual_selection()
+      else
+        execute 'h '.expand('<cword>')
+      endif
     else
       call CocAction('doHover')
     endif
@@ -685,6 +702,17 @@ endfunction
 command! -nargs=0 ToggleMacroMode call ToggleMacroMode()
 
 noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
+"}}}
+
+"vim qf {{{
+nmap [q <Plug>(qf_qf_previous)
+nmap ]q <Plug>(qf_qf_next)
+nmap [l <Plug>(qf_loc_previous)
+nmap ]l <Plug>(qf_loc_next)
+nmap <c-s> <Plug>(qf_qf_switch)
+nmap yoq <Plug>(qf_qf_toggle)
+"overrides a unimpared mapping, but I don't use that mapping
+nmap yol <Plug>(qf_loc_toggle)
 "}}}
 
 " vim: set fdm=marker:

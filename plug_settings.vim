@@ -173,7 +173,7 @@ omap S <Plug>Sneak_S
 " let g:sqs_within_lines = 5
 "}}}
 
-"floating fzf window {{{
+"fzf {{{
 let g:fzf_layout = { 'window': 'call FloatingBuffer()' }
 "}}}
 

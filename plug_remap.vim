@@ -55,6 +55,20 @@ command! -bang -nargs=* RgHidden
       \ "--color=always --smart-case --hidden --no-ignore-vcs " . 
       \ shellescape(<q-args>), 1, <bang>0)
 
+command! -bang -nargs=* RgPreview call RgPreview()
+
+function! RgPreview(args)
+  let options = fzf#vim#with_preview('right:50%').options
+ 
+  echom string(options)
+  let extra = {'options': options}
+  call fzf#vim#grep("rg --column --vimgrep --line-number --no-heading " .
+        \ "--color=always --smart-case --hidden --no-ignore-vcs " . 
+        \ shellescape(a:args), 1, extra)
+endfunction
+
+command! -bang -nargs=* RgPreview call RgPreview(<q-args>)
+
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
 nnoremap <M-C-A> <Cmd>Maps<cr>

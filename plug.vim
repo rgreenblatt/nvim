@@ -71,7 +71,6 @@ Plug 'kana/vim-textobj-entire'
 Plug 'buztard/vim-rel-jump'
 Plug 'chaoren/vim-wordmotion'
 Plug 'bfredl/nvim-miniyank'
-Plug 'rgreenblatt/scratch.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
@@ -87,7 +86,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/sideways.vim'
 "}}}
 
-"navigation/layout {{{
+"navigation/setup {{{
 Plug 'mhinz/vim-startify'
 Plug 'rgreenblatt/vim-wintabs'
 " Plug 'vim-scripts/restore_view.vim'
@@ -96,6 +95,10 @@ Plug 'rgreenblatt/fzf.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'rgreenblatt/scratch.vim'
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/local_vimrc'
+Plug 'airblade/vim-rooter'
 "}}}
 
 "integrations {{{
@@ -119,8 +122,6 @@ Plug 'vhdirk/vim-cmake'
 
 "misc {{{
 Plug 'wikitopian/hardmode'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/local_vimrc'
 Plug 'rgreenblatt/vim-unimpaired'
 
 "TODO

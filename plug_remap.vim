@@ -34,10 +34,10 @@ call MapWinCmd("f", "Files")
 call MapWinCmd("F", "Files ", 1)
 call MapWinCmd("g", "GFiles")
 call MapWinCmd("G", "GFiles ", 1)
-call MapWinCmd("R", "Rg")
-call MapWinCmd("r", "Rg ", 1)
-call MapWinCmd("I", "RgHidden")
-call MapWinCmd("i", "RgHidden ", 1)
+call MapWinCmd("i", "RgPreview ", 1)
+call MapWinCmd("I", "RgPreview")
+call MapWinCmd(";i", "RgPreviewHidden ", 1)
+call MapWinCmd(";I", "RgPreviewHidden")
 call MapWinCmd("l", "BLines")
 call MapWinCmd("L", "Lines")
 call MapWinCmd(";t", "Tags")
@@ -50,30 +50,23 @@ call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
 call MapWinCmd("B", "Wipeouts")
 
-command! -bang -nargs=* RgHidden 
-      \ call fzf#vim#grep("rg --column --line-number --no-heading " .
-      \ "--color=always --smart-case --hidden --no-ignore-vcs " . 
-      \ shellescape(<q-args>), 1, <bang>0)
-
 command! -bang -nargs=* RgPreview call RgPreview()
 
-function! RgPreview(args)
-  let options = fzf#vim#with_preview('right:50%').options
- 
-  echom string(options)
-  let extra = {'options': options}
-  call fzf#vim#grep("rg --column --vimgrep --line-number --no-heading " .
-        \ "--color=always --smart-case --hidden --no-ignore-vcs " . 
-        \ shellescape(a:args), 1, extra)
+function! RgPreview(args, hidden)
+  call fzf#vim#grep("rg --column --line-number --no-heading " .
+        \ "--color=always --smart-case " . (a:hidden ? "--hidden " : "") . 
+        \ shellescape(a:args), 1, {'options' : 
+        \ fzf#vim#with_preview('right:50%').options})
 endfunction
 
-command! -bang -nargs=* RgPreview call RgPreview(<q-args>)
+command! -bang -nargs=* RgPreview call RgPreview(<q-args>, 0)
+command! -bang -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
 
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
 nnoremap <M-C-A> <Cmd>Maps<cr>
 nnoremap <M-C-F> <Cmd>Files<cr>
-nnoremap <M-C-G> :<c-u>Rg<space>
+nnoremap <M-C-G> :<c-u>RgPreview<space>
 nnoremap <M-C-H> <Cmd>History/<cr>
 nnoremap <M-C-P> <Cmd>:Helptags<cr>
 nnoremap <leader>: <Cmd>History:<cr>
@@ -513,13 +506,13 @@ nnoremap <silent> ;vg <Cmd>Goyo<cr>
 function! SetupGoyo()
   Limelight
   nnoremap <silent> ;vg <Cmd>Goyo!<cr>
-  setlocal nocursorline nocursorcolumn
+  setlocal nocursorline
 endfunction
 
 function! SetupNoGoyo()
   Limelight!
   nnoremap <silent> ;vg <Cmd>Goyo<cr>
-  setlocal cursorline cursorcolumn
+  setlocal cursorline
 endfunction
 
 autocmd! User GoyoEnter call SetupGoyo()

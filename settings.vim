@@ -31,7 +31,6 @@ set signcolumn=yes
 set autowrite
 set gdefault
 set cursorline
-set cursorcolumn
 set noshowmode
 set foldmethod=syntax
 

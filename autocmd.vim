@@ -26,11 +26,18 @@ augroup BWCCreateDir
 augroup end
 "}}}
 
-"cursorline/column only in current window {{{
+"cursorline only in current window {{{
+function! EnterWin()
+  set cursorline
+  if &number 
+    set relativenumber
+  endif
+endfunction
+
 augroup BgHighlight
   autocmd!
-  autocmd WinEnter * set cursorline cursorcolumn
-  autocmd WinLeave * set nocursorline nocursorcolumn
+  autocmd WinEnter * call EnterWin()
+  autocmd WinLeave * set nocursorline norelativenumber
 augroup END
 "}}}
 

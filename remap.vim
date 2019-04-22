@@ -54,21 +54,22 @@ nnoremap <c-f> ms[s1z=`s
 "window maps {{{
 function! FloatingBuffer()
   let buf = nvim_create_buf(v:false, v:true)
-
   "full size
   let height = &lines - 1 - &cmdheight
   let width = &columns
-  let col = float2nr((&columns - width) / 2)
 
   let opts = {
         \ 'relative': 'editor',
         \ 'row': 0,
-        \ 'col': col,
+        \ 'col': 0,
         \ 'width': width,
         \ 'height': height
         \ }
 
+  " not sure why before and after is required
+  set winhighlight=NormalFloat:Normal
   call nvim_open_win(buf, v:true, opts)
+  set winhighlight=NormalFloat:Normal
 endfunction
 
 function! MapWinCmd(key, command, ...)

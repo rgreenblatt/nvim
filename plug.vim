@@ -36,7 +36,7 @@ Plug 'metakirby5/codi.vim'
 "}}}
 
 "appearance {{{
-Plug 'rgreenblatt/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'

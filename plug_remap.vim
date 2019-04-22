@@ -184,7 +184,7 @@ if !exists("g:disable_coc")
 
   function! s:show_documentation()
     if &filetype == 'vim' || &filetype == 'help'
-      if mode() == "v" || mode() == "V" || mode() == ""
+      if mode() == "v" || mode() == "V" || mode() == "\<c-v>"
         execute 'h '. s:get_visual_selection()
       else
         execute 'h '.expand('<cword>')
@@ -422,7 +422,7 @@ function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter,
   let g:pattern_alter = a:pattern_alter
   "do nothing change required for some reason
   let cur_mode = mode()
-  let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == ""
+  let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == "\<c-v>"
   let g:substitute_region_edit_flags = a:edit_flags
 
   if !is_visual

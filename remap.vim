@@ -52,7 +52,33 @@ nnoremap <c-f> ms[s1z=`s
 "}}}
 
 "window maps {{{
-function! FloatingBuffer()
+function! FloatingOverWindow(path)
+  let buf = nvim_create_buf(v:false, v:true)
+  
+  "window size
+  let height = winheight(0)
+  let width = winwidth(0)
+
+  let opts = {
+        \ 'relative': 'win',
+        \ 'row': 0,
+        \ 'col': 0,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  " not sure why before and after is required
+  set winhighlight=NormalFloat:Normal
+  let handle = nvim_open_win(buf, v:true, opts)
+  set winhighlight=NormalFloat:Normal
+  echo handle 
+  let win_id = nvim_get_current_win()
+  execute "edit " . a:path
+
+  return win_id
+endfunction
+
+function! FloatingFullscreen()
   let buf = nvim_create_buf(v:false, v:true)
   "full size
   let height = &lines - 1 - &cmdheight
@@ -68,8 +94,10 @@ function! FloatingBuffer()
 
   " not sure why before and after is required
   set winhighlight=NormalFloat:Normal
-  call nvim_open_win(buf, v:true, opts)
+  let win_id = nvim_open_win(buf, v:true, opts)
   set winhighlight=NormalFloat:Normal
+
+  return win_id
 endfunction
 
 function! MapWinCmd(key, command, ...)
@@ -88,7 +116,7 @@ function! MapWinCmd(key, command, ...)
         \ a:command.suffix
   execute "nnoremap <leader>l".a:key." :<c-u>belowright vnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingBuffer()<CR>:".
+  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingFullscreen()<CR>:".
         \ a:command.suffix
   execute "nnoremap <leader>,".a:key." :<c-u>tabnew <bar>".
         \ a:command.suffix

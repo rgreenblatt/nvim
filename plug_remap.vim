@@ -50,18 +50,6 @@ call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
 call MapWinCmd("B", "Wipeouts")
 
-command! -bang -nargs=* RgPreview call RgPreview()
-
-function! RgPreview(args, hidden)
-  call fzf#vim#grep("rg --column --line-number --no-heading " .
-        \ "--color=always --smart-case " . (a:hidden ? "--hidden " : "") . 
-        \ shellescape(a:args), 1, {'options' : 
-        \ fzf#vim#with_preview('right:50%').options})
-endfunction
-
-command! -bang -nargs=* RgPreview call RgPreview(<q-args>, 0)
-command! -bang -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
-
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
 nnoremap <M-C-A> <Cmd>Maps<cr>

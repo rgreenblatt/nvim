@@ -174,11 +174,10 @@ omap S <Plug>Sneak_S
 "}}}
 
 "fzf {{{
-command! -bang -nargs=* RgPreview call RgPreview()
-
 function! RgPreview(args, hidden)
   call fzf#vim#grep("rg --column --line-number --no-heading " .
-        \ "--color=always --smart-case " . (a:hidden ? "--hidden " : "") . 
+        \ "--color=always --smart-case " . 
+        \ (a:hidden ? '--hidden --glob "!.git/*"' : '') . 
         \ shellescape(a:args), 1, {'options' : 
         \ fzf#vim#with_preview('right:50%').options})
 endfunction
@@ -186,9 +185,12 @@ endfunction
 command! -bang -nargs=* RgPreview call RgPreview(<q-args>, 0)
 command! -bang -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
 
-let g:fzf_preview_window = -1
+let g:fzf_layout = { 'window': 'call FloatingFullscreen()' }
 
 "Too slow
+"
+" let g:fzf_preview_window = -1
+"
 "function! FloatingFZFPreview(path, line_num)
 "  if g:fzf_window != -1 && nvim_win_is_valid(g:fzf_window)
 "    echom "started_preview"
@@ -252,8 +254,6 @@ let g:fzf_preview_window = -1
 " function! FloatingFZF()
 "   let g:fzf_window = FloatingFullscreen()
 " endfunction
-
-let g:fzf_layout = { 'window': 'call FloatingFullscreen()' }
 "}}}
 
 "rainbow parens {{{

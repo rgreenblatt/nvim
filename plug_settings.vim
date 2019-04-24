@@ -182,10 +182,47 @@ function! RgPreview(args, hidden)
         \ fzf#vim#with_preview('right:50%').options})
 endfunction
 
-command! -bang -nargs=* RgPreview call RgPreview(<q-args>, 0)
-command! -bang -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
+let s:fzf_window_option = 'call FloatingFullscreen()'
 
-let g:fzf_layout = { 'window': 'call FloatingFullscreen()' }
+function! ZshAliases()
+  call fzf#run({'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
+        \ "${(k)aliases}) <(print -rl -- ${aliases})'",
+        \ 'window': s:fzf_window_option})
+endfunction
+
+function! ZshFunctions()
+  call fzf#run({
+        \ 'source': "zsh -c 'source ~/.zshrc && print -rl -- ${(k)functions}'", 
+        \ 'window': s:fzf_window_option,
+        \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
+        \ "source ~/.zshrc && which {}\"'"})
+endfunction
+
+function! ZshVariables()
+  call fzf#run({
+        \ 'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
+        \ " ${(k)parameters}) <(print -rl -- ${parameters}) '", 
+        \ 'window': s:fzf_window_option,
+        \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
+        \ "source ~/.zshrc && get_value {}\"'"})
+endfunction
+
+function! ZshExecutables()
+  call fzf#run({
+        \ 'source': "zsh -c 'source ~/.zshrc && whence -pm \"*\"'", 
+        \ 'sink': 'e',
+        \ 'window': s:fzf_window_option,
+        \ 'options' : fzf#vim#with_preview('right:50%').options})
+endfunction
+
+command! -nargs=* RgPreview call RgPreview(<q-args>, 0)
+command! -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
+command! ZshAliases call ZshAliases()
+command! ZshFunctions call ZshFunctions()
+command! ZshVariables call ZshVariables()
+command! ZshExecutables call ZshExecutables()
+
+let g:fzf_layout = { 'window': s:fzf_window_option }
 
 "Too slow
 "

@@ -5,7 +5,6 @@ augroup FiletypeAutocmds
   autocmd TermOpen * setlocal signcolumn=no
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
-  autocmd FileType gitcommit set bufhidden=delete
   autocmd BufRead,BufNewFile *.sbt set filetype=scala
 augroup end
 "}}}

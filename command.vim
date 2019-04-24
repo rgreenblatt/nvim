@@ -24,13 +24,15 @@ command! -nargs=+ -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
 "}}}
 
 "shared terminals {{{
+let g:shared_term_buffer = -1
+
 function! s:GlobalSharedTerm()
-  let bnr = bufnr('global_shared_term')
-  if bnr > 0
-    execute 'buffer'.bnr
+  if g:shared_term_buffer > 0
+    execute 'buffer ' . g:shared_term_buffer
   else
     execute 'terminal'
-    file global_shared_term
+    let g:shared_term_buffer = bufnr('%')
+    autocmd BufWipeout <buffer> let g:shared_term_buffer = -1
   endif
 endfunction
 

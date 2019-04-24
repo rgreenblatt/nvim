@@ -177,7 +177,7 @@ omap S <Plug>Sneak_S
 function! RgPreview(args, hidden)
   call fzf#vim#grep("rg --column --line-number --no-heading " .
         \ "--color=always --smart-case " . 
-        \ (a:hidden ? '--hidden --glob "!.git/*"' : '') . 
+        \ (a:hidden ? '--hidden --glob "!.git/*" ' : '') . 
         \ shellescape(a:args), 1, {'options' : 
         \ fzf#vim#with_preview('right:50%').options})
 endfunction

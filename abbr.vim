@@ -1,4 +1,4 @@
-iabbrev cosnt const
+inoreabbrev cosnt const
 
 "command abbreviation {{{
 function! SetupCommandAbbrs(from, to)
@@ -14,6 +14,8 @@ call SetupCommandAbbrs('PU', 'PlugUpdate')
 call SetupCommandAbbrs('PC', 'PlugClean')
 call SetupCommandAbbrs('TC', 'WintabsCloseVimtab')
 call SetupCommandAbbrs('WD', 'WintabsDo')
+
+cnoreabbrev ehco echo
 "}}}
 
 " vim: set fdm=marker:

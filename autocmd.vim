@@ -1,7 +1,7 @@
 "general filetype autocmds {{{
 augroup FiletypeAutocmds
   autocmd!
-  autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+  autocmd TermOpen * setlocal listchars=
   autocmd TermOpen * setlocal signcolumn=no
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -25,7 +25,7 @@ augroup BWCCreateDir
 augroup end
 "}}}
 
-"cursorline only in current window {{{
+"cursorline and relativenumber only in current window {{{
 function! EnterWin()
   set cursorline
   if &number 
@@ -35,8 +35,8 @@ endfunction
 
 augroup BgHighlight
   autocmd!
-  autocmd WinEnter * call EnterWin()
-  autocmd WinLeave * set nocursorline norelativenumber
+  autocmd WinEnter,TabEnter,BufWinEnter * call EnterWin()
+  autocmd WinLeave,TabLeave  * set nocursorline norelativenumber
 augroup END
 "}}}
 

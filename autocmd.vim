@@ -1,8 +1,8 @@
 "general filetype autocmds {{{
 augroup FiletypeAutocmds
   autocmd!
-  autocmd TermOpen * setlocal listchars=
-  autocmd TermOpen * setlocal signcolumn=no
+  autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber
+  autocmd TermOpen * let b:persistant_relative_number=1
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufRead,BufNewFile *.sbt set filetype=scala
@@ -38,15 +38,22 @@ augroup end
 "cursorline and relativenumber only in current window {{{
 function! EnterWin()
   set cursorline
-  if &number 
+  if &number
     set relativenumber
+  endif
+endfunction
+
+function! ExitWin()
+  set nocursorline
+  if !exists("b:persistant_relative_number")
+    set norelativenumber
   endif
 endfunction
 
 augroup BgHighlight
   autocmd!
   autocmd WinEnter,TabEnter,BufWinEnter * call EnterWin()
-  autocmd WinLeave,TabLeave  * set nocursorline norelativenumber
+  autocmd WinLeave,TabLeave  * call ExitWin()
 augroup END
 "}}}
 

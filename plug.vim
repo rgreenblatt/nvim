@@ -30,7 +30,8 @@ Plug 'kana/vim-textobj-function'
 Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'ehamberg/vim-cute-python'
 Plug 'sheerun/vim-polyglot'
-Plug 'LucHermitte/VimFold4C'
+"slooooooow
+" Plug 'LucHermitte/VimFold4C'
 Plug 'tmhedberg/SimpylFold'
 Plug 'metakirby5/codi.vim'
 "}}}
@@ -76,7 +77,10 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'simnalamburt/vim-mundo'
 Plug 'romainl/vim-cool'
+
+"TODO
 Plug 'Konfekt/FastFold'
+
 Plug 'machakann/vim-sandwich'
 Plug 'terryma/vim-expand-region'
 Plug 'matze/vim-move'

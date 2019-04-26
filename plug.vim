@@ -25,9 +25,9 @@ if exists("g:disable_coc")
   "}}}
 endif
 
-let s:blacklist = []
+let g:combined_blacklist = []
 for val in values(g:plugin_blacklist)
-  let s:blacklist += val
+  let g:combined_blacklist += val
 endfor
 "}}}
 
@@ -155,16 +155,25 @@ call s:PA(['zenbro/mirror.vim'])
 "}}}
 "}}}
 
+"add all plugins {{{
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 for plugin in s:plugins
-  if index(s:blacklist, plugin[0]) == -1
+  if index(g:combined_blacklist, plugin[0]) == -1
     let plugin[0] = "'" . plugin[0] . "'"
     execute 'Plug ' . join(plugin, ', ')
   endif
 endfor
 call plug#end()
 filetype plugin indent on
+"}}}
+
+"helpers {{{
+function! IsInstalled(plugin)
+  return index(s:plugins, a:plugin) != -1 && 
+        \ index(g:combined_blacklist, a:plugin) == -1
+endfunction
+"}}}
 
 " vim: set fdm=marker:

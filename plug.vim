@@ -38,6 +38,12 @@ function! s:PA(x)
   call add(s:plugins, a:x)
 endfunction
 
+"headed install tools {{{
+call s:PA(['Carpetsmoker/xdg_open.vim'])
+call s:PA(['rgreenblatt/i3-vim-focus'])
+call s:PA(['szw/vim-g'])
+"}}}
+
 "languages {{{
 " call s:PA(['dansomething/vim-eclim'])
 call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])

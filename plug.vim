@@ -26,12 +26,9 @@ if exists("g:disable_coc")
 endif
 
 let s:blacklist = []
-echo g:plugin_blacklist
-echo s:blacklist
 for val in values(g:plugin_blacklist)
   let s:blacklist += val
 endfor
-echo s:blacklist
 "}}}
 
 "plugins list {{{

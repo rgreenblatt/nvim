@@ -1,11 +1,11 @@
 "setplugin_blacklist up blacklist {{{
 if !exists("g:plugin_blacklist")
-  let g:plugin_blacklist = []
+  let g:plugin_blacklist = {}
 endif
 
 if exists("g:headless")
   "{{{
-  let g:plugin_blacklist += [
+  let g:plugin_blacklist.headless = [
         \ 'Carpetsmoker/xdg_open.vim',
         \ 'rgreenblatt/i3-vim-focus',
         \ 'szw/vim-g',
@@ -15,7 +15,7 @@ endif
 
 if exists("g:disable_coc")
   "{{{
-  let g:plugin_blacklist += [
+  let g:plugin_blacklist.disable_coc = [
         \ 'neoclide/coc.nvim',
         \ 'liuchengxu/vista.vim',
         \ 'Shougo/neco-vim',
@@ -24,6 +24,14 @@ if exists("g:disable_coc")
         \ ]
   "}}}
 endif
+
+let s:blacklist = []
+echo g:plugin_blacklist
+echo s:blacklist
+for val in values(g:plugin_blacklist)
+  let s:blacklist += val
+endfor
+echo s:blacklist
 "}}}
 
 "plugins list {{{
@@ -154,7 +162,7 @@ set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 for plugin in s:plugins
-  if index(g:plugin_blacklist, plugin[0]) == -1
+  if index(s:blacklist, plugin[0]) == -1
     let plugin[0] = "'" . plugin[0] . "'"
     execute 'Plug ' . join(plugin, ', ')
   endif

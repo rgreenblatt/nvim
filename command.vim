@@ -23,7 +23,7 @@ endfunction
 command! -nargs=+ -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
 "}}}
 
-"shared terminals {{{
+"terminals {{{
 let g:shared_term_buffer = -1
 
 function! s:GlobalSharedTerm()

@@ -240,7 +240,6 @@ augroup END
 "terminal {{{
 tnoremap <C-Space> <C-\><C-n>
 
-
 call MapWinCmd("t", "GlobalSharedTerm")
 call MapWinCmd("T", "terminal")
 "}}}

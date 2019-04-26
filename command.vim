@@ -20,7 +20,7 @@ function! s:SetDebugPath(path)
     let g:debug_path = a:path
 endfunction
 
-command! -nargs=+ -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
+command! -nargs=1 -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
 "}}}
 
 "terminals {{{

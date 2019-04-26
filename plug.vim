@@ -1,137 +1,164 @@
+"set up blacklist {{{
+if !exists("g:plug_blacklist")
+  let g:plug_blacklist = []
+endif
+
+if exists("g:headless")
+  "{{{
+  let g:plug_blacklist += [
+        \ 'Carpetsmoker/xdg_open.vim',
+        \ 'rgreenblatt/i3-vim-focus',
+        \ 'szw/vim-g',
+        \ ]
+  "}}}
+endif
+
+if !exists("g:disable_coc")
+  "{{{
+  let g:plug_blacklist += [
+        \ 'neoclide/coc.nvim',
+        \ 'liuchengxu/vista.vim',
+        \ 'Shougo/neco-vim',
+        \ 'neoclide/coc-neco',
+        \ 'honza/vim-snippets',
+        \ ]
+  "}}}
+endif
+"}}}
+
+"plugins list {{{
+let s:plugins = []
+
+function! s:PA(x)
+  call add(s:plugins, a:x)
+endfunction
+
+"languages {{{
+" call s:PA(['dansomething/vim-eclim'])
+call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])
+call s:PA(['liuchengxu/vista.vim'])
+call s:PA(['Shougo/neco-vim'])
+call s:PA(['neoclide/coc-neco'])
+call s:PA(['honza/vim-snippets'])
+call s:PA(['arakashic/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
+call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
+call s:PA(['lervag/vimtex'])
+call s:PA(['ludovicchabant/vim-gutentags'])
+call s:PA(['Chiel92/vim-autoformat'])
+call s:PA(['tpope/vim-markdown'])
+call s:PA(['tpope/vim-apathy'])
+call s:PA(['rgreenblatt/c-conceal'])
+call s:PA(['kana/vim-textobj-function'])
+call s:PA(['jeetsukumaran/vim-pythonsense'])
+call s:PA(['ehamberg/vim-cute-python'])
+call s:PA(['sheerun/vim-polyglot'])
+"slooooooow
+" call s:PA(['LucHermitte/VimFold4C'])
+call s:PA(['tmhedberg/SimpylFold'])
+call s:PA(['metakirby5/codi.vim'])
+"}}}
+"appearance {{{
+call s:PA(['morhetz/gruvbox'])
+call s:PA(['itchyny/lightline.vim'])
+call s:PA(['junegunn/limelight.vim'])
+call s:PA(['junegunn/goyo.vim'])
+" call s:PA(['TaDaa/vimade'])
+call s:PA(['machakann/vim-highlightedyank'])
+call s:PA(['ryanoasis/vim-devicons'])
+call s:PA(['RRethy/vim-hexokinase'])
+"}}}
+"general editing {{{
+call s:PA(['wellle/targets.vim'])
+call s:PA(['rhysd/clever-f.vim'])
+call s:PA(['unblevable/quick-scope'])
+call s:PA(['justinmk/vim-sneak'])
+call s:PA(['rgreenblatt/sneak-quick-scope'])
+call s:PA(['inkarkat/vim-ingo-library'])
+call s:PA(['inkarkat/vim-CountJump'])
+call s:PA(['inkarkat/vim-EnhancedJumps'])
+call s:PA(['markonm/traces.vim'])
+call s:PA(['rgreenblatt/vim-ninja-feet'])
+call s:PA(['tommcdo/vim-exchange'])
+call s:PA(['tpope/vim-repeat'])
+call s:PA(['tommcdo/vim-lion'])
+call s:PA(['tpope/vim-commentary'])
+call s:PA(['tpope/vim-abolish'])
+call s:PA(['inkarkat/vim-mark'])
+call s:PA(['michaeljsmith/vim-indent-object'])
+call s:PA(['kana/vim-textobj-user'])
+call s:PA(['kana/vim-textobj-fold'])
+call s:PA(['kana/vim-operator-user'])
+call s:PA(['kana/vim-textobj-entire'])
+call s:PA(['buztard/vim-rel-jump'])
+call s:PA(['chaoren/vim-wordmotion'])
+call s:PA(['bfredl/nvim-miniyank'])
+call s:PA(['chrisbra/NrrwRgn'])
+call s:PA(['kien/rainbow_parentheses.vim'])
+call s:PA(['kshenoy/vim-signature'])
+call s:PA(['simnalamburt/vim-mundo'])
+call s:PA(['romainl/vim-cool'])
+"TODO
+"call s:PA(['Konfekt/FastFold'])
+
+call s:PA(['machakann/vim-sandwich'])
+call s:PA(['terryma/vim-expand-region'])
+call s:PA(['matze/vim-move'])
+call s:PA(['wsdjeg/vim-fetch'])
+call s:PA(['thinca/vim-visualstar'])
+call s:PA(['AndrewRadev/splitjoin.vim'])
+call s:PA(['AndrewRadev/sideways.vim'])
+"}}}
+"navigation/setup {{{
+call s:PA(['mhinz/vim-startify'])
+call s:PA(['rgreenblatt/vim-wintabs'])
+" call s:PA(['vim-scripts/restore_view.vim'])
+call s:PA(['junegunn/fzf', "{'dir': '~/.fzf', 'do': './install --bin'}"])
+call s:PA(['rgreenblatt/fzf.vim'])
+call s:PA(['wesQ3/vim-windowswap'])
+call s:PA(['justinmk/vim-dirvish'])
+call s:PA(['kristijanhusak/vim-dirvish-git'])
+call s:PA(['rgreenblatt/scratch.vim'])
+call s:PA(['LucHermitte/lh-vim-lib'])
+call s:PA(['LucHermitte/local_vimrc'])
+call s:PA(['airblade/vim-rooter'])
+call s:PA(['romainl/vim-qf'])
+call s:PA(['tpope/vim-dispatch'])
+call s:PA(['radenling/vim-dispatch-neovim'])
+call s:PA(['skywind3000/asyncrun.vim'])
+"}}}
+"integrations {{{
+call s:PA(['itchyny/calendar.vim'])
+call s:PA(['makerj/vim-pdf'])
+call s:PA(['tpope/vim-fugitive'])
+call s:PA(['tpope/vim-rhubarb'])
+call s:PA(['junegunn/gv.vim'])
+call s:PA(['esneider/YUNOcommit.vim'])
+call s:PA(['tpope/vim-eunuch'])
+call s:PA(['ron89/thesaurus_query.vim'])
+call s:PA(['sakhnik/nvim-gdb', 
+  \ "{'do': ':!./install.sh \\| UpdateRemotePlugins'}"])
+call s:PA(['neomutt/neomutt.vim'])
+call s:PA(['mhinz/vim-signify'])
+call s:PA(['lambdalisue/suda.vim'])
+call s:PA(['vhdirk/vim-cmake'])
+"}}}
+"misc {{{
+call s:PA(['wikitopian/hardmode'])
+call s:PA(['rgreenblatt/vim-unimpaired'])
+"TODO
+call s:PA(['zenbro/mirror.vim'])
+"}}}
+"}}}
+
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
-"plugins for a headed install {{{
-if !exists("g:headless")
-  Plug 'Carpetsmoker/xdg_open.vim'
-  Plug 'rgreenblatt/i3-vim-focus'
-  Plug 'szw/vim-g'
-endif
-"}}}
-
-"languages {{{
-" Plug 'dansomething/vim-eclim'
-if !exists("g:disable_coc")
-  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'liuchengxu/vista.vim'
-  Plug 'Shougo/neco-vim'
-  Plug 'neoclide/coc-neco'
-  Plug 'honza/vim-snippets'
-endif
-Plug 'arakashic/chromatica.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'lervag/vimtex'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'Chiel92/vim-autoformat'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-apathy'
-Plug 'rgreenblatt/c-conceal'
-Plug 'kana/vim-textobj-function'
-Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'ehamberg/vim-cute-python'
-Plug 'sheerun/vim-polyglot'
-"slooooooow
-" Plug 'LucHermitte/VimFold4C'
-Plug 'tmhedberg/SimpylFold'
-Plug 'metakirby5/codi.vim'
-"}}}
-
-"appearance {{{
-Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/goyo.vim'
-" Plug 'TaDaa/vimade'
-Plug 'machakann/vim-highlightedyank'
-Plug 'ryanoasis/vim-devicons'
-Plug 'RRethy/vim-hexokinase'
-"}}}
-
-"general editing {{{
-Plug 'wellle/targets.vim'
-Plug 'rhysd/clever-f.vim'
-Plug 'unblevable/quick-scope'
-Plug 'justinmk/vim-sneak'
-Plug 'rgreenblatt/sneak-quick-scope'
-Plug 'inkarkat/vim-ingo-library'
-Plug 'inkarkat/vim-CountJump'
-Plug 'inkarkat/vim-EnhancedJumps'
-Plug 'markonm/traces.vim'
-Plug 'rgreenblatt/vim-ninja-feet'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-repeat'
-Plug 'tommcdo/vim-lion'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-abolish'
-Plug 'inkarkat/vim-mark'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-fold'
-Plug 'kana/vim-operator-user'
-Plug 'kana/vim-textobj-entire'
-Plug 'buztard/vim-rel-jump'
-Plug 'chaoren/vim-wordmotion'
-Plug 'bfredl/nvim-miniyank'
-Plug 'chrisbra/NrrwRgn'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'simnalamburt/vim-mundo'
-Plug 'romainl/vim-cool'
-
-"TODO
-Plug 'Konfekt/FastFold'
-
-Plug 'machakann/vim-sandwich'
-Plug 'terryma/vim-expand-region'
-Plug 'matze/vim-move'
-Plug 'wsdjeg/vim-fetch'
-Plug 'thinca/vim-visualstar'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'AndrewRadev/sideways.vim'
-"}}}
-
-"navigation/setup {{{
-Plug 'mhinz/vim-startify'
-Plug 'rgreenblatt/vim-wintabs'
-" Plug 'vim-scripts/restore_view.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'rgreenblatt/fzf.vim'
-Plug 'wesQ3/vim-windowswap'
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'rgreenblatt/scratch.vim'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/local_vimrc'
-Plug 'airblade/vim-rooter'
-Plug 'romainl/vim-qf'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'skywind3000/asyncrun.vim'
-"}}}
-
-"integrations {{{
-Plug 'itchyny/calendar.vim'
-Plug 'makerj/vim-pdf'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-Plug 'esneider/YUNOcommit.vim'
-Plug 'tpope/vim-eunuch'
-Plug 'ron89/thesaurus_query.vim'
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-Plug 'neomutt/neomutt.vim'
-Plug 'mhinz/vim-signify'
-Plug 'lambdalisue/suda.vim'
-Plug 'vhdirk/vim-cmake'
-"}}}
-
-"misc {{{
-Plug 'wikitopian/hardmode'
-Plug 'rgreenblatt/vim-unimpaired'
-
-"TODO
-Plug 'zenbro/mirror.vim'
-"}}}
+for plugin in s:plugins
+  if index(g:plug_blacklist, plugin[0]) == -1
+    let plugin[0] = "'" . plugin[0] . "'"
+    execute 'Plug ' . join(plugin, ', ')
+  endif
+endfor
 call plug#end()
 filetype plugin indent on
 

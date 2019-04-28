@@ -6,7 +6,7 @@ endif
 if exists("g:headless")
   "{{{
   let g:plugin_blacklist.headless = [
-        \ 'Carpetsmoker/xdg_open.vim',
+        \ 'rgreenblatt/xdg_open.vim',
         \ 'rgreenblatt/i3-vim-focus',
         \ 'szw/vim-g',
         \ ]
@@ -39,7 +39,7 @@ function! s:PA(x)
 endfunction
 
 "tools for headed installs {{{
-call s:PA(['Carpetsmoker/xdg_open.vim'])
+call s:PA(['rgreenblatt/xdg_open.vim'])
 call s:PA(['rgreenblatt/i3-vim-focus'])
 call s:PA(['szw/vim-g'])
 "}}}

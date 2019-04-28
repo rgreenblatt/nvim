@@ -38,12 +38,11 @@ function! s:PA(x)
   call add(s:plugins, a:x)
 endfunction
 
-"headed install tools {{{
+"tools for headed installs {{{
 call s:PA(['Carpetsmoker/xdg_open.vim'])
 call s:PA(['rgreenblatt/i3-vim-focus'])
 call s:PA(['szw/vim-g'])
 "}}}
-
 "languages {{{
 " call s:PA(['dansomething/vim-eclim'])
 call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])
@@ -165,7 +164,8 @@ call s:PA(['zenbro/mirror.vim'])
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
-for plugin in s:plugins
+let plugins_copy = deepcopy(s:plugins)
+for plugin in plugins_copy
   if index(g:combined_blacklist, plugin[0]) == -1
     let plugin[0] = "'" . plugin[0] . "'"
     execute 'Plug ' . join(plugin, ', ')
@@ -176,8 +176,14 @@ filetype plugin indent on
 "}}}
 
 "helpers {{{
+function! s:First(lst)
+  return a:lst[0]
+endfunction
+
+let s:plugin_names = map(deepcopy(s:plugins), "s:First(v:val)")
+
 function! IsInstalled(plugin)
-  return index(s:plugins, a:plugin) != -1 && 
+  return index(s:plugin_names, a:plugin) != -1 && 
         \ index(g:combined_blacklist, a:plugin) == -1
 endfunction
 "}}}

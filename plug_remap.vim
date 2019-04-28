@@ -32,12 +32,13 @@ call MapWinCmd("c", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
 "fzf maps {{{
 call MapWinCmd("f", "Files")
 call MapWinCmd("F", "Files ", 1)
+call MapWinCmd("'", "GFiles?")
 call MapWinCmd("g", "GFiles")
 call MapWinCmd("G", "GFiles ", 1)
-call MapWinCmd("i", "RgPreview ", 1)
-call MapWinCmd("I", "RgPreview")
-call MapWinCmd(";i", "RgPreviewHidden ", 1)
-call MapWinCmd(";I", "RgPreviewHidden")
+call MapWinCmd("r", "RgPreview ", 1)
+call MapWinCmd("R", "RgPreview")
+call MapWinCmd(";r", "RgPreviewHidden ", 1)
+call MapWinCmd(";R", "RgPreviewHidden")
 call MapWinCmd("l", "BLines")
 call MapWinCmd("L", "Lines")
 call MapWinCmd(";t", "Tags")
@@ -70,8 +71,8 @@ call MapWinCmd("s", "Startify")
 "}}}
 
 "thesaurus {{{
-nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<CR>
-xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <C-r>"<CR>
+nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<cr>
+xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <c-r>"<cr>
 "}}}
 
 if !exists("g:disable_coc")
@@ -108,12 +109,14 @@ if !exists("g:disable_coc")
   "snippet trigger
   imap <C-s> <Plug>(coc-snippets-expand)
 
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+  inoremap <silent><expr> <cr> pumvisible() && !empty(v:completed_item) ? 
+        \ coc#_select_confirm()
         \: "\<CR>"
 
   nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
   nnoremap <leader>R <Cmd>CocCommand python.execInTerminal<cr>
   nnoremap ;L :<c-u>CocList<space>
+  nnoremap ;A :<c-u>CocCommand<space>
   nnoremap ;S <Cmd>CocList -I symbols<cr>
   nnoremap ;D <Cmd>CocList --auto-preview diagnostics<cr>
   nnoremap ;O <Cmd>CocList --auto-preview outline<cr>
@@ -428,7 +431,7 @@ function! SubstituteRegion(_)
     if @. != ""
       call setpos("'[", g:substitute_region_start_insert)
       call setpos("']", g:substitute_region_end_insert)
-      silent execute "normal! `[\"sy`]"
+      silent execute "normal! `[v`]h\"sy"
       let g:saved_s_reg = function(g:replace_alter)(@s)
       call setpos("'[", start)
       call setpos("']", end)
@@ -437,6 +440,7 @@ function! SubstituteRegion(_)
     endif
     call feedkeys("2u", 'ni')
   endif
+  let @s = g:saved_s_reg
   let to_feed = "\<Cmd>call setpos(\"'[\", ". string(start) . ")\<cr>" .
         \ "\<Cmd>call setpos(\"']\", ". string(end) . ")\<cr>" .
         \ ":'[,']" .
@@ -444,7 +448,7 @@ function! SubstituteRegion(_)
         \ function(g:pattern_alter)(g:to_sub) .
         \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags
 
-  let to_feed_suffix = " | normal! '[ | let @s = g:substitute_region_orig_s"
+  let to_feed_suffix = " | let @s = g:substitute_region_orig_s | normal! '["
   let to_feed .= to_feed_suffix
 
   if g:substitute_region_edit_flags
@@ -452,6 +456,10 @@ function! SubstituteRegion(_)
   else
     let to_feed .= "\<cr>"
   endif
+
+  echom @s
+  echom to_feed
+
   call feedkeys(to_feed, 'n')
   let g:substitute_region_is_first = 0
 endfunction
@@ -515,11 +523,9 @@ nnoremap ;gd :<c-u>Gvdiff<space>
 "when bug gets fixed, switch back to builtin commands
 function! GitCheckSSH(command)
   if system("cd ". expand("%:p:h") .
-        \ "&& git config --get remote.origin.url")[:3] == "git@"
-    echom "ssh"
+        \ "&& git remote show -n origin")[29:32] == "git@"
     execute "G" . a:command
   else
-    echom "https"
     execute "Git " . a:command
   endif
 endfunction

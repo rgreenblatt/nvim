@@ -5,6 +5,8 @@ Abolish thier their
 Abolish slient silent
 Abolish accross across
 Abolish teh the
+Abolish ofr for
+Abolish hte the
 Abolish duoble double
 Abolish lsit{,s} list{}
 Abolish fo of

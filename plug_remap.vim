@@ -56,7 +56,7 @@ nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
 nnoremap <M-C-A> <Cmd>Maps<cr>
 nnoremap <M-C-F> <Cmd>Files<cr>
-nnoremap <M-C-G> :<c-u>RgPreview<space>
+nnoremap <M-C-G> :<c-u>RgPreviewHidden<space>
 nnoremap <M-C-H> <Cmd>History/<cr>
 nnoremap <M-C-P> <Cmd>:Helptags<cr>
 nnoremap <leader>: <Cmd>History:<cr>

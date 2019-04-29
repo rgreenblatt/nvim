@@ -38,7 +38,7 @@ noremap Q @@
 "}}}
 
 "conceal toggle {{{
-nnoremap ;vc :<c-u>set <C-R>=&conceallevel ?
+nnoremap ;vc <Cmd>set <C-R>=&conceallevel ?
       \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 "}}}
 
@@ -134,11 +134,11 @@ endfunction
 "}}}
 
 "general leader/semicolon/alt maps {{{
-nnoremap <silent> <leader>p :<c-u>cd %:p:h<CR>
+nnoremap <silent> <leader>p <Cmd>cd %:p:h<CR>
 nnoremap <leader>P :<c-u>cd<space>
-nnoremap <silent> <leader>,p :<c-u>tcd %:p:h<CR>
+nnoremap <silent> <leader>,p <Cmd>tcd %:p:h<CR>
 nnoremap <leader>,P :<c-u>tcd<space>
-nnoremap <silent> <leader>.p :<c-u>lcd %:p:h<CR>
+nnoremap <silent> <leader>.p <Cmd>lcd %:p:h<CR>
 nnoremap <leader>.P :<c-u>lcd<space>
 
 "not sure if I really need these mappings...
@@ -151,17 +151,17 @@ nnoremap <leader>JD :<c-u>lfdo<space>
 nnoremap <leader>lD :<c-u>bufdo<space>
 nnoremap <leader>hD :<c-u>argdo<space>
 
-nnoremap <silent> <a-n> :<c-u>set invrelativenumber<CR>
-nnoremap <silent> <a-w> :<c-u>%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <silent> <leader>z :<c-u>noh<CR>
+nnoremap <silent> <a-n> <Cmd>set invrelativenumber<CR>
+nnoremap <silent> <a-w> <Cmd>%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <silent> <leader>z <Cmd>noh<CR>
 
-nnoremap <silent> <leader>q :<c-u>q<CR>
-nnoremap <silent> <leader>A :<c-u>qa<CR>
-nnoremap <silent> <leader>b :<c-u>w<CR>
-nnoremap <silent> <a-d> :<c-u>w<CR> :<c-u>bd<CR>
+nnoremap <silent> <leader>q <Cmd>q<CR>
+nnoremap <silent> <leader>A <Cmd>qa<CR>
+nnoremap <silent> <leader>b <Cmd>w<CR>
+nnoremap <silent> <a-d> <Cmd>bd!<CR>
 
-xnoremap ;i :<c-u>'<,'>normal ^i
-xnoremap ;a :<c-u>'<,'>normal $a
+xnoremap ;i :'<,'>normal ^i
+xnoremap ;a :'<,'>normal $a
 
 nnoremap <leader>ww <C-w><bar>
 nnoremap <leader>wt <C-w>_
@@ -180,7 +180,7 @@ nnoremap ;t g<C-]>
 nnoremap <Leader>s *``cgn
 nnoremap <Leader>S #``cgN
 
-nnoremap <leader>Q :bp\|bd #<CR>
+nnoremap <leader>Q <Cmd>bp\|bd #<CR>
 
 nnoremap <leader>f gq
 xnoremap <leader>f gq
@@ -193,7 +193,7 @@ nnoremap <a-c> <Cmd>changes<cr>
 nnoremap <a-z> :<c-u>help<space>
 nnoremap <a-s> <Cmd>source %<cr>
 
-nnoremap <a-o> <Cmd>:s/\C<cr>
+nnoremap <a-o> :<c-u>s/\C<left><left><left><left>
 "}}}
 
 "navigate indents {{{

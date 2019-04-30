@@ -45,7 +45,8 @@ if !g:no_language_plugins
     call s:PA(['honza/vim-snippets'])
   endif
   "}}}
-  call s:PA(['arakashic/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
+  "TODO
+  call s:PA(['rgreenblatt/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
   call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
   call s:PA(['lervag/vimtex'])
   call s:PA(['ludovicchabant/vim-gutentags'])

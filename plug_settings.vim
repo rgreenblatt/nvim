@@ -1,7 +1,25 @@
 "colorscheme{{{
-let g:gruvbox_contrast_dark = "hard"
-let g:gruvbox_italic = 1
-colorscheme gruvbox
+if IsInstalled('morhetz/gruvbox')
+  let g:gruvbox_contrast_dark = "hard"
+  let g:gruvbox_italic = 1
+  colorscheme gruvbox
+
+  function! s:ZshVIMModeEnterInsert()
+    setlocal winhighlight=TermCursor:TerminalInsert
+    redraw
+  endfunction
+
+  function! s:ZshVIMModeExitInsert()
+    setlocal winhighlight=TermCursor:TerminalNormal
+    redraw
+  endfunction
+
+  command! -nargs=0 ZshVIMModeExitInsert call s:ZshVIMModeExitInsert()
+  command! -nargs=0 ZshVIMModeEnterInsert call s:ZshVIMModeEnterInsert()
+else
+  command! -nargs=0 ZshVIMModeExitInsert echo "normal"
+  command! -nargs=0 ZshVIMModeEnterInsert echo "insert"
+endif
 "}}}
 
 "enhanced jumps{{{
@@ -21,7 +39,7 @@ let g:clever_f_timeout_ms = 3000
 
 let g:wordmotion_prefix = ';'
 
-if !exists("g:disable_coc")
+if IsInstalled('neoclide/coc.nvim')
   "coc {{{
   let g:coc_global_extensions = [
         \ 'coc-word',
@@ -48,7 +66,6 @@ if !exists("g:disable_coc")
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
   "}}}
-
 
   "vista {{{
   let g:vista_fzf_preview = ['right:50%']
@@ -175,133 +192,137 @@ omap S <Plug>Sneak_S
 "}}}
 
 "fzf {{{
-function! RgPreview(args, hidden)
-  call fzf#vim#grep("rg --column --line-number --no-heading " .
-        \ "--color=always --smart-case " . 
-        \ (a:hidden ? '--hidden --glob "!.git/*" ' : '') . 
-        \ shellescape(a:args), 1, {'options' : 
-        \ fzf#vim#with_preview('right:50%').options})
-endfunction
+if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
+  function! RgPreview(args, hidden)
+    call fzf#vim#grep("rg --column --line-number --no-heading " .
+          \ "--color=always --smart-case " . 
+          \ (a:hidden ? '--hidden --glob "!.git/*" ' : '') . 
+          \ shellescape(a:args), 1, {'options' : 
+          \ fzf#vim#with_preview('right:50%').options})
+  endfunction
 
-let s:fzf_window_option = 'call FloatingFullscreen()'
+  let s:fzf_window_option = 'call FloatingFullscreen()'
 
-function! ZshAliases()
-  call fzf#run({'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
-        \ "${(k)aliases}) <(print -rl -- ${aliases})'",
-        \ 'window': s:fzf_window_option})
-endfunction
+  function! ZshAliases()
+    call fzf#run({'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
+          \ "${(k)aliases}) <(print -rl -- ${aliases})'",
+          \ 'window': s:fzf_window_option})
+  endfunction
 
-function! ZshFunctions()
-  call fzf#run({
-        \ 'source': "zsh -c 'source ~/.zshrc && print -rl -- ${(k)functions}'", 
-        \ 'window': s:fzf_window_option,
-        \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
-        \ "source ~/.zshrc && which {}\"'"})
-endfunction
+  function! ZshFunctions()
+    call fzf#run({
+          \ 'source': "zsh -c 'source ~/.zshrc && print -rl -- ${(k)functions}'", 
+          \ 'window': s:fzf_window_option,
+          \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
+          \ "source ~/.zshrc && which {}\"'"})
+  endfunction
 
-function! ZshVariables()
-  call fzf#run({
-        \ 'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
-        \ " ${(k)parameters}) <(print -rl -- ${parameters}) '", 
-        \ 'window': s:fzf_window_option,
-        \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
-        \ "source ~/.zshrc && get_value {}\"'"})
-endfunction
+  function! ZshVariables()
+    call fzf#run({
+          \ 'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
+          \ " ${(k)parameters}) <(print -rl -- ${parameters}) '", 
+          \ 'window': s:fzf_window_option,
+          \ 'options' : "--preview 'zsh -c \"export NO_COMPLETE=true && ".
+          \ "source ~/.zshrc && get_value {}\"'"})
+  endfunction
 
-function! ZshExecutables()
-  call fzf#run({
-        \ 'source': "zsh -c 'source ~/.zshrc && whence -pm \"*\"'", 
-        \ 'sink': 'e',
-        \ 'window': s:fzf_window_option,
-        \ 'options' : fzf#vim#with_preview('right:50%').options})
-endfunction
+  function! ZshExecutables()
+    call fzf#run({
+          \ 'source': "zsh -c 'source ~/.zshrc && whence -pm \"*\"'", 
+          \ 'sink': 'e',
+          \ 'window': s:fzf_window_option,
+          \ 'options' : fzf#vim#with_preview('right:50%').options})
+  endfunction
 
-command! -nargs=* RgPreview call RgPreview(<q-args>, 0)
-command! -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
-command! ZshAliases call ZshAliases()
-command! ZshFunctions call ZshFunctions()
-command! ZshVariables call ZshVariables()
-command! ZshExecutables call ZshExecutables()
+  command! -nargs=* RgPreview call RgPreview(<q-args>, 0)
+  command! -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
+  command! ZshAliases call ZshAliases()
+  command! ZshFunctions call ZshFunctions()
+  command! ZshVariables call ZshVariables()
+  command! ZshExecutables call ZshExecutables()
 
-let g:fzf_layout = { 'window': s:fzf_window_option }
+  let g:fzf_layout = { 'window': s:fzf_window_option }
 
-"Too slow
-"
-" let g:fzf_preview_window = -1
-"
-"function! FloatingFZFPreview(path, line_num)
-"  if g:fzf_window != -1 && nvim_win_is_valid(g:fzf_window)
-"    echom "started_preview"
-"    let win_config = nvim_win_get_config(g:fzf_window)
-"    let win_config.width = float2nr(&columns / 2)
-"    call nvim_win_set_config(g:fzf_window, win_config)
-"    let g:orig_win = nvim_get_current_win()
-"    if g:fzf_preview_window != -1 && nvim_win_is_valid(g:fzf_preview_window)
-"      call nvim_win_close(g:fzf_preview_window, 0)
-"      let g:fzf_preview_window = -1
-"    endif
-"    let buf = nvim_create_buf(v:false, v:true)
-"    let orig_mode = mode()
+  "Too slow
+  "
+  " let g:fzf_preview_window = -1
+  "
+  "function! FloatingFZFPreview(path, line_num)
+  "  if g:fzf_window != -1 && nvim_win_is_valid(g:fzf_window)
+  "    echom "started_preview"
+  "    let win_config = nvim_win_get_config(g:fzf_window)
+  "    let win_config.width = float2nr(&columns / 2)
+  "    call nvim_win_set_config(g:fzf_window, win_config)
+  "    let g:orig_win = nvim_get_current_win()
+  "    if g:fzf_preview_window != -1 && nvim_win_is_valid(g:fzf_preview_window)
+  "      call nvim_win_close(g:fzf_preview_window, 0)
+  "      let g:fzf_preview_window = -1
+  "    endif
+  "    let buf = nvim_create_buf(v:false, v:true)
+  "    let orig_mode = mode()
 
-"    "window size
-"    let height = &lines - 1 - &cmdheight
-"    let width = float2nr(&columns / 2)
+  "    "window size
+  "    let height = &lines - 1 - &cmdheight
+  "    let width = float2nr(&columns / 2)
 
-"    let opts = {
-"          \ 'relative': 'editor',
-"          \ 'row': 0,
-"          \ 'col': &columns - width,
-"          \ 'width': width,
-"          \ 'height': height
-"          \ }
+  "    let opts = {
+  "          \ 'relative': 'editor',
+  "          \ 'row': 0,
+  "          \ 'col': &columns - width,
+  "          \ 'width': width,
+  "          \ 'height': height
+  "          \ }
 
-"    " not sure why before and after is required
-"    let g:fzf_preview_window = nvim_open_win(buf, v:false, opts)
-"    call win_gotoid(g:fzf_preview_window)
-"    execute "edit " . a:path
-"    normal! zR
-"    call win_gotoid(g:orig_win)
-"    call nvim_win_set_option(g:fzf_preview_window, "winhighlight", 
-"          \ "NormalFloat:Normal")
-"    call nvim_win_set_option(g:fzf_preview_window, "signcolumn", 
-"          \ "no")
-"    echom "finished_preview"
-"    return g:fzf_preview_window
-"  else
-"    echom "not preview"
-"    return -1
-"  endif
-"endfunction
+  "    " not sure why before and after is required
+  "    let g:fzf_preview_window = nvim_open_win(buf, v:false, opts)
+  "    call win_gotoid(g:fzf_preview_window)
+  "    execute "edit " . a:path
+  "    normal! zR
+  "    call win_gotoid(g:orig_win)
+  "    call nvim_win_set_option(g:fzf_preview_window, "winhighlight", 
+  "          \ "NormalFloat:Normal")
+  "    call nvim_win_set_option(g:fzf_preview_window, "signcolumn", 
+  "          \ "no")
+  "    echom "finished_preview"
+  "    return g:fzf_preview_window
+  "  else
+  "    echom "not preview"
+  "    return -1
+  "  endif
+  "endfunction
 
-" function! FZFCheckWindow()
-"   if g:fzf_window != -1 && g:fzf_preview_window != -1  && 
-"         \ !nvim_win_is_valid(g:fzf_window) && 
-"         \ nvim_win_is_valid(g:fzf_preview_window)
-"     call nvim_win_close(g:fzf_preview_window, 0)
-"     let g:fzf_preview_window = -1
-"   endif
-" endfunction
+  " function! FZFCheckWindow()
+  "   if g:fzf_window != -1 && g:fzf_preview_window != -1  && 
+  "         \ !nvim_win_is_valid(g:fzf_window) && 
+  "         \ nvim_win_is_valid(g:fzf_preview_window)
+  "     call nvim_win_close(g:fzf_preview_window, 0)
+  "     let g:fzf_preview_window = -1
+  "   endif
+  " endfunction
 
-" augroup FzfWindowHandler
-"   autocmd!
-"   autocmd WinEnter * call FZFCheckWindow()
-" augroup end 
+  " augroup FzfWindowHandler
+  "   autocmd!
+  "   autocmd WinEnter * call FZFCheckWindow()
+  " augroup end 
 
-" let g:fzf_window = -1
+  " let g:fzf_window = -1
 
-" function! FloatingFZF()
-"   let g:fzf_window = FloatingFullscreen()
-" endfunction
+  " function! FloatingFZF()
+  "   let g:fzf_window = FloatingFullscreen()
+  " endfunction
+endif
 "}}}
 
 "rainbow parens {{{
-augroup RainbowParens
-  autocmd!
-  autocmd VimEnter * RainbowParenthesesToggle
-  autocmd Syntax   * RainbowParenthesesLoadRound
-  autocmd Syntax   * RainbowParenthesesLoadSquare
-  autocmd Syntax   * RainbowParenthesesLoadBraces
-augroup end
+if IsInstalled('kien/rainbow_parentheses.vim')
+  augroup RainbowParens
+    autocmd!
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax   * RainbowParenthesesLoadRound
+    autocmd Syntax   * RainbowParenthesesLoadSquare
+    autocmd Syntax   * RainbowParenthesesLoadBraces
+  augroup end
+endif
 "}}}
 
 let g:local_vimrc = ['.config', 'local_init.vim']

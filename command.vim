@@ -37,19 +37,6 @@ function! s:GlobalSharedTerm()
 endfunction
 
 command! -nargs=0 GlobalSharedTerm call s:GlobalSharedTerm()
-
-function! s:ZshVIMModeEnterInsert()
-  setlocal winhighlight=TermCursor:TerminalInsert
-  redraw
-endfunction
-
-function! s:ZshVIMModeExitInsert()
-  setlocal winhighlight=TermCursor:TerminalNormal
-  redraw
-endfunction
-
-command! -nargs=0 ZshVIMModeExitInsert call s:ZshVIMModeExitInsert()
-command! -nargs=0 ZshVIMModeEnterInsert call s:ZshVIMModeEnterInsert()
 "}}}
 
 "timing commands {{{

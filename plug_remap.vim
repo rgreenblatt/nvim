@@ -1,16 +1,18 @@
 "better jumping (uses vim-EnhancedJumps) {{{
-if exists("g:disable_coc")
-  nmap <TAB> <Plug>EnhancedJumpsOlder
-  nmap <S-TAB> <Plug>EnhancedJumpsNewer
-else
-  nmap <silent><expr> <TAB>
-        \ coc#expandableOrJumpable() ?
-        \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-        \ "\<Plug>EnhancedJumpsOlder"
-  nmap <silent><expr> <S-TAB>
-        \ coc#expandableOrJumpable() ?
-        \ coc#rpc#request('snippetPrev', []) :
-        \ "\<Plug>EnhancedJumpsNewer"
+if IsInstalled('inkarkat/vim-EnhancedJumps')
+  if IsInstalled('neoclide/coc.nvim')
+    nmap <silent><expr> <TAB>
+          \ coc#expandableOrJumpable() ?
+          \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+          \ "\<Plug>EnhancedJumpsOlder"
+    nmap <silent><expr> <S-TAB>
+          \ coc#expandableOrJumpable() ?
+          \ coc#rpc#request('snippetPrev', []) :
+          \ "\<Plug>EnhancedJumpsNewer"
+  else
+    nmap <TAB> <Plug>EnhancedJumpsOlder
+    nmap <S-TAB> <Plug>EnhancedJumpsNewer
+  endif
 endif
 
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
@@ -75,7 +77,7 @@ nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<cr>
 xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <c-r>"<cr>
 "}}}
 
-if !exists("g:disable_coc")
+if IsInstalled('neoclide/coc.nvim')
   "coc remaps {{{
   " use <tab> for trigger completion and navigate to next complete item
   function! s:check_back_space() abort
@@ -213,7 +215,7 @@ nmap  <leader>xs   <plug>(vimtex-toggle-main)
 "}}}
 
 "plugin remaps for a headed install {{{
-if !exists("g:headless")
+if !g:headless
   "google {{{
   nnoremap <a-g> :<c-u>Google<space>
   nnoremap <a-f> :<c-u>Googlef<space>
@@ -278,217 +280,219 @@ xmap ;R <Plug>NrrwrgnBangDo
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 
 "custom operators {{{
-xmap ;s <Plug>(substitute-region)
-xmap ;S <Plug>(subvert-region)
-nmap ;s <Plug>(substitute-region)
-nmap ;S <Plug>(subvert-region)
+if IsInstalled('kana/vim-operator-user')
+  xmap ;s <Plug>(substitute-region)
+  xmap ;S <Plug>(subvert-region)
+  nmap ;s <Plug>(substitute-region)
+  nmap ;S <Plug>(subvert-region)
 
-xmap ;r <Plug>(substitute-region-g)
-xmap ;R <Plug>(subvert-region-g)
-nmap ;r <Plug>(substitute-region-g)
-nmap ;R <Plug>(subvert-region-g)
+  xmap ;r <Plug>(substitute-region-g)
+  xmap ;R <Plug>(subvert-region-g)
+  nmap ;r <Plug>(substitute-region-g)
+  nmap ;R <Plug>(subvert-region-g)
 
-xmap ;c <Plug>(substitute-region-c)
-xmap ;C <Plug>(subvert-region-c)
-nmap ;c <Plug>(substitute-region-c)
-nmap ;C <Plug>(subvert-region-c)
+  xmap ;c <Plug>(substitute-region-c)
+  xmap ;C <Plug>(subvert-region-c)
+  nmap ;c <Plug>(substitute-region-c)
+  nmap ;C <Plug>(subvert-region-c)
 
-xmap ;;s <Plug>(substitute-region-exact)
-xmap ;;S <Plug>(subvert-region-exact)
-nmap ;;s <Plug>(substitute-region-exact)
-nmap ;;S <Plug>(subvert-region-exact)
+  xmap ;;s <Plug>(substitute-region-exact)
+  xmap ;;S <Plug>(subvert-region-exact)
+  nmap ;;s <Plug>(substitute-region-exact)
+  nmap ;;S <Plug>(subvert-region-exact)
 
-xmap ;;r <Plug>(substitute-region-g-exact)
-xmap ;;R <Plug>(subvert-region-g-exact)
-nmap ;;r <Plug>(substitute-region-g-exact)
-nmap ;;R <Plug>(subvert-region-g-exact)
+  xmap ;;r <Plug>(substitute-region-g-exact)
+  xmap ;;R <Plug>(subvert-region-g-exact)
+  nmap ;;r <Plug>(substitute-region-g-exact)
+  nmap ;;R <Plug>(subvert-region-g-exact)
 
-xmap ;;c <Plug>(substitute-region-c-exact)
-xmap ;;C <Plug>(subvert-region-c-exact)
-nmap ;;c <Plug>(substitute-region-c-exact)
-nmap ;;C <Plug>(subvert-region-c-exact)
+  xmap ;;c <Plug>(substitute-region-c-exact)
+  xmap ;;C <Plug>(subvert-region-c-exact)
+  nmap ;;c <Plug>(substitute-region-c-exact)
+  nmap ;;C <Plug>(subvert-region-c-exact)
 
-xmap ;z <Plug>(substitute-region-edit)
-xmap ;Z <Plug>(subvert-region-edit)
-nmap ;z <Plug>(substitute-region-edit)
-nmap ;Z <Plug>(subvert-region-edit)
+  xmap ;z <Plug>(substitute-region-edit)
+  xmap ;Z <Plug>(subvert-region-edit)
+  nmap ;z <Plug>(substitute-region-edit)
+  nmap ;Z <Plug>(subvert-region-edit)
 
-function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
-      \ replace_alter, ...)
+  function! SubstituteRegionMakeMap(plug_name, command, flags, pattern_alter,
+        \ replace_alter, ...)
 
-  let edit_flags = a:0 && a:1
+    let edit_flags = a:0 && a:1
 
-  let start_map = "map <silent> <Plug>(" . a:plug_name .
-        \ ") <Cmd>call SubstituteRegionSetup('" . a:command .
-        \ "', '".  a:flags . "', '" . a:pattern_alter . "', '" .
-        \ a:replace_alter .  "', '" . edit_flags . "')<cr>"
-  let start_xmap = "x" . start_map
-  let start_nmap = "n" . start_map
-  let end_xmap = "<Plug>(substitute-region-visual-finish)"
-  let end_nmap = "."
-  execute start_xmap . end_xmap
-  execute start_nmap . end_nmap
-endfunction
+    let start_map = "map <silent> <Plug>(" . a:plug_name .
+          \ ") <Cmd>call SubstituteRegionSetup('" . a:command .
+          \ "', '".  a:flags . "', '" . a:pattern_alter . "', '" .
+          \ a:replace_alter .  "', '" . edit_flags . "')<cr>"
+    let start_xmap = "x" . start_map
+    let start_nmap = "n" . start_map
+    let end_xmap = "<Plug>(substitute-region-visual-finish)"
+    let end_nmap = "."
+    execute start_xmap . end_xmap
+    execute start_nmap . end_nmap
+  endfunction
 
-"source:
-"https://stackoverflow.com/questions/53498121/all-the-special-characters-that-need-escaping-in-vim-pattern-searching-replacmen
-function! SubstitutePatternEscape(str)
-  return '\V\C' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
-endfunction
+  "source:
+  "https://stackoverflow.com/questions/53498121/all-the-special-characters-that-need-escaping-in-vim-pattern-searching-replacmen
+  function! SubstitutePatternEscape(str)
+    return '\V\C' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
+  endfunction
 
-function! SubstituteReplaceEscape(str)
-  return escape(a:str, '/\' . (&magic ? '&~' : ''))
-endfunction
+  function! SubstituteReplaceEscape(str)
+    return escape(a:str, '/\' . (&magic ? '&~' : ''))
+  endfunction
 
-"note, { and } can't be effectively escaped for subvert...
-function! SubvertPatternEscape(str)
-  return substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
-endfunction
+  "note, { and } can't be effectively escaped for subvert...
+  function! SubvertPatternEscape(str)
+    return substitute(escape(a:str, '/\'), "\n", '\\n', 'ge')
+  endfunction
 
-function! SubvertReplaceEscape(str)
-  return a:str
-endfunction
+  function! SubvertReplaceEscape(str)
+    return a:str
+  endfunction
 
-function! SubstitutePatternEscapeExact(str)
-  return '\V\C' . '\<' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge') .
-        \ '\>'
-endfunction
+  function! SubstitutePatternEscapeExact(str)
+    return '\V\C' . '\<' . substitute(escape(a:str, '/\'), "\n", '\\n', 'ge') .
+          \ '\>'
+  endfunction
 
-call SubstituteRegionMakeMap("substitute-region", "s", "",
-      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("substitute-region-g", "s", "g",
-      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("substitute-region-c", "s", "c",
-      \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region", "S", "",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region-g", "S", "g",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region-c", "S", "c",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region", "s", "",
+        \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region-g", "s", "g",
+        \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region-c", "s", "c",
+        \ "SubstitutePatternEscape", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region", "S", "",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region-g", "S", "g",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region-c", "S", "c",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
 
-call SubstituteRegionMakeMap("substitute-region-exact", "s", "",
-      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("substitute-region-g-exact", "s", "g",
-      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("substitute-region-c-exact", "s", "c",
-      \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region-exact", "S", "w",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region-g-exact", "S", "gw",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
-call SubstituteRegionMakeMap("subvert-region-c-exact", "S", "cw",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region-exact", "s", "",
+        \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region-g-exact", "s", "g",
+        \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("substitute-region-c-exact", "s", "c",
+        \ "SubstitutePatternEscapeExact", "SubstituteReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region-exact", "S", "w",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region-g-exact", "S", "gw",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
+  call SubstituteRegionMakeMap("subvert-region-c-exact", "S", "cw",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape")
 
 
-call SubstituteRegionMakeMap("substitute-region-edit", "s", "",
-      \ "SubstitutePatternEscape", "SubstituteReplaceEscape", 1)
-call SubstituteRegionMakeMap("subvert-region-edit", "S", "",
-      \ "SubvertPatternEscape", "SubvertReplaceEscape", 1)
+  call SubstituteRegionMakeMap("substitute-region-edit", "s", "",
+        \ "SubstitutePatternEscape", "SubstituteReplaceEscape", 1)
+  call SubstituteRegionMakeMap("subvert-region-edit", "S", "",
+        \ "SubvertPatternEscape", "SubvertReplaceEscape", 1)
 
-function! GetVisCommand(line_dif)
-  if a:line_dif
-    return string(a:line_dif) . "j"
-  else
-    return "l"
-  endif
-endfunction
-
-xmap <silent> <Plug>(substitute-region-visual-finish)
-      \ <esc>'<<Cmd>execute "normal .".
-      \ GetVisCommand(line("'>") - line("'<"))<cr>
-
-function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter,
-      \ edit_flags)
-  let g:to_sub = eval("@" . v:register)
-  let g:substitute_region_start_insert = getpos("'[")
-  let g:substitute_region_end_insert = getpos("']")
-  let g:replace_alter = a:replace_alter
-  let g:pattern_alter = a:pattern_alter
-  "do nothing change required for some reason
-  let cur_mode = mode()
-  let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == "\<c-v>"
-  let g:substitute_region_edit_flags = a:edit_flags
-
-  if !is_visual
-    silent execute "normal! ia\<bs>\<esc>"
-  endif
-
-  let g:substitute_region_is_first = 1
-  let g:substitute_region_command = a:command
-  let g:substitute_region_flags = a:flags
-  silent! call repeat#set("\<Plug>(operator-substitute-region)", v:count)
-endfunction
-
-call operator#user#define('substitute-region', 'SubstituteRegion')
-
-function! SubstituteRegion(_)
-  let cursor = getcurpos()
-  let g:substitute_region_orig_s = @s
-  let start = getpos("'[")
-  let end = getpos("']")
-  if g:substitute_region_is_first
-    if @. != ""
-      call setpos("'[", g:substitute_region_start_insert)
-      call setpos("']", g:substitute_region_end_insert)
-      silent execute "normal! `[v`]h\"sy"
-      let g:saved_s_reg = function(g:replace_alter)(@s)
-      call setpos("'[", start)
-      call setpos("']", end)
+  function! GetVisCommand(line_dif)
+    if a:line_dif
+      return string(a:line_dif) . "j"
     else
-      let g:saved_s_reg = ""
+      return "l"
     endif
-    call feedkeys("2u", 'ni')
-  endif
-  let @s = g:saved_s_reg
-  let to_feed = "\<Cmd>call setpos(\"'[\", ". string(start) . ")\<cr>" .
-        \ "\<Cmd>call setpos(\"']\", ". string(end) . ")\<cr>" .
-        \ ":'[,']" .
-        \ g:substitute_region_command . "/" .
-        \ function(g:pattern_alter)(g:to_sub) .
-        \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags
+  endfunction
 
-  let to_feed_suffix = " | let @s = g:substitute_region_orig_s | normal! '["
-  let to_feed .= to_feed_suffix
+  xmap <silent> <Plug>(substitute-region-visual-finish)
+        \ <esc>'<<Cmd>execute "normal .".
+        \ GetVisCommand(line("'>") - line("'<"))<cr>
 
-  if g:substitute_region_edit_flags
-    let to_feed .= repeat("\<left>", len(to_feed_suffix))
-  else
-    let to_feed .= "\<cr>"
-  endif
+  function! SubstituteRegionSetup(command, flags, pattern_alter, replace_alter,
+        \ edit_flags)
+    let g:to_sub = eval("@" . v:register)
+    let g:substitute_region_start_insert = getpos("'[")
+    let g:substitute_region_end_insert = getpos("']")
+    let g:replace_alter = a:replace_alter
+    let g:pattern_alter = a:pattern_alter
+    "do nothing change required for some reason
+    let cur_mode = mode()
+    let is_visual = cur_mode == "v" || cur_mode == "V" || cur_mode == "\<c-v>"
+    let g:substitute_region_edit_flags = a:edit_flags
 
-  echom @s
-  echom to_feed
+    if !is_visual
+      silent execute "normal! ia\<bs>\<esc>"
+    endif
 
-  call feedkeys(to_feed, 'n')
-  let g:substitute_region_is_first = 0
-endfunction
+    let g:substitute_region_is_first = 1
+    let g:substitute_region_command = a:command
+    let g:substitute_region_flags = a:flags
+    silent! call repeat#set("\<Plug>(operator-substitute-region)", v:count)
+  endfunction
 
-nmap ;;v  <Plug>(operator-select)
-call operator#user#define('select', 'Op_select_region')
-function! Op_select_region(window_heightmotion_wiseness)
-  normal! `[v`]
-endfunction
+  call operator#user#define('substitute-region', 'SubstituteRegion')
 
-nmap ;;<c-v>  <Plug>(operator-select-block)
-call operator#user#define('select-block', 'Op_select_block')
-function! Op_select_block(window_heightmotion_wiseness)
-  exe "normal `[\<c-v>`]"
-endfunction
+  function! SubstituteRegion(_)
+    let cursor = getcurpos()
+    let g:substitute_region_orig_s = @s
+    let start = getpos("'[")
+    let end = getpos("']")
+    if g:substitute_region_is_first
+      if @. != ""
+        call setpos("'[", g:substitute_region_start_insert)
+        call setpos("']", g:substitute_region_end_insert)
+        silent execute "normal! `[v`]h\"sy"
+        let g:saved_s_reg = function(g:replace_alter)(@s)
+        call setpos("'[", start)
+        call setpos("']", end)
+      else
+        let g:saved_s_reg = ""
+      endif
+      call feedkeys("2u", 'ni')
+    endif
+    let @s = g:saved_s_reg
+    let to_feed = "\<Cmd>call setpos(\"'[\", ". string(start) . ")\<cr>" .
+          \ "\<Cmd>call setpos(\"']\", ". string(end) . ")\<cr>" .
+          \ ":'[,']" .
+          \ g:substitute_region_command . "/" .
+          \ function(g:pattern_alter)(g:to_sub) .
+          \ "/\<c-r>\<c-r>s/" .  g:substitute_region_flags
 
-nmap ;;V  <Plug>(operator-select-line)
-call operator#user#define('select-line', 'Op_select_line')
-function! Op_select_line(window_heightmotion_wiseness)
-  normal! `[V`]
-endfunction
+    let to_feed_suffix = " | let @s = g:substitute_region_orig_s | normal! '["
+    let to_feed .= to_feed_suffix
 
-nmap <leader>wa  <Plug>(operator-adjust)
-xmap <leader>wa  <Plug>(operator-adjust)
-call operator#user#define('adjust', 'Op_adjust_window_height')
-function! Op_adjust_window_height(motion_wiseness)
-  execute (line("']") - line("'[") + 1) 'wincmd' '_'
-  normal! `[zt
-endfunction
+    if g:substitute_region_edit_flags
+      let to_feed .= repeat("\<left>", len(to_feed_suffix))
+    else
+      let to_feed .= "\<cr>"
+    endif
+
+    echom @s
+    echom to_feed
+
+    call feedkeys(to_feed, 'n')
+    let g:substitute_region_is_first = 0
+  endfunction
+
+  nmap ;;v  <Plug>(operator-select)
+  call operator#user#define('select', 'Op_select_region')
+  function! Op_select_region(window_heightmotion_wiseness)
+    normal! `[v`]
+  endfunction
+
+  nmap ;;<c-v>  <Plug>(operator-select-block)
+  call operator#user#define('select-block', 'Op_select_block')
+  function! Op_select_block(window_heightmotion_wiseness)
+    exe "normal `[\<c-v>`]"
+  endfunction
+
+  nmap ;;V  <Plug>(operator-select-line)
+  call operator#user#define('select-line', 'Op_select_line')
+  function! Op_select_line(window_heightmotion_wiseness)
+    normal! `[V`]
+  endfunction
+
+  nmap <leader>wa  <Plug>(operator-adjust)
+  xmap <leader>wa  <Plug>(operator-adjust)
+  call operator#user#define('adjust', 'Op_adjust_window_height')
+  function! Op_adjust_window_height(motion_wiseness)
+    execute (line("']") - line("'[") + 1) 'wincmd' '_'
+    normal! `[zt
+  endfunction
+endif
 "}}}
 
 nnoremap <a-i> <Cmd>Codi<cr>
@@ -669,13 +673,17 @@ augroup END
 "}}}
 
 "ToggleMacroMode {{{
+let s:highlighted_yank_installed = IsInstalled('machakann/vim-highlightedyank')
+
 function! EnterMacroMode()
   let g:clever_f_mark_cursor = 0
   let g:clever_f_mark_char = 0
   let g:qs_enable = 0
   let g:sqs_enable = 0
   let g:macro_mode= 1
-  HighlightedyankOff
+  if s:highlighted_yank_installed
+    HighlightedyankOff
+  endif
 endfunction
 
 command! -nargs=0 EnterMacroMode call EnterMacroMode()
@@ -686,7 +694,9 @@ function! ExitMacroMode()
   let g:qs_enable = 1
   let g:sqs_enable = 1
   let g:macro_mode= 0
-  HighlightedyankOn
+  if s:highlighted_yank_installed
+    HighlightedyankOn
+  endif
 endfunction
 
 command! -nargs=0 ExitMacroMode call ExitMacroMode()
@@ -703,7 +713,11 @@ endfunction
 
 command! -nargs=0 ToggleMacroMode call ToggleMacroMode()
 
-noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
+if IsInstalled('itchyny/lightline.vim')
+  noremap <silent> ;m <Cmd>ToggleMacroMode<CR><Cmd>call lightline#update()<cr>
+else
+  noremap <silent> ;m <Cmd>ToggleMacroMode<CR>
+endif
 "}}}
 
 "vim qf {{{

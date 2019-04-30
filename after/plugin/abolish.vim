@@ -16,5 +16,6 @@ if IsInstalled('tpope/vim-abolish')
   Abolish addtion addition
   Abolish necces{ities,ary} necess{}
   Abolish {stagecoach,cockroach,approach,roach,coach,reproach,broach}s {}es
-  Abolish {rec,misperc,misconc,preconc,reconc,undec,perc,conc,rec,dec}ieve {}eive
+  Abolish {rec,misperc,misconc,preconc,reconc,undec,perc,conc,rec,dec}ieve 
+        \ {}eive
 endif

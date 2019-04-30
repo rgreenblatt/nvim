@@ -9,6 +9,7 @@ function s:Set(var, default)
   endif
 endfunction
 
+"default plug installs {{{
 call s:Set("g:headless", 0)
 call s:Set("g:no_language_plugins", 0)
 call s:Set("g:no_coc", 0)
@@ -18,6 +19,7 @@ call s:Set("g:no_editing_plugins", 0)
 call s:Set("g:no_setup_plugins", 0)
 call s:Set("g:no_integration_plugins", 0)
 call s:Set("g:no_misc_plugins", 0)
+"}}}
 
 let g:no_language_plugins = g:no_language_plugins || g:athame_running
 let g:no_appearance_plugins = g:no_appearance_plugins || g:athame_running

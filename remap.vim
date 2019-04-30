@@ -25,7 +25,6 @@ nnoremap ,i 8gt
 nnoremap ,o 9gt
 nnoremap ,p <Cmd>tablast<cr>
 "}}}
-
 "macros {{{
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
@@ -36,21 +35,17 @@ endfunction
 
 noremap Q @@
 "}}}
-
 "conceal toggle {{{
-nnoremap ;vc <Cmd>set <C-R>=&conceallevel ?
+nnoremap ;vc :<c-u>set <C-R>=&conceallevel ?
       \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 "}}}
-
 "command mode navigation{{{
 cnoremap <C-A> <Home>
 "}}}
-
 "fix spelling mistake {{{
 inoremap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
 nnoremap <c-f> ms[s1z=`s
 "}}}
-
 "window maps {{{
 function! FloatingOverWindow(path)
   let buf = nvim_create_buf(v:false, v:true)
@@ -132,7 +127,6 @@ function! MapWinCmd(key, command, ...)
         \ a:command.suffix
 endfunction
 "}}}
-
 "general leader/semicolon/alt maps {{{
 nnoremap <silent> <leader>p <Cmd>cd %:p:h<CR>
 nnoremap <leader>P :<c-u>cd<space>
@@ -195,7 +189,6 @@ nnoremap <a-s> <Cmd>source %<cr>
 
 nnoremap <a-o> :<c-u>s/\C<left><left><left><left>
 "}}}
-
 "navigate indents {{{
 function! s:indent_len(str)
   return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
@@ -222,7 +215,6 @@ endfunction
 nnoremap <silent> <leader>' <Cmd>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> <leader>" <Cmd>call <SID>go_indent(v:count1, -1)<cr>
 "}}}
-
 "better cmd line {{{
 cnoremap <esc> <c-f>z1<cr>
 
@@ -236,25 +228,21 @@ augroup CmdWin
   autocmd CmdwinLeave * set cmdheight=3
 augroup END
 "}}}
-
 "terminal {{{
 tnoremap <C-Space> <C-\><C-n>
 
 call MapWinCmd("t", "GlobalSharedTerm")
 call MapWinCmd("T", "terminal")
 "}}}
-
 "arbitrary command in new window {{{
 call MapWinCmd("e", " ", 1)
 "}}}
-
 "arrow key window resize {{{
 noremap <up>    <C-W>+
 noremap <down>  <C-W>-
 noremap <left>  3<C-W>>
 noremap <right> 3<C-W><
 "}}}
-
 "insert word of the line above/below {{{
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
 			\:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
@@ -266,23 +254,18 @@ inoremap <C-E> <C-C>:let @z = @"<CR>mz
 			\`zp:let @" = @z<CR>a
 
 "}}}
-
 "select last inserted/yank/etc text {{{
 nnoremap gV `[v`]h
 "}}}
-
 "line text object {{{
 xnoremap il ^og_
 onoremap il <Cmd>normal vil<CR>
 "}}}
-
 "view text object {{{
 xnoremap iv HoL
 onoremap iv <Cmd>exec "normal! HVL"<cr>
 "}}}
-
 "no ctrl z, I don't typically use vim in a shell, I run it standalone {{{
 nnoremap <c-z> <nop>
 "}}}
-
 " vim: set fdm=marker:

@@ -18,8 +18,8 @@ endif
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
 nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 
-nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
-nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
+nmap <leader><Tab> <Plug>EnhancedJumpsRemoteOlder
+nmap <leader><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
 "langmap related
 nnoremap g"  g,
@@ -30,7 +30,6 @@ nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 call MapWinCmd("c", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
       \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif")
 "}}}
-
 "fzf maps {{{
 call MapWinCmd("f", "Files")
 call MapWinCmd("F", "Files ", 1)
@@ -63,20 +62,16 @@ nnoremap <M-C-H> <Cmd>History/<cr>
 nnoremap <M-C-P> <Cmd>:Helptags<cr>
 nnoremap <leader>: <Cmd>History:<cr>
 "}}}
-
 "dirvish in new window {{{
 call MapWinCmd("d", "Dirvish")
 "}}}
-
 "startify in new window {{{
 call MapWinCmd("s", "Startify")
 "}}}
-
 "thesaurus {{{
 nnoremap <a-t> <Cmd>ThesaurusQueryReplaceCurrentWord<cr>
 xnoremap <a-t> y<Cmd>ThesaurusQueryReplace <c-r>"<cr>
 "}}}
-
 if IsInstalled('neoclide/coc.nvim')
   "coc remaps {{{
   " use <tab> for trigger completion and navigate to next complete item
@@ -181,14 +176,12 @@ if IsInstalled('neoclide/coc.nvim')
     endif
   endfunction
   "}}}
-
   "vista {{{
   call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
         \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
   nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
   "}}}
 endif
-
 "vimtex {{{
 nmap  <leader>xi   <plug>(vimtex-info)
 nmap  <leader>xI   <plug>(vimtex-info-full)
@@ -213,7 +206,6 @@ nmap  <leader>xx   <plug>(vimtex-reload)
 nmap  <leader>xX   <plug>(vimtex-reload-state)
 nmap  <leader>xs   <plug>(vimtex-toggle-main)
 "}}}
-
 "plugin remaps for a headed install {{{
 if !g:headless
   "google {{{
@@ -232,13 +224,11 @@ if !g:headless
   "}}}
 endif
 "}}}
-
 ""insertchar options {{{
 "let g:insert_char_no_default_mapping = 1
 "nmap <leader>s <Plug>InsertChar
 "nmap <leader>S <Plug>InsertCharAfter
 ""}}}
-
 "scratch {{{
 let g:scratch_no_mappings = 1
 
@@ -248,7 +238,6 @@ nmap zS <plug>(scratch-clear)
 xmap zs <plug>(scratch-selection-reuse)
 xmap zS <plug>(scratch-selection-clear)
 "}}}
-
 "yankring {{{
 nmap p <Plug>(miniyank-autoput)
 nmap P <Plug>(miniyank-autoPut)
@@ -259,7 +248,6 @@ xnoremap <expr> p v:register=='"'?'pgvy':'p'
 nmap ;n <Plug>(miniyank-cycle)
 nmap ;N <Plug>(miniyank-cycleback)
 "}}}
-
 " vimade {{{
 "  nnoremap <silent> ;vt <Cmd>VimadeToggle<cr>
 "  nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ?
@@ -268,7 +256,6 @@ nmap ;N <Plug>(miniyank-cycleback)
 "  nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ?
 "        \ "<Cmd>VimadeWinEnable<cr>" : "<Cmd>VimadeWinDisable<cr>"
 " }}}
-
 "NarrowRegion {{{
 let g:nrrw_rgn_nomap_nr = 1
 let g:nrrw_rgn_nomap_Nr = 1
@@ -276,11 +263,9 @@ let g:nrrw_rgn_nomap_Nr = 1
 xmap ;r <Plug>NrrwrgnDo
 xmap ;R <Plug>NrrwrgnBangDo
 "}}}
-
-nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
-
 "custom operators {{{
 if IsInstalled('kana/vim-operator-user')
+  "substitute region {{{
   xmap ;s <Plug>(substitute-region)
   xmap ;S <Plug>(subvert-region)
   nmap ;s <Plug>(substitute-region)
@@ -466,7 +451,8 @@ if IsInstalled('kana/vim-operator-user')
     call feedkeys(to_feed, 'n')
     let g:substitute_region_is_first = 0
   endfunction
-
+  "}}}
+  "selection operators {{{
   nmap ;;v  <Plug>(operator-select)
   call operator#user#define('select', 'Op_select_region')
   function! Op_select_region(window_heightmotion_wiseness)
@@ -492,15 +478,9 @@ if IsInstalled('kana/vim-operator-user')
     execute (line("']") - line("'[") + 1) 'wincmd' '_'
     normal! `[zt
   endfunction
+  "}}}
 endif
 "}}}
-
-nnoremap <a-i> <Cmd>Codi<cr>
-
-nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
-
-nnoremap <silent> <leader>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
-
 "goyo {{{
 nnoremap <silent> ;vg <Cmd>Goyo<cr>
 
@@ -519,7 +499,6 @@ endfunction
 autocmd! User GoyoEnter call SetupGoyo()
 autocmd! User GoyoLeave call SetupNoGoyo()
 "}}}
-
 "git {{{
 nnoremap <silent> ;gs <Cmd>Gstatus<cr>
 nnoremap ;gd :<c-u>Gvdiff<space>
@@ -544,19 +523,16 @@ nnoremap ;go :<c-u>Gcheckout<space>
 nnoremap ;gr :<c-u>Gremove<space>
 nnoremap ;gm :<c-u>Gmove<space>
 "}}}
-
 "ninja-feet overides mappings {{{
 nnoremap ;i [i
 nnoremap ;I [I
 "}}}
-
 "sideways maps {{{
 nnoremap <silent> ;h <Cmd>SidewaysJumpLeft<cr>
 nnoremap <silent> ;l <Cmd>SidewaysJumpRight<cr>
 nnoremap <silent> ;y <Cmd>SidewaysLeft<cr>
 nnoremap <silent> ;o <Cmd>SidewaysRight<cr>
 "}}}
-
 "nvimgdb {{{
 let g:nvimgdb_disable_start_keymaps = 1
 
@@ -586,23 +562,19 @@ let g:nvimgdb_config_override = {
       \ 'key_eval':          ';de'
       \ }
 "}}}
-
 "visual star search and replace {{{
 xmap <Leader>s <Plug>(visualstar-*)``cgn
 xmap <Leader>S <Plug>(visualstar-#)``cgN
 "}}}
-
 "dispatch {{{
 nnoremap <a-m> <Cmd>Make<cr>
 nnoremap <a-,> <Cmd>Make!<cr>
 "}}}
-
 "vim-cmake {{{
 nnoremap <a-b> <Cmd>CMake<cr>
 nnoremap <a-.> <Cmd>CMake!<cr>
 nnoremap <a-/> <Cmd>CMakeClean<cr>
 "}}}
-
 "sandwich {{{
 let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
@@ -633,7 +605,6 @@ xmap <leader>ar <Plug>(operator-sandwich-replace)
 " omap as <Plug>(textobj-sandwich-query-a)
 " xmap as <Plug>(textobj-sandwich-query-a)
 "}}}
-
 "wintabs {{{
 nmap <c-h> <Plug>(wintabs_previous)
 nmap <c-l> <Plug>(wintabs_next)
@@ -671,7 +642,6 @@ augroup CmdWinQ
   autocmd CmdwinEnter * nnoremap <buffer> <leader>q <Cmd>q<CR>
 augroup END
 "}}}
-
 "ToggleMacroMode {{{
 let s:highlighted_yank_installed = IsInstalled('machakann/vim-highlightedyank')
 
@@ -719,7 +689,6 @@ else
   noremap <silent> ;m <Cmd>ToggleMacroMode<CR>
 endif
 "}}}
-
 "vim qf {{{
 nmap [q <Plug>(qf_qf_previous)
 nmap ]q <Plug>(qf_qf_next)
@@ -730,5 +699,11 @@ nmap yoq <Plug>(qf_qf_toggle)
 "overrides a unimpared mapping, but I don't use that mapping
 nmap yol <Plug>(qf_loc_toggle)
 "}}}
-
+"other {{{
+nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
+nnoremap <a-i> <Cmd>Codi<cr>
+nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
+nnoremap <silent> <leader>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
+let g:targets_nl = 'nN'
+"}}}
 " vim: set fdm=marker:

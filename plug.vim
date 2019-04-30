@@ -19,7 +19,6 @@ for val in values(g:plugin_blacklist)
   let g:combined_blacklist += val
 endfor
 "}}}
-
 "plugins list {{{
 let s:plugins = []
 
@@ -60,6 +59,7 @@ if !g:no_language_plugins
   call s:PA(['sheerun/vim-polyglot'])
   "slooooooow
   " call s:PA(['LucHermitte/VimFold4C'])
+  call s:PA(['pseewald/vim-anyfold'])
   call s:PA(['tmhedberg/SimpylFold'])
   call s:PA(['metakirby5/codi.vim'])
 endif
@@ -166,7 +166,6 @@ if !g:no_misc_plugins
 endif
 "}}}
 "}}}
-
 "add all plugins {{{
 set nocompatible
 filetype off
@@ -181,7 +180,6 @@ endfor
 call plug#end()
 filetype plugin indent on
 "}}}
-
 "helpers {{{
 function! s:First(lst)
   return a:lst[0]
@@ -194,5 +192,4 @@ function! IsInstalled(plugin)
         \ index(g:combined_blacklist, a:plugin) == -1
 endfunction
 "}}}
-
 " vim: set fdm=marker:

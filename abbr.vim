@@ -1,5 +1,4 @@
 inoreabbrev cosnt const
-
 "command abbreviation {{{
 function! SetupCommandAbbrs(from, to)
     execute 'cnoreabbrev <expr> '.a:from
@@ -17,5 +16,4 @@ call SetupCommandAbbrs('WD', 'WintabsDo')
 
 cnoreabbrev ehco echo
 "}}}
-
 " vim: set fdm=marker:

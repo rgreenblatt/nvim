@@ -21,24 +21,15 @@ else
   command! -nargs=0 ZshVIMModeEnterInsert echo "insert"
 endif
 "}}}
-
 "enhanced jumps{{{
 let g:EnhancedJumps_CaptureJumpMessages = 0
 let g:EnhancedJumps_UseTab = 0
 "}}}
-
-let g:tex_conceal="abdgm"
-
-let g:lion_squeeze_spaces = 1
-
 "cleverf options{{{
 let g:clever_f_across_no_line = 1
 let g:clever_f_fix_key_direction = 0
 let g:clever_f_timeout_ms = 3000
 "}}}
-
-let g:wordmotion_prefix = ';'
-
 if IsInstalled('neoclide/coc.nvim')
   "coc {{{
   let g:coc_global_extensions = [
@@ -66,12 +57,10 @@ if IsInstalled('neoclide/coc.nvim')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
   "}}}
-
   "vista {{{
   let g:vista_fzf_preview = ['right:50%']
   "}}}
 endif
-
 "startify {{{
 let g:startify_change_to_dir = 0
 let g:startify_files_number = 5
@@ -94,7 +83,6 @@ let g:startify_skiplist = [
       \ ]
 
 "}}}
-
 "calender {{{
 let g:calendar_google_task = 1
 let g:calendar_google_calendar = 1
@@ -106,19 +94,17 @@ augroup calendar-mappings
   autocmd FileType calendar nunmap <buffer> <space>
 augroup end
 "}}}
-
 "vimtex {{{
+let g:tex_conceal="abdgm"
 let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
 "}}}
-
 "semshi {{{
 let g:semshi#error_sign = v:false
 let g:semshi#simplify_markup = v:false
 "}}}
-
 "chromatica {{{
 let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
 " augroup ChromaticaStartup
@@ -130,7 +116,6 @@ let g:chromatica#global_args = [
       \ ]
 let g:chromatica#responsive_mode = 1
 "}}}
-
 ""vimade {{{
 "augroup VimadeSpecial
 "    autocmd!
@@ -138,9 +123,6 @@ let g:chromatica#responsive_mode = 1
 "    autocmd CmdlineLeave * VimadeBufEnable
 "augroup END
 ""}}}
-
-let g:windowswap_map_keys = 0
-
 " limelight/goyo {{{
 let g:limelight_conceal_ctermfg = 'DarkGray'
 
@@ -151,9 +133,6 @@ let g:limelight_conceal_guifg = 'DarkGray'
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
 "}}}
-
-let g:mwAutoLoadMarks = 1
-
 "codi {{{
 let g:codi#interpreters = {
       \ 'python': {
@@ -161,9 +140,6 @@ let g:codi#interpreters = {
       \ },
       \ }
 "}}}
-
-let g:gutentags_cache_dir = '~/.tags'
-
 "c/cpp folding {{{
 let g:fold_options = {
       \ 'fallback_method' : { 'line_threshold' : 2000, 
@@ -177,9 +153,6 @@ let g:fold_options = {
       \ 'strip_template_arguments': 1
       \ }
 "}}}
-
-let g:highlightedyank_highlight_duration = 200
-
 " sneak {{{
 let g:sneak#s_next = 1
 let g:sneak#absolute_dir = 0
@@ -190,7 +163,6 @@ omap S <Plug>Sneak_S
 
 " let g:sqs_within_lines = 5
 "}}}
-
 "fzf {{{
 if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
   function! RgPreview(args, hidden)
@@ -198,7 +170,8 @@ if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
           \ "--color=always --smart-case " . 
           \ (a:hidden ? '--hidden --glob "!.git/*" ' : '') . 
           \ shellescape(a:args), 1, {'options' : 
-          \ fzf#vim#with_preview('right:50%').options})
+          \ fzf#vim#with_preview('right:50%').options + 
+          \ ['--bind', 'alt-e:execute-silent(remote_tab_open_grep {} &)']})
   endfunction
 
   let s:fzf_window_option = 'call FloatingFullscreen()'
@@ -312,7 +285,6 @@ if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
   " endfunction
 endif
 "}}}
-
 "rainbow parens {{{
 if IsInstalled('kien/rainbow_parentheses.vim')
   augroup RainbowParens
@@ -324,38 +296,25 @@ if IsInstalled('kien/rainbow_parentheses.vim')
   augroup end
 endif
 "}}}
-
-let g:local_vimrc = ['.config', 'local_init.vim']
-
 "wintabs {{{
 let g:wintabs_delete_buffers = 0 
 let g:wintabs_autoclose_vimtab = 1
 let g:wintabs_buffer_limit = 5
 "}}}
-
 ""autoformat {{{
 "noremap <F5> :AutoFormat<CR>
 "let g:formatdef_scalafmt = "'scalafmt --stdin'"
 "let g:formatters_scala = ['scalafmt'] 
 ""}}}
-
 "polyglot and associated plugins: {{{
 let g:polyglot_disabled = ['latex']
 "if I ever start working with csvs some, look into plugin
 let g:no_csv_maps = 1
 "}}}
-
 "sneak quick scope {{{
 let g:sqs_enable = 1
 nmap ;vs <plug>(SneakQuickScopeToggle)
 "}}}
-
-let g:scratch_autohide = 0
-
-let g:YUNOcommit_after = 2000
-
-let g:dispatch_no_maps = 1
-
 "dirvish {{{
 function! DirvishFoldHiddenText()
   let names = []
@@ -388,7 +347,6 @@ endfunction
 
 let g:dirvish_mode = 'call DirvishSetup()'
 "}}}
-
 "rooter {{{
 let g:rooter_use_lcd = 1
 let g:rooter_silent_chdir = 1
@@ -397,5 +355,16 @@ let g:rooter_patterns = ['build.sbt', 'build.sh', 'ccls',
       \ 'compile_commands.json', '.git', '.git/', '_darcs/', '.hg/', '.bzr/',
       \ '.svn/']
 "}}}
-
+" other {{{
+let g:wordmotion_prefix = ';'
+let g:lion_squeeze_spaces = 1
+let g:windowswap_map_keys = 0
+let g:mwAutoLoadMarks = 1
+let g:gutentags_cache_dir = '~/.tags'
+let g:highlightedyank_highlight_duration = 200
+let g:local_vimrc = ['.config', 'local_init.vim']
+let g:scratch_autohide = 0
+let g:YUNOcommit_after = 2000
+let g:dispatch_no_maps = 1
+"}}}
 " vim: set fdm=marker:

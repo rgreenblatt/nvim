@@ -5,7 +5,6 @@ function! MyFiletype()
         \'no ft') : ''
 endfunction
 "}}}
-
 "wintabs {{{
 function! WinTabBefore()
   return "%{wintabs#get_tablist(0)}"
@@ -27,7 +26,6 @@ let g:wintabs_only_basename = 1
 let g:wintabs_show_number = 1
 let g:wintabs_not_current_character_limit = 7
 "}}}
-
 " macro mode info {{{ 
 function! MacroModeInfo()
   if g:macro_mode == 1
@@ -37,7 +35,6 @@ function! MacroModeInfo()
   endif
 endfunction
 "}}}
-
 "short pwd {{{
 "requires shell script
 function! ShortPwd()
@@ -53,7 +50,6 @@ function! ShortPwdWrapper()
   return "%{ShortPwd()}"
 endfunction
 "}}}
-
 "FugitiveStatusline wrapper to reduce noise {{{
 function! FugitiveStatuslineWrapper()
   let out = FugitiveStatusline()
@@ -64,7 +60,6 @@ function! FugitiveStatuslineWrapper()
   endif
 endfunction
 "}}}
-
 "status line {{{
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -103,5 +98,4 @@ let g:lightline = {
       \ }
       \ }
 "}}}
-
 " vim: set fdm=marker:

@@ -14,7 +14,6 @@ endfunction
 
 command! -nargs=+ -complete=command Output call s:Output(<q-args>)
 "}}}
-
 "command for setting gdb path {{{
 function! s:SetDebugPath(path)
     let g:debug_path = a:path
@@ -22,7 +21,6 @@ endfunction
 
 command! -nargs=1 -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
 "}}}
-
 "terminals {{{
 let g:shared_term_buffer = -1
 
@@ -38,7 +36,6 @@ endfunction
 
 command! -nargs=0 GlobalSharedTerm call s:GlobalSharedTerm()
 "}}}
-
 "timing commands {{{
 " Times the number of times a particular command takes to execute the
 " specified number of times (in seconds).
@@ -57,5 +54,4 @@ function! HowLong( command, numberOfTimes )
   return result
 endfunction
 "}}}
-
 " vim: set fdm=marker:

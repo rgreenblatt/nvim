@@ -559,7 +559,7 @@ let g:nvimgdb_config_override = {
       \ 'key_breakpoint': ';db',
       \ 'key_frameup':    ';dk',
       \ 'key_framedown':  ';dj',
-      \ 'key_eval':       ';de'
+      \ 'key_eval':       ';de',
       \ 'split_command':  'vsplit'
       \ }
 "}}}

@@ -14,8 +14,6 @@ if g:athame_running
         \ ]
 endif
 
-let g:plugin_blacklist.temp_disable = ['inkarkat/vim-mark']
-
 let g:combined_blacklist = []
 for val in values(g:plugin_blacklist)
   let g:combined_blacklist += val

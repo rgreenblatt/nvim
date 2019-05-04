@@ -609,6 +609,8 @@ nmap ;u <Plug>(wintabs_undo)
 nmap <c-w>o <Plug>(wintabs_only)
 nmap ;q <Plug>(wintabs_close_window)
 nmap <c-w>O <Plug>(wintabs_only_window)
+nmap <c-w>c <Plug>(wintabs_only)<Plug>(wintabs_close)
+nmap <c-w>C <Plug>(wintabs_only_window)<Plug>(wintabs_only)<Plug>(wintabs_close)
 nmap ;Q <Plug>(wintabs_close_vimtab)
 nmap ;a <Plug>(wintabs_all)
 nmap <leader>.D <Cmd>WintabsDo<space>

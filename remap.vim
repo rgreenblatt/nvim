@@ -269,6 +269,10 @@ onoremap il <Cmd>normal vil<CR>
 xnoremap iv HoL
 onoremap iv <Cmd>exec "normal! HVL"<cr>
 
+"fold {{{1
+nnoremap zJ zczjzo
+nnoremap zK zczkzo
+
 "no ctrl z, I don't typically use vim in a shell, I run it standalone {{{1
 nnoremap <c-z> <nop>
 "}}}1

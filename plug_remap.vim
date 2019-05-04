@@ -551,15 +551,16 @@ nnoremap ;dr <Cmd>GdbBreakpointClearAll<cr>
 nnoremap ;di <Cmd>GdbInterrupt<cr>
 
 let g:nvimgdb_config_override = {
-      \ 'key_until':         ';du',
-      \ 'key_continue':      ';dc',
-      \ 'key_next':          ';dn',
-      \ 'key_step':          ';ds',
-      \ 'key_finish':        ';df',
-      \ 'key_breakpoint':    ';db',
-      \ 'key_frameup':       ';dk',
-      \ 'key_framedown':     ';dj',
-      \ 'key_eval':          ';de'
+      \ 'key_until':      ';du',
+      \ 'key_continue':   ';dc',
+      \ 'key_next':       ';dn',
+      \ 'key_step':       ';ds',
+      \ 'key_finish':     ';df',
+      \ 'key_breakpoint': ';db',
+      \ 'key_frameup':    ';dk',
+      \ 'key_framedown':  ';dj',
+      \ 'key_eval':       ';de'
+      \ 'split_command':  'vsplit'
       \ }
 "}}}
 "visual star search and replace {{{

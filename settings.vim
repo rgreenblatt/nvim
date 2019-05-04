@@ -32,4 +32,5 @@ set gdefault
 set cursorline
 set noshowmode
 set foldmethod=syntax
+set scrolloff=1
 " vim: set fdm=marker:

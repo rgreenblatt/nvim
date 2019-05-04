@@ -1,4 +1,4 @@
-"setplugin_blacklist up blacklist {{{
+"setplugin_blacklist up blacklist {{{1
 if !exists("g:plugin_blacklist")
   let g:plugin_blacklist = {}
 endif
@@ -18,25 +18,25 @@ let g:combined_blacklist = []
 for val in values(g:plugin_blacklist)
   let g:combined_blacklist += val
 endfor
-"}}}
-"plugins list {{{
+
+"plugins list {{{1
 let s:plugins = []
 
 function! s:PA(x)
   call add(s:plugins, a:x)
 endfunction
 
-"tools for headed installs {{{
+"tools for headed installs {{{2
 if !g:headless
   call s:PA(['rgreenblatt/xdg_open.vim'])
   call s:PA(['rgreenblatt/i3-vim-focus'])
   call s:PA(['szw/vim-g'])
 endif
-"}}}
-"languages {{{
+
+"languages {{{2
 if !g:no_language_plugins
 " call s:PA(['dansomething/vim-eclim'])
-  "coc {{{
+  "coc {{{3
   if !g:no_coc
     call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])
     call s:PA(['liuchengxu/vista.vim'])
@@ -44,7 +44,8 @@ if !g:no_language_plugins
     call s:PA(['neoclide/coc-neco'])
     call s:PA(['honza/vim-snippets'])
   endif
-  "}}}
+  "}}}3
+
   "TODO
   call s:PA(['rgreenblatt/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
   call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
@@ -64,8 +65,8 @@ if !g:no_language_plugins
   call s:PA(['tmhedberg/SimpylFold'])
   call s:PA(['metakirby5/codi.vim'])
 endif
-"}}}
-"appearance {{{
+
+"appearance {{{2
 if !g:no_appearance_plugins
   call s:PA(['morhetz/gruvbox'])
   call s:PA(['itchyny/lightline.vim'])
@@ -76,8 +77,8 @@ if !g:no_appearance_plugins
   call s:PA(['ryanoasis/vim-devicons'])
   call s:PA(['RRethy/vim-hexokinase'])
 endif
-"}}}
-"general editing {{{
+
+"general editing {{{2
 if !g:no_editing_plugins
   call s:PA(['wellle/targets.vim'])
   call s:PA(['rhysd/clever-f.vim'])
@@ -119,8 +120,8 @@ if !g:no_editing_plugins
   call s:PA(['AndrewRadev/splitjoin.vim'])
   call s:PA(['AndrewRadev/sideways.vim'])
 endif
-"}}}
-"navigation/setup {{{
+
+"navigation/setup {{{2
 if !no_setup_plugins
   call s:PA(['mhinz/vim-startify'])
   call s:PA(['rgreenblatt/vim-wintabs'])
@@ -139,8 +140,8 @@ if !no_setup_plugins
   call s:PA(['radenling/vim-dispatch-neovim'])
   call s:PA(['skywind3000/asyncrun.vim'])
 endif
-"}}}
-"integrations {{{
+
+"integrations {{{2
 if !g:no_integration_plugins
   call s:PA(['itchyny/calendar.vim'])
   call s:PA(['makerj/vim-pdf'])
@@ -157,17 +158,17 @@ if !g:no_integration_plugins
   call s:PA(['lambdalisue/suda.vim'])
   call s:PA(['vhdirk/vim-cmake'])
 endif
-"}}}
-"misc {{{
+
+"misc {{{2
 if !g:no_misc_plugins
   call s:PA(['wikitopian/hardmode'])
   call s:PA(['rgreenblatt/vim-unimpaired'])
   "TODO
   call s:PA(['zenbro/mirror.vim'])
 endif
-"}}}
-"}}}
-"add all plugins {{{
+
+"}}}1
+"add all plugins {{{1
 set nocompatible
 filetype off
 call plug#begin('~/.local/share/nvim/plugged')
@@ -180,8 +181,8 @@ for plugin in plugins_copy
 endfor
 call plug#end()
 filetype plugin indent on
-"}}}
-"helpers {{{
+
+"helpers {{{1
 function! s:First(lst)
   return a:lst[0]
 endfunction
@@ -192,5 +193,5 @@ function! IsInstalled(plugin)
   return index(s:plugin_names, a:plugin) != -1 && 
         \ index(g:combined_blacklist, a:plugin) == -1
 endfunction
-"}}}
+"}}}1
 " vim: set fdm=marker:

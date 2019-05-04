@@ -1,4 +1,4 @@
-"command for getting the output of another command {{{
+"command for getting the output of another command {{{1
 function! s:Output(cmd)
     redir => message
     silent execute a:cmd
@@ -13,15 +13,15 @@ function! s:Output(cmd)
 endfunction
 
 command! -nargs=+ -complete=command Output call s:Output(<q-args>)
-"}}}
-"command for setting gdb path {{{
+
+"command for setting gdb path {{{1
 function! s:SetDebugPath(path)
     let g:debug_path = a:path
 endfunction
 
 command! -nargs=1 -complete=shellcmd SetDebugPath call s:SetDebugPath(<q-args>)
-"}}}
-"terminals {{{
+
+"terminals {{{1
 let g:shared_term_buffer = -1
 
 function! s:GlobalSharedTerm()
@@ -35,8 +35,8 @@ function! s:GlobalSharedTerm()
 endfunction
 
 command! -nargs=0 GlobalSharedTerm call s:GlobalSharedTerm()
-"}}}
-"timing commands {{{
+
+"timing commands {{{1
 " Times the number of times a particular command takes to execute the
 " specified number of times (in seconds).
 function! HowLong( command, numberOfTimes )
@@ -53,5 +53,5 @@ function! HowLong( command, numberOfTimes )
   echo result
   return result
 endfunction
-"}}}
+"}}}1
 " vim: set fdm=marker:

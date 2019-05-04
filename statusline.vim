@@ -1,11 +1,11 @@
-"file type devicons helper {{{
+"file type devicons helper {{{1
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? 
         \ &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 
         \'no ft') : ''
 endfunction
-"}}}
-"wintabs {{{
+
+"wintabs {{{1
 function! WinTabBefore()
   return "%{wintabs#get_tablist(0)}"
 endfunction
@@ -25,8 +25,8 @@ let g:wintabs_number_separator = " "
 let g:wintabs_only_basename = 1
 let g:wintabs_show_number = 1
 let g:wintabs_not_current_character_limit = 7
-"}}}
-" macro mode info {{{ 
+
+" macro mode info {{{1 
 function! MacroModeInfo()
   if g:macro_mode == 1
     return "M"
@@ -34,8 +34,8 @@ function! MacroModeInfo()
     return ""
   endif
 endfunction
-"}}}
-"short pwd {{{
+
+"short pwd {{{1
 "requires shell script
 function! ShortPwd()
   let out = substitute(system("cd ". getcwd() . " && short_pwd"), "\n", "", "")
@@ -49,8 +49,8 @@ endfunction
 function! ShortPwdWrapper()
   return "%{ShortPwd()}"
 endfunction
-"}}}
-"FugitiveStatusline wrapper to reduce noise {{{
+
+"FugitiveStatusline wrapper to reduce noise {{{1
 function! FugitiveStatuslineWrapper()
   let out = FugitiveStatusline()
   if out == '[Git(master)]'
@@ -59,8 +59,8 @@ function! FugitiveStatuslineWrapper()
     return out
   endif
 endfunction
-"}}}
-"status line {{{
+
+"status line {{{1
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
@@ -97,5 +97,5 @@ let g:lightline = {
       \   'macromode': 'error'
       \ }
       \ }
-"}}}
+"}}}1
 " vim: set fdm=marker:

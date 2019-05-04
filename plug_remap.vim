@@ -537,13 +537,13 @@ nnoremap <silent> ;o <Cmd>SidewaysRight<cr>
 let g:nvimgdb_disable_start_keymaps = 1
 
 nnoremap ;dp :<c-u>SetDebugPath<space>
-nnoremap <expr> ;dsg exists('g:debug_path') ?
+nnoremap <expr> ;dg exists('g:debug_path') ?
       \'<Cmd>GdbStart gdb -q<space>' . expand(g:debug_path) . '<cr>' :
       \':<c-u>GdbStart gdb -q<space>'
-nnoremap <expr> ;dsl exists('g:debug_path') ?
+nnoremap <expr> ;dl exists('g:debug_path') ?
       \'<Cmd>GdbStartLLDB lldb <space>' . expand(g:debug_path) . '<cr>' :
       \':<c-u>GdbStartLLDB lldb<space>'
-nnoremap <expr> ;dsp exists('g:debug_path') ?
+nnoremap <expr> ;dy exists('g:debug_path') ?
       \'<Cmd>GdbStartPDB python -m pdb <space>' . expand(g:debug_path) .
       \ '<cr>' : ':<c-u>GdbStartPDB python -m pdb<space>'
 nnoremap ;dq <Cmd>GdbDebugStop<cr>

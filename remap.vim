@@ -188,7 +188,6 @@ nnoremap <leader>F gggqG<c-o>
 nnoremap <a-p> <Cmd>pwd<cr>
 nnoremap <a-r> <Cmd>registers<cr>
 nnoremap <a-c> <Cmd>changes<cr>
-nnoremap <a-z> :<c-u>help<space>
 nnoremap <a-s> <Cmd>source %<cr>
 
 nnoremap <a-o> :<c-u>s/\C<left><left><left><left>
@@ -238,8 +237,9 @@ tnoremap <C-Space> <C-\><C-n>
 call MapWinCmd("t", "GlobalSharedTerm")
 call MapWinCmd("T", "terminal")
 
-"arbitrary command in new window {{{1
+"arbitrary command in new window and scratch {{{1
 call MapWinCmd("e", " ", 1)
+call MapWinCmd("w", "setlocal bufhidden=hide nobuflisted buftype=nofile")
 
 "arrow key window resize {{{1
 noremap <up>    <C-W>+

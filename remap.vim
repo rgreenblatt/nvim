@@ -1,8 +1,11 @@
 "remaps which override defaults {{{
 map Y y$
 
-noremap "m "_
-noremap "j "+
+noremap , "
+noremap " ,
+
+noremap ,m "_
+noremap ,j "+
 
 map <space> <leader>
 map <space><space> <leader><leader>
@@ -14,16 +17,16 @@ noremap <C-r> R
 noremap R <C-r>
 noremap gR g<C-r>
 
-nnoremap ,q 1gt
-nnoremap ,w 2gt
-nnoremap ,e 3gt
-nnoremap ,r 4gt
-nnoremap ,t 5gt
-nnoremap ,y 6gt
-nnoremap ,u 7gt
-nnoremap ,i 8gt
-nnoremap ,o 9gt
-nnoremap ,p <Cmd>tablast<cr>
+nnoremap "q 1gt
+nnoremap "w 2gt
+nnoremap "e 3gt
+nnoremap "r 4gt
+nnoremap "t 5gt
+nnoremap "y 6gt
+nnoremap "u 7gt
+nnoremap "i 8gt
+nnoremap "o 9gt
+nnoremap "p <Cmd>tablast<cr>
 "}}}
 "macros {{{
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>

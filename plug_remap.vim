@@ -21,9 +21,6 @@ nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 nmap <leader><Tab> <Plug>EnhancedJumpsRemoteOlder
 nmap <leader><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
-"langmap related
-nnoremap g"  g,
-
 nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
 nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
 

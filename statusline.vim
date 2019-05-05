@@ -6,16 +6,29 @@ function! MyFiletype()
 endfunction
 
 "wintabs {{{1
+let s:win_tabs_installed = IsInstalled('rgreenblatt/vim-wintabs')
 function! WinTabBefore()
-  return "%{wintabs#get_tablist(0)}"
+  if s:win_tabs_installed
+    return "%{wintabs#get_tablist(0)}"
+  else
+    return ''
+  endif
 endfunction
 
 function! WinTabCurrent()
-  return "%{wintabs#get_tablist(1)}"
+  if s:win_tabs_installed
+    return "%{wintabs#get_tablist(1)}"
+  else
+    return ''
+  endif
 endfunction
 
 function! WinTabAfter()
-  return "%{wintabs#get_tablist(2)}"
+  if s:win_tabs_installed
+    return "%{wintabs#get_tablist(2)}"
+  else
+    return ''
+  endif
 endfunction
 
 let g:wintabs_marker_modified = "!"
@@ -51,12 +64,18 @@ function! ShortPwdWrapper()
 endfunction
 
 "FugitiveStatusline wrapper to reduce noise {{{1
+let s:fugitive_installed = IsInstalled('tpope/vim-fugitive')
+
 function! FugitiveStatuslineWrapper()
-  let out = FugitiveStatusline()
-  if out == '[Git(master)]'
-    return ''
+  if s:fugitive_installed
+    let out = FugitiveStatusline()
+    if out == '[Git(master)]'
+      return ''
+    else
+      return out
+    endif
   else
-    return out
+    return ''
   endif
 endfunction
 

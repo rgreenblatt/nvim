@@ -149,6 +149,7 @@ if !g:no_integration_plugins
   call s:PA(['tpope/vim-rhubarb'])
   call s:PA(['junegunn/gv.vim'])
   call s:PA(['esneider/YUNOcommit.vim'])
+  call s:PA(['rhysd/git-messenger.vim'])
   call s:PA(['tpope/vim-eunuch'])
   call s:PA(['ron89/thesaurus_query.vim'])
   call s:PA(['sakhnik/nvim-gdb', 

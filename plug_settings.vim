@@ -285,15 +285,20 @@ if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
 endif
 
 "rainbow parens {{{1
-if IsInstalled('kien/rainbow_parentheses.vim')
-  augroup RainbowParens
-    autocmd!
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax   * RainbowParenthesesLoadRound
-    autocmd Syntax   * RainbowParenthesesLoadSquare
-    autocmd Syntax   * RainbowParenthesesLoadBraces
-  augroup end
-endif
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \	'guifgs': ['#83a598', '#fe8019', '#b8bb26', '#fb4934'],
+      \	'ctermfgs': ['109', '208', '142', '167'],
+      \	'operators': '_,_',
+      \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 
+      \                 'start=/{/ end=/}/ fold'],
+      \	'separately': {
+      \		'lisp': {
+      \			'guifgs': ['#83a598', '#fe8019', '#b8bb26', '#fb4934'],
+      \		},
+      \		'css': 0,
+      \	}
+      \}
 
 "wintabs {{{1
 let g:wintabs_delete_buffers = 0 

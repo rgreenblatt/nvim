@@ -105,7 +105,7 @@ if !g:no_editing_plugins
   call s:PA(['chaoren/vim-wordmotion'])
   call s:PA(['bfredl/nvim-miniyank'])
   call s:PA(['chrisbra/NrrwRgn'])
-  call s:PA(['kien/rainbow_parentheses.vim'])
+  call s:PA(['luochen1990/rainbow'])
   call s:PA(['kshenoy/vim-signature'])
   call s:PA(['simnalamburt/vim-mundo'])
   call s:PA(['romainl/vim-cool'])

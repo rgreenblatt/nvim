@@ -642,6 +642,7 @@ augroup END
 
 "ToggleMacroMode {{{1
 let s:highlighted_yank_installed = IsInstalled('machakann/vim-highlightedyank')
+let s:rainbow_paren_installed = IsInstalled('luochen1990/rainbow')
 
 function! EnterMacroMode()
   let g:clever_f_mark_cursor = 0
@@ -649,8 +650,12 @@ function! EnterMacroMode()
   let g:qs_enable = 0
   let g:sqs_enable = 0
   let g:macro_mode= 1
+
   if s:highlighted_yank_installed
     HighlightedyankOff
+  endif
+  if s:highlighted_yank_installed
+    RainbowToggleOff
   endif
 endfunction
 
@@ -664,6 +669,9 @@ function! ExitMacroMode()
   let g:macro_mode= 0
   if s:highlighted_yank_installed
     HighlightedyankOn
+  endif
+  if s:highlighted_yank_installed
+    RainbowToggleOn
   endif
 endfunction
 

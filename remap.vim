@@ -107,83 +107,83 @@ function! MapWinCmd(key, command, ...)
   endif
 
   "silent?
-  execute "nnoremap <leader>h".a:key." :<c-u>aboveleft vnew <bar>".
+  execute "nnoremap <space>h".a:key." :<c-u>aboveleft vnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>j".a:key." :<c-u>belowright new <bar>".
+  execute "nnoremap <space>j".a:key." :<c-u>belowright new <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>k".a:key." :<c-u>aboveleft new <bar>".
+  execute "nnoremap <space>k".a:key." :<c-u>aboveleft new <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>l".a:key." :<c-u>belowright vnew <bar>".
+  execute "nnoremap <space>l".a:key." :<c-u>belowright vnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>;".a:key." :<c-u>call FloatingFullscreen()<CR>:".
+  execute "nnoremap <space>;".a:key." :<c-u>call FloatingFullscreen()<CR>:".
         \ a:command.suffix
-  execute "nnoremap <leader>,".a:key." :<c-u>tabnew <bar>".
+  execute "nnoremap <space>,".a:key." :<c-u>tabnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>.".a:key." :<c-u>".
+  execute "nnoremap <space>.".a:key." :<c-u>".
         \ a:command.suffix
-  execute "nnoremap <leader>H".a:key." :<c-u>topleft vnew <bar>".
+  execute "nnoremap <space>H".a:key." :<c-u>topleft vnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>J".a:key." :<c-u>botright new <bar>".
+  execute "nnoremap <space>J".a:key." :<c-u>botright new <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>K".a:key." :<c-u>topleft new <bar>".
+  execute "nnoremap <space>K".a:key." :<c-u>topleft new <bar>".
         \ a:command.suffix
-  execute "nnoremap <leader>L".a:key." :<c-u>botright vnew <bar>".
+  execute "nnoremap <space>L".a:key." :<c-u>botright vnew <bar>".
         \ a:command.suffix
 endfunction
 
-"general leader/semicolon/alt maps {{{1
-nnoremap <silent> <leader>p <Cmd>cd %:p:h<CR>
-nnoremap <leader>P :<c-u>cd<space>
-nnoremap <silent> <leader>,p <Cmd>tcd %:p:h<CR>
-nnoremap <leader>,P :<c-u>tcd<space>
-nnoremap <silent> <leader>.p <Cmd>lcd %:p:h<CR>
-nnoremap <leader>.P :<c-u>lcd<space>
+"general space/semicolon/alt maps {{{1
+nnoremap <silent> <space>p <Cmd>cd %:p:h<CR>
+nnoremap <space>P :<c-u>cd<space>
+nnoremap <silent> <space>,p <Cmd>tcd %:p:h<CR>
+nnoremap <space>,P :<c-u>tcd<space>
+nnoremap <silent> <space>.p <Cmd>lcd %:p:h<CR>
+nnoremap <space>.P :<c-u>lcd<space>
 
 "not sure if I really need these mappings...
-nnoremap <leader>,D :<c-u>tabdo<space>
-nnoremap <leader>;D :<c-u>windo<space>
-nnoremap <leader>kD :<c-u>cdo<space>
-nnoremap <leader>jD :<c-u>ldo<space>
-nnoremap <leader>KD :<c-u>cfdo<space>
-nnoremap <leader>JD :<c-u>lfdo<space>
-nnoremap <leader>lD :<c-u>bufdo<space>
-nnoremap <leader>hD :<c-u>argdo<space>
+nnoremap <space>,D :<c-u>tabdo<space>
+nnoremap <space>;D :<c-u>windo<space>
+nnoremap <space>kD :<c-u>cdo<space>
+nnoremap <space>jD :<c-u>ldo<space>
+nnoremap <space>KD :<c-u>cfdo<space>
+nnoremap <space>JD :<c-u>lfdo<space>
+nnoremap <space>lD :<c-u>bufdo<space>
+nnoremap <space>hD :<c-u>argdo<space>
 
 nnoremap <silent> <a-n> <Cmd>set invrelativenumber<CR>
 nnoremap <silent> <a-w> <Cmd>%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <silent> <leader>z <Cmd>noh<CR>
+nnoremap <silent> <space>z <Cmd>noh<CR>
 
-nnoremap <silent> <leader>q <Cmd>q<CR>
-nnoremap <silent> <leader>A <Cmd>qa<CR>
-nnoremap <silent> <leader>b <Cmd>w<CR>
+nnoremap <silent> <space>q <Cmd>q<CR>
+nnoremap <silent> <space>A <Cmd>qa<CR>
+nnoremap <silent> <space>b <Cmd>w<CR>
 nnoremap <silent> <a-d> <Cmd>bd!<CR>
 
 xnoremap ;i :'<,'>normal ^i
 xnoremap ;a :'<,'>normal $a
 
-nnoremap <leader>ww <C-w><bar>
-nnoremap <leader>wt <C-w>_
-nnoremap <leader>we <C-w>=
-nnoremap <leader>wm <C-w><bar><C-w>_
-nmap <leader>w <C-w>
+nnoremap <space>ww <C-w><bar>
+nnoremap <space>wt <C-w>_
+nnoremap <space>we <C-w>=
+nnoremap <space>wm <C-w><bar><C-w>_
+nmap <space>w <C-w>
 
-xnoremap <leader>t <C-]>
-xnoremap <leader>T <C-T>
+xnoremap <space>t <C-]>
+xnoremap <space>T <C-T>
 xnoremap ;t g<C-]>
 
-nnoremap <leader>t <C-]>
-nnoremap <leader>T <C-T>
+nnoremap <space>t <C-]>
+nnoremap <space>T <C-T>
 nnoremap ;t g<C-]>
 
-nnoremap <Leader>s *``cgn
-nnoremap <Leader>S #``cgN
+nnoremap <space>s *``cgn
+nnoremap <space>S #``cgN
 
-nnoremap <leader>Q <Cmd>bp\|bd #<CR>
+nnoremap <space>Q <Cmd>bp\|bd #<CR>
 
-nnoremap <leader>f gq
-xnoremap <leader>f gq
+nnoremap <space>f gq
+xnoremap <space>f gq
 
-nnoremap <leader>F gggqG<c-o>
+nnoremap <space>F gggqG<c-o>
 
 nnoremap <a-p> <Cmd>pwd<cr>
 nnoremap <a-r> <Cmd>registers<cr>
@@ -215,8 +215,8 @@ function! s:go_indent(times, dir)
   endfor
 endfunction
 
-nnoremap <silent> <leader>' <Cmd>call <SID>go_indent(v:count1, 1)<cr>
-nnoremap <silent> <leader>" <Cmd>call <SID>go_indent(v:count1, -1)<cr>
+nnoremap <silent> <space>' <Cmd>call <SID>go_indent(v:count1, 1)<cr>
+nnoremap <silent> <space>" <Cmd>call <SID>go_indent(v:count1, -1)<cr>
 
 "better cmd line {{{1
 cnoremap <esc> <c-f>z1<cr>

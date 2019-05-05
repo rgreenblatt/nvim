@@ -18,8 +18,8 @@ endif
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
 nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
 
-nmap <leader><Tab> <Plug>EnhancedJumpsRemoteOlder
-nmap <leader><S-Tab> <Plug>EnhancedJumpsRemoteNewer
+nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
+nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
 
 nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
 nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
@@ -57,7 +57,7 @@ nnoremap <M-C-F> <Cmd>Files<cr>
 nnoremap <M-C-G> :<c-u>RgPreviewHidden<space>
 nnoremap <M-C-H> <Cmd>History/<cr>
 nnoremap <M-C-P> <Cmd>:Helptags<cr>
-nnoremap <leader>: <Cmd>History:<cr>
+nnoremap <space>: <Cmd>History:<cr>
 
 "dirvish in new window {{{1
 call MapWinCmd("d", "Dirvish")
@@ -107,14 +107,14 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
         \ coc#_select_confirm()
         \: "\<CR>"
 
-  nnoremap <leader>I <Cmd>CocCommand python.sortImports<cr>
-  nnoremap <leader>R <Cmd>CocCommand python.execInTerminal<cr>
+  nnoremap <space>I <Cmd>CocCommand python.sortImports<cr>
+  nnoremap <space>R <Cmd>CocCommand python.execInTerminal<cr>
   nnoremap ;L :<c-u>CocList<space>
   nnoremap ;A :<c-u>CocCommand<space>
   nnoremap ;S <Cmd>CocList -I symbols<cr>
   nnoremap ;D <Cmd>CocList --auto-preview diagnostics<cr>
   nnoremap ;O <Cmd>CocList --auto-preview outline<cr>
-  nnoremap <leader>G <Cmd>CocList links<cr>
+  nnoremap <space>G <Cmd>CocList links<cr>
   nnoremap ;f <Cmd>CocList --auto-preview files<cr>
 
 
@@ -122,27 +122,27 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nmap [g <Plug>(coc-diagnostic-prev)
   nmap ]g <Plug>(coc-diagnostic-next)
 
-  nmap <leader>O <Plug>(coc-openlink)
-  nmap <leader>E <Plug>(coc-codelens-action)
+  nmap <space>O <Plug>(coc-openlink)
+  nmap <space>E <Plug>(coc-codelens-action)
 
   " Remap keys for gotos
-  nmap <leader>D <Plug>(coc-declaration)
-  nmap <leader>d <Plug>(coc-definition)
-  nmap <leader>o <Plug>(coc-type-definition)
+  nmap <space>D <Plug>(coc-declaration)
+  nmap <space>d <Plug>(coc-definition)
+  nmap <space>o <Plug>(coc-type-definition)
 
-  nmap <leader>i <Plug>(coc-implementation)
-  nmap <leader>u <Plug>(coc-references)
+  nmap <space>i <Plug>(coc-implementation)
+  nmap <space>u <Plug>(coc-references)
 
-  nmap <leader>e <Plug>(coc-rename)
+  nmap <space>e <Plug>(coc-rename)
 
-  nmap <leader>c <Plug>(coc-fix-current)
+  nmap <space>c <Plug>(coc-fix-current)
 
-  nmap <leader>C <Plug>(coc-codeaction)
+  nmap <space>C <Plug>(coc-codeaction)
 
-  " nmap <leader>a <Plug>(coc-codeaction-selected)
-  " xmap <leader>a <Plug>(coc-codeaction-selected)
+  " nmap <space>a <Plug>(coc-codeaction-selected)
+  " xmap <space>a <Plug>(coc-codeaction-selected)
 
-  nmap <leader>Z <Plug>(coc-float-jump)
+  nmap <space>Z <Plug>(coc-float-jump)
 
   "show documentation in preview window
   nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
@@ -176,32 +176,32 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   "vista {{{2
   call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
         \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
-  nnoremap <silent> <leader>V <Cmd>Vista!!<cr>
+  nnoremap <silent> <space>V <Cmd>Vista!!<cr>
   "}}}2
 endif
 "vimtex {{{1
-nmap  <leader>xi   <plug>(vimtex-info)
-nmap  <leader>xI   <plug>(vimtex-info-full)
-nmap  <leader>xt   <plug>(vimtex-toc-open)
-nmap  <leader>xT   <plug>(vimtex-toc-toggle)
-nmap  <leader>xq   <plug>(vimtex-log)
-nmap  <leader>xv   <plug>(vimtex-view)
-nmap  <leader>xr   <plug>(vimtex-reverse-search)
-nmap  <leader>xl   <plug>(vimtex-compile)
-nmap  <leader>xL   <plug>(vimtex-compile-selected)
-nmap  <leader>xL   <plug>(vimtex-compile-selected)
-nmap  <leader>xk   <plug>(vimtex-stop)
-nmap  <leader>xK   <plug>(vimtex-stop-all)
-nmap  <leader>xe   <plug>(vimtex-errors)
-nmap  <leader>xo   <plug>(vimtex-compile-output)
-nmap  <leader>xg   <plug>(vimtex-status)
-nmap  <leader>xG   <plug>(vimtex-status-all)
-nmap  <leader>xc   <plug>(vimtex-clean)
-nmap  <leader>xC   <plug>(vimtex-clean-full)
-nmap  <leader>xm   <plug>(vimtex-imaps-list)
-nmap  <leader>xx   <plug>(vimtex-reload)
-nmap  <leader>xX   <plug>(vimtex-reload-state)
-nmap  <leader>xs   <plug>(vimtex-toggle-main)
+nmap  <space>xi   <plug>(vimtex-info)
+nmap  <space>xI   <plug>(vimtex-info-full)
+nmap  <space>xt   <plug>(vimtex-toc-open)
+nmap  <space>xT   <plug>(vimtex-toc-toggle)
+nmap  <space>xq   <plug>(vimtex-log)
+nmap  <space>xv   <plug>(vimtex-view)
+nmap  <space>xr   <plug>(vimtex-reverse-search)
+nmap  <space>xl   <plug>(vimtex-compile)
+nmap  <space>xL   <plug>(vimtex-compile-selected)
+nmap  <space>xL   <plug>(vimtex-compile-selected)
+nmap  <space>xk   <plug>(vimtex-stop)
+nmap  <space>xK   <plug>(vimtex-stop-all)
+nmap  <space>xe   <plug>(vimtex-errors)
+nmap  <space>xo   <plug>(vimtex-compile-output)
+nmap  <space>xg   <plug>(vimtex-status)
+nmap  <space>xG   <plug>(vimtex-status-all)
+nmap  <space>xc   <plug>(vimtex-clean)
+nmap  <space>xC   <plug>(vimtex-clean-full)
+nmap  <space>xm   <plug>(vimtex-imaps-list)
+nmap  <space>xx   <plug>(vimtex-reload)
+nmap  <space>xX   <plug>(vimtex-reload-state)
+nmap  <space>xs   <plug>(vimtex-toggle-main)
 
 "plugin remaps for a headed install {{{1
 if !g:headless
@@ -221,8 +221,8 @@ endif
 
 ""insertchar options {{{1
 "let g:insert_char_no_default_mapping = 1
-"nmap <leader>s <Plug>InsertChar
-"nmap <leader>S <Plug>InsertCharAfter
+"nmap <space>s <Plug>InsertChar
+"nmap <space>S <Plug>InsertCharAfter
 "
 "scratch {{{1
 let g:scratch_no_mappings = 1
@@ -466,8 +466,8 @@ if IsInstalled('kana/vim-operator-user')
     normal! `[V`]
   endfunction
 
-  nmap <leader>wa  <Plug>(operator-adjust)
-  xmap <leader>wa  <Plug>(operator-adjust)
+  nmap <space>wa  <Plug>(operator-adjust)
+  xmap <space>wa  <Plug>(operator-adjust)
   call operator#user#define('adjust', 'Op_adjust_window_height')
   function! Op_adjust_window_height(motion_wiseness)
     execute (line("']") - line("'[") + 1) 'wincmd' '_'
@@ -559,8 +559,8 @@ let g:nvimgdb_config_override = {
       \ }
 
 "visual star search and replace {{{1
-xmap <Leader>s <Plug>(visualstar-*)``cgn
-xmap <Leader>S <Plug>(visualstar-#)``cgN
+xmap <space>s <Plug>(visualstar-*)``cgn
+xmap <space>S <Plug>(visualstar-#)``cgN
 
 "dispatch {{{1
 nnoremap <a-m> <Cmd>Make<cr>
@@ -576,20 +576,20 @@ let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
 
-nmap <silent> <leader>ad <Plug>(operator-sandwich-delete)
+nmap <silent> <space>ad <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> <leader>ar <Plug>(operator-sandwich-replace)
+nmap <silent> <space>ar <Plug>(operator-sandwich-replace)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> <leader>as <Plug>(operator-sandwich-delete)
+nmap <silent> <space>as <Plug>(operator-sandwich-delete)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-nmap <silent> <leader>ae <Plug>(operator-sandwich-replace)
+nmap <silent> <space>ae <Plug>(operator-sandwich-replace)
       \<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
-nmap <leader>aa <Plug>(operator-sandwich-add)
-xmap <leader>aa <Plug>(operator-sandwich-add)
-omap <leader>aa <Plug>(operator-sandwich-g@)
-xmap <leader>ad <Plug>(operator-sandwich-delete)
-xmap <leader>ar <Plug>(operator-sandwich-replace)
+nmap <space>aa <Plug>(operator-sandwich-add)
+xmap <space>aa <Plug>(operator-sandwich-add)
+omap <space>aa <Plug>(operator-sandwich-g@)
+xmap <space>ad <Plug>(operator-sandwich-delete)
+xmap <space>ar <Plug>(operator-sandwich-replace)
 
 " omap ib <Plug>(textobj-sandwich-auto-i)
 " xmap ib <Plug>(textobj-sandwich-auto-i)
@@ -604,7 +604,7 @@ xmap <leader>ar <Plug>(operator-sandwich-replace)
 "wintabs {{{1
 nmap <c-h> <Plug>(wintabs_previous)
 nmap <c-l> <Plug>(wintabs_next)
-nmap <leader>q <Plug>(wintabs_close)
+nmap <space>q <Plug>(wintabs_close)
 nmap ;u <Plug>(wintabs_undo)
 nmap <c-w>o <Plug>(wintabs_only)
 nmap ;q <Plug>(wintabs_close_window)
@@ -613,31 +613,31 @@ nmap <c-w>c <Plug>(wintabs_only)<Plug>(wintabs_close)
 nmap <c-w>C <Plug>(wintabs_only_window)<Plug>(wintabs_only)<Plug>(wintabs_close)
 nmap ;Q <Plug>(wintabs_close_vimtab)
 nmap ;a <Plug>(wintabs_all)
-nmap <leader>.D <Cmd>WintabsDo<space>
+nmap <space>.D <Cmd>WintabsDo<space>
 
-nmap <leader><leader>h <Plug>(wintabs_move_to_window_left)
-nmap <leader><leader>j <Plug>(wintabs_move_to_window_right)
-nmap <leader><leader>k <Plug>(wintabs_move_to_window_above)
-nmap <leader><leader>l <Plug>(wintabs_move_to_window_below)
-nmap <leader><leader>p <Plug>(wintabs_move_to_window_next)
-nmap <leader><leader>m <Plug>(wintabs_maximize)
+nmap <space><space>h <Plug>(wintabs_move_to_window_left)
+nmap <space><space>j <Plug>(wintabs_move_to_window_right)
+nmap <space><space>k <Plug>(wintabs_move_to_window_above)
+nmap <space><space>l <Plug>(wintabs_move_to_window_below)
+nmap <space><space>p <Plug>(wintabs_move_to_window_next)
+nmap <space><space>m <Plug>(wintabs_maximize)
 
-nmap <leader><leader>q <Plug>(wintabs_tab_1)
-nmap <leader><leader>w <Plug>(wintabs_tab_2)
-nmap <leader><leader>e <Plug>(wintabs_tab_3)
-nmap <leader><leader>r <Plug>(wintabs_tab_4)
-nmap <leader><leader>t <Plug>(wintabs_tab_5)
-nmap <leader><leader>y <Plug>(wintabs_tab_6)
-nmap <leader><leader>u <Plug>(wintabs_tab_7)
-nmap <leader><leader>i <Plug>(wintabs_tab_8)
-nmap <leader><leader>o <Plug>(wintabs_tab_9)
-nmap <leader><leader>p <Plug>(wintabs_last)
+nmap <space><space>q <Plug>(wintabs_tab_1)
+nmap <space><space>w <Plug>(wintabs_tab_2)
+nmap <space><space>e <Plug>(wintabs_tab_3)
+nmap <space><space>r <Plug>(wintabs_tab_4)
+nmap <space><space>t <Plug>(wintabs_tab_5)
+nmap <space><space>y <Plug>(wintabs_tab_6)
+nmap <space><space>u <Plug>(wintabs_tab_7)
+nmap <space><space>i <Plug>(wintabs_tab_8)
+nmap <space><space>o <Plug>(wintabs_tab_9)
+nmap <space><space>p <Plug>(wintabs_last)
 
-nmap <leader>Q <Cmd>Startify<cr><Plug>(wintabs_only)
+nmap <space>Q <Cmd>Startify<cr><Plug>(wintabs_only)
 
 augroup CmdWinQ
   autocmd!
-  autocmd CmdwinEnter * nnoremap <buffer> <leader>q <Cmd>q<CR>
+  autocmd CmdwinEnter * nnoremap <buffer> <space>q <Cmd>q<CR>
 augroup END
 
 "ToggleMacroMode {{{1
@@ -697,11 +697,14 @@ nmap yoq <Plug>(qf_qf_toggle)
 "overrides a unimpared mapping, but I don't use that mapping
 nmap yol <Plug>(qf_loc_toggle)
 
+"git messenger {{{1
+nmap <space>g <Plug>(git-messenger)
+
 "other {{{1
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 nnoremap <a-i> <Cmd>Codi<cr>
 nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
-nnoremap <silent> <leader>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <space>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
 let g:targets_nl = 'nN'
 "}}}1
 " vim: set fdm=marker:

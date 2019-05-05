@@ -657,6 +657,7 @@ function! EnterMacroMode()
   if s:highlighted_yank_installed
     RainbowToggleOff
   endif
+  set paste
 endfunction
 
 command! -nargs=0 EnterMacroMode call EnterMacroMode()
@@ -673,6 +674,7 @@ function! ExitMacroMode()
   if s:highlighted_yank_installed
     RainbowToggleOn
   endif
+  set nopaste
 endfunction
 
 command! -nargs=0 ExitMacroMode call ExitMacroMode()

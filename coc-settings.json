@@ -1,8 +1,8 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnType": true,
   "python.jediEnabled": false,
+  "python.linting.pylintUseMinimalCheckers": false,
   "suggest.completionItemKindLabels": {
     "function": "\uf794",
     "method": "\uf6a6",

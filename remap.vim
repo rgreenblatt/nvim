@@ -13,7 +13,7 @@ map <space><space> <leader><leader>
 noremap <BS> -
 nnoremap z<BS> z-
 
-noremap U <C-r>
+nnoremap U <C-r>
 
 nnoremap "q 1gt
 nnoremap "w 2gt

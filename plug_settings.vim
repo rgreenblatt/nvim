@@ -367,7 +367,6 @@ let g:mwAutoLoadMarks = 1
 let g:gutentags_cache_dir = '~/.tags'
 let g:highlightedyank_highlight_duration = 200
 let g:local_vimrc = ['.config', 'local_init.vim']
-let g:scratch_autohide = 0
 let g:YUNOcommit_after = 2000
 let g:dispatch_no_maps = 1
 "}}}1

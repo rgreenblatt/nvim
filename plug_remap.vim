@@ -224,15 +224,6 @@ endif
 "nmap <space>s <Plug>InsertChar
 "nmap <space>S <Plug>InsertCharAfter
 "
-"scratch {{{1
-let g:scratch_no_mappings = 1
-
-nmap zs <plug>(scratch-reuse)
-nmap zS <plug>(scratch-clear)
-
-xmap zs <plug>(scratch-selection-reuse)
-xmap zS <plug>(scratch-selection-clear)
-
 "yankring {{{1
 nmap p <Plug>(miniyank-autoput)
 nmap P <Plug>(miniyank-autoPut)
@@ -261,6 +252,8 @@ xmap ;R <Plug>NrrwrgnBangDo
 "custom operators {{{1
 if IsInstalled('kana/vim-operator-user')
   "substitute region {{{2
+  "TODO:
+  "work for other commands?
   xmap ;s <Plug>(substitute-region)
   xmap ;S <Plug>(subvert-region)
   nmap ;s <Plug>(substitute-region)

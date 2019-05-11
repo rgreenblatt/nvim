@@ -131,7 +131,6 @@ if !no_setup_plugins
   call s:PA(['wesQ3/vim-windowswap'])
   call s:PA(['justinmk/vim-dirvish'])
   call s:PA(['kristijanhusak/vim-dirvish-git'])
-  call s:PA(['rgreenblatt/scratch.vim'])
   call s:PA(['LucHermitte/lh-vim-lib'])
   call s:PA(['LucHermitte/local_vimrc'])
   call s:PA(['airblade/vim-rooter'])

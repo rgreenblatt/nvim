@@ -33,4 +33,6 @@ set cursorline
 set noshowmode
 set foldmethod=syntax
 set scrolloff=1
+set clipboard=unnamedplus
+
 " vim: set fdm=marker:

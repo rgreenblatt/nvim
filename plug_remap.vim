@@ -511,10 +511,6 @@ nnoremap ;go :<c-u>Gcheckout<space>
 nnoremap ;gr :<c-u>Gremove<space>
 nnoremap ;gm :<c-u>Gmove<space>
 
-"ninja-feet overides mappings {{{1
-nnoremap ;i [i
-nnoremap ;I [I
-
 "sideways maps {{{1
 nnoremap <silent> ;h <Cmd>SidewaysJumpLeft<cr>
 nnoremap <silent> ;l <Cmd>SidewaysJumpRight<cr>
@@ -700,14 +696,13 @@ nmap yoq <Plug>(qf_qf_toggle)
 "overrides a unimpared mapping, but I don't use that mapping
 nmap yol <Plug>(qf_loc_toggle)
 
-"git messenger {{{1
-nmap <space>g <Plug>(git-messenger)
-
 "other {{{1
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 nnoremap <a-i> <Cmd>Codi<cr>
 nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
 nnoremap <silent> <space>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>
+nmap <space>g <Plug>(git-messenger)
 let g:targets_nl = 'nN'
 "}}}1
+
 " vim: set fdm=marker:

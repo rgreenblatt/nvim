@@ -1,10 +1,7 @@
 "TODO: 
-" - is ninja feet worthwhile?
 " - fix athame
 " - coc path issues
-" - locale crashs
 " - search offsets
-" - fold sort?
 " - regex/unix power
 
 let g:athame_var = system("echo ${ATHAME_USE_JOBS+1}")

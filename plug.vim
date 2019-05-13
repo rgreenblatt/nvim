@@ -89,7 +89,7 @@ if !g:no_editing_plugins
   call s:PA(['inkarkat/vim-CountJump'])
   call s:PA(['inkarkat/vim-EnhancedJumps'])
   call s:PA(['markonm/traces.vim'])
-  call s:PA(['rgreenblatt/vim-ninja-feet'])
+  " call s:PA(['rgreenblatt/vim-ninja-feet'])
   call s:PA(['tommcdo/vim-exchange'])
   call s:PA(['tpope/vim-repeat'])
   call s:PA(['tommcdo/vim-lion'])

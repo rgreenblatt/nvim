@@ -63,7 +63,7 @@ function! ShortPwdWrapper()
   return "%{ShortPwd()}"
 endfunction
 
-"FugitiveStatusline wrapper to reduce noise {{{1
+"FugitiveStatusline wrapper {{{1
 let s:fugitive_installed = IsInstalled('tpope/vim-fugitive')
 
 function! FugitiveStatuslineWrapper()
@@ -74,6 +74,22 @@ function! FugitiveStatuslineWrapper()
     else
       return out
     endif
+  else
+    return ''
+  endif
+endfunction
+
+"coc#status wrapper {{{1
+let s:coc_installed = IsInstalled('neoclide/coc.nvim')
+
+function! CocStatusWrapper()
+  if s:coc_installed
+    let out = coc#status()
+    let out = substitute(out, 'Python', '', '')
+    let out = substitute(out, ' 64-bit', '', '')
+    let out = substitute(out, 'Analyzing in background, ', '', '')
+    let out = substitute(out, 'items left...', 'left', '')
+    return out
   else
     return ''
   endif
@@ -100,7 +116,7 @@ let g:lightline = {
       \               'wintab_before' ] ],
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
+      \   'cocstatus': 'CocStatusWrapper',
       \   'gitstatus': 'FugitiveStatuslineWrapper',
       \   'filetype': 'MyFiletype',
       \ },
@@ -117,4 +133,5 @@ let g:lightline = {
       \ }
       \ }
 "}}}1
+
 " vim: set fdm=marker:

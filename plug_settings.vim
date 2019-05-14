@@ -371,4 +371,5 @@ let g:local_vimrc = ['.config', 'local_init.vim']
 let g:YUNOcommit_after = 2000
 let g:dispatch_no_maps = 1
 "}}}1
+
 " vim: set fdm=marker:

@@ -175,6 +175,7 @@ if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
 
   let s:fzf_window_option = 'call FloatingFullscreen()'
 
+  "most of these zsh ones don't need to be vim functions
   function! ZshAliases()
     call fzf#run({'source': "zsh -c 'source ~/.zshrc && paste <(print -rl -- " .
           \ "${(k)aliases}) <(print -rl -- ${aliases})'",

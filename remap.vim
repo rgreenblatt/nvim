@@ -261,19 +261,12 @@ inoremap <C-E> <C-C>:let @z = @"<CR>mz
 "select last inserted/yank/etc text {{{1
 nnoremap gV `[v`]h
 
-"line text object {{{1
-xnoremap il ^og_
-onoremap il <Cmd>normal vil<CR>
-
-"view text object {{{1
-xnoremap iv HoL
-onoremap iv <Cmd>exec "normal! HVL"<cr>
-
 "fold {{{1
 nnoremap zJ zczjzo
 nnoremap zK zczkzo
 
 "no ctrl z, I don't typically use vim in a shell, I run it standalone {{{1
 nnoremap <c-z> <nop>
-"}}}1
+"}}}
+
 " vim: set fdm=marker:

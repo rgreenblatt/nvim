@@ -98,6 +98,8 @@ if !g:no_editing_plugins
   call s:PA(['inkarkat/vim-mark'])
   call s:PA(['michaeljsmith/vim-indent-object'])
   call s:PA(['kana/vim-textobj-user'])
+  call s:PA(['mattn/vim-textobj-url'])
+  call s:PA(['rhysd/vim-textobj-continuous-line'])
   call s:PA(['kana/vim-textobj-fold'])
   call s:PA(['kana/vim-operator-user'])
   call s:PA(['kana/vim-textobj-entire'])
@@ -194,4 +196,5 @@ function! IsInstalled(plugin)
         \ index(g:combined_blacklist, a:plugin) == -1
 endfunction
 "}}}1
+
 " vim: set fdm=marker:

@@ -191,6 +191,8 @@ nnoremap <a-c> <Cmd>changes<cr>
 nnoremap <a-s> <Cmd>source %<cr>
 
 nnoremap <a-o> :<c-u>s/\C<left><left><left><left>
+vnoremap <a-o> :<c-u>s/\C<left><left><left><left>
+nnoremap <space><space>c <Cmd>let @+=@@<cr>
 
 "navigate indents {{{1
 function! s:indent_len(str)

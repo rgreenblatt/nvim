@@ -40,8 +40,6 @@ if !g:no_language_plugins
   if !g:no_coc
     call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])
     call s:PA(['liuchengxu/vista.vim'])
-    call s:PA(['Shougo/neco-vim'])
-    call s:PA(['neoclide/coc-neco'])
     call s:PA(['honza/vim-snippets'])
   endif
   "}}}3

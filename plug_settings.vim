@@ -46,6 +46,7 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-ccls',
         \ 'coc-yaml',
         \ 'coc-rls',
+        \ 'coc-vimlsp',
         \ 'coc-snippets',
         \ 'coc-gocode']
   augroup CocGenericAutocmds
@@ -370,6 +371,10 @@ let g:highlightedyank_highlight_duration = 200
 let g:local_vimrc = ['.config', 'local_init.vim']
 let g:YUNOcommit_after = 2000
 let g:dispatch_no_maps = 1
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 "}}}1
 
 " vim: set fdm=marker:

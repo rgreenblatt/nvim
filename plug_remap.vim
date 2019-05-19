@@ -145,34 +145,9 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nmap <space>Z <Plug>(coc-float-jump)
 
   "show documentation in preview window
-  nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
-  xnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
+  nnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
+  xnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
 
-  function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-      return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-  endfunction
-
-  function! s:show_documentation()
-    if &filetype == 'vim' || &filetype == 'help'
-      if mode() == "v" || mode() == "V" || mode() == "\<c-v>"
-        execute 'h '. s:get_visual_selection()
-      else
-        execute 'h '.expand('<cword>')
-      endif
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-  
   "vista {{{2
   call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
         \ "'EnhancedJumps#Jump', 0, 'remote') <bar> endif <bar> Vista finder")
@@ -225,7 +200,7 @@ endif
 "nmap <space>S <Plug>InsertCharAfter
 "
 "yankring {{{1
-function FZFYankList() abort
+function! FZFYankList() abort
   function! KeyValue(key, val)
     let line = join(a:val[0], '\n')
     if (a:val[1] ==# 'V')
@@ -236,7 +211,7 @@ function FZFYankList() abort
   return map(miniyank#read(), function('KeyValue'))
 endfunction
 
-function FZFYankHandler(opt, line) abort
+function! FZFYankHandler(opt, line) abort
   let key = substitute(a:line, ' .*', '', '')
   if !empty(a:line)
     let yanks = miniyank#read()[key]
@@ -244,13 +219,13 @@ function FZFYankHandler(opt, line) abort
   endif
 endfunction
 
-command YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
+command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
       \ 'source':  FZFYankList(),
       \ 'sink':    function('FZFYankHandler', ['p']),
       \ 'options': '--no-sort --prompt="Yanks-p> "',
       \ }))
 
-command YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
+command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
       \ 'source':  FZFYankList(),
       \ 'sink':    function('FZFYankHandler', ['P']),
       \ 'options': '--no-sort --prompt="Yanks-P> "',

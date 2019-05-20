@@ -157,6 +157,7 @@ if !g:no_integration_plugins
   call s:PA(['mhinz/vim-signify'])
   call s:PA(['lambdalisue/suda.vim'])
   call s:PA(['vhdirk/vim-cmake'])
+  call s:PA(['taketwo/vim-ros'])
 endif
 
 "misc {{{2

@@ -119,6 +119,7 @@ if !g:no_editing_plugins
   call s:PA(['thinca/vim-visualstar'])
   call s:PA(['AndrewRadev/splitjoin.vim'])
   call s:PA(['AndrewRadev/sideways.vim'])
+  call s:PA(['vim-scripts/ReplaceWithRegister'])
 endif
 
 "navigation/setup {{{2

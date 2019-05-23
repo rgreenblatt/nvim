@@ -704,6 +704,12 @@ nmap yoq <Plug>(qf_qf_toggle)
 "overrides a unimpared mapping, but I don't use that mapping
 nmap yol <Plug>(qf_loc_toggle)
 
+"signify (not mapped by default for some reason) {{{1
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+
 "other {{{1
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 nnoremap <a-i> <Cmd>Codi<cr>

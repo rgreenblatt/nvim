@@ -69,7 +69,8 @@ let s:fugitive_installed = IsInstalled('tpope/vim-fugitive')
 function! FugitiveStatuslineWrapper()
   if s:fugitive_installed
     let out = FugitiveStatusline()
-    if out == '[Git(master)]'
+    let blacklist = ['[Git(master)]', '[Git(devel)]']
+    if index(blacklist, out) != -1
       return ''
     else
       return out

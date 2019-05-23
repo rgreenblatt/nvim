@@ -47,9 +47,9 @@ call MapWinCmd("q", "Commits")
 call MapWinCmd("Q", "BCommits")
 call MapWinCmd("o", "commands")
 call MapWinCmd("b", "Buffers")
-call MapWinCmd("B", "Wipeouts")
 call MapWinCmd("E", "ZshExecutables")
 
+nnoremap <Space>B <Cmd>Wipeouts<cr>
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
 nnoremap <M-C-A> <Cmd>Maps<cr>

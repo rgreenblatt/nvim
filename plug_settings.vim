@@ -357,7 +357,7 @@ let g:dirvish_mode = 'call DirvishSetup()'
 let g:rooter_use_lcd = 1
 let g:rooter_silent_chdir = 1
 let g:rooter_resolve_links = 1
-let g:rooter_patterns = ['build.sbt', 'build.sh', 'ccls', 
+let g:rooter_patterns = ['build.sbt', 'package.xml', 'build.sh', '.ccls',
       \ 'compile_commands.json', '.git', '.git/', '_darcs/', '.hg/', '.bzr/',
       \ '.svn/']
 

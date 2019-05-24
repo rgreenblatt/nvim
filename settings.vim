@@ -13,7 +13,7 @@ set wildmode=longest,list,full
 set wildmenu
 set conceallevel=2
 set colorcolumn=81
-set iskeyword+=-
+" set iskeyword+=-
 set termguicolors
 set pumblend=20
 try

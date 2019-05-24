@@ -525,35 +525,21 @@ nnoremap <silent> ;l <Cmd>SidewaysJumpRight<cr>
 nnoremap <silent> ;y <Cmd>SidewaysLeft<cr>
 nnoremap <silent> ;o <Cmd>SidewaysRight<cr>
 
-"nvimgdb {{{1
-let g:nvimgdb_disable_start_keymaps = 1
-
-nnoremap ;dp :<c-u>SetDebugPath<space>
-nnoremap <expr> ;dg exists('g:debug_path') ?
-      \'<Cmd>GdbStart gdb -q<space>' . expand(g:debug_path) . '<cr>' :
-      \':<c-u>GdbStart gdb -q<space>'
-nnoremap <expr> ;dl exists('g:debug_path') ?
-      \'<Cmd>GdbStartLLDB lldb <space>' . expand(g:debug_path) . '<cr>' :
-      \':<c-u>GdbStartLLDB lldb<space>'
-nnoremap <expr> ;dy exists('g:debug_path') ?
-      \'<Cmd>GdbStartPDB python -m pdb <space>' . expand(g:debug_path) .
-      \ '<cr>' : ':<c-u>GdbStartPDB python -m pdb<space>'
-nnoremap ;dq <Cmd>GdbDebugStop<cr>
-nnoremap ;dr <Cmd>GdbBreakpointClearAll<cr>
-nnoremap ;di <Cmd>GdbInterrupt<cr>
-
-let g:nvimgdb_config_override = {
-      \ 'key_until':      ';du',
-      \ 'key_continue':   ';dc',
-      \ 'key_next':       ';dn',
-      \ 'key_step':       ';ds',
-      \ 'key_finish':     ';df',
-      \ 'key_breakpoint': ';db',
-      \ 'key_frameup':    ';dk',
-      \ 'key_framedown':  ';dj',
-      \ 'key_eval':       ';de',
-      \ 'split_command':  'vsplit'
-      \ }
+"Termdebug {{{1
+nnoremap ;do <Cmd>Termdebug<cr>
+nnoremap ;dO :<c-u>Termdebug
+nnoremap ;db <Cmd>Break<cr>
+nnoremap ;dc <Cmd>Clear<cr>
+nnoremap ;ds <Cmd>Step<cr>
+nnoremap ;dn <Cmd>Next<cr>
+nnoremap ;dc <Cmd>Continue<cr>
+nnoremap ;ds <Cmd>Stop<cr>
+nnoremap ;de <Cmd>Evaluate<cr>
+xnoremap ;de <Cmd>'<,'>Evaluate<cr>
+xnoremap ;dd <Cmd>Gdb<cr>
+xnoremap ;dp <Cmd>Program<cr>
+xnoremap ;dt <Cmd>Source<cr>
+nnoremap ;dw :<c-u>call TermDebugSendCommand('watch <c-r>=expand("<cword>")<cr>')<cr>
 
 "visual star search and replace {{{1
 xmap <space>s <Plug>(visualstar-*)``cgn

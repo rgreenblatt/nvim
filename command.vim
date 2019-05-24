@@ -54,4 +54,5 @@ function! HowLong( command, numberOfTimes )
   return result
 endfunction
 "}}}1
+
 " vim: set fdm=marker:

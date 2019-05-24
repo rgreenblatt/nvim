@@ -616,8 +616,6 @@ nmap <space><space>i <Plug>(wintabs_tab_8)
 nmap <space><space>o <Plug>(wintabs_tab_9)
 nmap <space><space>p <Plug>(wintabs_last)
 
-nmap <space>Q <Cmd>Startify<cr><Plug>(wintabs_only)
-
 augroup CmdWinQ
   autocmd!
   autocmd CmdwinEnter * nnoremap <buffer> <space>q <Cmd>q<CR>

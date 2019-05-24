@@ -179,6 +179,7 @@ nnoremap <space>s *``cgn
 nnoremap <space>S #``cgN
 
 nnoremap <space>Q <Cmd>bp\|bd #<CR>
+nnoremap <space><space>Q <Cmd>bp\|bd! #<CR>
 
 nnoremap <space>f gq
 xnoremap <space>f gq

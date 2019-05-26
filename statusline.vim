@@ -104,8 +104,9 @@ let g:lightline = {
       \             [ 'percent' ],
       \             [ 'cocstatus', 'gitstatus', 'short_pwd',
       \               'readonly', 'macromode' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'filetype' ],
+      \   'right': [ [ 'linter_checking', 'linter_errors', 
+      \                'linter_warnings', 'linter_ok' ],
+      \              [ 'filetype', 'lineinfo'],
       \              [ 'wintab_after', 'wintab_current', 
       \               'wintab_before' ] ],
       \ },
@@ -126,11 +127,19 @@ let g:lightline = {
       \   'wintab_current': 'WinTabCurrent',
       \   'wintab_after': 'WinTabAfter',
       \   'macromode': 'MacroModeInfo',
-      \   'short_pwd': 'ShortPwdWrapper'
+      \   'short_pwd': 'ShortPwdWrapper',
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
       \ },
       \ 'component_type': {
       \   'wintab_current': 'error',
-      \   'macromode': 'error'
+      \   'macromode': 'error',
+      \   'linter_checking': 'left',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'left',
       \ }
       \ }
 "}}}1

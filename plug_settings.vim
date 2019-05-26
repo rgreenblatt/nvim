@@ -361,6 +361,20 @@ let g:rooter_patterns = ['build.sbt', 'package.xml', 'build.sh', '.ccls',
       \ 'compile_commands.json', '.git', '.git/', '_darcs/', '.hg/', '.bzr/',
       \ '.svn/']
 
+"ale {{{1
+let g:ale_virtualtext_cursor = 1
+let g:ale_sign_error = "❌"
+let g:ale_sign_warning = "❗"
+let g:ale_virtualtext_prefix = "⯇ "
+
+let g:ale_disable_lsp = 1
+
+hi ALEVirtualTextError cterm=italic ctermfg=167 gui=italic guifg=#fb4934
+hi ALEVirtualTextWarning cterm=italic ctermfg=214 gui=italic guifg=#fabd2f
+hi ALEVirtualTextInfo cterm=italic ctermfg=245 gui=italic guifg=#928374
+hi link ALEVirtualTextStyleError ALEVirtualTextError
+hi link ALEVirtualTextStyleWarning ALEVirtualTextWarning
+
 " other {{{1
 let g:wordmotion_prefix = ';'
 let g:lion_squeeze_spaces = 1

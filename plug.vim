@@ -14,6 +14,10 @@ if g:athame_running
         \ ]
 endif
 
+if !has('python')
+  let g:plugin_blacklist.ros = ['taketwo/vim-ros']
+endif
+
 let g:combined_blacklist = []
 for val in values(g:plugin_blacklist)
   let g:combined_blacklist += val

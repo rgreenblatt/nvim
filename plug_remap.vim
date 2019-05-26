@@ -117,11 +117,6 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nnoremap <space>G <Cmd>CocList links<cr>
   nnoremap ;f <Cmd>CocList --auto-preview files<cr>
 
-
-  " Use `[g` and `]g` for navigate diagnostics
-  nmap [g <Plug>(coc-diagnostic-prev)
-  nmap ]g <Plug>(coc-diagnostic-next)
-
   nmap <space>O <Plug>(coc-openlink)
   nmap <space>E <Plug>(coc-codelens-action)
 
@@ -693,6 +688,12 @@ omap ic <plug>(signify-motion-inner-pending)
 xmap ic <plug>(signify-motion-inner-visual)
 omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
+
+"ale {{{1
+nmap [g <Plug>(ale_previous_wrap)
+nmap ]g <Plug>(ale_next_wrap)
+nmap [G <Plug>(ale_first)
+nmap ]G <Plug>(ale_last)
 
 "other {{{1
 nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>

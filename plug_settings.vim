@@ -49,8 +49,7 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-git',
         \ 'coc-vimlsp',
         \ 'coc-snippets',
-        \ 'coc-gocode',
-        \ 'coc-github']
+        \ 'coc-gocode']
 
   augroup CocGenericAutocmds
     autocmd!

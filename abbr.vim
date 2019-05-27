@@ -8,6 +8,7 @@ endfunction
 
 call SetupCommandAbbrs('T', 'tabedit')
 call SetupCommandAbbrs('R', 'CocRestart')
+call SetupCommandAbbrs('CC', 'CocCommand')
 call SetupCommandAbbrs('PI', 'PlugInstall')
 call SetupCommandAbbrs('PU', 'PlugUpdate')
 call SetupCommandAbbrs('PC', 'PlugClean')

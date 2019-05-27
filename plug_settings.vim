@@ -48,7 +48,8 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-rls',
         \ 'coc-vimlsp',
         \ 'coc-snippets',
-        \ 'coc-gocode']
+        \ 'coc-gocode',
+        \ 'coc-github']
   augroup CocGenericAutocmds
     autocmd!
     " Setup formatexpr specified filetype(s).

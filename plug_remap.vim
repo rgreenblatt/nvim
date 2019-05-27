@@ -111,10 +111,8 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nnoremap <space>R <Cmd>CocCommand python.execInTerminal<cr>
   nnoremap ;L :<c-u>CocList<space>
   nnoremap ;A :<c-u>CocCommand<space>
-  nnoremap ;S <Cmd>CocList -I symbols<cr>
   nnoremap ;D <Cmd>CocList --auto-preview diagnostics<cr>
   nnoremap ;O <Cmd>CocList --auto-preview outline<cr>
-  nnoremap <space>G <Cmd>CocList links<cr>
   nnoremap ;f <Cmd>CocList --auto-preview files<cr>
 
   nmap <space>O <Plug>(coc-openlink)
@@ -142,6 +140,13 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   "show documentation in preview window
   nnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
   xnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
+
+  "coc-git
+  nmap [c <plug>(coc-git-prevchunk)
+  nmap ]c <plug>(coc-git-nextchunk)
+  nmap gs <Cmd>CocCommand git.chunkStage<cr>
+  nmap <space>G <plug>(coc-git-chunkinfo)
+  nmap ;gu <Cmd>CocCommand git.chunkUndo<cr>
 
   "vista {{{2
   call MapWinCmd("v", "if bufname('') == '' <bar> call EnhancedJumps#Go(".
@@ -682,12 +687,6 @@ nmap <c-s> <Plug>(qf_qf_switch)
 nmap yoq <Plug>(qf_qf_toggle)
 "overrides a unimpared mapping, but I don't use that mapping
 nmap yol <Plug>(qf_loc_toggle)
-
-"signify (not mapped by default for some reason) {{{1
-omap ic <plug>(signify-motion-inner-pending)
-xmap ic <plug>(signify-motion-inner-visual)
-omap ac <plug>(signify-motion-outer-pending)
-xmap ac <plug>(signify-motion-outer-visual)
 
 "ale {{{1
 nmap [g <Plug>(ale_previous_wrap)

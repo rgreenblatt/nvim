@@ -367,9 +367,11 @@ let g:rooter_patterns = ['build.sbt', 'package.xml', 'build.sh', '.ccls',
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = "❌"
 let g:ale_sign_warning = "❗"
-let g:ale_virtualtext_prefix = "⯇ "
+let g:ale_virtualtext_prefix = "◀ "
 
 let g:ale_disable_lsp = 1
+let g:ale_linters = {'cpp': ['cpplint']}
+let g:ale_echo_msg_format = '[%linter%] %s [%code%]'
 
 hi ALEVirtualTextError cterm=italic ctermfg=167 gui=italic guifg=#fb4934
 hi ALEVirtualTextWarning cterm=italic ctermfg=214 gui=italic guifg=#fabd2f

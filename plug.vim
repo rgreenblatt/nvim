@@ -58,7 +58,7 @@ if !g:no_language_plugins
   call s:PA(['Chiel92/vim-autoformat'])
   call s:PA(['tpope/vim-markdown'])
   call s:PA(['tpope/vim-apathy'])
-  call s:PA(['rgreenblatt/c-conceal'])
+  " call s:PA(['rgreenblatt/c-conceal'])
   call s:PA(['kana/vim-textobj-function'])
   call s:PA(['jeetsukumaran/vim-pythonsense'])
   call s:PA(['ehamberg/vim-cute-python'])

@@ -101,12 +101,12 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'percent' ],
-      \             [ 'cocstatus', 'gitstatus', 'short_pwd',
-      \               'readonly', 'macromode' ] ],
-      \   'right': [ [ 'linter_checking', 'linter_errors', 
-      \                'linter_warnings', 'linter_ok' ],
-      \              [ 'filetype', 'lineinfo'],
+      \             [ 'percent', 'macromode' ],
+      \             [ 'cocstatus', 'gitstatus', 'short_pwd', 'readonly', 
+      \               'linter_checking', 'linter_errors', 'linter_warnings', 
+      \               'linter_ok', ] ],
+      \   'right': [ [ 'lineinfo'],
+      \              [ 'filetype'  ],
       \              [ 'wintab_after', 'wintab_current', 
       \               'wintab_before' ] ],
       \ },
@@ -136,10 +136,8 @@ let g:lightline = {
       \ 'component_type': {
       \   'wintab_current': 'error',
       \   'macromode': 'error',
-      \   'linter_checking': 'left',
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',
-      \   'linter_ok': 'left',
       \ }
       \ }
 "}}}1

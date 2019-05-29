@@ -4,6 +4,11 @@
   "python.jediEnabled": false,
   "python.linting.pylintUseMinimalCheckers": false,
   "diagnostic.displayByAle": true,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "suggest.completionItemKindLabels": {
     "function": "\uf794",
     "method": "\uf6a6",

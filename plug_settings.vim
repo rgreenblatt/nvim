@@ -1,5 +1,5 @@
 "colorscheme{{{1
-if IsInstalled('morhetz/gruvbox')
+if IsInstalled('gruvbox-community/gruvbox')
   let g:gruvbox_contrast_dark = "hard"
   let g:gruvbox_italic = 1
   colorscheme gruvbox

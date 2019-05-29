@@ -72,7 +72,7 @@ endif
 
 "appearance {{{2
 if !g:no_appearance_plugins
-  call s:PA(['morhetz/gruvbox'])
+  call s:PA(['gruvbox-community/gruvbox'])
   call s:PA(['itchyny/lightline.vim'])
   call s:PA(['junegunn/limelight.vim'])
   call s:PA(['junegunn/goyo.vim'])

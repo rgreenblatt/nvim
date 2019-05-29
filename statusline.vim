@@ -1,10 +1,3 @@
-"file type devicons helper {{{1
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? 
-        \ &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 
-        \'no ft') : ''
-endfunction
-
 "wintabs {{{1
 let s:win_tabs_installed = IsInstalled('rgreenblatt/vim-wintabs')
 function! WinTabBefore()
@@ -63,24 +56,7 @@ function! ShortPwdWrapper()
   return "%{ShortPwd()}"
 endfunction
 
-"FugitiveStatusline wrapper {{{1
-let s:fugitive_installed = IsInstalled('tpope/vim-fugitive')
-
-function! FugitiveStatuslineWrapper()
-  if s:fugitive_installed
-    let out = FugitiveStatusline()
-    let blacklist = ['[Git(master)]', '[Git(devel)]']
-    if index(blacklist, out) != -1
-      return ''
-    else
-      return out
-    endif
-  else
-    return ''
-  endif
-endfunction
-
-"coc#status wrapper {{{1
+"coc wrappers {{{1
 let s:coc_installed = IsInstalled('neoclide/coc.nvim')
 
 function! CocStatusWrapper()
@@ -91,6 +67,67 @@ function! CocStatusWrapper()
     let out = substitute(out, 'Analyzing in background, ', '', '')
     let out = substitute(out, 'items left...', 'left', '')
     return out
+  endif
+  return ''
+endfunction
+
+let s:coc_git_status_character_limit = 20
+
+function! CocGitGlobalStatusWrapper()
+  if s:coc_installed && exists("g:coc_git_status")
+    if len(g:coc_git_status) > (s:coc_git_status_character_limit + 1)
+      return g:coc_git_status[:s:coc_git_status_character_limit - 1] .
+            \ g:wintabs_marker_cutoff
+    else
+      return g:coc_git_status
+    endif
+  endif
+  return ''
+endfunction
+
+function! CocGitBufferStatusWrapper()
+  if s:coc_installed && exists("b:coc_git_status")
+      return trim(b:coc_git_status)
+  endif
+  return ''
+endfunction
+
+"blank {{{1
+function! Blank()
+  return ' '
+endfunction
+
+"ale wrappers {{{1
+let s:ale_installed = IsInstalled('w0rp/ale') &&
+      \ IsInstalled('maximbaz/lightline-ale')
+
+function! AleCheckingWrapper()
+  if s:ale_installed
+    return '%{lightline#ale#checking()}'
+  else
+    return ''
+  endif
+endfunction
+
+function! AleWarningsWrapper()
+  if s:ale_installed
+    return '%{lightline#ale#warnings()}'
+  else
+    return ''
+  endif
+endfunction
+
+function! AleErrorsWrapper()
+  if s:ale_installed
+    return '%{lightline#ale#errors()}'
+  else
+    return ''
+  endif
+endfunction
+
+function! AleOkWrapper()
+  if s:ale_installed
+    return '%{lightline#ale#ok()}'
   else
     return ''
   endif
@@ -101,17 +138,17 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'percent', 'macromode' ],
-      \             [ 'cocstatus', 'gitstatus', 'short_pwd', 'readonly', 
-      \               'linter_checking', 'linter_errors', 'linter_warnings', 
-      \               'linter_ok', ] ],
+      \             [ 'short_pwd', ],
+      \             [ 'cocstatus', 'git_buffer_status', 'linter_checking', 
+      \               'linter_errors', 'linter_warnings', 'linter_ok', 
+      \               'readonly', ] ],
       \   'right': [ [ 'lineinfo'],
       \              [ 'filetype'  ],
-      \              [ 'wintab_after', 'wintab_current', 
-      \               'wintab_before' ] ],
+      \              [ 'wintab_after', 'marker', 'wintab_before' ] ],
       \ },
       \ 'inactive': {
-      \   'left': [ [ 'percent', 'gitstatus', 'short_pwd'] ],
+      \   'left': [ [ 'short_pwd', 'git_buffer_status', 'linter_checking', 
+      \               'linter_errors', 'linter_warnings', 'linter_ok', ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'filetype' ],
       \              [ 'wintab_after', 'wintab_current', 
@@ -119,8 +156,8 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'cocstatus': 'CocStatusWrapper',
-      \   'gitstatus': 'FugitiveStatuslineWrapper',
-      \   'filetype': 'MyFiletype',
+      \   'git_global_status': 'CocGitGlobalStatusWrapper',
+      \   'git_buffer_status': 'CocGitBufferStatusWrapper',
       \ },
       \ 'component_expand': {
       \   'wintab_before': 'WinTabBefore',
@@ -128,17 +165,25 @@ let g:lightline = {
       \   'wintab_after': 'WinTabAfter',
       \   'macromode': 'MacroModeInfo',
       \   'short_pwd': 'ShortPwdWrapper',
-      \   'linter_checking': 'lightline#ale#checking',
-      \   'linter_warnings': 'lightline#ale#warnings',
-      \   'linter_errors': 'lightline#ale#errors',
-      \   'linter_ok': 'lightline#ale#ok',
+      \   'linter_checking': 'AleCheckingWrapper',
+      \   'linter_warnings': 'AleWarningsWrapper',
+      \   'linter_errors': 'AleErrorsWrapper',
+      \   'linter_ok': 'AleOkWrapper',
+      \   'marker': 'Blank',
       \ },
       \ 'component_type': {
       \   'wintab_current': 'error',
-      \   'macromode': 'error',
+      \   'marker': 'error',
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',
+      \   'macromode': 'error',
       \ }
+      \ }
+
+"tabline {{{1
+let g:lightline.tabline = {
+      \ 'left': [ ['git_global_status', 'macromode', 'tabs' ] ],
+      \ 'right': [ ] 
       \ }
 "}}}1
 

@@ -33,5 +33,6 @@ set cursorline
 set noshowmode
 set foldmethod=syntax
 set scrolloff=1
+set showtabline=2
 
 " vim: set fdm=marker:

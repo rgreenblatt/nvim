@@ -1,7 +1,8 @@
 "colorscheme{{{1
 if IsInstalled('gruvbox-community/gruvbox')
-  let g:gruvbox_contrast_dark = "hard"
+  let g:gruvbox_contrast_dark = 'hard'
   let g:gruvbox_italic = 1
+  let g:gruvbox_guisp_fallback = 'bg'
   colorscheme gruvbox
 
   function! s:ZshVIMModeEnterInsert()

@@ -75,11 +75,12 @@ let s:coc_git_status_character_limit = 20
 
 function! CocGitGlobalStatusWrapper()
   if s:coc_installed && exists("g:coc_git_status")
+    let s:coc_git_status = g:coc_git_status[4:]
     if len(g:coc_git_status) > (s:coc_git_status_character_limit + 1)
-      return g:coc_git_status[:s:coc_git_status_character_limit - 1] .
+      return s:coc_git_status[:s:coc_git_status_character_limit - 1] .
             \ g:wintabs_marker_cutoff
     else
-      return g:coc_git_status
+      return s:coc_git_status
     endif
   endif
   return ''

@@ -380,6 +380,11 @@ hi ALEVirtualTextInfo cterm=italic ctermfg=245 gui=italic guifg=#928374
 hi link ALEVirtualTextStyleError ALEVirtualTextError
 hi link ALEVirtualTextStyleWarning ALEVirtualTextWarning
 
+"ros {{{1
+let g:ros_build_system = 'catkin-tools'
+"is this really needed?
+let g:ros_catkin_make_options = '-DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+
 " other {{{1
 let g:wordmotion_prefix = ';'
 let g:lion_squeeze_spaces = 1

@@ -15,16 +15,16 @@ nnoremap z<BS> z-
 
 nnoremap U <C-r>
 
-nnoremap "q 1gt
-nnoremap "w 2gt
-nnoremap "e 3gt
-nnoremap "r 4gt
-nnoremap "t 5gt
-nnoremap "y 6gt
-nnoremap "u 7gt
-nnoremap "i 8gt
-nnoremap "o 9gt
-nnoremap "p <Cmd>tablast<cr>
+nnoremap "a 1gt
+nnoremap "s 2gt
+nnoremap "d 3gt
+nnoremap "f 4gt
+nnoremap "g 5gt
+nnoremap "h 6gt
+nnoremap "j 7gt
+nnoremap "k 8gt
+nnoremap "l 9gt
+nnoremap "; <Cmd>tablast<cr>
 
 xnoremap > >gv
 xnoremap < <gv
@@ -50,6 +50,7 @@ cnoremap <C-A> <Home>
 inoremap <c-f> <c-g>u<Esc>[s1z=`]a<c-g>u
 nnoremap <c-f> ms[s1z=`s
 
+ 
 "window maps {{{1
 function! FloatingOverWindow(path)
   let buf = nvim_create_buf(v:false, v:true)
@@ -139,19 +140,8 @@ nnoremap <space>,P :<c-u>tcd<space>
 nnoremap <silent> <space>.p <Cmd>lcd %:p:h<CR>
 nnoremap <space>.P :<c-u>lcd<space>
 
-"not sure if I really need these mappings...
-nnoremap <space>,D :<c-u>tabdo<space>
-nnoremap <space>;D :<c-u>windo<space>
-nnoremap <space>kD :<c-u>cdo<space>
-nnoremap <space>jD :<c-u>ldo<space>
-nnoremap <space>KD :<c-u>cfdo<space>
-nnoremap <space>JD :<c-u>lfdo<space>
-nnoremap <space>lD :<c-u>bufdo<space>
-nnoremap <space>hD :<c-u>argdo<space>
-
 nnoremap <silent> <a-n> <Cmd>set invrelativenumber<CR>
 nnoremap <silent> <a-w> <Cmd>%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <silent> <space>z <Cmd>noh<CR>
 
 nnoremap <silent> <space>q <Cmd>q<CR>
 nnoremap <silent> <space>A <Cmd>qa<CR>
@@ -187,12 +177,10 @@ xnoremap <space>f gq
 nnoremap <space>F gggqG<c-o>
 
 nnoremap <a-p> <Cmd>pwd<cr>
-nnoremap <a-r> <Cmd>registers<cr>
-nnoremap <a-c> <Cmd>changes<cr>
 nnoremap <a-s> <Cmd>source %<cr>
 
-nnoremap <a-o> :<c-u>s/\C<left><left><left><left>
-vnoremap <a-o> :<c-u>s/\C<left><left><left><left>
+nnoremap <space>z :<c-u>s/\C<left><left><left><left>
+vnoremap <space>z :s/\C<left><left><left><left>
 nnoremap <space><space>c <Cmd>let @+=@@<cr>
 
 "navigate indents {{{1

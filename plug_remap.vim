@@ -52,12 +52,21 @@ call MapWinCmd("E", "ZshExecutables")
 nnoremap <Space>B <Cmd>Wipeouts<cr>
 nnoremap <M-C-B> <Cmd>Buffers<cr>
 nnoremap <M-C-N> <Cmd>GFiles<cr>
-nnoremap <M-C-A> <Cmd>Maps<cr>
+nnoremap <M-C-A> <Cmd>Commits<cr>
 nnoremap <M-C-F> <Cmd>Files<cr>
 nnoremap <M-C-G> :<c-u>RgPreviewHidden<space>
 nnoremap <M-C-H> <Cmd>History/<cr>
-nnoremap <M-C-P> <Cmd>:Helptags<cr>
+nnoremap <M-C-P> <Cmd>Lines<cr>
 nnoremap <space>: <Cmd>History:<cr>
+
+nnoremap <F1> :<c-u>RgPreviewHidden<space>
+nnoremap <F2> <Cmd>Buffers<cr>
+nnoremap <F3> <Cmd>GFiles<cr>
+nnoremap <F4> <Cmd>Files<cr>
+nnoremap <F5> <Cmd>Lines<cr>
+nnoremap <F6> <Cmd>BLines<cr>
+nnoremap <F7> <Cmd>Commits<cr>
+nnoremap <F8> <Cmd>History/<cr>
 
 "dirvish in new window {{{1
 call MapWinCmd("d", "Dirvish")
@@ -115,8 +124,8 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nnoremap ;O <Cmd>CocList --auto-preview outline<cr>
   nnoremap ;f <Cmd>CocList --auto-preview files<cr>
 
-  nmap <space>O <Plug>(coc-openlink)
-  nmap <space>E <Plug>(coc-codelens-action)
+  " nmap <space>O <Plug>(coc-openlink)
+  " nmap <space>E <Plug>(coc-codelens-action)
 
   " Remap keys for gotos
   nmap <space>D <Plug>(coc-declaration)
@@ -130,12 +139,12 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
 
   nmap <space>c <Plug>(coc-fix-current)
 
-  nmap <space>C <Plug>(coc-codeaction)
+  " nmap <space>C <Plug>(coc-codeaction)
 
   " nmap <space>a <Plug>(coc-codeaction-selected)
   " xmap <space>a <Plug>(coc-codeaction-selected)
 
-  nmap <space>Z <Plug>(coc-float-jump)
+  " nmap <space>Z <Plug>(coc-float-jump)
 
   "show documentation in preview window
   nnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
@@ -192,6 +201,7 @@ if !g:headless
   nnoremap <silent> gzh <Cmd>call Focus('left', 'h')<CR>
   nnoremap <silent> gzk <Cmd>call Focus('up', 'k')<CR>
   nnoremap <silent> gzj <Cmd>call Focus('down', 'j')<CR>
+  "}}}
 endif
 
 ""insertchar options {{{1
@@ -219,20 +229,13 @@ function! FZFYankHandler(opt, line) abort
   endif
 endfunction
 
-command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
-      \ 'source':  FZFYankList(),
-      \ 'sink':    function('FZFYankHandler', ['p']),
-      \ 'options': '--no-sort --prompt="Yanks-p> "',
-      \ }))
-
-command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
+command! Yanks call fzf#run(fzf#wrap('YanksBefore', {
       \ 'source':  FZFYankList(),
       \ 'sink':    function('FZFYankHandler', ['P']),
       \ 'options': '--no-sort --prompt="Yanks-P> "',
       \ }))
 
-nmap <A-p> :YanksAfter<CR>
-nmap <A-P> :YanksBefore<CR>
+nmap <F9> <Cmd>Yanks<CR>
     
 nmap p <Plug>(miniyank-autoput)
 nmap P <Plug>(miniyank-autoPut)
@@ -535,7 +538,7 @@ nnoremap ;dn <Cmd>Next<cr>
 nnoremap ;dc <Cmd>Continue<cr>
 nnoremap ;ds <Cmd>Stop<cr>
 nnoremap ;de <Cmd>Evaluate<cr>
-xnoremap ;de <Cmd>'<,'>Evaluate<cr>
+xnoremap ;de :Evaluate<cr>
 xnoremap ;dd <Cmd>Gdb<cr>
 xnoremap ;dp <Cmd>Program<cr>
 xnoremap ;dt <Cmd>Source<cr>
@@ -599,9 +602,9 @@ nmap ;a <Plug>(wintabs_all)
 nmap <space>.D <Cmd>WintabsDo<space>
 
 nmap <space><space>h <Plug>(wintabs_move_to_window_left)
-nmap <space><space>j <Plug>(wintabs_move_to_window_right)
+nmap <space><space>j <Plug>(wintabs_move_to_window_below)
 nmap <space><space>k <Plug>(wintabs_move_to_window_above)
-nmap <space><space>l <Plug>(wintabs_move_to_window_below)
+nmap <space><space>l <Plug>(wintabs_move_to_window_right)
 nmap <space><space>p <Plug>(wintabs_move_to_window_next)
 nmap <space><space>m <Plug>(wintabs_maximize)
 

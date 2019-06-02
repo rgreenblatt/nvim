@@ -398,6 +398,7 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
+let g:miniyank_maxitems = 100
 "}}}1
 
 " vim: set fdm=marker:

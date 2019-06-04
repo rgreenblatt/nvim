@@ -67,6 +67,7 @@ nnoremap <F5> <Cmd>Lines<cr>
 nnoremap <F6> <Cmd>BLines<cr>
 nnoremap <F7> <Cmd>Commits<cr>
 nnoremap <F8> <Cmd>History/<cr>
+nnoremap <F9> <Cmd>terminal<cr>
 
 "dirvish in new window {{{1
 call MapWinCmd("d", "Dirvish")
@@ -235,7 +236,7 @@ command! Yanks call fzf#run(fzf#wrap('YanksBefore', {
       \ 'options': '--no-sort --prompt="Yanks-P> "',
       \ }))
 
-nmap <F9> <Cmd>Yanks<CR>
+nnoremap <F10> <Cmd>Yanks<CR>
     
 nmap p <Plug>(miniyank-autoput)
 nmap P <Plug>(miniyank-autoPut)

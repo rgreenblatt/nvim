@@ -2,7 +2,6 @@
 augroup FiletypeAutocmds
   autocmd!
   autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber
-  autocmd TermOpen * let b:persistant_relative_number=1
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufRead,BufNewFile *.sbt set filetype=scala
@@ -32,19 +31,13 @@ augroup BWCCreateDir
   autocmd BufWritePre * :call s:MkDir(expand('<afile>'), +expand('<abuf>'))
 augroup end
 
-"cursorline and relativenumber only in current window {{{1
+"cursorline only in current window {{{1
 function! EnterWin()
   set cursorline
-  if &number
-    set relativenumber
-  endif
 endfunction
 
 function! ExitWin()
   set nocursorline
-  if !exists("b:persistant_relative_number")
-    set norelativenumber
-  endif
 endfunction
 
 augroup BgHighlight

@@ -26,7 +26,7 @@ set hidden
 set cmdheight=3
 set updatetime=100
 set shortmess+=c
-set signcolumn=auto:2
+set signcolumn=yes:1
 set autowrite
 set gdefault
 set cursorline

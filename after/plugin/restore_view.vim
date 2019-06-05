@@ -1,4 +1,4 @@
-if IsInstalled('vim-scripts/restore_view.vim')
+if exists("*IsInstalled") && IsInstalled('vim-scripts/restore_view.vim')
   augroup AutoView
     autocmd!
     " Autosave & Load Views.

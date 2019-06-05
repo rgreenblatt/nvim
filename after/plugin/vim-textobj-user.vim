@@ -1,4 +1,4 @@
-if IsInstalled('kana/vim-textobj-user')
+if exists("*IsInstalled") && IsInstalled('kana/vim-textobj-user')
   call textobj#user#plugin('line', {
         \   '-': {
         \     'select-a-function': 'CurrentLineA',

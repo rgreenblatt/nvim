@@ -1,4 +1,4 @@
-if IsInstalled('tpope/vim-abolish')
+if exists("*IsInstalled") && IsInstalled('tpope/vim-abolish')
   Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
   Abolish thsi this
   Abolish wiht{,in,out} with{}

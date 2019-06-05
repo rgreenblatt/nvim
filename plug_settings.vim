@@ -2,7 +2,7 @@
 if IsInstalled('gruvbox-community/gruvbox')
   let g:gruvbox_contrast_dark = 'hard'
   let g:gruvbox_italic = 1
-  let g:gruvbox_guisp_fallback = 'bg'
+  let g:gruvbox_guisp_fallback = 'fg'
   colorscheme gruvbox
 
   function! s:ZshVIMModeEnterInsert()

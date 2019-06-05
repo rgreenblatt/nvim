@@ -26,7 +26,7 @@ set hidden
 set cmdheight=3
 set updatetime=100
 set shortmess+=c
-set signcolumn=yes
+set signcolumn=auto:2
 set autowrite
 set gdefault
 set cursorline
@@ -34,5 +34,6 @@ set noshowmode
 set foldmethod=syntax
 set scrolloff=1
 set showtabline=2
+packadd termdebug
 
 " vim: set fdm=marker:

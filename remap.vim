@@ -232,8 +232,8 @@ augroup END
 "terminal {{{1
 tnoremap <C-Space> <C-\><C-n>
 
-call MapWinCmd("t", "GlobalSharedTerm")
-call MapWinCmd("T", "terminal")
+call MapWinCmd("t", "terminal")
+call MapWinCmd("T", "GlobalSharedTerm")
 
 "arbitrary command in new window and scratch {{{1
 call MapWinCmd("e", " ", 1)

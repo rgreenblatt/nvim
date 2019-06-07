@@ -56,7 +56,6 @@ function! FixSpellingMistake() abort
 endfunction
 
 nnoremap <c-f> <Cmd>call FixSpellingMistake()<cr>
-
  
 "window maps {{{1
 function! FloatingOverWindow(path)
@@ -181,7 +180,7 @@ nnoremap <space><space>Q <Cmd>bp\|bd! #<CR>
 nnoremap <space>f gq
 xnoremap <space>f gq
 
-nnoremap <space>F gggqG<c-o>
+nnoremap <space>F gggqG
 
 nnoremap <a-p> <Cmd>pwd<cr>
 nnoremap <a-s> <Cmd>source %<cr>

@@ -1,18 +1,16 @@
 "better jumping (uses vim-EnhancedJumps) {{{1
-if IsInstalled('inkarkat/vim-EnhancedJumps')
-  if IsInstalled('neoclide/coc.nvim')
-    nmap <silent><expr> <TAB>
-          \ coc#expandableOrJumpable() ?
-          \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-          \ "\<Plug>EnhancedJumpsOlder"
-    nmap <silent><expr> <S-TAB>
-          \ coc#expandableOrJumpable() ?
-          \ coc#rpc#request('snippetPrev', []) :
-          \ "\<Plug>EnhancedJumpsNewer"
-  else
-    nmap <TAB> <Plug>EnhancedJumpsOlder
-    nmap <S-TAB> <Plug>EnhancedJumpsNewer
-  endif
+if IsInstalled('neoclide/coc.nvim')
+  nmap <silent><expr> <TAB>
+        \ coc#expandableOrJumpable() ?
+        \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+        \ "\<c-o>"
+  nmap <silent><expr> <S-TAB>
+        \ coc#expandableOrJumpable() ?
+        \ coc#rpc#request('snippetPrev', []) :
+        \ "\<c-i>"
+else
+  nmap <TAB> <c-o>
+  nmap <S-TAB> <c-i>
 endif
 
 nmap g<Tab> <Plug>EnhancedJumpsLocalOlder

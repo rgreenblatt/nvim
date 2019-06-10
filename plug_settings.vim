@@ -44,7 +44,6 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-json',
         \ 'coc-java',
         \ 'coc-vimtex',
-        \ 'coc-ccls',
         \ 'coc-yaml',
         \ 'coc-rls',
         \ 'coc-git',

@@ -5,6 +5,29 @@ if IsInstalled('gruvbox-community/gruvbox')
   let g:gruvbox_guisp_fallback = 'fg'
   colorscheme gruvbox
 
+  function! SetColors()
+    highlight TermCursor ctermfg=Red guifg=Red
+    highlight link StartifyFooter GruvboxOrange
+    highlight Pmenu ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#282828
+    highlight CursorLine ctermbg=239 guibg=#282828
+    highlight CursorLineNr ctermbg=239 guibg=#282828
+    highlight TerminalNormal cterm=reverse gui=reverse ctermfg=Blue guifg=Blue
+    highlight TerminalInsert cterm=reverse gui=reverse ctermfg=Red guifg=Red
+
+    highlight! link gitmessengerHeader GruvboxBlue
+    highlight! link gitmessengerHash GruvboxYellow
+    highlight! link gitmessengerHistory GruvboxRed
+    highlight! link gitmessengerPopupNormal Pmenu
+    highlight! link gitmessengerEndOfBuffer Pmenu
+  endfunction
+
+  augroup ColorSets
+    autocmd!
+    autocmd ColorScheme * call SetColors()
+  augroup end
+  
+  call SetColors()
+
   function! s:ZshVIMModeEnterInsert()
     setlocal winhighlight=TermCursor:TerminalInsert
     redraw
@@ -47,6 +70,7 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-yaml',
         \ 'coc-rls',
         \ 'coc-git',
+        \ 'coc-highlight',
         \ 'coc-vimlsp',
         \ 'coc-snippets',
         \ 'coc-gocode']
@@ -58,7 +82,9 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
           \ setlocal formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd CursorHold * silent call CocActionAsync('highlight')
   augroup end
+  hi! CocHighlightText cterm=bold gui=bold
   
   "vista {{{2
   let g:vista_fzf_preview = ['right:50%']
@@ -370,6 +396,7 @@ let g:ale_sign_warning = "❗"
 let g:ale_virtualtext_prefix = "◀ "
 
 let g:ale_disable_lsp = 1
+" let g:ale_linters = {'cpp': ['cpplint', 'clangtidy']}
 let g:ale_linters = {'cpp': ['cpplint']}
 let g:ale_echo_msg_format = '[%linter%] %s [%code%]'
 

@@ -129,20 +129,20 @@ let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
 
-"semshi {{{1
-let g:semshi#error_sign = v:false
-let g:semshi#simplify_markup = v:false
+""semshi {{{1
+"let g:semshi#error_sign = v:false
+"let g:semshi#simplify_markup = v:false
 
-"chromatica {{{1
-let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
-" augroup ChromaticaStartup
-"     autocmd!
-"     autocmd FileType c,cpp,cuda ChromaticaStart
-" augroup end
-let g:chromatica#global_args = [
-      \ '-isystem /usr/lib/llvm-7/lib/clang/7.0.0/include'
-      \ ]
-let g:chromatica#responsive_mode = 1
+""chromatica {{{1
+"let g:chromatica#libclang_path = '/usr/lib/llvm-7/lib/libclang.so'
+"" augroup ChromaticaStartup
+""     autocmd!
+""     autocmd FileType c,cpp,cuda ChromaticaStart
+"" augroup end
+"let g:chromatica#global_args = [
+"      \ '-isystem /usr/lib/llvm-7/lib/clang/7.0.0/include'
+"      \ ]
+"let g:chromatica#responsive_mode = 1
 
 ""vimade {{{1
 "augroup VimadeSpecial

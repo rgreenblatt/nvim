@@ -51,8 +51,8 @@ if !g:no_language_plugins
   "TODO
   call s:PA(['w0rp/ale'])
   call s:PA(['maximbaz/lightline-ale'])
-  call s:PA(['rgreenblatt/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
-  call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
+  " call s:PA(['rgreenblatt/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
+  " call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
   call s:PA(['lervag/vimtex'])
   call s:PA(['ludovicchabant/vim-gutentags'])
   call s:PA(['Chiel92/vim-autoformat'])

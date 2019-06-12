@@ -172,7 +172,6 @@ if !g:no_misc_plugins
   call s:PA(['zenbro/mirror.vim'])
 endif
 
-"}}}1
 "add all plugins {{{1
 set nocompatible
 filetype off

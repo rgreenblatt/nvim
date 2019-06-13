@@ -30,11 +30,11 @@ xnoremap > >gv
 xnoremap < <gv
 
 "macros {{{1
-xnoremap @ <Cmd>call ExecuteMacroOverVisualRange()<cr>
+xnoremap @ :<c-u>call ExecuteMacroOverVisualRange()<cr>
 
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
+  execute ":'<,'>normal!  @".nr2char(getchar())
 endfunction
 
 " Repeatable macros {{{2
@@ -64,9 +64,10 @@ fun! AtInit()
 endfun
 
 " Enable calling a function within the mapping for @
-nno <expr> <plug>@init AtInit()
+nnoremap <expr> <plug>@init AtInit()
 " A macro could, albeit unusually, end in Insert mode.
-ino <expr> <plug>@init "\<c-o>".AtInit()
+inoremap <expr> <plug>@init "\<c-o>".AtInit()
+xnoremap <expr> <plug>@init "\<c-o>".AtInit()
 
 fun! AtReg()
     let s:atcount = v:count1
@@ -74,7 +75,7 @@ fun! AtReg()
     return '@'.c."\<plug>@init"
 endfun
 
-nmap <expr> @ AtReg()
+nnoremap <expr> @ AtReg()
 
 fun! QRepeat(_)
     call feedkeys('@'.s:qreg)

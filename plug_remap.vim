@@ -1,23 +1,23 @@
 "better jumping (uses vim-EnhancedJumps) {{{1
 if IsInstalled('neoclide/coc.nvim')
-  nmap <silent><expr> <TAB>
+  noremap <silent><expr> <tab>
         \ coc#expandableOrJumpable() ?
         \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
         \ "\<c-o>"
-  nmap <silent><expr> <S-TAB>
+  noremap <silent><expr> <s-tab>
         \ coc#expandableOrJumpable() ?
         \ coc#rpc#request('snippetPrev', []) :
         \ "\<c-i>"
 else
-  nmap <TAB> <c-o>
-  nmap <S-TAB> <c-i>
+  noremap <tab> <c-o>
+  noremap <s-tab> <c-i>
 endif
 
-nmap g<Tab> <Plug>EnhancedJumpsLocalOlder
-nmap g<S-Tab> <Plug>EnhancedJumpsLocalNewer
+nmap g<tab> <Plug>EnhancedJumpsLocalOlder
+nmap g<s-tab> <Plug>EnhancedJumpsLocalNewer
 
-nmap <space><Tab> <Plug>EnhancedJumpsRemoteOlder
-nmap <space><S-Tab> <Plug>EnhancedJumpsRemoteNewer
+nmap <space><tab> <Plug>EnhancedJumpsRemoteOlder
+nmap <space><s-tab> <Plug>EnhancedJumpsRemoteNewer
 
 nmap z;  <Plug>EnhancedJumpsFarFallbackChangeOlder
 nmap z,  <Plug>EnhancedJumpsFarFallbackChangeNewer
@@ -587,8 +587,8 @@ xmap <space>ar <Plug>(operator-sandwich-replace)
 " xmap as <Plug>(textobj-sandwich-query-a)
 
 "wintabs {{{1
-nmap <c-h> <Plug>(wintabs_previous)
-nmap <c-l> <Plug>(wintabs_next)
+nmap <a-h> <Plug>(wintabs_previous)
+nmap <a-l> <Plug>(wintabs_next)
 nmap <space>q <Plug>(wintabs_close)
 nmap ;u <Plug>(wintabs_undo)
 nmap <c-w>o <Plug>(wintabs_only)

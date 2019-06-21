@@ -637,7 +637,7 @@ function! EnterMacroMode()
   if s:highlighted_yank_installed
     HighlightedyankOff
   endif
-  if s:highlighted_yank_installed
+  if s:rainbow_paren_installed
     RainbowToggleOff
   endif
   set paste
@@ -654,7 +654,7 @@ function! ExitMacroMode()
   if s:highlighted_yank_installed
     HighlightedyankOn
   endif
-  if s:highlighted_yank_installed
+  if s:rainbow_paren_installed
     RainbowToggleOn
   endif
   set nopaste

@@ -1,17 +1,21 @@
 "better jumping (uses vim-EnhancedJumps) {{{1
-if IsInstalled('neoclide/coc.nvim')
-  noremap <silent><expr> <tab>
-        \ coc#expandableOrJumpable() ?
-        \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-        \ "\<c-o>"
-  noremap <silent><expr> <s-tab>
-        \ coc#expandableOrJumpable() ?
-        \ coc#rpc#request('snippetPrev', []) :
-        \ "\<c-i>"
-else
-  noremap <tab> <c-o>
-  noremap <s-tab> <c-i>
-endif
+function! MapTab()
+  if IsInstalled('neoclide/coc.nvim')
+    noremap <silent><expr> <tab>
+          \ coc#expandableOrJumpable() ?
+          \ coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+          \ "\<c-o>"
+    noremap <silent><expr> <s-tab>
+          \ coc#expandableOrJumpable() ?
+          \ coc#rpc#request('snippetPrev', []) :
+          \ "\<c-i>"
+  else
+    noremap <tab> <c-o>
+    noremap <s-tab> <c-i>
+  endif
+endfunction
+  
+call MapTab()
 
 nmap g<tab> <Plug>EnhancedJumpsLocalOlder
 nmap g<s-tab> <Plug>EnhancedJumpsLocalNewer

@@ -1,7 +1,8 @@
 "general filetype autocmds {{{1
 augroup FiletypeAutocmds
   autocmd!
-  autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber
+  autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber 
+        \ scrolloff=0
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufRead,BufNewFile *.sbt set filetype=scala

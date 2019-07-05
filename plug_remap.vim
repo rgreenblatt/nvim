@@ -153,8 +153,6 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
   xnoremap <silent> K <Cmd>call CocAction('doHover')<CR>
 
-  nmap <space>F <Plug>(coc-format)
-
   "coc-git
   nmap [c <plug>(coc-git-prevchunk)
   nmap ]c <plug>(coc-git-nextchunk)

@@ -3,6 +3,7 @@
   "suggest.maxCompleteItemCount": 20,
   "python.jediEnabled": false,
   "python.linting.pylintUseMinimalCheckers": false,
+  "python.formatting.provider": "yapf",
   "diagnostic.displayByAle": true,
   "coc.preferences.colorSupport": true,
   "highlight.colors.enable": true,

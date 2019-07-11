@@ -336,10 +336,11 @@ let g:wintabs_delete_buffers = 0
 let g:wintabs_autoclose_vimtab = 1
 let g:wintabs_buffer_limit = 5
 
-""autoformat {{{1
-"noremap <F5> :AutoFormat<CR>
-"let g:formatdef_scalafmt = "'scalafmt --stdin'"
-"let g:formatters_scala = ['scalafmt'] 
+"autoformat {{{1
+autocmd FileType,BufWrite cmake nnoremap <buffer> <space>F <Cmd>Autoformat<cr>
+
+let g:formatdef_cmake_format = '"cmake-format --tab-size " . &shiftwidth . " -"'
+let g:formatters_cmake = ['cmake_format']
 "
 "polyglot and associated plugins: {{{1
 let g:polyglot_disabled = ['latex']

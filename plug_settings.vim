@@ -75,12 +75,21 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-snippets',
         \ 'coc-gocode']
 
+  function! RustFmtFunc() abort
+    if line("$") == v:lnum + v:count - 1 && v:lnum == 1
+      RustFmt
+    else
+      execute string(v:lnum) . "," . string(v:lnum + v:count - 1) . "RustFmtRange"
+    endif
+  endfunction
+
   augroup CocGenericAutocmds
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType,BufWrite c,cpp,cuda,json,java,rust,tex,go,yaml,python,rust
           \ setlocal formatexpr=CocAction('formatSelected')
-    autocmd FileType,BufWrite rust nmap <buffer> <space>F <Plug>(coc-format)
+    autocmd FileType,BufWrite rust 
+          \ setlocal formatexpr=RustFmtFunc()
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -399,7 +408,12 @@ let g:ale_virtualtext_prefix = "◀ "
 
 let g:ale_disable_lsp = 1
 " let g:ale_linters = {'cpp': ['cpplint', 'clangtidy']}
-let g:ale_linters = {'cpp': ['cpplint']}
+let g:ale_linters = {
+      \ 'cpp': ['cpplint'], 
+      \ 'python': ['pylint'], 
+      \ 'c': [], 
+      \ 'rust': []
+      \ }
 let g:ale_echo_msg_format = '[%linter%] %s [%code%]'
 
 hi ALEVirtualTextError cterm=italic ctermfg=167 gui=italic guifg=#fb4934

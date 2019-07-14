@@ -94,7 +94,7 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')
   augroup end
-  hi! CocHighlightText cterm=bold gui=bold
+  hi! CocHighlightText cterm=bold gui=bold cterm=underline gui=underline
   
   "vista {{{2
   let g:vista_fzf_preview = ['right:50%']

@@ -94,7 +94,7 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')
   augroup end
-  hi! CocHighlightText cterm=bold gui=bold cterm=underline gui=underline
+  hi! CocHighlightText cterm=bold,underline gui=bold,underline
   
   "vista {{{2
   let g:vista_fzf_preview = ['right:50%']
@@ -403,7 +403,7 @@ let g:rooter_patterns = ['build.sbt', 'package.xml', 'build.sh', '.ccls',
 "ale {{{1
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = "❌"
-let g:ale_sign_warning = "❗"
+let g:ale_sign_warning = "⚠"
 let g:ale_virtualtext_prefix = "◀ "
 
 let g:ale_disable_lsp = 1

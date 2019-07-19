@@ -34,6 +34,9 @@ set noshowmode
 set foldmethod=syntax
 set scrolloff=1
 set showtabline=2
+set winminwidth=0
+set winminheight=0
+set winwidth=1
 packadd termdebug
 
 let g:rust_conceal = 1

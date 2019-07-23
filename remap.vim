@@ -305,7 +305,8 @@ call MapWinCmd("T", "GlobalSharedTerm")
 
 "arbitrary command in new window and scratch {{{1
 call MapWinCmd("e", " ", 1)
-call MapWinCmd("w", "setlocal bufhidden=hide nobuflisted buftype=nofile")
+call MapWinCmd("w", "enew <bar> setlocal bufhidden=hide nobuflisted " . 
+      \ "buftype=nofile")
 
 "arrow key window resize {{{1
 noremap <up>    <C-W>+
@@ -313,19 +314,8 @@ noremap <down>  <C-W>-
 noremap <left>  3<C-W>>
 noremap <right> 3<C-W><
 
-"insert word of the line above/below {{{1
-inoremap <C-Y> <C-C>:let @z = @"<CR>mz
-			\:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
-			\:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yiw')<CR>
-			\`zp:let @" = @z<CR>a
-inoremap <C-E> <C-C>:let @z = @"<CR>mz
-			\:exec 'normal!' (col('.')==1 && col('$')==1 ? 'j' : 'jl')<CR>
-			\:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yiw')<CR>
-			\`zp:let @" = @z<CR>a
-
-
-"select last inserted/yank/etc text {{{1
-nnoremap gV `[v`]h
+"select last selectinserted/yank/etc text {{{1
+nnoremap gV `[v`]
 
 "fold {{{1
 nnoremap zJ zczjzo

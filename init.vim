@@ -4,7 +4,7 @@ let g:athame_running = g:athame_var == "1\n"
 
 source ~/.vim_machine_specific.vim
 
-function s:Set(var, default)
+function! s:Set(var, default)
   if !exists(a:var)
     execute "let " . a:var . " = " . a:default
   endif
@@ -28,16 +28,17 @@ let g:no_setup_plugins = g:no_setup_plugins || g:athame_running
 let g:no_integration_plugins = g:no_integration_plugins || g:athame_running
 
 "sourcing all files {{{1
-source ~/.config/nvim/remap.vim
-source ~/.config/nvim/settings.vim
-source ~/.config/nvim/autocmd.vim
-source ~/.config/nvim/command.vim
-source ~/.config/nvim/abbr.vim
-source ~/.config/nvim/plug.vim
-source ~/.config/nvim/plug_settings.vim
-source ~/.config/nvim/plug_remap.vim
-source ~/.config/nvim/coc_fzf.vim
-source ~/.config/nvim/statusline.vim
+let config_path=fnamemodify(expand('$MYVIMRC'), ':p:h')
+execute 'source ' . config_path . '/remap.vim'
+execute 'source ' . config_path . '/settings.vim'
+execute 'source ' . config_path . '/autocmd.vim'
+execute 'source ' . config_path . '/command.vim'
+execute 'source ' . config_path . '/abbr.vim'
+execute 'source ' . config_path . '/plug.vim'
+execute 'source ' . config_path . '/plug_settings.vim'
+execute 'source ' . config_path . '/plug_remap.vim'
+execute 'source ' . config_path . '/coc_fzf.vim'
+execute 'source ' . config_path . '/statusline.vim'
 "}}}1
 
 " vim: set fdm=marker:

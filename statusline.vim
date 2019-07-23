@@ -19,7 +19,6 @@ endfunction
 function! WinTabCurrentConditional()
   let total_len = len(wintabs#get_tablist(0)) + len(wintabs#get_tablist(1)) + 
         \ len(wintabs#get_tablist(2)) + 50
-  echom string(total_len)
   if total_len > winwidth(".")
     return " "
   else

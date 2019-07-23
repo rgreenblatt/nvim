@@ -16,6 +16,17 @@ function! WinTabCurrent()
   endif
 endfunction
 
+function! WinTabCurrentConditional()
+  let total_len = len(wintabs#get_tablist(0)) + len(wintabs#get_tablist(1)) + 
+        \ len(wintabs#get_tablist(2)) + 50
+  echom string(total_len)
+  if total_len > winwidth(".")
+    return " "
+  else
+    return WinTabCurrent()
+  endif
+endfunction
+
 function! WinTabAfter()
   if s:win_tabs_installed
     return "%{wintabs#get_tablist(2)}"
@@ -145,7 +156,8 @@ let g:lightline = {
       \               'readonly', ] ],
       \   'right': [ [ 'lineinfo'],
       \              [ 'filetype'  ],
-      \              [ 'wintab_after', 'marker', 'wintab_before' ] ],
+      \              [ 'wintab_after', 'wintab_current_conditional', 
+      \                'wintab_before' ] ],
       \ },
       \ 'inactive': {
       \   'left': [ [ 'short_pwd', 'git_buffer_status', 'linter_checking', 
@@ -163,6 +175,7 @@ let g:lightline = {
       \ 'component_expand': {
       \   'wintab_before': 'WinTabBefore',
       \   'wintab_current': 'WinTabCurrent',
+      \   'wintab_current_conditional': 'WinTabCurrentConditional',
       \   'wintab_after': 'WinTabAfter',
       \   'macromode': 'MacroModeInfo',
       \   'short_pwd': 'ShortPwdWrapper',
@@ -174,6 +187,7 @@ let g:lightline = {
       \ },
       \ 'component_type': {
       \   'wintab_current': 'error',
+      \   'wintab_current_conditional': 'error',
       \   'marker': 'error',
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',

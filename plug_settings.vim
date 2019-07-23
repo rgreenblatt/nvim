@@ -73,23 +73,15 @@ if IsInstalled('neoclide/coc.nvim') "{{{1
         \ 'coc-highlight',
         \ 'coc-vimlsp',
         \ 'coc-snippets',
-        \ 'coc-gocode']
-
-  function! RustFmtFunc() abort
-    if line("$") == v:lnum + v:count - 1 && v:lnum == 1
-      RustFmt
-    else
-      execute string(v:lnum) . "," . string(v:lnum + v:count - 1) . "RustFmtRange"
-    endif
-  endfunction
+        \ 'coc-gocode',
+        \ 'coc-sh',
+        \]
 
   augroup CocGenericAutocmds
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType,BufWrite c,cpp,cuda,json,java,rust,tex,go,yaml,python,rust
           \ setlocal formatexpr=CocAction('formatSelected')
-    autocmd FileType,BufWrite rust 
-          \ setlocal formatexpr=RustFmtFunc()
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')

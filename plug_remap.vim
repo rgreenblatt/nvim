@@ -14,7 +14,7 @@ function! MapTab()
     noremap <s-tab> <c-i>
   endif
 endfunction
-  
+
 call MapTab()
 
 nmap g<tab> <Plug>EnhancedJumpsLocalOlder
@@ -68,7 +68,7 @@ nnoremap <F4> <Cmd>Files<cr>
 nnoremap <F5> <Cmd>Lines<cr>
 nnoremap <F6> <Cmd>BLines<cr>
 nnoremap <F7> <Cmd>Commits<cr>
-nnoremap <F8> <Cmd>History/<cr>
+nnoremap <F8> :<c-u>call RgPreviewHidden('','')<left><left><left><left><left>
 nnoremap <F9> <Cmd>terminal<cr>
 
 "dirvish in new window {{{1
@@ -115,7 +115,7 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   "snippet trigger
   imap <C-s> <Plug>(coc-snippets-expand)
 
-  inoremap <silent><expr> <cr> pumvisible() && !empty(v:completed_item) ? 
+  inoremap <silent><expr> <cr> pumvisible() && !empty(v:completed_item) ?
         \ coc#_select_confirm()
         \: "\<CR>"
 
@@ -166,29 +166,32 @@ if IsInstalled('neoclide/coc.nvim') " {{{1
   nnoremap <silent> <space>V <Cmd>Vista!!<cr>
   "}}}2
 endif
+
 "vimtex {{{1
-nmap  <space>xi   <plug>(vimtex-info)
-nmap  <space>xI   <plug>(vimtex-info-full)
-nmap  <space>xt   <plug>(vimtex-toc-open)
-nmap  <space>xT   <plug>(vimtex-toc-toggle)
-nmap  <space>xq   <plug>(vimtex-log)
-nmap  <space>xv   <plug>(vimtex-view)
-nmap  <space>xr   <plug>(vimtex-reverse-search)
+let g:vimtex_mappings_enabled = 0
+
+" nmap  <space>xi   <plug>(vimtex-info)
+" nmap  <space>xI   <plug>(vimtex-info-full)
+" nmap  <space>xt   <plug>(vimtex-toc-open)
+" nmap  <space>xT   <plug>(vimtex-toc-toggle)
+" nmap  <space>xq   <plug>(vimtex-log)
+" nmap  <space>xv   <plug>(vimtex-view)
+" nmap  <space>xr   <plug>(vimtex-reverse-search)
 nmap  <space>xl   <plug>(vimtex-compile)
-nmap  <space>xL   <plug>(vimtex-compile-selected)
-nmap  <space>xL   <plug>(vimtex-compile-selected)
-nmap  <space>xk   <plug>(vimtex-stop)
-nmap  <space>xK   <plug>(vimtex-stop-all)
+" nmap  <space>xL   <plug>(vimtex-compile-selected)
+" nmap  <space>xL   <plug>(vimtex-compile-selected)
+" nmap  <space>xk   <plug>(vimtex-stop)
+" nmap  <space>xK   <plug>(vimtex-stop-all)
 nmap  <space>xe   <plug>(vimtex-errors)
-nmap  <space>xo   <plug>(vimtex-compile-output)
-nmap  <space>xg   <plug>(vimtex-status)
-nmap  <space>xG   <plug>(vimtex-status-all)
-nmap  <space>xc   <plug>(vimtex-clean)
-nmap  <space>xC   <plug>(vimtex-clean-full)
-nmap  <space>xm   <plug>(vimtex-imaps-list)
-nmap  <space>xx   <plug>(vimtex-reload)
-nmap  <space>xX   <plug>(vimtex-reload-state)
-nmap  <space>xs   <plug>(vimtex-toggle-main)
+" nmap  <space>xo   <plug>(vimtex-compile-output)
+" nmap  <space>xg   <plug>(vimtex-status)
+" nmap  <space>xG   <plug>(vimtex-status-all)
+" nmap  <space>xc   <plug>(vimtex-clean)
+" nmap  <space>xC   <plug>(vimtex-clean-full)
+" nmap  <space>xm   <plug>(vimtex-imaps-list)
+" nmap  <space>xx   <plug>(vimtex-reload)
+" nmap  <space>xX   <plug>(vimtex-reload-state)
+" nmap  <space>xs   <plug>(vimtex-toggle-main)
 
 "plugin remaps for a headed install {{{1
 if !g:headless
@@ -198,7 +201,7 @@ if !g:headless
 
   xnoremap <a-g> :<c-u>Google<space>
   xnoremap <a-f> :<c-u>Googlef<space>
-  
+
   "window navigation (requires keyboard remaping and i3-vim-focus {{{2
   nnoremap <silent> gzl <Cmd>call Focus('right', 'l')<CR>
   nnoremap <silent> gzh <Cmd>call Focus('left', 'h')<CR>
@@ -239,7 +242,7 @@ command! Yanks call fzf#run(fzf#wrap('YanksBefore', {
       \ }))
 
 nnoremap <F10> <Cmd>Yanks<CR>
-    
+
 nmap p <Plug>(miniyank-autoput)
 nmap P <Plug>(miniyank-autoPut)
 xmap p <Plug>(miniyank-autoput)
@@ -247,21 +250,6 @@ xmap P <Plug>(miniyank-autoPut)
 
 nmap ;n <Plug>(miniyank-cycle)
 nmap ;N <Plug>(miniyank-cycleback)
-
-" vimade {{{1
-"  nnoremap <silent> ;vt <Cmd>VimadeToggle<cr>
-"  nnoremap <expr><silent> ;vb  exists("b:vimade_disabled") ?
-"        \ "<Cmd>VimadeBufEnable<cr>" :
-"        \"<Cmd>VimadeBufDisable<cr>"
-"  nnoremap <expr><silent> ;vw  exists("w:vimade_disabled") ?
-"        \ "<Cmd>VimadeWinEnable<cr>" : "<Cmd>VimadeWinDisable<cr>"
-" }}}
-"NarrowRegion {{{1
-let g:nrrw_rgn_nomap_nr = 1
-let g:nrrw_rgn_nomap_Nr = 1
-
-xmap ;r <Plug>NrrwrgnDo
-xmap ;R <Plug>NrrwrgnBangDo
 
 "custom operators {{{1
 if IsInstalled('kana/vim-operator-user')
@@ -453,7 +441,7 @@ if IsInstalled('kana/vim-operator-user')
     call feedkeys(to_feed, 'n')
     let g:substitute_region_is_first = 0
   endfunction
-  
+
   "selection operators {{{2
   nmap ;;v  <Plug>(operator-select)
   call operator#user#define('select', 'Op_select_region')
@@ -465,8 +453,8 @@ if IsInstalled('kana/vim-operator-user')
   call operator#user#define('select-block', 'Op_select_block')
   function! Op_select_block(window_heightmotion_wiseness)
     exe "normal `[\<c-v>`]"
-  endfunction
 
+  endfunction
   nmap ;;V  <Plug>(operator-select-line)
   call operator#user#define('select-line', 'Op_select_line')
   function! Op_select_line(window_heightmotion_wiseness)
@@ -480,7 +468,7 @@ if IsInstalled('kana/vim-operator-user')
     execute (line("']") - line("'[") + 1) 'wincmd' '_'
     normal! `[zt
   endfunction
-  
+
 endif
 
 "goyo {{{1
@@ -555,10 +543,10 @@ xmap <space>S <Plug>(visualstar-#)``cgN
 nnoremap <a-m> <Cmd>Make<cr>
 nnoremap <a-,> <Cmd>Make!<cr>
 
-"vim-cmake {{{1
-nnoremap <a-b> <Cmd>CMake<cr>
-nnoremap <a-.> <Cmd>CMake!<cr>
-nnoremap <a-/> <Cmd>CMakeClean<cr>
+""vim-cmake {{{1
+"nnoremap <a-b> <Cmd>CMake<cr>
+"nnoremap <a-.> <Cmd>CMake!<cr>
+"nnoremap <a-/> <Cmd>CMakeClean<cr>
 
 "sandwich {{{1
 let g:sandwich_no_default_key_mappings = 1
@@ -701,7 +689,6 @@ nmap [G <Plug>(ale_first)
 nmap ]G <Plug>(ale_last)
 
 "other {{{1
-nnoremap <silent> <a-u> <Cmd>MundoToggle<cr>
 nnoremap <a-i> <Cmd>Codi<cr>
 nnoremap <silent> ;vh <Cmd>HexokinaseToggle<cr>
 nnoremap <silent> <space>v <Cmd>call WindowSwap#EasyWindowSwap()<CR>

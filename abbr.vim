@@ -14,6 +14,7 @@ call SetupCommandAbbrs('PU', 'PlugUpdate')
 call SetupCommandAbbrs('PC', 'PlugClean')
 call SetupCommandAbbrs('TC', 'WintabsCloseVimtab')
 call SetupCommandAbbrs('WD', 'WintabsDo')
+call SetupCommandAbbrs('MT', 'MundoToggle')
 
 cnoreabbrev ehco echo
 "}}}

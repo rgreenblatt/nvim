@@ -203,10 +203,9 @@ omap S <Plug>Sneak_S
 
 "fzf {{{1
 if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
-  function! RgPreview(args, hidden)
+  function! RgPreview(args, extra_args)
     call fzf#vim#grep("rg --column --line-number --no-heading " .
-          \ "--color=always --smart-case " . 
-          \ (a:hidden ? '--hidden --glob "!.git/*" ' : '') . 
+          \ "--color=always --smart-case " . a:extra_args . " " .
           \ shellescape(a:args), 1, {'options' : 
           \ fzf#vim#with_preview('right:50%').options + 
           \ ['--bind', 'alt-e:execute-silent(remote_tab_open_grep {} &)']})
@@ -246,8 +245,12 @@ if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')
           \ 'options' : fzf#vim#with_preview('right:50%').options})
   endfunction
 
-  command! -nargs=* RgPreview call RgPreview(<q-args>, 0)
-  command! -nargs=* RgPreviewHidden call RgPreview(<q-args>, 1)
+  function! RgPreviewHidden(args, extra_args)
+    call RgPreview(a:args, '--hidden --glob "!.git/*" ' . a:extra_args)
+  endfunction
+
+  command! -nargs=* RgPreview call RgPreview(<q-args>, '')
+  command! -nargs=* RgPreviewHidden call RgPreviewHidden(<q-args>, '')
   command! ZshAliases call ZshAliases()
   command! ZshFunctions call ZshFunctions()
   command! ZshVariables call ZshVariables()

@@ -110,7 +110,6 @@ if !g:no_editing_plugins
   call s:PA(['buztard/vim-rel-jump'])
   call s:PA(['chaoren/vim-wordmotion'])
   call s:PA(['bfredl/nvim-miniyank'])
-  call s:PA(['chrisbra/NrrwRgn'])
   " call s:PA(['luochen1990/rainbow'])
   call s:PA(['kshenoy/vim-signature'])
   call s:PA(['simnalamburt/vim-mundo'])
@@ -160,7 +159,7 @@ if !g:no_integration_plugins
   call s:PA(['ron89/thesaurus_query.vim'])
   call s:PA(['neomutt/neomutt.vim'])
   call s:PA(['lambdalisue/suda.vim'])
-  call s:PA(['vhdirk/vim-cmake'])
+  " call s:PA(['vhdirk/vim-cmake'])
   call s:PA(['taketwo/vim-ros'])
 endif
 

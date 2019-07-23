@@ -26,9 +26,6 @@ nnoremap "k 8gt
 nnoremap "l 9gt
 nnoremap "; <Cmd>tablast<cr>
 
-xnoremap > >gv
-xnoremap < <gv
-
 "macros {{{1
 xnoremap @ :<c-u>call ExecuteMacroOverVisualRange()<cr>
 
@@ -110,7 +107,7 @@ nmap <expr> q QStart()
 
 "conceal toggle {{{1
 nnoremap ;vc :<c-u>set <C-R>=&conceallevel ?
-      \ 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+      \ 'conceallevel=0' : 'conceallevel=2'<cr><cr>
 
 "command mode navigation{{{1
 cnoremap <C-A> <Home>
@@ -125,11 +122,11 @@ function! FixSpellingMistake() abort
 endfunction
 
 nnoremap <c-f> <Cmd>call FixSpellingMistake()<cr>
- 
+
 "window maps {{{1
 function! FloatingOverWindow(path)
   let buf = nvim_create_buf(v:false, v:true)
-  
+
   "window size
   let height = winheight(0)
   let width = winwidth(0)
@@ -146,7 +143,7 @@ function! FloatingOverWindow(path)
   set winhighlight=NormalFloat:Normal
   let handle = nvim_open_win(buf, v:true, opts)
   set winhighlight=NormalFloat:Normal
-  echo handle 
+  echo handle
   let win_id = nvim_get_current_win()
   execute "edit " . a:path
 
@@ -179,7 +176,7 @@ function! MapWinCmd(key, command, ...)
   if a:0 && a:1
     let suffix = ""
   else
-    let suffix = "<CR>"
+    let suffix = "<cr>"
   endif
 
   "silent?
@@ -191,7 +188,7 @@ function! MapWinCmd(key, command, ...)
         \ a:command.suffix
   execute "nnoremap <space>l".a:key." :<c-u>belowright vnew <bar>".
         \ a:command.suffix
-  execute "nnoremap <space>;".a:key." :<c-u>call FloatingFullscreen()<CR>:".
+  execute "nnoremap <space>;".a:key." :<c-u>call FloatingFullscreen()<cr>:".
         \ a:command.suffix
   execute "nnoremap <space>,".a:key." :<c-u>tabnew <bar>".
         \ a:command.suffix
@@ -208,20 +205,19 @@ function! MapWinCmd(key, command, ...)
 endfunction
 
 "general space/semicolon/alt maps {{{1
-nnoremap <silent> <space>p <Cmd>cd %:p:h<CR>
-nnoremap <space>P :<c-u>cd<space>
-nnoremap <silent> <space>,p <Cmd>tcd %:p:h<CR>
-nnoremap <space>,P :<c-u>tcd<space>
-nnoremap <silent> <space>.p <Cmd>lcd %:p:h<CR>
-nnoremap <space>.P :<c-u>lcd<space>
+nnoremap <silent> <space>p <Cmd>lcd %:p:h<cr>
+nnoremap <space>P :<c-u>lcd<space>
 
-nnoremap <silent> <a-n> <Cmd>set invrelativenumber<CR>
-nnoremap <silent> <a-w> <Cmd>%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <space>y <Cmd>let @+=@@<cr>
+nnoremap <space>Y <Cmd>let @@=expand("%:p")<cr>
 
-nnoremap <silent> <space>q <Cmd>q<CR>
-nnoremap <silent> <space>A <Cmd>qa<CR>
-nnoremap <silent> <space>b <Cmd>w<CR>
-nnoremap <silent> <a-d> <Cmd>bd!<CR>
+nnoremap <silent> <a-n> <Cmd>set invrelativenumber<cr>
+nnoremap <silent> <a-w> <Cmd>%s/\s\+$//<cr>:let @/=''<cr>
+
+nnoremap <silent> <space>q <Cmd>q<cr>
+nnoremap <silent> <space>A <Cmd>qa<cr>
+nnoremap <silent> <space>b <Cmd>w<cr>
+nnoremap <silent> <a-d> <Cmd>bd!<cr>
 
 xnoremap ;i :'<,'>normal ^i
 xnoremap ;a :'<,'>normal $a
@@ -243,8 +239,7 @@ nnoremap ;t g<C-]>
 nnoremap <space>s *``cgn
 nnoremap <space>S #``cgN
 
-nnoremap <space>Q <Cmd>bp\|bd #<CR>
-nnoremap <space><space>Q <Cmd>bp\|bd! #<CR>
+nnoremap <space>Q <Cmd>bp\|bd! #<cr>
 
 nnoremap <space>f gq
 xnoremap <space>f gq
@@ -255,34 +250,7 @@ nnoremap <a-p> <Cmd>pwd<cr>
 nnoremap <a-s> <Cmd>source %<cr>
 
 nnoremap <space>z :<c-u>s/\C<left><left><left><left>
-vnoremap <space>z :s/\C<left><left><left><left>
-nnoremap <space><space>c <Cmd>let @+=@@<cr>
-
-"navigate indents {{{1
-function! s:indent_len(str)
-  return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
-endfunction
-
-function! s:go_indent(times, dir)
-  for _ in range(a:times)
-    let l = line('.')
-    let x = line('$')
-    let i = s:indent_len(getline(l))
-    let e = empty(getline(l))
-    while l >= 1 && l <= x
-      let line = getline(l + a:dir)
-      let l += a:dir
-      if s:indent_len(line) != i || empty(line) != e
-        break
-      endif
-    endwhile
-    let l = min([max([1, l]), x])
-    execute 'normal! '. l .'G^'
-  endfor
-endfunction
-
-nnoremap <silent> <space>' <Cmd>call <SID>go_indent(v:count1, 1)<cr>
-nnoremap <silent> <space>" <Cmd>call <SID>go_indent(v:count1, -1)<cr>
+xnoremap <space>z :s/\C<left><left><left><left>
 
 "better cmd line {{{1
 cnoremap <esc> <c-f>z1<cr>
@@ -291,7 +259,8 @@ augroup CmdWin
   autocmd!
   autocmd CmdwinEnter * cnoremap <buffer> <esc> <C-c>
   autocmd CmdwinEnter * nnoremap <esc> <C-c><C-c>
-  autocmd CmdwinEnter * nnoremap <expr><buffer><silent> k 'kz7<cr>:nnoremap k k<cr>'
+  autocmd CmdwinEnter * nnoremap <expr><buffer><silent> k
+        \ 'kz7<cr>:nnoremap k k<cr>'
   autocmd CmdwinEnter * au InsertEnter <buffer> :call feedkeys("\<C-c>")
   autocmd CmdwinEnter * set cmdheight=1
   autocmd CmdwinLeave * set cmdheight=3
@@ -303,9 +272,9 @@ tnoremap <C-Space> <C-\><C-n>
 call MapWinCmd("t", "terminal")
 call MapWinCmd("T", "GlobalSharedTerm")
 
-"arbitrary command in new window and scratch {{{1
-call MapWinCmd("e", " ", 1)
-call MapWinCmd("w", "enew <bar> setlocal bufhidden=hide nobuflisted " . 
+"edit/arbitrary command in new window and scratch {{{1
+call MapWinCmd("e", " e ", 1)
+call MapWinCmd("w", "enew <bar> setlocal bufhidden=hide nobuflisted " .
       \ "buftype=nofile")
 
 "arrow key window resize {{{1

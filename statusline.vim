@@ -34,7 +34,7 @@ function! WinTabAfter()
   endif
 endfunction
 
-let g:wintabs_marker_modified = "!"
+let g:wintabs_marker_modified = " +"
 let g:wintabs_marker_current = ""
 let g:wintabs_separator = " "
 let g:wintabs_number_separator = " "

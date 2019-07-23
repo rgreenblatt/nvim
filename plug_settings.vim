@@ -49,10 +49,10 @@ endif
 let g:EnhancedJumps_CaptureJumpMessages = 0
 let g:EnhancedJumps_UseTab = 0
 
-"cleverf options{{{1
-let g:clever_f_across_no_line = 1
-let g:clever_f_fix_key_direction = 0
-let g:clever_f_timeout_ms = 3000
+""cleverf options{{{1
+"let g:clever_f_across_no_line = 1
+"let g:clever_f_fix_key_direction = 0
+"let g:clever_f_timeout_ms = 3000
 
 if IsInstalled('neoclide/coc.nvim') "{{{1
   "coc {{{2
@@ -183,15 +183,27 @@ let g:fold_options = {
       \ 'strip_template_arguments': 1
       \ }
 
-" sneak {{{1
+" sneak/fFtT {{{1
 let g:sneak#s_next = 1
 let g:sneak#absolute_dir = 0
-" let g:sneak#label = 1
-" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+
 omap s <Plug>Sneak_s
 omap S <Plug>Sneak_S
 
-" let g:sqs_within_lines = 5
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
 
 "fzf {{{1
 if IsInstalled('junegunn/fzf') && IsInstalled('rgreenblatt/fzf.vim')

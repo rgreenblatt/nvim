@@ -2,7 +2,13 @@
 let g:athame_var = system("echo ${ATHAME_USE_JOBS+1}")
 let g:athame_running = g:athame_var == "1\n"
 
-source ~/.vim_machine_specific.vim
+if !empty($CONFIG_HOME)
+  let machine_specific_path = expand("$CONFIG_HOME")
+else
+  let machine_specific_path = '~'
+endif
+
+execute "source " . machine_specific_path . "/.vim_machine_specific.vim"
 
 function! s:Set(var, default)
   if !exists(a:var)
@@ -11,6 +17,7 @@ function! s:Set(var, default)
 endfunction
 
 "default plug installs {{{1
+call s:Set("g:disable_all_plugins", 0)
 call s:Set("g:headless", 0)
 call s:Set("g:no_language_plugins", 0)
 call s:Set("g:no_coc", 0)

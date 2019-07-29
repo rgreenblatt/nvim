@@ -170,19 +170,23 @@ if !g:no_misc_plugins
   "TODO
   call s:PA(['zenbro/mirror.vim'])
 endif
+"}}}
 
 "add all plugins {{{1
-set nocompatible
 filetype off
-call plug#begin('~/.local/share/nvim/plugged')
-let plugins_copy = deepcopy(s:plugins)
-for plugin in plugins_copy
-  if index(g:combined_blacklist, plugin[0]) == -1
-    let plugin[0] = "'" . plugin[0] . "'"
-    execute 'Plug ' . join(plugin, ', ')
-  endif
-endfor
-call plug#end()
+if g:disable_all_plugins
+  let s:plugins = []
+else
+  call plug#begin('~/.local/share/nvim/plugged')
+  let plugins_copy = deepcopy(s:plugins)
+  for plugin in plugins_copy
+    if index(g:combined_blacklist, plugin[0]) == -1
+      let plugin[0] = "'" . plugin[0] . "'"
+      execute 'Plug ' . join(plugin, ', ')
+    endif
+  endfor
+  call plug#end()
+endif
 filetype plugin indent on
 
 "helpers {{{1

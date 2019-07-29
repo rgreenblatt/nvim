@@ -9,8 +9,10 @@ endfunction
 
 augroup FiletypeAutocmds
   autocmd!
-  autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber 
-        \ scrolloff=0
+  if has('nvim')
+    autocmd TermOpen * setlocal listchars= signcolumn=no relativenumber nonumber
+          \ scrolloff=0
+  endif
   autocmd Filetype tex,text,textile,mkd,markdown setlocal spell
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufRead,BufNewFile *.sbt set filetype=scala

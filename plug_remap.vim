@@ -216,40 +216,42 @@ endif
 "nmap <space>S <Plug>InsertCharAfter
 "
 "yankring {{{1
-function! FZFYankList() abort
-  function! KeyValue(key, val)
-    let line = join(a:val[0], '\n')
-    if (a:val[1] ==# 'V')
-      let line = '\n'.line
-    endif
-    return a:key.' '.line
+if IsInstalled('bfredl/nvim-miniyank')
+  function! FZFYankList() abort
+    function! KeyValue(key, val)
+      let line = join(a:val[0], '\n')
+      if (a:val[1] ==# 'V')
+        let line = '\n'.line
+      endif
+      return a:key.' '.line
+    endfunction
+    return map(miniyank#read(), function('KeyValue'))
   endfunction
-  return map(miniyank#read(), function('KeyValue'))
-endfunction
 
-function! FZFYankHandler(opt, line) abort
-  let key = substitute(a:line, ' .*', '', '')
-  if !empty(a:line)
-    let yanks = miniyank#read()[key]
-    call miniyank#drop(yanks, a:opt)
-  endif
-endfunction
+  function! FZFYankHandler(opt, line) abort
+    let key = substitute(a:line, ' .*', '', '')
+    if !empty(a:line)
+      let yanks = miniyank#read()[key]
+      call miniyank#drop(yanks, a:opt)
+    endif
+  endfunction
 
-command! Yanks call fzf#run(fzf#wrap('YanksBefore', {
-      \ 'source':  FZFYankList(),
-      \ 'sink':    function('FZFYankHandler', ['P']),
-      \ 'options': '--no-sort --prompt="Yanks-P> "',
-      \ }))
+  command! Yanks call fzf#run(fzf#wrap('YanksBefore', {
+        \ 'source':  FZFYankList(),
+        \ 'sink':    function('FZFYankHandler', ['P']),
+        \ 'options': '--no-sort --prompt="Yanks-P> "',
+        \ }))
 
-nnoremap <F10> <Cmd>Yanks<CR>
+  nnoremap <F10> <Cmd>Yanks<CR>
 
-nmap p <Plug>(miniyank-autoput)
-nmap P <Plug>(miniyank-autoPut)
-xmap p <Plug>(miniyank-autoput)
-xmap P <Plug>(miniyank-autoPut)
+  nmap p <Plug>(miniyank-autoput)
+  nmap P <Plug>(miniyank-autoPut)
+  xmap p <Plug>(miniyank-autoput)
+  xmap P <Plug>(miniyank-autoPut)
 
-nmap ;n <Plug>(miniyank-cycle)
-nmap ;N <Plug>(miniyank-cycleback)
+  nmap ;n <Plug>(miniyank-cycle)
+  nmap ;N <Plug>(miniyank-cycleback)
+endif
 
 "custom operators {{{1
 if IsInstalled('kana/vim-operator-user')

@@ -267,7 +267,9 @@ augroup CmdWin
 augroup END
 
 "terminal {{{1
-tnoremap <C-Space> <C-\><C-n>
+if has("nvim")
+  tnoremap <C-Space> <C-\><C-n>
+endif
 
 call MapWinCmd("t", "terminal")
 call MapWinCmd("T", "GlobalSharedTerm")

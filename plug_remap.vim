@@ -687,6 +687,8 @@ nmap [g <Plug>(ale_previous_wrap)
 nmap ]g <Plug>(ale_next_wrap)
 nmap [G <Plug>(ale_first)
 nmap ]G <Plug>(ale_last)
+nmap ZA <Plug>(ale_detail)
+
 
 "other {{{1
 nnoremap <a-i> <Cmd>Codi<cr>

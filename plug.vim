@@ -39,7 +39,6 @@ endif
 
 "languages {{{2
 if !g:no_language_plugins
-" call s:PA(['dansomething/vim-eclim'])
   "coc {{{3
   if !g:no_coc
     call s:PA(['neoclide/coc.nvim', "{'do': 'yarn install --frozen-lockfile'}"])
@@ -48,23 +47,17 @@ if !g:no_language_plugins
   endif
   "}}}3
 
-  "TODO
   call s:PA(['w0rp/ale'])
   call s:PA(['maximbaz/lightline-ale'])
-  " call s:PA(['rgreenblatt/chromatica.nvim', "{'do': ':UpdateRemotePlugins'}"])
-  " call s:PA(['numirias/semshi', "{'do': ':UpdateRemotePlugins'}"])
   call s:PA(['lervag/vimtex'])
   call s:PA(['ludovicchabant/vim-gutentags'])
   call s:PA(['Chiel92/vim-autoformat'])
   call s:PA(['tpope/vim-markdown'])
   call s:PA(['tpope/vim-apathy'])
-  " call s:PA(['rgreenblatt/c-conceal'])
   call s:PA(['kana/vim-textobj-function'])
   call s:PA(['jeetsukumaran/vim-pythonsense'])
   call s:PA(['ehamberg/vim-cute-python'])
   call s:PA(['sheerun/vim-polyglot'])
-  "slooooooow
-  " call s:PA(['LucHermitte/VimFold4C'])
   call s:PA(['pseewald/vim-anyfold'])
   call s:PA(['tmhedberg/SimpylFold'])
   call s:PA(['metakirby5/codi.vim'])
@@ -76,7 +69,6 @@ if !g:no_appearance_plugins
   call s:PA(['itchyny/lightline.vim'])
   call s:PA(['junegunn/limelight.vim'])
   call s:PA(['junegunn/goyo.vim'])
-  " call s:PA(['TaDaa/vimade'])
   call s:PA(['machakann/vim-highlightedyank'])
   call s:PA(['ryanoasis/vim-devicons'])
   call s:PA(['RRethy/vim-hexokinase'])
@@ -93,7 +85,6 @@ if !g:no_editing_plugins
   call s:PA(['inkarkat/vim-CountJump'])
   call s:PA(['inkarkat/vim-EnhancedJumps'])
   call s:PA(['markonm/traces.vim'])
-  " call s:PA(['rgreenblatt/vim-ninja-feet'])
   call s:PA(['tommcdo/vim-exchange'])
   call s:PA(['tpope/vim-repeat'])
   call s:PA(['tommcdo/vim-lion'])
@@ -114,9 +105,6 @@ if !g:no_editing_plugins
   call s:PA(['kshenoy/vim-signature'])
   call s:PA(['simnalamburt/vim-mundo'])
   call s:PA(['romainl/vim-cool'])
-  "TODO
-  "call s:PA(['Konfekt/FastFold'])
-
   call s:PA(['machakann/vim-sandwich'])
   call s:PA(['terryma/vim-expand-region'])
   call s:PA(['matze/vim-move'])
@@ -132,14 +120,12 @@ endif
 if !no_setup_plugins
   call s:PA(['mhinz/vim-startify'])
   call s:PA(['rgreenblatt/vim-wintabs'])
-  " call s:PA(['vim-scripts/restore_view.vim'])
   call s:PA(['junegunn/fzf', "{'dir': '~/.fzf', 'do': './install --bin'}"])
   call s:PA(['rgreenblatt/fzf.vim'])
   call s:PA(['wesQ3/vim-windowswap'])
   call s:PA(['justinmk/vim-dirvish'])
   call s:PA(['kristijanhusak/vim-dirvish-git'])
-  call s:PA(['LucHermitte/lh-vim-lib'])
-  call s:PA(['LucHermitte/local_vimrc'])
+  call s:PA(['embear/vim-localvimrc'])
   call s:PA(['airblade/vim-rooter'])
   call s:PA(['romainl/vim-qf'])
   call s:PA(['tpope/vim-dispatch'])

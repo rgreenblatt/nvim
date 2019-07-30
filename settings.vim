@@ -63,11 +63,6 @@ try
   packadd termdebug
 catch /E919/
 endtry
-
-let g:rust_conceal = 1
-let g:rust_conceal_mod_path = 1
-let g:rust_conceal_pub = 1
-let g:rust_fold = 2
 "}}}
 
 " vim: set fdm=marker:

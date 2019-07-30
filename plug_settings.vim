@@ -410,7 +410,7 @@ let g:rooter_patterns = ['build.sbt', 'package.xml', 'build.sh', '.ccls',
 "ale {{{1
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = "❌"
-let g:ale_sign_warning = "⚠"
+let g:ale_sign_warning = "‼"
 let g:ale_virtualtext_prefix = "◀ "
 
 let g:ale_disable_lsp = 1
@@ -433,6 +433,12 @@ hi link ALEVirtualTextStyleWarning ALEVirtualTextWarning
 let g:ros_build_system = 'catkin-tools'
 "is this really needed?
 let g:ros_catkin_make_options = '-DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+
+"rust {{{1
+let g:rust_conceal = 1
+let g:rust_conceal_mod_path = 1
+let g:rust_conceal_pub = 1
+let g:rust_fold = 2
 
 " other {{{1
 let g:wordmotion_prefix = ';'
